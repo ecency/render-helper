@@ -271,7 +271,6 @@ describe('Markdown2Html', () => {
     });
   });
 
-
   describe('Test files', () => {
     it('1- Should catch images in table', () => {
       const data = getTestData(
@@ -282,7 +281,6 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(data.body)).to.matchSnapshotJSON();
     });
   });
-
 
   describe('Test legacy files', () => {
     const dataDir = `${__dirname}/data/legacy`;

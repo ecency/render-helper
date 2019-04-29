@@ -92,6 +92,13 @@ export const sanitizeHtml = (html) => {
 
       return {tagName, attribs};
     },
+    img: (tagName, attribs) => {
+      if (attribs.src && !/^https?:\/\//.test(attribs.src)) {
+        attribs.src = '';
+      }
+
+      return {tagName, attribs};
+    },
     script: () => (
       {tagName: 'span', attribs: {}}
     ),
@@ -119,19 +126,15 @@ const traverse = (node, depth = 0) => {
   }
 
   childNodes.forEach(child => {
-    global(child);
-    if (child.nodeName === 'a') a(child);
-    if (child.nodeName === 'iframe') iframe(child);
+    if (child.nodeName.toLowerCase() === 'a') a(child);
+    if (child.nodeName.toLowerCase() === 'iframe') iframe(child);
     if (child.nodeName === '#text') text(child);
-    if (child.nodeName === 'img') img(child);
+    if (child.nodeName.toLowerCase() === 'img') img(child);
 
     traverse(child, depth + 1);
   });
 };
 
-const global = el => {
-
-};
 
 const a = el => {
   let href = el.getAttribute('href');
