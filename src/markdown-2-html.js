@@ -437,13 +437,18 @@ export default input => {
     return '';
   }
 
-  let output = md.render(input);
+  let output;
 
-  const doc = DOMParser.parseFromString(`<body id="root">${output}</body>`, 'text/html');
+  try {
+    output = md.render(input);
+    const doc = DOMParser.parseFromString(`<body id="root">${output}</body>`, 'text/html');
 
-  traverse(doc);
+    traverse(doc);
 
-  output = XMLSerializer.serializeToString(doc);
+    output = XMLSerializer.serializeToString(doc);
+  } catch (error) {
+    output = '';
+  }
 
   output = output.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, '')
     .replace('<body id="root">', '')
