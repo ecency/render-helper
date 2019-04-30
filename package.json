@@ -20,11 +20,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esteem/esteem-render-helpers"
+    "url": "git+https://github.com/esteemapp/esteem-render-helpers"
   },
   "author": "eSteem <info@esteem.app>",
   "license": "MIT",
-  "homepage": "https://github.com/esteem/esteem-render-helpers",
+  "homepage": "https://github.com/esteemapp/esteem-render-helperss",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
