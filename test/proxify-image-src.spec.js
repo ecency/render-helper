@@ -1,22 +1,31 @@
 /* eslint-disable */
 
-import {assert} from 'chai';
+import {expect} from 'chai';
 
-import proxifyImageSrc from '../src/proxify-image-src';
+import proxifyImageSrc, {setProxyBase} from '../src/proxify-image-src';
 
 describe('Proxify image src', () => {
 
-  it('(1) should proxify image src', () => {
+  it('1- should proxify image src', () => {
     const input = 'https://i.imgur.com/muESb0B.png';
     const expected = 'https://steemitimages.com/0x0/https://i.imgur.com/muESb0B.png';
 
-    assert(proxifyImageSrc(input) === expected);
+    expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
 
-  it('(2) should not proxify if already proxified', () => {
+  it('2- should not proxify if already proxified', () => {
     const input = 'https://steemitimages.com/0x0/https://steemitimages.com/DQmWK9ACVoywHPBJQdoTuJpoTSoaubBSKSAdZaJtw1cfLb9/adsactlywitness.gif';
     const expected = 'https://steemitimages.com/0x0/https://steemitimages.com/DQmWK9ACVoywHPBJQdoTuJpoTSoaubBSKSAdZaJtw1cfLb9/adsactlywitness.gif';
 
-    assert(proxifyImageSrc(input) === expected);
+    expect(proxifyImageSrc(input)).to.deep.equal(expected);
+  });
+
+  it('3- set proxy base', () => {
+    setProxyBase('https://img.esteem.app');
+
+    const input = 'https://i.imgur.com/muESb0B.png';
+    const expected = 'https://img.esteem.app/0x0/https://i.imgur.com/muESb0B.png';
+
+    expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
 });
