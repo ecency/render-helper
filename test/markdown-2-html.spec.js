@@ -1,20 +1,14 @@
 /* eslint-disable */
 
-import chai, {expect} from 'chai';
-import * as snapshots from "chai-snapshots";
+import {expect} from 'chai';
+import setup from './setup';
+import {getTestData} from './data';
+import markdown2Html from '../src/markdown-2-html';
 
 const fs = require('fs');
 const path = require('path');
 
-chai.use(snapshots.SnapshotMatchers({
-  pathToSnaps: "./test/snaps.json", //relative to project root
-  ignoredAttributes: ["created_at", "updated_at"]
-}));
-
-
-import {getTestData} from './data';
-
-import markdown2Html from '../src/markdown-2-html';
+setup();
 
 describe('Markdown2Html', () => {
 
