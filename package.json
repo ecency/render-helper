@@ -1,6 +1,6 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "eSteem render helpers",
   "main": "./src/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "cover": "nyc --check-coverage npm run test:only",
     "lint": "eslint src test",
     "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
-    "prepublish": "npm run clean  npm run build"
+    "prepublish": "npm run clean && npm run lint && npm run test && npm run build"
   },
   "files": [
     "lib",
