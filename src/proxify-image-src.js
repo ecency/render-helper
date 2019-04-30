@@ -1,9 +1,15 @@
+let proxyBase = 'https://steemitimages.com';
+
+export const setProxyBase = (p) => {
+  proxyBase = p;
+};
+
 export default (url, width = 0, height = 0) => {
   if (!url) {
     return '';
   }
 
-  const prefix = `https://steemitimages.com/${width}x${height}/`;
+  const prefix = `${proxyBase}/${width}x${height}/`;
 
   if (url.startsWith(prefix)) return url;
 
