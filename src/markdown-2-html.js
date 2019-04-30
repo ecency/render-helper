@@ -32,9 +32,9 @@ const innerHTML = (node) => {
 };
 
 const removeChildNodes = (node) => {
-  for (let x = 0; x < node.childNodes.length; x++) {
+  [...Array(node.childNodes.length).keys()].forEach(x => {
     node.removeChild(node.childNodes[x]);
-  }
+  });
 };
 
 export const sanitizeHtml = (html) => {
@@ -103,12 +103,12 @@ export const sanitizeHtml = (html) => {
       {tagName: 'span', attribs: {}}
     ),
     '*': (tagName, attribs) => {
-      // for compability
-      for (const key in attribs) {
-        if (attribs[key].toLowerCase().indexOf(`${'java'}${'script:'}`) !== -1) {
-          attribs[key] = '';
+      // for compatibility
+      Object.keys(attribs).forEach(e => {
+        if (attribs[e].toLowerCase().indexOf(`${'java'}${'script:'}`) !== -1) {
+          attribs[e] = '';
         }
-      }
+      });
       return {tagName, attribs};
     }
   };
@@ -121,9 +121,9 @@ const traverse = (node, depth = 0) => {
 
   const childNodes = [];
 
-  for (let i = 0; i < node.childNodes.length; i++) {
+  [...Array(node.childNodes.length).keys()].forEach(i => {
     childNodes.push(node.childNodes[i]);
-  }
+  });
 
   childNodes.forEach(child => {
     if (child.nodeName.toLowerCase() === 'a') a(child);
