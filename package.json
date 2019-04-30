@@ -1,8 +1,8 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "eSteem render helpers",
-  "main": "./src/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "test": "npm run lint && npm run cover",
