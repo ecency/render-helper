@@ -52,7 +52,7 @@ describe('catchPostImage', () => {
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
 
-  it('(4) Should extract entry image from image link', () => {
+  it('4- Should extract entry image from image link', () => {
     const input = {
       author: 'foo4',
       permlink: 'bar4',
@@ -65,7 +65,7 @@ describe('catchPostImage', () => {
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
 
-  it('(5) Should extract entry image from img tag', () => {
+  it('5- Should extract entry image from img tag', () => {
     const input = {
       author: 'foo5',
       permlink: 'bar5',
@@ -79,7 +79,7 @@ describe('catchPostImage', () => {
   });
 
 
-  it('(6) Should extract entry image from markdown img tag', () => {
+  it('6- Should extract entry image from markdown img tag', () => {
     const input = {
       author: 'foo6',
       permlink: 'bar6',
@@ -93,7 +93,7 @@ describe('catchPostImage', () => {
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
 
-  it('(8) Should extract nothing', () => {
+  it('7- Should extract nothing', () => {
     const input = {
       author: 'foo7',
       permlink: 'bar7',
@@ -104,5 +104,4 @@ describe('catchPostImage', () => {
     const expected = null;
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
-
 });
