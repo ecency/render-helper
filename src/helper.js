@@ -5,7 +5,8 @@ export const createDoc = (html) => {
     return null;
   }
 
-  const noop = () => {};
+  const noop = () => {
+  };
 
   const parser = new xmldom.DOMParser({
     errorHandler: {warning: noop, error: noop}
@@ -18,3 +19,6 @@ export const createDoc = (html) => {
 
 
 export const domSerializer = () => new xmldom.XMLSerializer();
+
+
+export const makeEntryCacheKey = entry => `${entry.author}-${entry.permlink}-${entry.last_update}`;

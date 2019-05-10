@@ -1,6 +1,6 @@
 import proxifyImageSrc from './proxify-image-src';
 import markdown2html from './markdown-2-html';
-import {createDoc} from './helper';
+import {createDoc, makeEntryCacheKey} from './helper';
 
 const cache = {};
 
@@ -37,7 +37,7 @@ const image = (entry, width = 0, height = 0) => {
 };
 
 export default (entry, width = 0, height = 0) => {
-  const key = `${entry.author}-${entry.permlink}-${entry.last_update}`;
+  const key = makeEntryCacheKey(entry);
 
   if (cache[key] !== undefined) {
     return cache[key];
