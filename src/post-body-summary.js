@@ -1,9 +1,12 @@
 import he from 'he';
 import Remarkable from 'remarkable';
+import {makeEntryCacheKey} from './helper';
+
+const cache = {};
 
 const md = new Remarkable({html: true, breaks: true, linkify: false});
 
-export default (entryBody, length) => {
+const postBodySummary = (entryBody, length) => {
   if (!entryBody) {
     return '';
   }
@@ -26,4 +29,17 @@ export default (entryBody, length) => {
   text = he.decode(text); // decode html entities
 
   return text;
+};
+
+export default (entry, length) => {
+  const key = `${makeEntryCacheKey(entry)}-${length}`;
+
+  if (cache[key] !== undefined) {
+    return cache[key];
+  }
+
+  const res = postBodySummary(entry.body, length);
+  cache[key] = res;
+
+  return res;
 };
