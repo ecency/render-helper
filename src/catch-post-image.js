@@ -37,7 +37,7 @@ const image = (entry, width = 0, height = 0) => {
 };
 
 export default (entry, width = 0, height = 0) => {
-  const key = `${entry.author}-${entry.permlink}`;
+  const key = `${entry.author}-${entry.permlink}-${entry.last_update}`;
 
   if (cache[key] !== undefined) {
     return cache[key];
