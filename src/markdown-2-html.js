@@ -3,6 +3,10 @@ import sanitize from 'sanitize-html';
 
 import proxifyImageSrc from './proxify-image-src';
 
+import {makeEntryCacheKey} from './helper';
+
+const cache = {};
+
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
@@ -432,7 +436,7 @@ export const linkify = content => {
   return content;
 };
 
-export default input => {
+const markdown2html = input => {
   if (!input) {
     return '';
   }
@@ -456,4 +460,17 @@ export default input => {
     .trim();
 
   return sanitizeHtml(output);
+};
+
+export default entry => {
+  const key = makeEntryCacheKey(entry);
+
+  if (cache[key] !== undefined) {
+    return cache[key];
+  }
+
+  const res = markdown2html(entry.body);
+  cache[key] = res;
+
+  return res;
 };

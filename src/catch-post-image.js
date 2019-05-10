@@ -21,7 +21,7 @@ const image = (entry, width = 0, height = 0) => {
   }
 
   // try to find first image from post body
-  const html = markdown2html(entry.body);
+  const html = markdown2html(entry);
   const doc = createDoc(html);
   if (!doc) {
     return null;
