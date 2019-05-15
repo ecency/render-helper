@@ -12,6 +12,7 @@
     "arrow-parens": "off",
     "operator-linebreak": "off",
     "no-param-reassign": "off",
-    "object-curly-newline": "off"
+    "object-curly-newline": "off",
+    "no-underscore-dangle": "off"
   }
 }

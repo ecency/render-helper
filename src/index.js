@@ -1,6 +1,12 @@
-import renderPostBody from './markdown-2-html';
-import catchPostImage from './catch-post-image';
-import postBodySummary from './post-body-summary';
+import renderPostBody, {_renderPostBody} from './markdown-2-html';
+import catchPostImage, {_catchPostImage} from './catch-post-image';
+import postBodySummary, {_postBodySummary} from './post-body-summary';
 import proxifyImageSrc, {setProxyBase} from './proxify-image-src';
 
-export {renderPostBody, catchPostImage, postBodySummary, proxifyImageSrc, setProxyBase};
+export {
+  renderPostBody, _renderPostBody,
+  catchPostImage, _catchPostImage,
+  postBodySummary, _postBodySummary,
+  proxifyImageSrc,
+  setProxyBase
+};

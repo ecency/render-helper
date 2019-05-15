@@ -462,6 +462,8 @@ const markdown2html = input => {
   return sanitizeHtml(output);
 };
 
+export const _renderPostBody = entry => markdown2html(entry.body);
+
 export default entry => {
   const key = makeEntryCacheKey(entry);
 

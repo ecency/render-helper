@@ -31,6 +31,8 @@ const postBodySummary = (entryBody, length) => {
   return text;
 };
 
+export const _postBodySummary = (entry, length) => postBodySummary(entry.body, length);
+
 export default (entry, length) => {
   const key = `${makeEntryCacheKey(entry)}-${length}`;
 

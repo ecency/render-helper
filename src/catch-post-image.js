@@ -36,6 +36,8 @@ const image = (entry, width = 0, height = 0) => {
   return null;
 };
 
+export const _catchPostImage = (entry, width = 0, height = 0) => image(entry, width, height);
+
 export default (entry, width = 0, height = 0) => {
   const key = makeEntryCacheKey(entry);
 
