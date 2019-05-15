@@ -31,16 +31,18 @@ const postBodySummary = (entryBody, length) => {
   return text;
 };
 
-export const _postBodySummary = (entry, length) => postBodySummary(entry.body, length);
+export default (obj, length) => {
+  if (typeof obj === 'string') {
+    return postBodySummary(obj, length);
+  }
 
-export default (entry, length) => {
-  const key = `${makeEntryCacheKey(entry)}-${length}`;
+  const key = `${makeEntryCacheKey(obj)}-${length}`;
 
   if (cache[key] !== undefined) {
     return cache[key];
   }
 
-  const res = postBodySummary(entry.body, length);
+  const res = postBodySummary(obj.body, length);
   cache[key] = res;
 
   return res;

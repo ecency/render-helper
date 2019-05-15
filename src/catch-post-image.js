@@ -36,16 +36,17 @@ const image = (entry, width = 0, height = 0) => {
   return null;
 };
 
-export const _catchPostImage = (entry, width = 0, height = 0) => image(entry, width, height);
-
-export default (entry, width = 0, height = 0) => {
-  const key = makeEntryCacheKey(entry);
+export default (obj, width = 0, height = 0) => {
+  if (typeof obj === 'string') {
+    return image(obj, width, height);
+  }
+  const key = makeEntryCacheKey(obj);
 
   if (cache[key] !== undefined) {
     return cache[key];
   }
 
-  const res = image(entry, width, height);
+  const res = image(obj, width, height);
 
   cache[key] = res;
 

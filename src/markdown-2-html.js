@@ -462,16 +462,18 @@ const markdown2html = input => {
   return sanitizeHtml(output);
 };
 
-export const _renderPostBody = entry => markdown2html(entry.body);
+export default obj => {
+  if (typeof obj === 'string') {
+    return markdown2html(obj);
+  }
 
-export default entry => {
-  const key = makeEntryCacheKey(entry);
+  const key = makeEntryCacheKey(obj);
 
   if (cache[key] !== undefined) {
     return cache[key];
   }
 
-  const res = markdown2html(entry.body);
+  const res = markdown2html(obj.body);
   cache[key] = res;
 
   return res;

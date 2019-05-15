@@ -2,6 +2,7 @@
 import {expect} from 'chai';
 
 import postBodySummary from '../src/post-body-summary';
+import catchPostImage from "../src/catch-post-image";
 
 
 describe('postBodySummary', () => {
@@ -137,5 +138,11 @@ So, how can you qualify to get one?`
     const expected = 'Hey Dtube! Hey Steemian It\'s your boy marpe @marpemusic. I greet you from my stable, Ibadan Nigeria. There\'s excitement in the air! The epoch making STEEMIB (that is, STEEMIT IBADAN) meet up is around';
 
     expect(postBodySummary(input, 200)).to.deep.equal(expected);
+  });
+
+  it('11- Test with not obj param', () => {
+    const input = '<center>Lorem Ipsum Dolor</center>';
+    const expected = 'Lorem Ipsum Dolor';
+    expect(postBodySummary(input)).to.deep.equal(expected);
   });
 });

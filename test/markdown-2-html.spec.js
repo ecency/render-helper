@@ -394,6 +394,12 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(data)).to.matchSnapshotJSON();
     });
 
+    it('23- Test with not obj param', () => {
+      expect(markdown2Html('<a href="foo">foo</a> lorem ipsum **dolor** sit amet').trim()).to.deep.equal(
+        '<p><a class="markdown-external-link" data-href="https://foo">foo</a> lorem ipsum <strong>dolor</strong> sit amet</p>'
+      );
+    });
+
   });
 
 

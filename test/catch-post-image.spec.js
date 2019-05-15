@@ -7,6 +7,7 @@ import setup from './setup';
 setup();
 
 import catchPostImage from '../src/catch-post-image';
+import markdown2Html from "../src/markdown-2-html";
 
 describe('catchPostImage', () => {
   it('1- Should extract entry image from json_metadata', () => {
@@ -111,4 +112,13 @@ describe('catchPostImage', () => {
     const expected = null;
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
+
+  it('8- Test with not obj param', () => {
+    const input = '<center>![ezrni9y9pw.jpg](https://img.esteem.ws/ezrni9y9pw.jpg)</center><hr>';
+    const expected = 'https://steemitimages.com/0x0/https://img.esteem.ws/ezrni9y9pw.jpg';
+
+    expect(catchPostImage(input)).to.deep.equal(expected);
+  });
+
+
 });
