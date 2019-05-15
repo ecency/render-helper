@@ -1,6 +1,6 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "eSteem render helpers",
   "main": "./lib/index.js",
   "scripts": {
