@@ -1,6 +1,6 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "eSteem render helpers",
   "main": "./lib/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   },
   "author": "eSteem <info@esteem.app>",
   "license": "MIT",
-  "homepage": "https://github.com/esteemapp/esteem-render-helperss",
+  "homepage": "https://github.com/esteemapp/esteem-render-helpers",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
