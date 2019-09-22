@@ -81,7 +81,7 @@ export const sanitizeHtml = (html) => {
   ];
 
   const allowedAttributes = {
-    'a': ['data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'class', 'title'],
+    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'class', 'title'],
     'img': ['src', 'alt', 'class'],
     'span': ['class'],
     'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
@@ -120,7 +120,7 @@ export const sanitizeHtml = (html) => {
   return sanitize(html, {allowedTags, allowedAttributes, transformTags});
 };
 
-const traverse = (node, depth = 0) => {
+const traverse = (node, forApp, depth = 0) => {
   if (!node || !node.childNodes) return;
 
   const childNodes = [];
@@ -130,17 +130,16 @@ const traverse = (node, depth = 0) => {
   });
 
   childNodes.forEach(child => {
-    if (child.nodeName.toLowerCase() === 'a') a(child);
+    if (child.nodeName.toLowerCase() === 'a') a(child, forApp);
     if (child.nodeName.toLowerCase() === 'iframe') iframe(child);
-    if (child.nodeName === '#text') text(child);
+    if (child.nodeName === '#text') text(child, forApp);
     if (child.nodeName.toLowerCase() === 'img') img(child);
 
-    traverse(child, depth + 1);
+    traverse(child, forApp, depth + 1);
   });
 };
 
-
-const a = el => {
+const a = (el, forApp) => {
   let href = el.getAttribute('href');
 
   // Continue if href has no value
@@ -171,9 +170,12 @@ const a = el => {
     href.trim().replace(/&amp;/g, '&') ===
     innerHTML(el).trim().replace(/&amp;/g, '&')
   ) {
-    el.setAttribute('data-href', href);
+    if (forApp) {
+      el.setAttribute('data-href', href);
+      el.removeAttribute('href');
+    }
+
     el.setAttribute('class', 'markdown-img-link');
-    el.removeAttribute('href');
 
     removeChildNodes(el);
 
@@ -188,12 +190,21 @@ const a = el => {
   let postMatch = href.match(postRegex);
   if (postMatch) {
     el.setAttribute('class', 'markdown-post-link');
-    el.removeAttribute('href');
 
-    el.setAttribute('data-tag', postMatch[2]);
-    el.setAttribute('data-author', postMatch[3].replace('@', ''));
-    el.setAttribute('data-permlink', postMatch[4]);
+    const tag = postMatch[2];
+    const author = postMatch[3].replace('@', '');
+    const permlink = postMatch[4];
 
+    if (forApp) {
+      el.removeAttribute('href');
+
+      el.setAttribute('data-tag', tag);
+      el.setAttribute('data-author', author);
+      el.setAttribute('data-permlink', permlink);
+    } else {
+      const h = `/${tag}/@${author}/${permlink}`;
+      el.setAttribute('href', h);
+    }
     return;
   }
 
@@ -202,7 +213,6 @@ const a = el => {
   postMatch = href.match(copiedPostRegex);
   if (postMatch) {
     el.setAttribute('class', 'markdown-post-link');
-    el.removeAttribute('href');
 
     let tag = postMatch[1];
     // busy links matches with this regex. need to remove slash trail
@@ -210,9 +220,19 @@ const a = el => {
       tag = 'busy';
     }
 
-    el.setAttribute('data-tag', tag);
-    el.setAttribute('data-author', postMatch[2].replace('@', ''));
-    el.setAttribute('data-permlink', postMatch[3]);
+    const author = postMatch[2].replace('@', '');
+    const permlink = postMatch[3];
+
+    if (forApp) {
+      el.removeAttribute('href');
+      el.setAttribute('data-tag', tag);
+      el.setAttribute('data-author', author);
+      el.setAttribute('data-permlink', permlink);
+    } else {
+      const h = `/${tag}/@${author}/${permlink}`;
+      el.setAttribute('href', h);
+    }
+
     return;
   }
 
@@ -308,11 +328,12 @@ const a = el => {
       'https://steemconnect.com/sign/account-witness-vote?witness='
     ) === 0
   ) {
-    el.setAttribute('class', 'markdown-witnesses-link');
-    el.setAttribute('data-href', href);
-    el.removeAttribute('href');
-
-    return;
+    if (forApp) {
+      el.setAttribute('class', 'markdown-witnesses-link');
+      el.setAttribute('data-href', href);
+      el.removeAttribute('href');
+      return;
+    }
   }
 
   // If nothing matched element as external link so it will be opened in external window
@@ -327,8 +348,13 @@ const a = el => {
     href = `https://${href}`;
   }
 
-  el.setAttribute('data-href', href);
-  el.removeAttribute('href');
+  if (forApp) {
+    el.setAttribute('data-href', href);
+    el.removeAttribute('href');
+  } else {
+    el.setAttribute('target', '_blank');
+    el.setAttribute('rel', 'noopener noreferrer');
+  }
 };
 
 const iframe = (el) => {
@@ -388,10 +414,10 @@ const img = node => {
   }
 };
 
-const text = node => {
+const text = (node, forApp) => {
   if (['a', 'code'].includes(node.parentNode.nodeName)) return;
 
-  const linkified = linkify(node.nodeValue);
+  const linkified = linkify(node.nodeValue, forApp);
   if (linkified !== node.nodeValue) {
     const replaceNode = DOMParser.parseFromString(
       `<span class="will-replaced">${linkified}</span>`
@@ -403,15 +429,16 @@ const text = node => {
   }
 
   if (node.nodeValue.match(imgRegex)) {
+    const attrs = forApp ? `data-href="${node.nodeValue}"` : `href="${node.nodeValue}"`;
     const replaceNode = DOMParser.parseFromString(
-      `<a data-href="${node.nodeValue}" class="markdown-img-link"><img src="${node.nodeValue}"></a>`
+      `<a ${attrs} class="markdown-img-link"><img src="${node.nodeValue}"></a>`
     );
 
     node.parentNode.replaceChild(replaceNode, node);
   }
 };
 
-export const linkify = content => {
+export const linkify = (content, forApp) => {
   // Tags
   content = content.replace(/(^|\s|>)(#[-a-z\d]+)/gi, tag => {
     if (/#[\d]+$/.test(tag)) return tag; // do not allow only numbers (like #1)
@@ -419,7 +446,9 @@ export const linkify = content => {
     tag = tag.replace('>', ''); // remove closing tag
     const tag2 = tag.trim().substring(1);
     const tagLower = tag2.toLowerCase();
-    return `${preceding}<a class="markdown-tag-link" data-tag="${tagLower}">${tag.trim()}</a>`;
+
+    const attrs = forApp ? `data-tag="${tagLower}"` : `href="/${tagLower}"`;
+    return `${preceding}<a class="markdown-tag-link" ${attrs}>${tag.trim()}</a>`;
   });
 
   // User mentions
@@ -429,14 +458,15 @@ export const linkify = content => {
       const userLower = user.toLowerCase();
       const preceedings = (preceeding1 || '') + (preceeding2 || '');
 
-      return `${preceedings}<a class="markdown-author-link" data-author="${userLower}">@${user}</a>`;
+      const attrs = forApp ? `data-author="${userLower}"` : `href="/@${userLower}"`;
+      return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`;
     }
   );
 
   return content;
 };
 
-const markdown2html = input => {
+const markdown2html = (input, forApp) => {
   if (!input) {
     return '';
   }
@@ -447,7 +477,7 @@ const markdown2html = input => {
     output = md.render(input);
     const doc = DOMParser.parseFromString(`<body id="root">${output}</body>`, 'text/html');
 
-    traverse(doc);
+    traverse(doc, forApp);
 
     output = XMLSerializer.serializeToString(doc);
   } catch (error) {
@@ -462,9 +492,9 @@ const markdown2html = input => {
   return sanitizeHtml(output);
 };
 
-export default obj => {
+export default (obj, forApp = true) => {
   if (typeof obj === 'string') {
-    return markdown2html(obj);
+    return markdown2html(obj, forApp);
   }
 
   const key = makeEntryCacheKey(obj);
@@ -473,7 +503,7 @@ export default obj => {
     return cache[key];
   }
 
-  const res = markdown2html(obj.body);
+  const res = markdown2html(obj.body, forApp);
   cache[key] = res;
 
   return res;

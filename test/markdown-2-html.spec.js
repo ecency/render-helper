@@ -402,7 +402,6 @@ describe('Markdown2Html', () => {
 
   });
 
-
   describe('Sanitization', () => {
 
     it('1- Should remove javascript links', () => {
@@ -455,7 +454,6 @@ describe('Markdown2Html', () => {
     });
   });
 
-
   describe('Test files', () => {
     it('1- Should catch images in table', () => {
       const data = getTestData(
@@ -504,5 +502,20 @@ describe('Markdown2Html', () => {
 
   });
 
+
+  describe('forApp = false', () => {
+
+    it('1', () => {
+      const input = {
+        author: 'foo1123',
+        permlink: 'bar1123',
+        last_update: '2019-05-10T09:15:21',
+        body: "https://img.esteem.ws/bbq3ob1idy.png <a href=\"https://steemit.com/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">fooo</a> <a href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">bar</a> <a href=\"http://external.com/loromoro\">baz</a> #lorem @ipsum <a href='https://steemit.com/~witnesses'>vote me</a>"
+      };
+      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://steemitimages.com/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a> <a class="markdown-tag-link" href="/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> <a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
+
+      expect(markdown2Html(input, false)).to.deep.equal(expected);
+    });
+  });
 })
 ;
