@@ -447,7 +447,7 @@ export const linkify = (content, forApp) => {
     const tag2 = tag.trim().substring(1);
     const tagLower = tag2.toLowerCase();
 
-    const attrs = forApp ? `data-tag="${tagLower}"` : `href="/${tagLower}"`;
+    const attrs = forApp ? `data-tag="${tagLower}"` : `href="/trending/${tagLower}"`;
     return `${preceding}<a class="markdown-tag-link" ${attrs}>${tag.trim()}</a>`;
   });
 
