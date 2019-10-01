@@ -438,6 +438,10 @@ const text = (node, forApp) => {
   }
 };
 
+const cleanReply = (s) => s.split('\n')
+  .filter(item => item.includes('Posted using [Partiko') === false)
+  .join('\n');
+
 export const linkify = (content, forApp) => {
   // Tags
   content = content.replace(/(^|\s|>)(#[-a-z\d]+)/gi, tag => {
@@ -492,6 +496,7 @@ const markdown2html = (input, forApp) => {
   return sanitizeHtml(output);
 };
 
+
 export default (obj, forApp = true) => {
   if (typeof obj === 'string') {
     return markdown2html(obj, forApp);
@@ -501,6 +506,10 @@ export default (obj, forApp = true) => {
 
   if (cache[key] !== undefined) {
     return cache[key];
+  }
+
+  if (obj.parent_author) {
+    obj.body = cleanReply(obj.body);
   }
 
   const res = markdown2html(obj.body, forApp);

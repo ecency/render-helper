@@ -498,10 +498,7 @@ describe('Markdown2Html', () => {
 
       x += 1;
     }
-
-
   });
-
 
   describe('forApp = false', () => {
 
@@ -517,5 +514,19 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
   });
-})
-;
+
+  describe('cleanReply', () => {
+    it('1- Should clean reply body', () => {
+      const input = {
+        parent_author: 'bar333',
+        author: 'foo6401',
+        permlink: 'bar6401',
+        last_update: '2019-05-10T09:15:21',
+        body: "hello lorem ipsum dolor sit amet \n Posted using [Partiko Android](https://partiko.app/referral/aftabkhan10)"
+      };
+      const expected = "<p>hello lorem ipsum dolor sit amet</p>";
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+  });
+});
