@@ -410,7 +410,7 @@ const img = node => {
 
   const src = node.getAttribute('src');
   node.setAttribute('itemprop', 'image');
-  
+
   if (node.getAttribute('class').indexOf('no-replace') === -1) {
     node.setAttribute('src', proxifyImageSrc(src));
   }
