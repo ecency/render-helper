@@ -309,6 +309,7 @@ const a = (el, forApp) => {
 
         const thumbImg = el.ownerDocument.createElement('img');
         thumbImg.setAttribute('class', 'no-replace video-thumbnail');
+        thumbImg.setAttribute('itemprop','image');
         thumbImg.setAttribute('src', thumbnail);
 
         const play = el.ownerDocument.createElement('span');
@@ -408,7 +409,8 @@ const img = node => {
   node.removeAttribute('height');
 
   const src = node.getAttribute('src');
-
+  node.setAttribute('itemprop','image');
+  
   if (node.getAttribute('class').indexOf('no-replace') === -1) {
     node.setAttribute('src', proxifyImageSrc(src));
   }
