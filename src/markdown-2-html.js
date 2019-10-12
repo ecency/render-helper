@@ -81,7 +81,7 @@ export const sanitizeHtml = (html) => {
   ];
 
   const allowedAttributes = {
-    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'class', 'title'],
+    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
     'img': ['src', 'alt', 'class'],
     'span': ['class'],
     'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
@@ -339,10 +339,14 @@ const a = (el, forApp) => {
 
   if (href.indexOf('steemconnect.com/sign/update-proposal-votes?proposal_ids') > 0) {
     if (forApp) {
-      el.setAttribute('class', 'markdown-proposal-link');
-      el.setAttribute('data-href', href);
-      el.removeAttribute('href');
-      return;
+      const m = href.match(/proposal_ids=\[(\d+)]/);
+      if (m) {
+        el.setAttribute('class', 'markdown-proposal-link');
+        el.setAttribute('data-href', href);
+        el.setAttribute('data-proposal', m[1]);
+        el.removeAttribute('href');
+        return;
+      }
     }
   }
 

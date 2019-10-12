@@ -405,9 +405,9 @@ describe('Markdown2Html', () => {
         author: 'foo358',
         permlink: 'bar358',
         last_update: '2019-05-10T09:15:21',
-        body: "[Approve](https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&approve=true) [Unapprove](https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&approve=false)"
+        body: "[Approve](https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&approve=true) [Unapprove](https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[41]&approve=false)"
       };
-      const expected = '<p><a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=false">Unapprove</a></p>';
+      const expected = '<p><a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true" data-proposal="39">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[41]&amp;approve=false" data-proposal="41">Unapprove</a></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
 
