@@ -337,6 +337,15 @@ const a = (el, forApp) => {
     }
   }
 
+  if (href.indexOf('steemconnect.com/sign/update-proposal-votes?proposal_ids') > 0) {
+    if (forApp) {
+      el.setAttribute('class', 'markdown-proposal-link');
+      el.setAttribute('data-href', href);
+      el.removeAttribute('href');
+      return;
+    }
+  }
+
   // If nothing matched element as external link so it will be opened in external window
   el.setAttribute('class', 'markdown-external-link');
 

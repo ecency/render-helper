@@ -400,6 +400,17 @@ describe('Markdown2Html', () => {
       );
     });
 
+    it('24- Should handle proposal vote links', () => {
+      const input = {
+        author: 'foo358',
+        permlink: 'bar358',
+        last_update: '2019-05-10T09:15:21',
+        body: "[Approve](https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&approve=true) [Unapprove](https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&approve=false)"
+      };
+      const expected = '<p><a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=false">Unapprove</a></p>';
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+
   });
 
   describe('Sanitization', () => {
@@ -468,7 +479,6 @@ describe('Markdown2Html', () => {
     });
   });
 
-
   describe('Test legacy files', () => {
     const dataDir = `${__dirname}/data/legacy`;
 
@@ -516,7 +526,7 @@ describe('Markdown2Html', () => {
   });
 
   describe('cleanReply', () => {
-    it('1- Should clean reply body', () => {
+    it(' Should clean reply body', () => {
       const input = {
         parent_author: 'bar333',
         author: 'foo6401',
