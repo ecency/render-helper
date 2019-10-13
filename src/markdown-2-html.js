@@ -339,7 +339,7 @@ const a = (el, forApp) => {
 
   if (href.indexOf('steemconnect.com/sign/update-proposal-votes?proposal_ids') > 0) {
     if (forApp) {
-      const m = href.match(/proposal_ids=\[(\d+)]/);
+      const m = decodeURI(href).match(/proposal_ids=\[(\d+)]/);
       if (m) {
         el.setAttribute('class', 'markdown-proposal-link');
         el.setAttribute('data-href', href);
