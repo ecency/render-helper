@@ -303,7 +303,7 @@ const a = (el, forApp) => {
         el.removeAttribute('href');
 
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'));
-        const videoHref = `https://d.tube/#!/v/${e[2]}/${e[3]}`;
+        const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`;
 
         el.setAttribute('data-video-href', videoHref);
 
