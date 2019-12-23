@@ -318,6 +318,9 @@ const a = (el, forApp) => {
         el.appendChild(thumbImg);
         el.appendChild(play);
 
+        // Remove image.
+        el.removeChild(imgEls[0]);
+
         return;
       }
     }
