@@ -13,6 +13,7 @@ const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
+const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
 
 const Remarkable = require('remarkable');
 
@@ -276,6 +277,34 @@ const a = (el, forApp) => {
       el.removeAttribute('href');
 
       const embedSrc = `https://player.vimeo.com/video/${e[3]}`;
+
+      el.textContent = '';
+
+      const ifr = el.ownerDocument.createElement('iframe');
+      ifr.setAttribute('frameborder', '0');
+      ifr.setAttribute('allowfullscreen', 'true');
+      ifr.setAttribute('src', embedSrc);
+      el.appendChild(ifr);
+
+      return;
+    }
+  }
+
+  // If twitch video
+  match = href.match(twitchRegex);
+  if (match && href === el.textContent) {
+    const e = twitchRegex.exec(href);
+    if (e[2]) {
+      el.setAttribute('class', 'markdown-video-link markdown-video-link-twitch');
+      el.removeAttribute('href');
+
+      let embedSrc = '';
+
+      if (e[1] === undefined) {
+        embedSrc = `https://player.twitch.tv/?channel=${e[2]}`;
+      } else {
+        embedSrc = `https://player.twitch.tv/?video=${e[1]}`;
+      }
 
       el.textContent = '';
 

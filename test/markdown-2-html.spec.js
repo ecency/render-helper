@@ -410,6 +410,17 @@ describe('Markdown2Html', () => {
       const expected = '<p><a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true" data-proposal="39">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.steemconnect.com/sign/update-proposal-votes?proposal_ids=%5B41%5D&amp;approve=false" data-proposal="41">Unapprove</a></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('25- Should handle twitch videos', () => {
+      const input = {
+        author: 'foo363',
+        permlink: 'bar363',
+        last_update: '2019-05-10T09:15:21',
+        body: "https://www.twitch.tv/steemspacely"
+      };
+      const expected = '<p><a class="markdown-video-link markdown-video-link-twitch"><iframe frameborder="0" allowfullscreen="true" src="https://player.twitch.tv/?channel=steemspacely&amp;autoplay=false"></iframe></a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
 
   });
 
