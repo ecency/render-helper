@@ -334,7 +334,8 @@ const a = (el, forApp) => {
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'));
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`;
 
-        el.setAttribute('data-video-href', videoHref);
+        // el.setAttribute('data-video-href', videoHref);
+        el.setAttribute('data-embed-src', videoHref);
 
         const thumbImg = el.ownerDocument.createElement('img');
         thumbImg.setAttribute('class', 'no-replace video-thumbnail');
