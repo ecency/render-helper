@@ -14,6 +14,7 @@ const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
+const speakRegex = /(?:https?:\/\/(?:3speak.online\/watch\?v=)|(?:3speak.online\/embed\?v=))([A-Za-z0-9\_\-\/]+)/i;
 
 const Remarkable = require('remarkable');
 
@@ -356,6 +357,29 @@ const a = (el, forApp) => {
     }
   }
 
+  // Detect 3Speak
+  match = href.match(speakRegex);
+  if (match && href === el.textContent) {
+    const e = speakRegex.exec(href);
+    if (e[1]) {
+      el.setAttribute('class', 'markdown-video-link markdown-video-link-speak');
+      el.removeAttribute('href');
+
+      let embedSrc = '';
+      embedSrc = `https://3speak.online/embed?v=${e[1]}`;
+
+      el.textContent = '';
+
+      const ifr = el.ownerDocument.createElement('iframe');
+      ifr.setAttribute('frameborder', '0');
+      ifr.setAttribute('allowfullscreen', 'true');
+      ifr.setAttribute('src', embedSrc);
+      el.appendChild(ifr);
+
+      return;
+    }
+  }
+
   if (
     href.indexOf('https://steemit.com/~witnesses') === 0 ||
     href.indexOf(
@@ -428,6 +452,13 @@ const iframe = (el) => {
 
   // Twitch
   if (src.match(/^(https?:)?\/\/player.twitch.tv\/.*/i)) {
+    const s = `${src}&autoplay=false`;
+    el.setAttribute('src', s);
+    return;
+  }
+
+  // 3Speak
+  if (src.match(/^(https?:)?\/\/3speak.online\/embed\?.*/i)) {
     const s = `${src}&autoplay=false`;
     el.setAttribute('src', s);
     return;
