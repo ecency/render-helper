@@ -360,24 +360,38 @@ const a = (el, forApp) => {
 
   // Detect 3Speak
   match = href.match(speakRegex);
-  if (match && href === el.textContent) {
-    const e = speakRegex.exec(href);
-    if (e[1]) {
-      el.setAttribute('class', 'markdown-video-link markdown-video-link-speak');
-      el.removeAttribute('href');
+  if (match) {
+    const imgEls = el.getElementsByTagName('img');
 
-      let embedSrc = '';
-      embedSrc = `https://3speak.online/embed?v=${e[1]}`;
+    if (imgEls.length === 1) {
+      const e = speakRegex.exec(href);
+      // e[2] = username, e[3] object id
+      if (e[1]) {
+        el.setAttribute('class', 'markdown-video-link markdown-video-link-speak');
+        el.removeAttribute('href');
 
-      el.textContent = '';
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'));
+        const videoHref = `https://3speak.online/embed?v=${e[1]}`;
 
-      const ifr = el.ownerDocument.createElement('iframe');
-      ifr.setAttribute('frameborder', '0');
-      ifr.setAttribute('allowfullscreen', 'true');
-      ifr.setAttribute('src', embedSrc);
-      el.appendChild(ifr);
+        // el.setAttribute('data-video-href', videoHref);
+        el.setAttribute('data-embed-src', videoHref);
 
-      return;
+        const thumbImg = el.ownerDocument.createElement('img');
+        thumbImg.setAttribute('class', 'no-replace video-thumbnail');
+        thumbImg.setAttribute('itemprop', 'image');
+        thumbImg.setAttribute('src', thumbnail);
+
+        const play = el.ownerDocument.createElement('span');
+        play.setAttribute('class', 'markdown-video-play');
+
+        el.appendChild(thumbImg);
+        el.appendChild(play);
+
+        // Remove image.
+        el.removeChild(imgEls[0]);
+
+        return;
+      }
     }
   }
 

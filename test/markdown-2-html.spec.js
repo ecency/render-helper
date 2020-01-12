@@ -426,13 +426,12 @@ describe('Markdown2Html', () => {
         author: 'foo333',
         permlink: 'bar323',
         last_update: '2019-05-10T09:15:21',
-        body: "https://3speak.online/watch?v=wehmoen/xrhjxocx"
+        body: "[![](https://img.3speakcontent.online/xrhjxocx/post.png?v2)](https://3speak.online/watch?v=wehmoen/xrhjxocx)"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-speak"><iframe frameborder="0" allowfullscreen="true" src="https://3speak.online/embed?v=wehmoen/xrhjxocx&amp;autoplay=false"></iframe></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://steemitimages.com/0x0/https://img.3speakcontent.online/xrhjxocx/post.png?v2" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-
   });
 
   describe('Sanitization', () => {
