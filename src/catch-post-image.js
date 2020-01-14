@@ -1,9 +1,7 @@
-import LRU from 'lru-cache';
 import proxifyImageSrc from './proxify-image-src';
 import markdown2html from './markdown-2-html';
 import {createDoc, makeEntryCacheKey} from './helper';
-
-const cache = new LRU(120);
+import {cacheGet, cacheSet} from './cache';
 
 const image = (entry, width = 0, height = 0) => {
   // return from json metadata if exists
@@ -41,15 +39,15 @@ export default (obj, width = 0, height = 0) => {
   if (typeof obj === 'string') {
     return image(obj, width, height);
   }
-  const key = makeEntryCacheKey(obj);
+  const key = `${makeEntryCacheKey(obj)}-image`;
 
-  const item = cache.get(key);
+  const item = cacheGet(key);
   if (item) {
     return item;
   }
 
   const res = image(obj, width, height);
-  cache.set(key, res);
+  cacheSet(key, res);
 
   return res;
 };

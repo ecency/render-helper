@@ -1,9 +1,7 @@
-import LRU from 'lru-cache';
 import he from 'he';
 import Remarkable from 'remarkable';
 import {makeEntryCacheKey} from './helper';
-
-const cache = new LRU(60);
+import {cacheGet, cacheSet} from './cache';
 
 const md = new Remarkable({html: true, breaks: true, linkify: false});
 
@@ -37,15 +35,15 @@ export default (obj, length) => {
     return postBodySummary(obj, length);
   }
 
-  const key = `${makeEntryCacheKey(obj)}-${length}`;
+  const key = `${makeEntryCacheKey(obj)}-sum-${length}`;
 
-  const item = cache.get(key);
+  const item = cacheGet(key);
   if (item) {
     return item;
   }
 
   const res = postBodySummary(obj.body, length);
-  cache.set(key, res);
+  cacheSet(key, res);
 
   return res;
 };
