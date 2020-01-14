@@ -1,8 +1,9 @@
+import LRU from 'lru-cache';
 import proxifyImageSrc from './proxify-image-src';
 import markdown2html from './markdown-2-html';
 import {createDoc, makeEntryCacheKey} from './helper';
 
-const cache = {};
+const cache = new LRU(120);
 
 const image = (entry, width = 0, height = 0) => {
   // return from json metadata if exists
@@ -42,13 +43,13 @@ export default (obj, width = 0, height = 0) => {
   }
   const key = makeEntryCacheKey(obj);
 
-  if (cache[key] !== undefined) {
-    return cache[key];
+  const item = cache.get(key);
+  if (item) {
+    return item;
   }
 
   const res = image(obj, width, height);
-
-  cache[key] = res;
+  cache.set(key, res);
 
   return res;
 };

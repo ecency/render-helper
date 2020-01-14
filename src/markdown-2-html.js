@@ -1,11 +1,13 @@
+import LRU from 'lru-cache';
 import xmldom from 'xmldom';
+
 import sanitize from 'sanitize-html';
 
 import proxifyImageSrc from './proxify-image-src';
 
 import {makeEntryCacheKey} from './helper';
 
-const cache = {};
+const cache = new LRU(60);
 
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
@@ -594,8 +596,9 @@ export default (obj, forApp = true) => {
 
   const key = makeEntryCacheKey(obj);
 
-  if (cache[key] !== undefined) {
-    return cache[key];
+  const item = cache.get(key);
+  if (item) {
+    return item;
   }
 
   if (obj.parent_author) {
@@ -603,7 +606,7 @@ export default (obj, forApp = true) => {
   }
 
   const res = markdown2html(obj.body, forApp);
-  cache[key] = res;
+  cache.set(key, res);
 
   return res;
 };
