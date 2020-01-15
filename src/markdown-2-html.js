@@ -36,7 +36,7 @@ const innerHTML = (node) => {
     return XMLSerializer.serializeToString(node.childNodes[0]);
   }
 
-  return null;
+  return '';
 };
 
 const removeChildNodes = (node) => {
