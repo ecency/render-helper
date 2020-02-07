@@ -10,6 +10,7 @@ import {cacheGet, cacheSet} from './cache';
 
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
+const mentionRegex = /^https?:\/\/(steemit\.com|beta\.steemit\.com|esteem\.app)\/(@[\w.\d-]+)/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
@@ -212,6 +213,23 @@ const a = (el, forApp) => {
     return;
   }
 
+  // If a steem user with url
+  const mentionMatch = href.match(mentionRegex);
+  if (mentionMatch) {
+    el.setAttribute('class', 'markdown-author-link');
+
+    const author = mentionMatch[2].replace('@', '').toLowerCase();
+
+    if (forApp) {
+      el.removeAttribute('href');
+
+      el.setAttribute('data-author', author);
+    } else {
+      const h = `/@${author}`;
+      el.setAttribute('href', h);
+    }
+    return;
+  }
 
   // If a copied post link
   postMatch = href.match(copiedPostRegex);

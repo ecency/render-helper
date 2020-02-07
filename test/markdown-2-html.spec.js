@@ -39,6 +39,18 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
 
+    it('30- Should handle steemit user links', () => {
+      const input = {
+        author: 'foo339',
+        permlink: 'bar339',
+        last_update: '2019-12-10T09:15:21',
+        body: "lorem ipsum dolor sit <a href='https://steemit.com/@esteemapp'>esteemapp</a> amet. <a href='https://steemit.com/@good-karma'>click here</a> to go"
+      };
+      const expected = '<p>lorem ipsum dolor sit <a class="markdown-author-link" data-author="esteemapp">esteemapp</a> amet. <a class="markdown-author-link" data-author="good-karma">click here</a> to go</p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+
     it('3- Should handle copied links', () => {
       const input = {
         author: 'foo33',
