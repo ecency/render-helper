@@ -1,4 +1,4 @@
-let proxyBase = 'https://steemitimages.com';
+let proxyBase = 'https://images.hive.blog';
 
 export const setProxyBase = (p) => {
   proxyBase = p;

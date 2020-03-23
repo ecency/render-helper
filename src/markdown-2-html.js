@@ -10,7 +10,7 @@ import {cacheGet, cacheSet} from './cache';
 
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
-const mentionRegex = /^https?:\/\/(steemit\.com|beta\.steemit\.com|esteem\.app)\/(@[\w.\d-]+)/i;
+const mentionRegex = /^https?:\/\/(esteem\.app)\/(@[\w.\d-]+)/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
@@ -411,9 +411,8 @@ const a = (el, forApp) => {
   }
 
   if (
-    href.indexOf('https://steemit.com/~witnesses') === 0 ||
     href.indexOf(
-      'https://steemconnect.com/sign/account-witness-vote?witness='
+      'https://hivesigner.com/sign/account-witness-vote?witness='
     ) === 0
   ) {
     if (forApp) {
@@ -424,7 +423,7 @@ const a = (el, forApp) => {
     }
   }
 
-  if (href.indexOf('steemconnect.com/sign/update-proposal-votes?proposal_ids') > 0) {
+  if (href.indexOf('hivesigner.com/sign/update-proposal-votes?proposal_ids') > 0) {
     if (forApp) {
       const m = decodeURI(href).match(/proposal_ids=\[(\d+)]/);
       if (m) {
