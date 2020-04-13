@@ -21,7 +21,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png"
       };
-      const expected = '<p><a data-href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.hive.blog/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a></p>';
+      const expected = '<p><a data-href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://avatars.esteem.app/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -95,9 +95,9 @@ describe('Markdown2Html', () => {
         author: 'foo37',
         permlink: 'bar37',
         last_update: '2019-05-10T09:15:21',
-        body: '<a href="https://d.tube/#!/v/scottcbusiness/g04n2bbp" title="This link will take you away from steemit.com"><img src="https://images.hive.blog/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t"></a>'
+        body: '<a href="https://d.tube/#!/v/scottcbusiness/g04n2bbp" title="This link will take you away from steemit.com"><img src="https://avatars.esteem.app/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t"></a>'
       };
-      const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.hive.blog/0x0/https://images.hive.blog/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t" /><span class="markdown-video-play"></span></a></p>';
+      const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://avatars.esteem.app/0x0/https://avatars.esteem.app/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -355,7 +355,7 @@ describe('Markdown2Html', () => {
         author: 'foo61',
         permlink: 'bar61',
         last_update: '2019-05-10T09:15:21',
-        body: 'lorem [this error](https://images.hive.blog/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png) ipsum'
+        body: 'lorem [this error](https://avatars.esteem.app/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png) ipsum'
       };
       expect(markdown2Html(input)).to.matchSnapshotJSON();
     });
@@ -418,7 +418,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "[![](https://img.3speakcontent.online/xrhjxocx/post.png?v2)](https://3speak.online/watch?v=wehmoen/xrhjxocx)"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.hive.blog/0x0/https://img.3speakcontent.online/xrhjxocx/post.png?v2" /></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://avatars.esteem.app/0x0/https://img.3speakcontent.online/xrhjxocx/post.png?v2" /></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -530,7 +530,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png <a href=\"https://steemit.com/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">fooo</a> <a href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">bar</a> <a href=\"http://external.com/loromoro\">baz</a> #lorem @ipsum <a href='https://steemit.com/~witnesses'>vote me</a>"
       };
-      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.hive.blog/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> <a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
+      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://avatars.esteem.app/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> <a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
