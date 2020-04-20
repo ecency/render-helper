@@ -8,14 +8,14 @@ describe('Proxify image src', () => {
 
   it('1- should proxify image src', () => {
     const input = 'https://i.imgur.com/muESb0B.png';
-    const expected = 'https://avatars.esteem.app/0x0/https://i.imgur.com/muESb0B.png';
+    const expected = 'https://images.esteem.app/0x0/https://i.imgur.com/muESb0B.png';
 
     expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
 
   it('2- should not proxify if already proxified', () => {
-    const input = 'https://avatars.esteem.app/0x0/https://avatars.esteem.app/DQmWK9ACVoywHPBJQdoTuJpoTSoaubBSKSAdZaJtw1cfLb9/adsactlywitness.gif';
-    const expected = 'https://avatars.esteem.app/0x0/https://avatars.esteem.app/DQmWK9ACVoywHPBJQdoTuJpoTSoaubBSKSAdZaJtw1cfLb9/adsactlywitness.gif';
+    const input = 'https://images.esteem.app/0x0/https://images.esteem.app/DQmWK9ACVoywHPBJQdoTuJpoTSoaubBSKSAdZaJtw1cfLb9/adsactlywitness.gif';
+    const expected = 'https://images.esteem.app/0x0/https://images.esteem.app/DQmWK9ACVoywHPBJQdoTuJpoTSoaubBSKSAdZaJtw1cfLb9/adsactlywitness.gif';
 
     expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
