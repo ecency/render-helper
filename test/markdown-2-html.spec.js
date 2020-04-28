@@ -72,7 +72,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://www.youtube.com/watch?v=qK3d1eoH-Qs"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/qK3d1eoH-Qs?autoplay=1"><img class="no-replace video-thumbnail" src="https://img.youtube.com/vi/qK3d1eoH-Qs/hqdefault.jpg" /><span class="markdown-video-play"></span></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/qK3d1eoH-Qs?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.esteem.app/0x0/https://img.youtube.com/vi/qK3d1eoH-Qs/hqdefault.jpg" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });

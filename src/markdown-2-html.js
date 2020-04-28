@@ -17,7 +17,7 @@ const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channe
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
 // eslint-disable-next-line no-useless-escape
-const speakRegex = /(?:https?:\/\/(?:3speak.online\/watch\?v=)|(?:3speak.online\/embed\?v=))([A-Za-z0-9\_\-\/]+)/i;
+const speakRegex = /(?:https?:\/\/(?:3speak.online\/watch\?v=)|(?:3speak.online\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
 
 const Remarkable = require('remarkable');
 
@@ -268,7 +268,7 @@ const a = (el, forApp) => {
       el.removeAttribute('href');
 
       const vid = e[1];
-      const thumbnail = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid}/hqdefault.jpg`);
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`;
 
       el.textContent = '';
@@ -488,7 +488,7 @@ const iframe = (el) => {
 
   // 3Speak
   if (src.match(/^(https?:)?\/\/3speak.online\/embed\?.*/i)) {
-    const s = `${src}&autoplay=false`;
+    const s = `${src}&autoplay=true`;
     el.setAttribute('src', s);
     return;
   }

@@ -1,6 +1,6 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Esteem render helpers",
   "main": "./lib/index.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "type": "git",
     "url": "git+https://github.com/esteemapp/esteem-render-helpers"
   },
-  "author": "eSteem <info@esteem.app>",
+  "author": "Esteem <info@esteem.app>",
   "license": "MIT",
   "homepage": "https://github.com/esteemapp/esteem-render-helpers",
   "devDependencies": {
