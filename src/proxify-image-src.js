@@ -1,4 +1,4 @@
-let proxyBase = 'https://images.esteem.app';
+let proxyBase = 'https://images.ecency.com';
 
 export const setProxyBase = (p) => {
   proxyBase = p;
