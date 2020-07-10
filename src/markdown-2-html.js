@@ -268,7 +268,7 @@ const a = (el, forApp) => {
       el.removeAttribute('href');
 
       const vid = e[1];
-      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid}/hqdefault.jpg`);
+      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`);
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`;
 
       el.textContent = '';
@@ -481,7 +481,11 @@ const iframe = (el) => {
 
   // Twitch
   if (src.match(/^(https?:)?\/\/player.twitch.tv\/.*/i)) {
-    const s = `${src}&autoplay=false`;
+    let parentDomain = 'ecency.com';
+    if (typeof window !== 'undefined') {
+      parentDomain = window.location.hostname;
+    }
+    const s = `${src}&parent=${parentDomain}&autoplay=false`;
     el.setAttribute('src', s);
     return;
   }

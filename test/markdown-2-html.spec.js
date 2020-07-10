@@ -172,7 +172,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '<iframe src="https://player.twitch.tv/?channel=esl_csgo" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>'
       };
-      const expected = '<iframe src="https://player.twitch.tv/?channel=esl_csgo&amp;autoplay=false" frameborder="0" allowfullscreen="true"></iframe>';
+      const expected = '<iframe src="https://player.twitch.tv/?channel=esl_csgo&amp;parent=ecency.com&amp;autoplay=false" frameborder="0" allowfullscreen="true"></iframe>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -407,7 +407,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://www.twitch.tv/steemspacely"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-twitch"><iframe frameborder="0" allowfullscreen="true" src="https://player.twitch.tv/?channel=steemspacely&amp;autoplay=false"></iframe></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-twitch"><iframe frameborder="0" allowfullscreen="true" src="https://player.twitch.tv/?channel=steemspacely&amp;parent=ecency.com&amp;autoplay=false"></iframe></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
