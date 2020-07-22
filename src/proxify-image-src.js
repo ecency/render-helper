@@ -11,7 +11,7 @@ export default (url, width = 0, height = 0) => {
 
   const prefix = `${proxyBase}/${width}x${height}/`;
 
-  if (url.startsWith(prefix)) return url;
+  if (url.startsWith(proxyBase)) return url;
 
   return `${prefix}${url}`;
 };

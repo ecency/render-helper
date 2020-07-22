@@ -7,10 +7,14 @@ const image = (entry, width = 0, height = 0) => {
   // return from json metadata if exists
   let meta;
 
-  try {
-    meta = JSON.parse(entry.json_metadata);
-  } catch (e) {
-    meta = null;
+  if (typeof entry.json_metadata === 'object') {
+    meta = entry.json_metadata;
+  } else {
+    try {
+      meta = JSON.parse(entry.json_metadata);
+    } catch (e) {
+      meta = null;
+    }
   }
 
   if (meta && meta.image && meta.image.length > 0) {

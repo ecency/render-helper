@@ -121,4 +121,18 @@ describe('catchPostImage', () => {
   });
 
 
+  it('9- Should catch from new post style', () => {
+
+    const input = {
+      "json_metadata": {
+        "image": ["https://files.peakd.com/file/peakd-hive/aggroed/agtirkG8-image.png", "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.adafruit.com%2Fblog%2Fwp-content%2Fuploads%2F2014%2F04%2Fgeordi-la-forge-600x458.jpg&amp;f=1&amp;nofb=1"],
+      },
+    };
+
+    const expected = 'https://images.ecency.com/0x0/https://files.peakd.com/file/peakd-hive/aggroed/agtirkG8-image.png';
+
+    expect(catchPostImage(input)).to.deep.equal(expected);
+  });
+
+
 });
