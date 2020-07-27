@@ -10,8 +10,11 @@ export default (url, width = 0, height = 0) => {
   }
 
   const prefix = `${proxyBase}/${width}x${height}/`;
+  const proxied = `${proxyBase}/0x0/`;
 
-  if (url.startsWith(proxyBase)) return url;
+  if (url.startsWith(prefix)) return url;
+
+  if (url.startsWith(proxied) || url.startsWith(proxyBase)) return url.replace(proxied, prefix);
 
   return `${prefix}${url}`;
 };

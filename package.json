@@ -1,7 +1,7 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.4.5",
-  "description": "Esteem render helpers",
+  "version": "1.4.6",
+  "description": "Markdown+Html Render helper",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
@@ -20,11 +20,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/esteemapp/esteem-render-helpers"
+    "url": "git+https://github.com/ecency/esteem-render-helpers"
   },
-  "author": "Esteem <info@esteem.app>",
+  "author": "Ecency <hello@ecency.com>",
   "license": "MIT",
-  "homepage": "https://github.com/esteemapp/esteem-render-helpers",
+  "homepage": "https://github.com/ecency/esteem-render-helpers",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
