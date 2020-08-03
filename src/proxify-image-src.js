@@ -9,7 +9,7 @@ export default (url, width = 0, height = 0, webp = false) => {
     return '';
   }
 
-  if (webp) proxyBase = `${proxyBase}/webp`;
+  if (webp && proxyBase.indexOf('/webp') === -1) proxyBase = `${proxyBase}/webp`;
 
   const prefix = `${proxyBase}/${width}x${height}/`;
   const proxied = `${proxyBase}/0x0/`;

@@ -1,6 +1,6 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.4.7",
+  "version": "1.4.8",
   "description": "Markdown+Html Render helper",
   "main": "./lib/index.js",
   "scripts": {
