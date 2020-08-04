@@ -21,7 +21,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png"
       };
-      const expected = '<p><a data-href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a></p>';
+      const expected = '<p><a data-href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -72,7 +72,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://www.youtube.com/watch?v=qK3d1eoH-Qs"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/qK3d1eoH-Qs?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/0x0/https://img.youtube.com/vi/qK3d1eoH-Qs/hqdefault.jpg" /><span class="markdown-video-play"></span></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/qK3d1eoH-Qs?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eMZRVYW6mkGBWKemLWWzXbRhNG7Z3h1qjGS?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -97,7 +97,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '<a href="https://d.tube/#!/v/scottcbusiness/g04n2bbp" title="This link will take you away from steemit.com"><img src="https://images.ecency.com/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t"></a>'
       };
-      const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.ecency.com/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t" /><span class="markdown-video-play"></span></a></p>';
+      const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/vM1pGHgNcyCbee5hzZJ19JZfuFzCeUv7mVFJiGiFiNQVJDro9149cjGX97c8UTe28JvW5inmTcYkxfCwaUSR5416cJHQ7FpYMEKq35W4mcyHNJ8uaYMmUHS9qXJTXUc3qjAUVis?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -418,7 +418,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "[![](https://img.3speakcontent.online/xrhjxocx/post.png?v2)](https://3speak.online/watch?v=wehmoen/xrhjxocx)"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.ecency.com/0x0/https://img.3speakcontent.online/xrhjxocx/post.png?v2" /></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/2ufhwNgM3qHKBGVeU2TMMqPBjdB17MRuf4Q7vGrmGMtTn6yFtvW3Lt9t5v1c3so7UFhWDYh9B?format=match&amp;mode=fit" /></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -530,7 +530,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png <a href=\"https://steemit.com/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">fooo</a> <a href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">bar</a> <a href=\"http://external.com/loromoro\">baz</a> #lorem @ipsum <a href='https://steemit.com/~witnesses'>vote me</a>"
       };
-      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/0x0/https://img.esteem.ws/bbq3ob1idy.png" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> <a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
+      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> <a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });

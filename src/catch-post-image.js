@@ -3,7 +3,7 @@ import markdown2html from './markdown-2-html';
 import {createDoc, makeEntryCacheKey} from './helper';
 import {cacheGet, cacheSet} from './cache';
 
-const image = (entry, width = 0, height = 0, webp = false) => {
+const image = (entry, width = 0, height = 0) => {
   // return from json metadata if exists
   let meta;
 
@@ -19,7 +19,7 @@ const image = (entry, width = 0, height = 0, webp = false) => {
 
   if (meta && meta.image && meta.image.length > 0) {
     if (meta.image[0]) {
-      return proxifyImageSrc(meta.image[0], width, height, webp);
+      return proxifyImageSrc(meta.image[0], width, height);
     }
   }
 
@@ -33,15 +33,15 @@ const image = (entry, width = 0, height = 0, webp = false) => {
   const imgEls = doc.getElementsByTagName('img');
   if (imgEls.length >= 1) {
     const src = imgEls[0].getAttribute('src');
-    return proxifyImageSrc(src, width, height, webp);
+    return proxifyImageSrc(src, width, height);
   }
 
   return null;
 };
 
-export default (obj, width = 0, height = 0, webp = false) => {
+export default (obj, width = 0, height = 0) => {
   if (typeof obj === 'string') {
-    return image(obj, width, height, webp);
+    return image(obj, width, height);
   }
   const key = `${makeEntryCacheKey(obj)}-image`;
 
@@ -50,7 +50,7 @@ export default (obj, width = 0, height = 0, webp = false) => {
     return item;
   }
 
-  const res = image(obj, width, height, webp);
+  const res = image(obj, width, height);
   cacheSet(key, res);
 
   return res;

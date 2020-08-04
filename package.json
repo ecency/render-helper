@@ -1,13 +1,13 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Markdown+Html Render helper",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "test": "npm run lint && npm run cover",
     "test:prod": "cross-env BABEL_ENV=production npm run test",
-    "test:only": "mocha --require babel-core/register --require babel-polyfill --recursive",
+    "test:only": "mocha --update --require babel-core/register --require babel-polyfill --recursive",
     "test:watch": "npm test -- --watch",
     "cover": "nyc --check-coverage npm run test:only",
     "lint": "eslint src test",
@@ -47,7 +47,9 @@
   "dependencies": {
     "he": "^1.2.0",
     "lru-cache": "^5.1.1",
+    "multihashes": "^3.0.1",
     "path": "^0.12.7",
+    "querystring": "^0.2.0",
     "remarkable": "^1.7.3",
     "sanitize-html": "^1.20.1",
     "url": "^0.11.0",

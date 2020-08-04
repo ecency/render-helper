@@ -20,7 +20,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     };
 
-    const expected = 'https://images.ecency.com/0x0/http://www.autonews.com/apps/pbcsi.dll/storyimage/CA/20180205/MOBILITY/180209919/AR/0/AR-180209919.jpg';
+    const expected = 'https://images.ecency.com/p/2N61tysBoFrHXFxZDViD89h3bB1XeSgVQ4AKkLUBP2yqmAVL2ZqehqfzwxCQq2g82mHjH9LZV4ugYdmL4TbpNqAoc5LaDDRVPYNurZeK7HpTFq6fjtFG1s9ZpXZWuCufpLhZsDw1G1wL?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
@@ -36,7 +36,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     };
 
-    const expected = 'https://images.ecency.com/0x0/https://i.imgur.com/NUt92kg.jpg';
+    const expected = 'https://images.ecency.com/p/2bP4pJr4wVimqCWjYimXJe2cnCgnAvKo1Rap9w75mXk?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
@@ -65,7 +65,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     };
 
-    const expected = 'https://images.ecency.com/0x0/https://ipfs.io/ipfs/aa.png';
+    const expected = 'https://images.ecency.com/p/F7pXcna7voXwGzRSmsevszxeTZTcnhJVu7akN?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
@@ -79,7 +79,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     };
 
-    const expected = 'https://images.ecency.com/0x0/https://ipfs.io/ipfs/QmaG5Dpg1XGiY7EyeMCwT8Dqw4GfiAaehq3hZadongniQc';
+    const expected = 'https://images.ecency.com/p/46aP2QbqUqBqwzwxM6L1P6uLNceBDDCMCT7ReED4mRE2QxpU6UqBLE8rB5qCFGv3PRxu6pX61M3gUWVEEkTHbKBUQ2Kc?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
@@ -95,7 +95,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     };
 
-    const expected = 'https://images.ecency.com/0x0/https://img.esteem.ws/ezrni9y9pw.jpg';
+    const expected = 'https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMxpZmncLuDWMUeztZaUN?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
@@ -115,7 +115,7 @@ describe('catchPostImage', () => {
 
   it('8- Test with not obj param', () => {
     const input = '<center>![ezrni9y9pw.jpg](https://img.esteem.ws/ezrni9y9pw.jpg)</center><hr>';
-    const expected = 'https://images.ecency.com/0x0/https://img.esteem.ws/ezrni9y9pw.jpg';
+    const expected = 'https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMxpZmncLuDWMUeztZaUN?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });
@@ -129,7 +129,7 @@ describe('catchPostImage', () => {
       },
     };
 
-    const expected = 'https://images.ecency.com/0x0/https://files.peakd.com/file/peakd-hive/aggroed/agtirkG8-image.png';
+    const expected = 'https://images.ecency.com/p/hgjbks2vRxvf3xsYr6qQ7dm31DuBHGui8pKMdEVPxhLfEeEoVMPfUw4Z6QduNMpLay65R9vadbefhmDKmhM6HD8w8a?format=match&mode=fit';
 
     expect(catchPostImage(input)).to.deep.equal(expected);
   });

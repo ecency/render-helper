@@ -518,7 +518,10 @@ const img = node => {
   node.removeAttribute('width');
   node.removeAttribute('height');
 
-  const src = node.getAttribute('src');
+  let src = node.getAttribute('src');
+  if (src.startsWith('javascript')) {
+    src = '';
+  }
   node.setAttribute('itemprop', 'image');
 
   if (node.getAttribute('class').indexOf('no-replace') === -1) {
