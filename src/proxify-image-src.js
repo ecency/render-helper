@@ -22,7 +22,7 @@ export const getLatestUrl = (str) => {
   return last;
 };
 
-export default (url, width = 0, height = 0) => {
+export default (url, width = 0, height = 0, format = 'match') => {
   if (!url) {
     return '';
   }
@@ -31,7 +31,7 @@ export default (url, width = 0, height = 0) => {
   const pHash = extractPHash(realUrl);
 
   const options = {
-    format: 'match',
+    format,
     mode: 'fit',
   };
 
