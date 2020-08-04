@@ -1,5 +1,5 @@
-import * as multihash from 'multihashes';
-import * as querystring from 'querystring';
+import multihash from 'multihashes';
+import querystring from 'querystring';
 
 let proxyBase = 'https://images.ecency.com';
 

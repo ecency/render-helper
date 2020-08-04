@@ -1,6 +1,6 @@
 {
   "name": "@esteemapp/esteem-render-helpers",
-  "version": "1.4.9",
+  "version": "1.5.0",
   "description": "Markdown+Html Render helper",
   "main": "./lib/index.js",
   "scripts": {
@@ -47,7 +47,7 @@
   "dependencies": {
     "he": "^1.2.0",
     "lru-cache": "^5.1.1",
-    "multihashes": "^3.0.1",
+    "multihashes": "0.4.13",
     "path": "^0.12.7",
     "querystring": "^0.2.0",
     "remarkable": "^1.7.3",
