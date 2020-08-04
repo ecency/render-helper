@@ -97,7 +97,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '<a href="https://d.tube/#!/v/scottcbusiness/g04n2bbp" title="This link will take you away from steemit.com"><img src="https://images.ecency.com/640x0/https://ipfs.io/ipfs/QmPhb9HA1gASFiNAUPFqMdSidTAj17L5SSoV3zbXUx8M7t"></a>'
       };
-      const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/vM1pGHgNcyCbee5hzZJ19JZfuFzCeUv7mVFJiGiFiNQVJDro9149cjGX97c8UTe28JvW5inmTcYkxfCwaUSR5416cJHQ7FpYMEKq35W4mcyHNJ8uaYMmUHS9qXJTXUc3qjAUVis?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
+      const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/46aP2QbqUqBqwzwxM6L1P6uLNceBDDCM6xyDJFx6ANhENRd3gJWJH7TiVR91QZ1KBcdAdZruQE35PBpQ3jUvkNK4mJqZ?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
