@@ -27,6 +27,11 @@ export default (url, width = 0, height = 0, format = 'match') => {
     return '';
   }
 
+  // skip images already proxified with images.hive.blog
+  if (url.indexOf('https://images.hive.blog') === 0) {
+    return url;
+  }
+
   const realUrl = getLatestUrl(url);
   const pHash = extractPHash(realUrl);
 

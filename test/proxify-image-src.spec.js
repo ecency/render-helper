@@ -67,4 +67,11 @@ describe('Proxify image src', () => {
 
     expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
+
+  it('4- skip already proxified', () => {
+    const input = 'https://images.hive.blog/60x70/http://hivebuzz.me/@hiveonboard/upvotes.png?202008050233';
+    const expected = 'https://images.hive.blog/60x70/http://hivebuzz.me/@hiveonboard/upvotes.png?202008050233';
+
+    expect(proxifyImageSrc(input)).to.deep.equal(expected);
+  });
 });
