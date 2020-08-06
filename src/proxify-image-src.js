@@ -28,8 +28,10 @@ export default (url, width = 0, height = 0, format = 'match') => {
   }
 
   // skip images already proxified with images.hive.blog
-  if (url.indexOf('https://images.hive.blog') === 0) {
-    return url;
+  if (url.indexOf('https://images.hive.blog/') === 0) {
+    if (url.indexOf('https://images.hive.blog/D') !== 0) {
+      return url.replace('https://images.hive.blog', proxyBase);
+    }
   }
 
   const realUrl = getLatestUrl(url);

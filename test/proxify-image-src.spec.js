@@ -68,9 +68,18 @@ describe('Proxify image src', () => {
     expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
 
-  it('4- skip already proxified', () => {
+  it('4- replace already proxified', () => {
+    setProxyBase('https://images.ecency.com');
     const input = 'https://images.hive.blog/60x70/http://hivebuzz.me/@hiveonboard/upvotes.png?202008050233';
-    const expected = 'https://images.hive.blog/60x70/http://hivebuzz.me/@hiveonboard/upvotes.png?202008050233';
+    const expected = 'https://images.ecency.com/60x70/http://hivebuzz.me/@hiveonboard/upvotes.png?202008050233';
+
+    expect(proxifyImageSrc(input)).to.deep.equal(expected);
+  });
+  
+  it('5- normal proxify for uploads', () => {
+    setProxyBase('https://images.ecency.com');
+    const input = 'https://images.hive.blog/DQmT7UTd6JTP3bB2fXzV6tv8u4cJ6fLijy2bUxatkLChzHD/IMG_6631.JPG';
+    const expected = 'https://images.ecency.com/p/Zskj9C56UonZ32EJw6nMctrTQ6kTQ3swaDmbMFtRtMzyrHs9JdvWTXeiP6cW6a7F6pv2A4qkeHLiAPVtmfYMDf3iYbydFZ7e8iYY4MZP74TgyWo8WnJa?format=match&mode=fit';
 
     expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
