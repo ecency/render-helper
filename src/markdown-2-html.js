@@ -125,7 +125,7 @@ export const sanitizeHtml = (html) => {
   return sanitize(html, {allowedTags, allowedAttributes, transformTags});
 };
 
-const traverse = (node, forApp, depth = 0) => {
+const traverse = (node, forApp, depth = 0, webp = false) => {
   if (!node || !node.childNodes) return;
 
   const childNodes = [];
@@ -135,16 +135,16 @@ const traverse = (node, forApp, depth = 0) => {
   });
 
   childNodes.forEach(child => {
-    if (child.nodeName.toLowerCase() === 'a') a(child, forApp);
+    if (child.nodeName.toLowerCase() === 'a') a(child, forApp, webp);
     if (child.nodeName.toLowerCase() === 'iframe') iframe(child);
     if (child.nodeName === '#text') text(child, forApp);
-    if (child.nodeName.toLowerCase() === 'img') img(child);
+    if (child.nodeName.toLowerCase() === 'img') img(child, webp);
 
-    traverse(child, forApp, depth + 1);
+    traverse(child, forApp, depth + 1, webp);
   });
 };
 
-const a = (el, forApp) => {
+const a = (el, forApp, webp) => {
   let href = el.getAttribute('href');
 
   // Continue if href has no value
@@ -268,7 +268,7 @@ const a = (el, forApp) => {
       el.removeAttribute('href');
 
       const vid = e[1];
-      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`);
+      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`, 0, 0, webp ? 'webp' : 'match');
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`;
 
       el.textContent = '';
@@ -352,7 +352,7 @@ const a = (el, forApp) => {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube');
         el.removeAttribute('href');
 
-        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'));
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'), 0, 0, webp ? 'webp' : 'match');
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`;
 
         // el.setAttribute('data-video-href', videoHref);
@@ -389,7 +389,7 @@ const a = (el, forApp) => {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-speak');
         el.removeAttribute('href');
 
-        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'));
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'), 0, 0, webp ? 'webp' : 'match');
         const videoHref = `https://3speak.online/embed?v=${e[1]}`;
 
         // el.setAttribute('data-video-href', videoHref);
@@ -514,7 +514,7 @@ const iframe = (el) => {
   el.parentNode.removeChild(el);
 };
 
-const img = node => {
+const img = (node, webp) => {
   node.removeAttribute('width');
   node.removeAttribute('height');
 
@@ -525,7 +525,7 @@ const img = node => {
   node.setAttribute('itemprop', 'image');
 
   if (node.getAttribute('class').indexOf('no-replace') === -1) {
-    node.setAttribute('src', proxifyImageSrc(src));
+    node.setAttribute('src', proxifyImageSrc(src, 0, 0, webp ? 'webp' : 'match'));
   }
 };
 
@@ -585,7 +585,7 @@ export const linkify = (content, forApp) => {
   return content;
 };
 
-const markdown2html = (input, forApp) => {
+const markdown2html = (input, forApp, webp) => {
   if (!input) {
     return '';
   }
@@ -596,7 +596,7 @@ const markdown2html = (input, forApp) => {
     output = md.render(input);
     const doc = DOMParser.parseFromString(`<body id="root">${output}</body>`, 'text/html');
 
-    traverse(doc, forApp);
+    traverse(doc, forApp, webp);
 
     output = XMLSerializer.serializeToString(doc);
   } catch (error) {
@@ -612,9 +612,9 @@ const markdown2html = (input, forApp) => {
 };
 
 
-export default (obj, forApp = true) => {
+export default (obj, forApp = true, webp = false) => {
   if (typeof obj === 'string') {
-    return markdown2html(obj, forApp);
+    return markdown2html(obj, forApp, webp);
   }
 
   const key = `${makeEntryCacheKey(obj)}-md`;
@@ -628,7 +628,7 @@ export default (obj, forApp = true) => {
     obj.body = cleanReply(obj.body);
   }
 
-  const res = markdown2html(obj.body, forApp);
+  const res = markdown2html(obj.body, forApp, webp);
   cacheSet(key, res);
 
   return res;
