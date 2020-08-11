@@ -617,7 +617,7 @@ export default (obj, forApp = true, webp = false) => {
     return markdown2html(obj, forApp, webp);
   }
 
-  const key = `${makeEntryCacheKey(obj)}-md`;
+  const key = `${makeEntryCacheKey(obj)}-md${webp ? '-webp' : ''}`;
 
   const item = cacheGet(key);
   if (item) {
