@@ -550,4 +550,13 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
   });
+
+  describe('Webp support', () => {
+    it('Should render images in webp format', () => {
+      const input = 'lorem ipsum https://images.ecency.com/foobarbaz.jpg dolor sit amet';
+
+      expect(markdown2Html(input, false, true)).to.matchSnapshotJSON();
+    });
+  });
+
 });

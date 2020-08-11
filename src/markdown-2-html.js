@@ -596,7 +596,7 @@ const markdown2html = (input, forApp, webp) => {
     output = md.render(input);
     const doc = DOMParser.parseFromString(`<body id="root">${output}</body>`, 'text/html');
 
-    traverse(doc, forApp, webp);
+    traverse(doc, forApp, 0, webp);
 
     output = XMLSerializer.serializeToString(doc);
   } catch (error) {
