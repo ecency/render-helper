@@ -422,6 +422,28 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('27- Should handle peakd post links', () => {
+      const input = {
+        author: 'foo3343',
+        permlink: 'bar3243',
+        last_update: '2019-05-10T09:15:21',
+        body: "https://peakd.com/@demo/tests"
+      };
+      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">https://peakd.com/@demo/tests</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('28- Should handle youtu.be videos', () => {
+      const input = {
+        author: 'foo353',
+        permlink: 'bar352',
+        last_update: '2019-05-10T09:15:21',
+        body: "https://youtu.be/_-6hJ8sltdI"
+      };
+      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/_-6hJ8sltdI?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eEGc5AMBA14JMjkkxrUAj3mV5QR9D6zfstr?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
   });
 
   describe('Sanitization', () => {

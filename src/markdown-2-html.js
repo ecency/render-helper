@@ -137,7 +137,7 @@ const traverse = (node, forApp, depth = 0, webp = false) => {
   childNodes.forEach(child => {
     if (child.nodeName.toLowerCase() === 'a') a(child, forApp, webp);
     if (child.nodeName.toLowerCase() === 'iframe') iframe(child);
-    if (child.nodeName === '#text') text(child, forApp);
+    if (child.nodeName === '#text') text(child, forApp, webp);
     if (child.nodeName.toLowerCase() === 'img') img(child, webp);
 
     traverse(child, forApp, depth + 1, webp);
@@ -238,8 +238,8 @@ const a = (el, forApp, webp) => {
 
     let tag = postMatch[1];
     // busy links matches with this regex. need to remove slash trail
-    if (tag === '/busy.org') {
-      tag = 'busy';
+    if (tag === '/busy.org' || tag === '/peakd.com' || tag === '/hive.blog' || tag === '/ecency.com') {
+      tag = 'post';
     }
 
     const author = postMatch[2].replace('@', '');
@@ -529,7 +529,7 @@ const img = (node, webp) => {
   }
 };
 
-const text = (node, forApp) => {
+const text = (node, forApp, webp) => {
   if (['a', 'code'].includes(node.parentNode.nodeName)) return;
 
   const linkified = linkify(node.nodeValue, forApp);
@@ -546,10 +546,31 @@ const text = (node, forApp) => {
   if (node.nodeValue.match(imgRegex)) {
     const attrs = forApp ? `data-href="${node.nodeValue}"` : `href="${node.nodeValue}"`;
     const replaceNode = DOMParser.parseFromString(
-      `<a ${attrs} class="markdown-img-link"><img src="${node.nodeValue}"></a>`
+      `<a ${attrs} class="markdown-img-link"><img src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"></a>`
     );
 
     node.parentNode.replaceChild(replaceNode, node);
+  }
+  // If a youtube video
+  if (node.nodeValue.match(youTubeRegex)) {
+    const e = youTubeRegex.exec(node.nodeValue);
+    if (e[1]) {
+      const vid = e[1];
+      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`, 0, 0, webp ? 'webp' : 'match');
+      const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`;
+
+      const attrs = `class="markdown-video-link markdown-video-link-youtube" data-embed-src="${embedSrc}"`;
+
+      const thumbImg = node.ownerDocument.createElement('img');
+      thumbImg.setAttribute('class', 'no-replace video-thumbnail');
+      thumbImg.setAttribute('src', thumbnail);
+
+      const play = node.ownerDocument.createElement('span');
+      play.setAttribute('class', 'markdown-video-play');
+
+      const replaceNode = DOMParser.parseFromString(`<p><a ${attrs}>${thumbImg}${play}</a></p>`);
+      node.parentNode.replaceChild(replaceNode, node);
+    }
   }
 };
 
