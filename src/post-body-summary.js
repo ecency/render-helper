@@ -1,5 +1,5 @@
 import he from 'he';
-import Remarkable from 'remarkable';
+import { Remarkable } from 'remarkable';
 import {makeEntryCacheKey} from './helper';
 import {cacheGet, cacheSet} from './cache';
 

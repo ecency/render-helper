@@ -18,13 +18,32 @@ const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
 // eslint-disable-next-line no-useless-escape
 const speakRegex = /(?:https?:\/\/(?:3speak.online\/watch\?v=)|(?:3speak.online\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
+const linkRegex = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/i;
 
-const Remarkable = require('remarkable');
+const { Remarkable } = require('remarkable');
 
 const md = new Remarkable({html: true, breaks: true, linkify: true});
 
 const noop = () => {
 };
+
+const whitelist = [
+  '/hive.blog',
+  '/peakd.com',
+  '/busy.org',
+  '/steemit.com',
+  '/esteem.app',
+  '/steempeak.com',
+  '/partiko.app',
+  '/chainbb.com',
+  '/utopian.io',
+  '/steemkr.com',
+  '/strimi.pl',
+  '/steemhunt.com',
+  '/travelfeed.io',
+  '/ulogs.org',
+  '/hede.io',
+];
 
 const DOMParser = new xmldom.DOMParser({
   errorHandler: {warning: noop, error: noop}
@@ -135,9 +154,9 @@ const traverse = (node, forApp, depth = 0, webp = false) => {
   });
 
   childNodes.forEach(child => {
+    if (child.nodeName === '#text') text(child, forApp, webp);
     if (child.nodeName.toLowerCase() === 'a') a(child, forApp, webp);
     if (child.nodeName.toLowerCase() === 'iframe') iframe(child);
-    if (child.nodeName === '#text') text(child, forApp, webp);
     if (child.nodeName.toLowerCase() === 'img') img(child, webp);
 
     traverse(child, forApp, depth + 1, webp);
@@ -542,14 +561,49 @@ const text = (node, forApp, webp) => {
     node.parentNode.removeChild(node);
     return;
   }
-
+  // If a hive post
+  let postMatch = node.nodeValue.match(postRegex);
+  if (postMatch) {
+    console.log(postMatch[0], postMatch[1]);
+    if (whitelist.includes(postMatch[1])) {
+      console.log('matched url');
+    }
+    const tag = postMatch[2];
+    const author = postMatch[3].replace('@', '');
+    const permlink = postMatch[4];
+    const h = `/${tag}/@${author}/${permlink}`;
+    const attrs = forApp ? `class="markdown-post-link" data-tag="${tag}" data-author="${author}" data-permlink="${permlink}"` : `class="markdown-post-link" href="${h}"`;
+    const replaceNode = DOMParser.parseFromString(
+      `<a ${attrs}>${node.nodeValue}</a>`
+    );
+    node.parentNode.replaceChild(replaceNode, node);
+    return;
+  }
+  // If a copied post link
+  postMatch = node.nodeValue.match(copiedPostRegex);
+  if (postMatch) {
+    let tag = postMatch[1];
+    //  links matches with whitelisted domains
+    if (whitelist.includes(tag)) {
+      tag = 'post';
+    }
+    const author = postMatch[2].replace('@', '');
+    const permlink = postMatch[3];
+    const h = `/${tag}/@${author}/${permlink}`;
+    const attrs = forApp ? `class="markdown-post-link" data-tag="${tag}" data-author="${author}" data-permlink="${permlink}"` : `class="markdown-post-link" href="${h}"`;
+    const replaceNode = DOMParser.parseFromString(
+      `<a ${attrs}>${node.nodeValue}</a>`
+    );
+    node.parentNode.replaceChild(replaceNode, node);
+    return;
+  }
   if (node.nodeValue.match(imgRegex)) {
     const attrs = forApp ? `data-href="${node.nodeValue}"` : `href="${node.nodeValue}"`;
     const replaceNode = DOMParser.parseFromString(
       `<a ${attrs} class="markdown-img-link"><img src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"></a>`
     );
-
     node.parentNode.replaceChild(replaceNode, node);
+    return;
   }
   // If a youtube video
   if (node.nodeValue.match(youTubeRegex)) {
@@ -567,10 +621,58 @@ const text = (node, forApp, webp) => {
 
       const play = node.ownerDocument.createElement('span');
       play.setAttribute('class', 'markdown-video-play');
-
-      const replaceNode = DOMParser.parseFromString(`<p><a ${attrs}>${thumbImg}${play}</a></p>`);
+      const replaceNode = DOMParser.parseFromString(`<a ${attrs}>${thumbImg}${play}</a>`);
       node.parentNode.replaceChild(replaceNode, node);
+      return;
     }
+  }
+  // If vimeo video
+  if (node.nodeValue.match(vimeoRegex)) {
+    const e = vimeoRegex.exec(node.nodeValue);
+    if (e[3]) {
+      const embedSrc = `https://player.vimeo.com/video/${e[3]}`;
+      const attrs = 'class="markdown-video-link markdown-video-link-vimeo"';
+
+      const ifr = node.ownerDocument.createElement('iframe');
+      ifr.setAttribute('frameborder', '0');
+      ifr.setAttribute('allowfullscreen', 'true');
+      ifr.setAttribute('src', embedSrc);
+      const replaceNode = DOMParser.parseFromString(`<a ${attrs}>${ifr}</a>`);
+      node.parentNode.replaceChild(replaceNode, node);
+      return;
+    }
+  }
+  // If twitch video
+  if (node.nodeValue.match(twitchRegex)) {
+    const e = twitchRegex.exec(node.nodeValue);
+    if (e[2]) {
+      let embedSrc = '';
+      let parentDomain = 'ecency.com';
+      if (typeof window !== 'undefined') {
+        parentDomain = window.location.hostname;
+      }
+      if (e[1] === undefined) {
+        embedSrc = `https://player.twitch.tv/?channel=${e[2]}&parent=${parentDomain}&autoplay=false`;
+      } else {
+        embedSrc = `https://player.twitch.tv/?video=${e[1]}&parent=${parentDomain}&autoplay=false`;
+      }
+      const attrs = 'class="markdown-video-link markdown-video-link-twitch"';
+
+      const ifr = node.ownerDocument.createElement('iframe');
+      ifr.setAttribute('frameborder', '0');
+      ifr.setAttribute('allowfullscreen', 'true');
+      ifr.setAttribute('src', embedSrc);
+      const replaceNode = DOMParser.parseFromString(`<a ${attrs}>${ifr}</a>`);
+      node.parentNode.replaceChild(replaceNode, node);
+      return;
+    }
+  }
+  if (node.nodeValue.match(linkRegex)) {
+    const attrs = forApp ? `class="markdown-external-link" data-href="${node.nodeValue}"` : `class="markdown-external-link" target="_blank" rel="noopener noreferrer" href="${node.nodeValue}"`;
+    const replaceNode = DOMParser.parseFromString(
+      `<a ${attrs}>${node.nodeValue}</a>`
+    );
+    node.parentNode.replaceChild(replaceNode, node);
   }
 };
 
