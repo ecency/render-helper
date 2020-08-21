@@ -1,12 +1,14 @@
 import xmldom from 'xmldom';
 
-import sanitize from 'sanitize-html';
+// import sanitize from 'sanitize-html';
 
 import proxifyImageSrc from './proxify-image-src';
 
 import {makeEntryCacheKey} from './helper';
 
 import {cacheGet, cacheSet} from './cache';
+
+const xss = require('xss');
 
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
@@ -46,8 +48,8 @@ const removeChildNodes = (node) => {
   });
 };
 
-export const sanitizeHtml = (html) => {
-  const allowedTags = [
+export const sanitizeHtml = (_html) => {
+  /* const allowedTags = [
     'a',
     'strong',
     'b',
@@ -83,19 +85,49 @@ export const sanitizeHtml = (html) => {
     'del',
     'ins',
     'span'
-  ];
+  ]; */
 
   const allowedAttributes = {
     'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
     'img': ['src', 'alt', 'class'],
     'span': ['class'],
     'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
-    'div': ['class']
+    'div': ['class'],
+    'strong': [],
+    'b': [],
+    'i': [],
+    'em': [],
+    'code': [],
+    'pre': [],
+    'blockquote': [],
+    'sup': [],
+    'sub': [],
+    'h1': [],
+    'h2': [],
+    'h3': [],
+    'h4': [],
+    'h5': [],
+    'h6': [],
+    'p': [],
+    'center': [],
+    'ul': [],
+    'ol': [],
+    'li': [],
+    'table': [],
+    'thead': [],
+    'tbody': [],
+    'tr': [],
+    'td': [],
+    'th': [],
+    'hr': [],
+    'br': [],
+    'del': [],
+    'ins': []
   };
 
-  const transformTags = {
+  /* const transformTags = {
     span: (tagName, attribs) => {
-      if (attribs.class === 'will-replaced') {
+      if (attribs.class === 'wr') {
         return {tagName: '', attribs: {}};
       }
 
@@ -120,9 +152,23 @@ export const sanitizeHtml = (html) => {
       });
       return {tagName, attribs};
     }
+  }; */
+  const _options = {
+    whiteList: allowedAttributes,
+    stripIgnoreTag: true, // filter out all HTML not in the whitelist
+    css: true,
+    stripIgnoreTagBody: ['style'],
+    onTagAttr: (tag, name, value) => {
+      if (tag === 'span' && name === 'class' && value === 'wr') {
+        return '';
+      }
+      if (tag === 'img' && name === 'src' && !/^https?:\/\//.test(value)) {
+        return '';
+      }
+    }
   };
-
-  return sanitize(html, {allowedTags, allowedAttributes, transformTags});
+  return xss(_html, _options);
+  // return sanitize(html, {allowedTags, allowedAttributes, transformTags});
 };
 
 const traverse = (node, forApp, depth = 0, webp = false) => {
@@ -535,7 +581,7 @@ const text = (node, forApp, webp) => {
   const linkified = linkify(node.nodeValue, forApp);
   if (linkified !== node.nodeValue) {
     const replaceNode = DOMParser.parseFromString(
-      `<span class="will-replaced">${linkified}</span>`
+      `<span class="wr">${linkified}</span>`
     );
 
     node.parentNode.insertBefore(replaceNode, node);

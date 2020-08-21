@@ -209,7 +209,7 @@ describe('Markdown2Html', () => {
         body: 'lorem ipsum @dolor sit amet'
       };
       let expected =
-        '<p>lorem ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</p>';
+        '<p><span>lorem ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -219,7 +219,7 @@ describe('Markdown2Html', () => {
         body: '@lorem ipsum @dolor sit amet'
       };
       expected =
-        '<p><a class="markdown-author-link" data-author="lorem">@lorem</a> ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</p>';
+        '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
 
@@ -230,7 +230,7 @@ describe('Markdown2Html', () => {
         body: '@lorem @ipsum @dolor sit amet'
       };
       expected =
-        '<p><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</p>';
+        '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
 
@@ -241,7 +241,7 @@ describe('Markdown2Html', () => {
         body: '@lorem @ipsum @dolor \n @sit amet'
       };
       expected =
-        '<p><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a><br />\n<a class="markdown-author-link" data-author="sit">@sit</a> amet</p>';
+        '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@sit</a> amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
 
@@ -252,7 +252,7 @@ describe('Markdown2Html', () => {
         body: '@lorem @ipsum @dolor \n @Sit amet'
       };
       expected =
-        '<p><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a><br />\n<a class="markdown-author-link" data-author="sit">@Sit</a> amet</p>';
+        '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@Sit</a> amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
 
@@ -265,7 +265,7 @@ describe('Markdown2Html', () => {
         body: 'lorem ipsum #dolor sit amet'
       };
       let expected =
-        '<p>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</p>';
+        '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -275,7 +275,7 @@ describe('Markdown2Html', () => {
         body: '#lorem ipsum #dolor sit amet'
       };
       expected =
-        '<p><a class="markdown-tag-link" data-tag="lorem">#lorem</a> ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</p>';
+        '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -285,7 +285,7 @@ describe('Markdown2Html', () => {
         body: '#lorem #ipsum #dolor sit amet'
       };
       expected =
-        '<p><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</p>';
+        '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -295,7 +295,7 @@ describe('Markdown2Html', () => {
         body: '#lorem #ipsum #dolor \n #sit amet'
       };
       expected =
-        '<p><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a><br />\n<a class="markdown-tag-link" data-tag="sit">#sit</a> amet</p>';
+        '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#sit</a> amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -305,7 +305,7 @@ describe('Markdown2Html', () => {
         body: '#lorem #ipsum #dolor \n #Sit amet'
       };
       expected =
-        '<p><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a><br />\n<a class="markdown-tag-link" data-tag="sit">#Sit</a> amet</p>';
+        '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#Sit</a> amet</span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -324,7 +324,7 @@ describe('Markdown2Html', () => {
         body: 'you are #1 #steemit-promo'
       };
       expected =
-        '<p>you are #1 <a class="markdown-tag-link" data-tag="steemit-promo">#steemit-promo</a></p>';
+        '<p><span>you are #1 <a class="markdown-tag-link" data-tag="steemit-promo">#steemit-promo</a></span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
 
@@ -337,7 +337,7 @@ describe('Markdown2Html', () => {
         body: 'lorem ipsum #dolor sit @amet'
       };
       let expected =
-        '<p>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit <a class="markdown-author-link" data-author="amet">@amet</a></p>';
+        '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit <a class="markdown-author-link" data-author="amet">@amet</a></span></p>';
       expect(markdown2Html(input)).to.deep.equal(expected);
 
       input = {
@@ -467,7 +467,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: `<script>document.getElementById('body').remove();</script>`
       };
-      const expected = "<span>document.getElementById('body').remove();</span>";
+      const expected = "document.getElementById('body').remove();";
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -552,7 +552,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png <a href=\"https://steemit.com/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">fooo</a> <a href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">bar</a> <a href=\"http://external.com/loromoro\">baz</a> #lorem @ipsum <a href='https://steemit.com/~witnesses'>vote me</a>"
       };
-      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> <a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
+      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
