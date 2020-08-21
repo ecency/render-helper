@@ -89,7 +89,7 @@ export const sanitizeHtml = (_html) => {
 
   const allowedAttributes = {
     'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
-    'img': ['src', 'alt', 'class'],
+    'img': ['src', 'alt', 'class', 'loading'],
     'span': ['class'],
     'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
     'div': ['class'],
@@ -232,6 +232,7 @@ const a = (el, forApp, webp) => {
 
     const img = el.ownerDocument.createElement('img');
     img.setAttribute('src', href);
+    img.setAttribute('loading', 'lazy');
     el.appendChild(img);
 
     return;
@@ -323,6 +324,7 @@ const a = (el, forApp, webp) => {
 
       const thumbImg = el.ownerDocument.createElement('img');
       thumbImg.setAttribute('class', 'no-replace video-thumbnail');
+      thumbImg.setAttribute('loading', 'lazy');
       thumbImg.setAttribute('src', thumbnail);
 
       const play = el.ownerDocument.createElement('span');
@@ -407,6 +409,7 @@ const a = (el, forApp, webp) => {
         const thumbImg = el.ownerDocument.createElement('img');
         thumbImg.setAttribute('class', 'no-replace video-thumbnail');
         thumbImg.setAttribute('itemprop', 'image');
+        thumbImg.setAttribute('loading', 'lazy');
         thumbImg.setAttribute('src', thumbnail);
 
         const play = el.ownerDocument.createElement('span');
@@ -444,6 +447,7 @@ const a = (el, forApp, webp) => {
         const thumbImg = el.ownerDocument.createElement('img');
         thumbImg.setAttribute('class', 'no-replace video-thumbnail');
         thumbImg.setAttribute('itemprop', 'image');
+        thumbImg.setAttribute('loading', 'lazy');
         thumbImg.setAttribute('src', thumbnail);
 
         el.appendChild(thumbImg);
@@ -569,6 +573,7 @@ const img = (node, webp) => {
     src = '';
   }
   node.setAttribute('itemprop', 'image');
+  node.setAttribute('loading', 'lazy');
 
   if (node.getAttribute('class').indexOf('no-replace') === -1) {
     node.setAttribute('src', proxifyImageSrc(src, 0, 0, webp ? 'webp' : 'match'));
@@ -592,7 +597,7 @@ const text = (node, forApp, webp) => {
   if (node.nodeValue.match(imgRegex)) {
     const attrs = forApp ? `data-href="${node.nodeValue}"` : `href="${node.nodeValue}"`;
     const replaceNode = DOMParser.parseFromString(
-      `<a ${attrs} class="markdown-img-link"><img src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"></a>`
+      `<a ${attrs} class="markdown-img-link"><img src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}" loading="lazy"></a>`
     );
 
     node.parentNode.replaceChild(replaceNode, node);
@@ -609,6 +614,7 @@ const text = (node, forApp, webp) => {
 
       const thumbImg = node.ownerDocument.createElement('img');
       thumbImg.setAttribute('class', 'no-replace video-thumbnail');
+      thumbImg.setAttribute('loading', 'lazy');
       thumbImg.setAttribute('src', thumbnail);
 
       const play = node.ownerDocument.createElement('span');

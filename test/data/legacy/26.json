@@ -1,5 +1,5 @@
 {
   "id": 26,
   "input": "<IMG DYNSRC=\"javascript:alert('XSS')\"> <IMG LOWSRC=\"javascript:alert('XSS')\"> <STYLE>li {list-style-image: url(\"javascript:alert('XSS')\");}</STYLE>",
-  "result": "<p><img /> <img /> </p>"
+  "result": "<p><img loading=\"lazy\" /> <img loading=\"lazy\" /> </p>"
 }
