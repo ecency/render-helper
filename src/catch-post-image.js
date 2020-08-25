@@ -43,7 +43,7 @@ export default (obj, width = 0, height = 0, format = 'match') => {
   if (typeof obj === 'string') {
     return image(obj, width, height, format);
   }
-  const key = `${makeEntryCacheKey(obj)}-image`;
+  const key = `${makeEntryCacheKey(obj)}-${width}x${height}-${format}`;
 
   const item = cacheGet(key);
   if (item) {
