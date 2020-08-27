@@ -398,7 +398,7 @@ const a = (el, forApp, webp) => {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube');
         el.removeAttribute('href');
 
-        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'), 0, 0, webp ? 'webp' : 'match');
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match');
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`;
 
         // el.setAttribute('data-video-href', videoHref);
@@ -435,7 +435,7 @@ const a = (el, forApp, webp) => {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-speak');
         el.removeAttribute('href');
 
-        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src'), 0, 0, webp ? 'webp' : 'match');
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match');
         const videoHref = `https://3speak.online/embed?v=${e[1]}`;
 
         // el.setAttribute('data-video-href', videoHref);
