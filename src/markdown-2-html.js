@@ -4,7 +4,7 @@ import xmldom from 'xmldom';
 
 import proxifyImageSrc from './proxify-image-src';
 
-import {makeEntryCacheKey} from './helper';
+import {makeEntryCacheKey, whiteList} from './helper';
 
 import {cacheGet, cacheSet} from './cache';
 
@@ -23,7 +23,7 @@ const speakRegex = /(?:https?:\/\/(?:3speak.online\/watch\?v=)|(?:3speak.online\
 
 const Remarkable = require('remarkable');
 
-const md = new Remarkable({html: true, breaks: true, linkify: true});
+const md = new Remarkable({html: true, breaks: true, typographer: false, linkify: true});
 
 const noop = () => {
 };
@@ -96,6 +96,7 @@ export const sanitizeHtml = (_html) => {
     'strong': [],
     'b': [],
     'i': [],
+    'strike': [],
     'em': [],
     'code': [],
     'pre': [],
@@ -237,15 +238,17 @@ const a = (el, forApp, webp) => {
     return;
   }
 
-  // If a steem post
-  let postMatch = href.match(postRegex);
-  if (postMatch) {
+  // If a hive post
+  const postMatch = href.match(postRegex);
+  if (postMatch && whiteList.includes(postMatch[1])) {
     el.setAttribute('class', 'markdown-post-link');
 
     const tag = postMatch[2];
     const author = postMatch[3].replace('@', '');
     const permlink = postMatch[4];
-
+    if (el.textContent === href) {
+      el.textContent = `/${tag}/@${author}/${permlink}`;
+    }
     if (forApp) {
       el.removeAttribute('href');
 
@@ -278,19 +281,21 @@ const a = (el, forApp, webp) => {
   }
 
   // If a copied post link
-  postMatch = href.match(copiedPostRegex);
-  if (postMatch) {
+  const cpostMatch = href.match(copiedPostRegex);
+  if ((cpostMatch && whiteList.includes(cpostMatch[1].substring(1))) ||
+      (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)) {
     el.setAttribute('class', 'markdown-post-link');
 
-    let tag = postMatch[1];
-    // busy links matches with this regex. need to remove slash trail
-    if (tag === '/busy.org' || tag === '/peakd.com' || tag === '/hive.blog' || tag === '/ecency.com') {
-      tag = 'post';
+    let tag = 'post';
+    if (!whiteList.includes(cpostMatch[1].substring(1))) {
+      [, tag] = cpostMatch;
     }
 
-    const author = postMatch[2].replace('@', '');
-    const permlink = postMatch[3];
-
+    const author = cpostMatch[2].replace('@', '');
+    const permlink = cpostMatch[3];
+    if (el.textContent === href) {
+      el.textContent = `/${tag}/@${author}/${permlink}`;
+    }
     if (forApp) {
       el.removeAttribute('href');
       el.setAttribute('data-tag', tag);
@@ -486,11 +491,7 @@ const a = (el, forApp, webp) => {
   el.setAttribute('class', 'markdown-external-link');
 
   // Prepend https if no scheme provided
-  if (
-    !/^((#)|(mailto:)|(\/(?!\/))|(((steem|esteem|https?):)?\/\/))/.test(
-      href
-    )
-  ) {
+  if (!(/^((#)|(mailto:)|(\/(?!\/))|(((steem|hive|esteem|ecency|https?):)?\/\/))/.test(href))) {
     href = `https://${href}`;
   }
 
@@ -622,6 +623,8 @@ const text = (node, forApp, webp) => {
 
 const cleanReply = (s) => s.split('\n')
   .filter(item => item.includes('Posted using [Partiko') === false)
+  .filter(item => item.includes('Posted using [Dapplr') === false)
+  .filter(item => item.includes('Posted Using [LeoFinance') === false)
   .join('\n');
 
 export const linkify = (content, forApp) => {

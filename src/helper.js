@@ -22,3 +22,21 @@ export const domSerializer = () => new xmldom.XMLSerializer();
 
 
 export const makeEntryCacheKey = entry => `${entry.author}-${entry.permlink}-${entry.last_update}`;
+
+export const whiteList = [
+  'hive.blog',
+  'peakd.com',
+  'busy.org',
+  'steemit.com',
+  'esteem.app',
+  'steempeak.com',
+  'partiko.app',
+  'chainbb.com',
+  'utopian.io',
+  'steemkr.com',
+  'strimi.pl',
+  'steemhunt.com',
+  'travelfeed.io',
+  'ulogs.org',
+  'hede.io',
+];

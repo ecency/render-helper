@@ -58,7 +58,7 @@ describe('Markdown2Html', () => {
         author: 'foo34',
         permlink: 'bar34',
         last_update: '2019-05-10T09:15:21',
-        body: "<a href='/esteem/@esteemapp/esteem-monthly-guest-curation-program-4'>click here</a>"
+        body: "[click here](/esteem/@esteemapp/esteem-monthly-guest-curation-program-4)"
       };
       const expected = '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>';
 
@@ -429,7 +429,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://peakd.com/@demo/tests"
       };
-      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">https://peakd.com/@demo/tests</a></p>';
+      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">/post/@demo/tests</a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -441,6 +441,39 @@ describe('Markdown2Html', () => {
         body: "https://youtu.be/_-6hJ8sltdI"
       };
       const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/_-6hJ8sltdI?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eEGc5AMBA14JMjkkxrUAj3mV5QR9D6zfstr?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('29- Should handle external similar post links', () => {
+      const input = {
+        author: 'foo3534',
+        permlink: 'bar3523',
+        last_update: '2019-05-10T09:15:21',
+        body: "[Voice: the criteria for success or failure](https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)"
+      };
+      const expected = '<p><a class="markdown-external-link" data-href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597">Voice: the criteria for success or failure</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('30- Should handle external similar post links', () => {
+      const input = {
+        author: 'foo35341',
+        permlink: 'bar35231',
+        last_update: '2019-05-10T09:15:21',
+        body: "[Voice: the criteria for success or failure](https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)"
+      };
+      const expected = '<p><a class="markdown-external-link" data-href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597">Voice: the criteria for success or failure</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('31- Should handle whitelisted post links', () => {
+      const input = {
+        author: 'foo33435',
+        permlink: 'bar32435',
+        last_update: '2019-05-10T09:15:21',
+        body: "https://peakd.com/tag/@demo/tests and https://steemit.com/test/@demo/post"
+      };
+      const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">/tag/@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">/test/@demo/post</a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -556,6 +589,28 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
+    it('2- Should handle external similar post links', () => {
+      const input = {
+        author: 'foo35342',
+        permlink: 'bar35232',
+        last_update: '2019-05-10T09:15:21',
+        body: "[Voice: the criteria for success or failure](https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)"
+      };
+      const expected = '<p><a href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener noreferrer">Voice: the criteria for success or failure</a></p>';
+
+      expect(markdown2Html(input, false)).to.deep.equal(expected);
+    });
+    it('3- Should handle external similar post links', () => {
+      const input = {
+        author: 'foo35343',
+        permlink: 'bar35233',
+        last_update: '2019-05-10T09:15:21',
+        body: "[Voice: the criteria for success or failure](https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)"
+      };
+      const expected = '<p><a href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener noreferrer">Voice: the criteria for success or failure</a></p>';
+
+      expect(markdown2Html(input, false)).to.deep.equal(expected);
+    });
   });
 
   describe('cleanReply', () => {
@@ -565,9 +620,9 @@ describe('Markdown2Html', () => {
         author: 'foo6401',
         permlink: 'bar6401',
         last_update: '2019-05-10T09:15:21',
-        body: "hello lorem ipsum dolor sit amet \n Posted using [Partiko Android](https://partiko.app/referral/aftabkhan10)"
+        body: "hello lorem ipsum \n Posted using [Partiko Android](https://partiko.app/referral/aftabkhan10) \n Posted using [Dapplr](https://app.dapplr.in/L55YHRuX4jKJ2SSk8) \n  Posted Using [LeoFinance](https://leofinance.io/@taskmaster4450/is-defi-for-real)"
       };
-      const expected = "<p>hello lorem ipsum dolor sit amet</p>";
+      const expected = "<p>hello lorem ipsum</p>";
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
