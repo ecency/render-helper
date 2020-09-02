@@ -685,6 +685,7 @@ const markdown2html = (input, forApp, webp) => {
 
 export default (obj, forApp = true, webp = false) => {
   if (typeof obj === 'string') {
+    obj = cleanReply(obj);
     return markdown2html(obj, forApp, webp);
   }
 
