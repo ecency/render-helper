@@ -477,6 +477,17 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('32- Should handle whitelisted user links', () => {
+      const input = {
+        author: 'foo334352',
+        permlink: 'bar324352',
+        last_update: '2019-05-10T09:15:21',
+        body: "https://peakd.com/@demo and https://steemit.com/@demo123"
+      };
+      const expected = '<p><a class="markdown-author-link" data-author="demo">@demo</a> and <a class="markdown-author-link" data-author="demo123">@demo123</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
   });
 
   describe('Sanitization', () => {

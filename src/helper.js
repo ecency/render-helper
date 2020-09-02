@@ -24,6 +24,7 @@ export const domSerializer = () => new xmldom.XMLSerializer();
 export const makeEntryCacheKey = entry => `${entry.author}-${entry.permlink}-${entry.last_update}`;
 
 export const whiteList = [
+  'ecency.com',
   'hive.blog',
   'peakd.com',
   'busy.org',

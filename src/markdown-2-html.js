@@ -12,7 +12,7 @@ const xss = require('xss');
 
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
-const mentionRegex = /^https?:\/\/(esteem\.app)\/(@[\w.\d-]+)/i;
+const mentionRegex = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
@@ -264,11 +264,12 @@ const a = (el, forApp, webp) => {
 
   // If a steem user with url
   const mentionMatch = href.match(mentionRegex);
-  if (mentionMatch) {
+  if (mentionMatch && whiteList.includes(mentionMatch[1]) && mentionMatch.length === 3) {
     el.setAttribute('class', 'markdown-author-link');
-
     const author = mentionMatch[2].replace('@', '').toLowerCase();
-
+    if (el.textContent === href) {
+      el.textContent = `@${author}`;
+    }
     if (forApp) {
       el.removeAttribute('href');
 
@@ -694,9 +695,7 @@ export default (obj, forApp = true, webp = false) => {
     return item;
   }
 
-  if (obj.parent_author) {
-    obj.body = cleanReply(obj.body);
-  }
+  obj.body = cleanReply(obj.body);
 
   const res = markdown2html(obj.body, forApp, webp);
   cacheSet(key, res);
