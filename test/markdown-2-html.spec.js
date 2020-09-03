@@ -429,7 +429,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://peakd.com/@demo/tests"
       };
-      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">/post/@demo/tests</a></p>';
+      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">@demo/tests</a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -473,7 +473,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://peakd.com/tag/@demo/tests and https://steemit.com/test/@demo/post"
       };
-      const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">/tag/@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">/test/@demo/post</a></p>';
+      const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">@demo/post</a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });

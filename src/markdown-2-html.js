@@ -247,7 +247,7 @@ const a = (el, forApp, webp) => {
     const author = postMatch[3].replace('@', '');
     const permlink = postMatch[4];
     if (el.textContent === href) {
-      el.textContent = `/${tag}/@${author}/${permlink}`;
+      el.textContent = `@${author}/${permlink}`;
     }
     if (forApp) {
       el.removeAttribute('href');
@@ -295,7 +295,7 @@ const a = (el, forApp, webp) => {
     const author = cpostMatch[2].replace('@', '');
     const permlink = cpostMatch[3];
     if (el.textContent === href) {
-      el.textContent = `/${tag}/@${author}/${permlink}`;
+      el.textContent = `@${author}/${permlink}`;
     }
     if (forApp) {
       el.removeAttribute('href');
