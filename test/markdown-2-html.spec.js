@@ -488,6 +488,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    /*
+    it('33- Should handle copied links', () => {
+      const input = {
+        author: 'foo349',
+        permlink: 'bar349',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link /esteem/@esteemapp/esteem-monthly-guest-curation-program-4"
+      };
+      const expected = '<p>this is link <a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">/esteem/@esteemapp/esteem-monthly-guest-curation-program-4</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });*/
   });
 
   describe('Sanitization', () => {
@@ -596,7 +608,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png <a href=\"https://steemit.com/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">fooo</a> <a href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">bar</a> <a href=\"http://external.com/loromoro\">baz</a> #lorem @ipsum <a href='https://steemit.com/~witnesses'>vote me</a>"
       };
-      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener noreferrer">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener noreferrer">vote me</a></p>';
+      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener">vote me</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
@@ -607,7 +619,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "[Voice: the criteria for success or failure](https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)"
       };
-      const expected = '<p><a href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener noreferrer">Voice: the criteria for success or failure</a></p>';
+      const expected = '<p><a href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
@@ -618,7 +630,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "[Voice: the criteria for success or failure](https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)"
       };
-      const expected = '<p><a href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener noreferrer">Voice: the criteria for success or failure</a></p>';
+      const expected = '<p><a href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });

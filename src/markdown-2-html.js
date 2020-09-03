@@ -501,7 +501,7 @@ const a = (el, forApp, webp) => {
     el.removeAttribute('href');
   } else {
     el.setAttribute('target', '_blank');
-    el.setAttribute('rel', 'noopener noreferrer');
+    el.setAttribute('rel', 'noopener');
   }
 };
 
