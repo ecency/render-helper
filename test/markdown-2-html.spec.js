@@ -488,18 +488,17 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    /*
-    it('33- Should handle copied links', () => {
+    it('33- Should handle ipfs links', () => {
       const input = {
-        author: 'foo349',
-        permlink: 'bar349',
+        author: 'foo3493',
+        permlink: 'bar3493',
         last_update: '2019-05-10T09:15:21',
-        body: "this is link /esteem/@esteemapp/esteem-monthly-guest-curation-program-4"
+        body: "this is link https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q"
       };
-      const expected = '<p>this is link <a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">/esteem/@esteemapp/esteem-monthly-guest-curation-program-4</a></p>';
+      const expected = '<p>this is link <a data-href="https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q" class="markdown-img-link"><img src="https://images.ecency.com/p/2923mN3pnd7PiPXAMdj9UuE6SsjvQJDHj5VpTTCNs3tkJu9JC9Pu9qXSi5Ys5PYtkaRx6ErTnFVzh1WQxWS45rvr6Q4rfUooAM242oyKeihwnx?format=match&amp;mode=fit" /></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
-    });*/
+    });
   });
 
   describe('Sanitization', () => {
