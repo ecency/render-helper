@@ -422,7 +422,20 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('27- Should handle peakd post links', () => {
+
+    it('27- Should handle speak videos with different tld', () => {
+      const input = {
+        author: 'foo33399',
+        permlink: 'bar32300',
+        last_update: '2029-05-10T09:15:21',
+        body: "[![](https://img.3speakcontent.co/blnmdkjt/post.png)](https://3speak.co/watch?v=theycallmedan/blnmdkjt) [Watch on 3Speak](https://3speak.co/watch?v=theycallmedan/blnmdkjt)"
+      };
+      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS?format=match&amp;mode=fit" /></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+
+    it('28- Should handle peakd post links', () => {
       const input = {
         author: 'foo3343',
         permlink: 'bar3243',
@@ -433,7 +446,7 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('28- Should handle youtu.be videos', () => {
+    it('29- Should handle youtu.be videos', () => {
       const input = {
         author: 'foo353',
         permlink: 'bar352',
@@ -444,7 +457,7 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('29- Should handle external similar post links', () => {
+    it('30- Should handle external similar post links', () => {
       const input = {
         author: 'foo3534',
         permlink: 'bar3523',
@@ -455,7 +468,7 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('30- Should handle external similar post links', () => {
+    it('31- Should handle external similar post links', () => {
       const input = {
         author: 'foo35341',
         permlink: 'bar35231',
@@ -466,7 +479,7 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('31- Should handle whitelisted post links', () => {
+    it('32- Should handle whitelisted post links', () => {
       const input = {
         author: 'foo33435',
         permlink: 'bar32435',
@@ -477,7 +490,7 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('32- Should handle whitelisted user links', () => {
+    it('33- Should handle whitelisted user links', () => {
       const input = {
         author: 'foo334352',
         permlink: 'bar324352',
@@ -488,7 +501,7 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    it('33- Should handle ipfs links', () => {
+    it('34- Should handle ipfs links', () => {
       const input = {
         author: 'foo3493',
         permlink: 'bar3493',

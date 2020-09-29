@@ -20,7 +20,7 @@ const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channe
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
 // eslint-disable-next-line no-useless-escape
-const speakRegex = /(?:https?:\/\/(?:3speak.online\/watch\?v=)|(?:3speak.online\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
+const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
 
 const Remarkable = require('remarkable');
 
@@ -458,13 +458,13 @@ const a = (el, forApp, webp) => {
 
     if (imgEls.length === 1) {
       const e = speakRegex.exec(href);
-      // e[2] = username, e[3] object id
-      if (e[1]) {
+      // e[1] = tld , e[3] = embed address
+      if (e[1] && e[3]) {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-speak');
         el.removeAttribute('href');
 
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match');
-        const videoHref = `https://3speak.online/embed?v=${e[1]}`;
+        const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`;
 
         // el.setAttribute('data-video-href', videoHref);
         el.setAttribute('data-embed-src', videoHref);
