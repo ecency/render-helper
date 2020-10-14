@@ -306,7 +306,7 @@ const a = (el, forApp, webp) => {
   // If a copied post link
   const cpostMatch = href.match(copiedPostRegex);
   if ((cpostMatch && whiteList.includes(cpostMatch[1].substring(1))) ||
-      (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)) {
+    (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)) {
     el.setAttribute('class', 'markdown-post-link');
 
     let tag = 'post';
@@ -644,11 +644,11 @@ const text = (node, forApp, webp) => {
   }
 };
 
-const cleanReply = (s) => s.split('\n')
+const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted using [Partiko') === false)
   .filter(item => item.includes('Posted using [Dapplr') === false)
   .filter(item => item.includes('Posted Using [LeoFinance') === false)
-  .join('\n');
+  .join('\n') : '');
 
 export const linkify = (content, forApp) => {
   // Tags
