@@ -34,6 +34,12 @@ export default (url, width = 0, height = 0, format = 'match') => {
     }
   }
 
+  if (url.indexOf('https://steemitimages.com/') === 0) {
+    if (url.indexOf('https://steemitimages.com/D') !== 0) {
+      return url.replace('https://steemitimages.com', proxyBase);
+    }
+  }
+
   const realUrl = getLatestUrl(url);
   const pHash = extractPHash(realUrl);
 
