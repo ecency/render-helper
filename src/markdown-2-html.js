@@ -21,7 +21,7 @@ const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
 // eslint-disable-next-line no-useless-escape
 const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
-
+const twitterRegex = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi;
 const Remarkable = require('remarkable');
 
 const md = new Remarkable({html: true, breaks: true, typographer: false, linkify: true});
@@ -481,6 +481,30 @@ const a = (el, forApp, webp) => {
 
         return;
       }
+    }
+  }
+
+  // If tweets
+  const matchT = href.match(twitterRegex);
+  if (matchT && el.textContent.trim() === href) {
+    const e = twitterRegex.exec(href);
+    if (e) {
+      const url = e[0].replace(/(<([^>]+)>)/gi, '');
+      const author = e[1].replace(/(<([^>]+)>)/gi, '');
+      // const id = e[2];
+      const description = url;
+      const date = '';
+
+      el.setAttribute('class', 'markdown-embed-link markdown-embed-link-twitter');
+      el.removeAttribute('href');
+      const twitterCode =
+            '<blockquote class="twitter-tweet">' +
+            `<p lang="en" dir="ltr">${description}</p>` +
+            `- ${author} <a href="${url}">${date}</a>` +
+            '</blockquote>';
+      const replaceNode = DOMParser.parseFromString(twitterCode);
+      el.parentNode.replaceChild(replaceNode, el);
+      return;
     }
   }
 

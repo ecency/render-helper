@@ -512,6 +512,17 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('35- Should handle twitter links', () => {
+      const input = {
+        author: 'foo3321',
+        permlink: 'bar3321',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link https://twitter.com/DeWaarheid_/status/1320603494836015105"
+      };
+      const expected = '<p>this is link <blockquote><p>https://twitter.com/DeWaarheid_/status/1320603494836015105</p>- DeWaarheid_ <a href="https://twitter.com/DeWaarheid_/status/1320603494836015105"></a></blockquote></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
   });
 
   describe('Sanitization', () => {
