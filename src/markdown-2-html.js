@@ -101,7 +101,7 @@ export const sanitizeHtml = (_html) => {
     'em': [],
     'code': [],
     'pre': [],
-    'blockquote': [],
+    'blockquote': ['class'],
     'sup': [],
     'sub': [],
     'h1': [],
@@ -491,17 +491,8 @@ const a = (el, forApp, webp) => {
     if (e) {
       const url = e[0].replace(/(<([^>]+)>)/gi, '');
       const author = e[1].replace(/(<([^>]+)>)/gi, '');
-      // const id = e[2];
-      const description = url;
-      const date = '';
 
-      el.setAttribute('class', 'markdown-embed-link markdown-embed-link-twitter');
-      el.removeAttribute('href');
-      const twitterCode =
-            '<blockquote class="twitter-tweet">' +
-            `<p lang="en" dir="ltr">${description}</p>` +
-            `- ${author} <a href="${url}">${date}</a>` +
-            '</blockquote>';
+      const twitterCode = `<blockquote class="twitter-tweet"><p>${url}</p>- ${author} <a href="${url}"></a></blockquote>`;
       const replaceNode = DOMParser.parseFromString(twitterCode);
       el.parentNode.replaceChild(replaceNode, el);
       return;
