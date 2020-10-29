@@ -672,6 +672,7 @@ const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted using [Partiko') === false)
   .filter(item => item.includes('Posted using [Dapplr') === false)
   .filter(item => item.includes('Posted Using [LeoFinance') === false)
+  .filter(item => item.includes('Posted via <a href="https://d.buzz"') === false)
   .join('\n') : '');
 
 export const linkify = (content, forApp) => {
