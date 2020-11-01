@@ -523,6 +523,17 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('36- Should handle custom community links', () => {
+      const input = {
+        author: 'foo33210',
+        permlink: 'bar33210',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link https://peakd.com/c/hive-106444/trending and markdown link [Manipulation Station](https://peakd.com/c/hive-122516/trending)"
+      };
+      const expected = '<p>this is link <a class="markdown-community-link" data-community="hive-106444" data-filter="trending">trending/hive-106444</a> and markdown link <a class="markdown-community-link" data-community="hive-122516" data-filter="trending">Manipulation Station</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
   });
 
   describe('Sanitization', () => {

@@ -15,6 +15,7 @@ const ipfsRegex = /^https?:\/\/[^/]+\/(ip[fn]s)\/([^/?#]+)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const mentionRegex = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
+const communityRegex = /^https?:\/\/(.*)\/c\/(hive-\d+)\/(.*)/i;
 const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
@@ -89,7 +90,7 @@ export const sanitizeHtml = (_html) => {
   ]; */
 
   const allowedAttributes = {
-    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
+    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-community', 'data-filter', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
     'img': ['src', 'alt', 'class'],
     'span': ['class'],
     'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
@@ -284,7 +285,7 @@ const a = (el, forApp, webp) => {
     return;
   }
 
-  // If a steem user with url
+  // If a hive user with url
   const mentionMatch = href.match(mentionRegex);
   if (mentionMatch && whiteList.includes(mentionMatch[1]) && mentionMatch.length === 3) {
     el.setAttribute('class', 'markdown-author-link');
@@ -332,6 +333,31 @@ const a = (el, forApp, webp) => {
     return;
   }
 
+  // If a custom hive community link
+  const comMatch = href.match(communityRegex);
+  if (comMatch && whiteList.includes(comMatch[1])) {
+    el.setAttribute('class', 'markdown-community-link');
+
+    const community = comMatch[2];
+    let filter = comMatch[3];
+    if (filter === 'about' || filter === 'discord') {
+      filter = 'created';
+    }
+    if (el.textContent === href) {
+      el.textContent = `${filter}/${community}`;
+    }
+
+    if (forApp) {
+      el.removeAttribute('href');
+
+      el.setAttribute('data-community', community);
+      el.setAttribute('data-filter', filter);
+    } else {
+      const h = `/${filter}/${community}`;
+      el.setAttribute('href', h);
+    }
+    return;
+  }
 
   // If a youtube video
   let match = href.match(youTubeRegex);

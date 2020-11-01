@@ -40,5 +40,6 @@ export const whiteList = [
   'travelfeed.io',
   'ulogs.org',
   'hede.io',
-  'weedcash.network'
+  'weedcash.network',
+  'dapplr.in'
 ];
