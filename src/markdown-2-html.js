@@ -224,18 +224,13 @@ const a = (el, forApp, webp) => {
     href.trim().replace(/&amp;/g, '&') ===
     innerHTML(el).trim().replace(/&amp;/g, '&')
   ) {
-    if (forApp) {
-      el.setAttribute('data-href', href);
-      el.removeAttribute('href');
-    }
+    const attrs = forApp ? `data-href="${href}" class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"`;
 
-    el.setAttribute('class', 'markdown-img-link');
+    const replaceNode = DOMParser.parseFromString(
+      `<img ${attrs}/>`
+    );
 
-    removeChildNodes(el);
-
-    const img = el.ownerDocument.createElement('img');
-    img.setAttribute('src', href);
-    el.appendChild(img);
+    el.parentNode.replaceChild(replaceNode, el);
 
     return;
   }
@@ -655,9 +650,9 @@ const text = (node, forApp, webp) => {
   }
 
   if (node.nodeValue.match(imgRegex)) {
-    const attrs = forApp ? `data-href="${node.nodeValue}"` : `href="${node.nodeValue}"`;
+    const attrs = forApp ? `data-href="${node.nodeValue}" class="markdown-img-link" src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"`;
     const replaceNode = DOMParser.parseFromString(
-      `<a ${attrs} class="markdown-img-link"><img src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"></a>`
+      `<img ${attrs}/>`
     );
 
     node.parentNode.replaceChild(replaceNode, node);
