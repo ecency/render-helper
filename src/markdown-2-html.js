@@ -638,7 +638,7 @@ const img = (node, webp) => {
 const text = (node, forApp, webp) => {
   if (['a', 'code'].includes(node.parentNode.nodeName)) return;
 
-  const linkified = linkify(node.nodeValue, forApp);
+  const linkified = linkify(node.nodeValue, forApp, webp);
   if (linkified !== node.nodeValue) {
     const replaceNode = DOMParser.parseFromString(
       `<span class="wr">${linkified}</span>`
@@ -686,7 +686,7 @@ const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted Using [LeoFinance') === false)
   .join('\n') : '').replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '');
 
-export const linkify = (content, forApp) => {
+export const linkify = (content, forApp, webp) => {
   // Tags
   content = content.replace(/(^|\s|>)(#[-a-z\d]+)/gi, tag => {
     if (/#[\d]+$/.test(tag)) return tag; // do not allow only numbers (like #1)
@@ -710,6 +710,12 @@ export const linkify = (content, forApp) => {
       return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`;
     }
   );
+
+  // Image links
+  content = content.replace(imgRegex, imglink => {
+    const attrs = forApp ? `data-href="${imglink}" class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"`;
+    return `<img ${attrs}/>`;
+  });
 
   return content;
 };
