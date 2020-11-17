@@ -41,5 +41,6 @@ export const whiteList = [
   'ulogs.org',
   'hede.io',
   'weedcash.network',
-  'dapplr.in'
+  'dapplr.in',
+  'leofinance.io'
 ];

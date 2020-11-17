@@ -513,7 +513,7 @@ const a = (el, forApp, webp) => {
       const url = e[0].replace(/(<([^>]+)>)/gi, '');
       const author = e[1].replace(/(<([^>]+)>)/gi, '');
 
-      const twitterCode = `<blockquote class="twitter-tweet"><p>${url}</p>- ${author} <a href="${url}"></a></blockquote>`;
+      const twitterCode = `<blockquote class="twitter-tweet"><p>${url}</p>- <a href="${url}">${author}</a></blockquote>`;
       const replaceNode = DOMParser.parseFromString(twitterCode);
       el.parentNode.replaceChild(replaceNode, el);
       return;
@@ -684,6 +684,7 @@ const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted using [Partiko') === false)
   .filter(item => item.includes('Posted using [Dapplr') === false)
   .filter(item => item.includes('Posted Using [LeoFinance') === false)
+  .filter(item => item.includes('Posted via [neoxian') === false)
   .join('\n') : '').replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '');
 
 export const linkify = (content, forApp, webp) => {
