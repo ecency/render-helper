@@ -20,6 +20,8 @@ const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
+const dapplrRegex = /^(https?:)?\/\/[a-z]*\.dapplr.in\/file\/dapplr-videos\/.*/i;
+const lbryRegex = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i;
 // eslint-disable-next-line no-useless-escape
 const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
 const twitterRegex = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi;
@@ -93,7 +95,7 @@ export const sanitizeHtml = (_html) => {
     'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-community', 'data-filter', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
     'img': ['src', 'alt', 'class'],
     'span': ['class'],
-    'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
+    'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen', 'sandbox'],
     'div': ['class'],
     'strong': [],
     'b': [],
@@ -611,6 +613,22 @@ const iframe = (el) => {
       el.setAttribute('src', s);
       return;
     }
+  }
+
+  // Dapplr
+  if (src.match(dapplrRegex)) {
+    el.setAttribute('src', src);
+    el.setAttribute('sandbox', '');
+    el.setAttribute('frameborder', '0');
+    el.setAttribute('allowfullscreen', 'true');
+    return;
+  }
+
+  // LBRY.tv
+  if (src.match(lbryRegex)) {
+    el.setAttribute('src', src);
+    el.setAttribute('frameborder', '0');
+    return;
   }
 
   const replaceNode = el.ownerDocument.createElement('div');

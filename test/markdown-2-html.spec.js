@@ -534,6 +534,31 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('37- Should handle dapplr iframe', () => {
+      const input = {
+        author: 'foo332101',
+        permlink: 'bar332101',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link <iframe src=\"https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4\" ></iframe>"
+      };
+      const expected = '<p>this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" sandbox frameborder="0" allowfullscreen="true"></iframe></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('38- Should handle lbry.tv iframe', () => {
+      const input = {
+        author: 'foo332102',
+        permlink: 'bar332102',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link <iframe id=\"lbry-iframe\" width=\"560\" height=\"315\" src=\"https://lbry.tv/$/embed/epic-drone-video-sunset-swiss/38f32ec6de375352512a01c37ec9ef5e7fc35958?r=4N4ga6kbnyKXLSUCHtyfF7zh57vvJwfu\" allowfullscreen></iframe> "
+      };
+      const expected = '<p>this is link <iframe src="https://lbry.tv/$/embed/epic-drone-video-sunset-swiss/38f32ec6de375352512a01c37ec9ef5e7fc35958?r=4N4ga6kbnyKXLSUCHtyfF7zh57vvJwfu" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    
+    
+
   });
 
   describe('Sanitization', () => {
