@@ -1,6 +1,6 @@
 {
   "name": "@ecency/render-helper",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Markdown+Html Render helper",
   "main": "./lib/index.js",
   "scripts": {
