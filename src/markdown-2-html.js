@@ -303,8 +303,11 @@ const a = (el, forApp, webp) => {
 
   // If a copied post link
   const cpostMatch = href.match(copiedPostRegex);
-  if ((cpostMatch && whiteList.includes(cpostMatch[1].substring(1))) ||
-    (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)) {
+  if (
+    (
+      (cpostMatch && whiteList.includes(cpostMatch[1].substring(1))) || (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)
+    ) && !['wallet', 'points', 'communities', 'posts', 'blog', 'comments', 'replies'].includes(cpostMatch[3])
+  ) {
     el.setAttribute('class', 'markdown-post-link');
 
     let tag = 'post';
