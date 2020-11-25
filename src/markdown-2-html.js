@@ -15,10 +15,13 @@ const ipfsRegex = /^https?:\/\/[^/]+\/(ip[fn]s)\/([^/?#]+)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const mentionRegex = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
+const communityRegex = /^https?:\/\/(.*)\/c\/(hive-\d+)\/(.*)/i;
 const youTubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g;
 const vimeoRegex = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i;
 const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
+const dapplrRegex = /^(https?:)?\/\/[a-z]*\.dapplr.in\/file\/dapplr-videos\/.*/i;
+const lbryRegex = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i;
 // eslint-disable-next-line no-useless-escape
 const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
 const twitterRegex = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi;
@@ -89,10 +92,10 @@ export const sanitizeHtml = (_html) => {
   ]; */
 
   const allowedAttributes = {
-    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
+    'a': ['href', 'target', 'rel', 'data-permlink', 'data-tag', 'data-author', 'data-href', 'data-community', 'data-filter', 'data-embed-src', 'data-video-href', 'data-proposal', 'class', 'title'],
     'img': ['src', 'alt', 'class'],
     'span': ['class'],
-    'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen'],
+    'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen', 'sandbox'],
     'div': ['class'],
     'strong': [],
     'b': [],
@@ -223,18 +226,13 @@ const a = (el, forApp, webp) => {
     href.trim().replace(/&amp;/g, '&') ===
     innerHTML(el).trim().replace(/&amp;/g, '&')
   ) {
-    if (forApp) {
-      el.setAttribute('data-href', href);
-      el.removeAttribute('href');
-    }
+    const attrs = forApp ? `data-href="${href}" class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"`;
 
-    el.setAttribute('class', 'markdown-img-link');
+    const replaceNode = DOMParser.parseFromString(
+      `<img ${attrs}/>`
+    );
 
-    removeChildNodes(el);
-
-    const img = el.ownerDocument.createElement('img');
-    img.setAttribute('src', href);
-    el.appendChild(img);
+    el.parentNode.replaceChild(replaceNode, el);
 
     return;
   }
@@ -284,7 +282,7 @@ const a = (el, forApp, webp) => {
     return;
   }
 
-  // If a steem user with url
+  // If a hive user with url
   const mentionMatch = href.match(mentionRegex);
   if (mentionMatch && whiteList.includes(mentionMatch[1]) && mentionMatch.length === 3) {
     el.setAttribute('class', 'markdown-author-link');
@@ -332,6 +330,31 @@ const a = (el, forApp, webp) => {
     return;
   }
 
+  // If a custom hive community link
+  const comMatch = href.match(communityRegex);
+  if (comMatch && whiteList.includes(comMatch[1])) {
+    el.setAttribute('class', 'markdown-community-link');
+
+    const community = comMatch[2];
+    let filter = comMatch[3];
+    if (filter === 'about' || filter === 'discord') {
+      filter = 'created';
+    }
+    if (el.textContent === href) {
+      el.textContent = `${filter}/${community}`;
+    }
+
+    if (forApp) {
+      el.removeAttribute('href');
+
+      el.setAttribute('data-community', community);
+      el.setAttribute('data-filter', filter);
+    } else {
+      const h = `/${filter}/${community}`;
+      el.setAttribute('href', h);
+    }
+    return;
+  }
 
   // If a youtube video
   let match = href.match(youTubeRegex);
@@ -492,7 +515,7 @@ const a = (el, forApp, webp) => {
       const url = e[0].replace(/(<([^>]+)>)/gi, '');
       const author = e[1].replace(/(<([^>]+)>)/gi, '');
 
-      const twitterCode = `<blockquote class="twitter-tweet"><p>${url}</p>- ${author} <a href="${url}"></a></blockquote>`;
+      const twitterCode = `<blockquote class="twitter-tweet"><p>${url}</p>- <a href="${url}">${author}</a></blockquote>`;
       const replaceNode = DOMParser.parseFromString(twitterCode);
       el.parentNode.replaceChild(replaceNode, el);
       return;
@@ -592,6 +615,22 @@ const iframe = (el) => {
     }
   }
 
+  // Dapplr
+  if (src.match(dapplrRegex)) {
+    el.setAttribute('src', src);
+    el.setAttribute('sandbox', '');
+    el.setAttribute('frameborder', '0');
+    el.setAttribute('allowfullscreen', 'true');
+    return;
+  }
+
+  // LBRY.tv
+  if (src.match(lbryRegex)) {
+    el.setAttribute('src', src);
+    el.setAttribute('frameborder', '0');
+    return;
+  }
+
   const replaceNode = el.ownerDocument.createElement('div');
   replaceNode.setAttribute('class', 'unsupported-iframe');
   replaceNode.textContent = `(Unsupported ${src})`;
@@ -617,7 +656,7 @@ const img = (node, webp) => {
 const text = (node, forApp, webp) => {
   if (['a', 'code'].includes(node.parentNode.nodeName)) return;
 
-  const linkified = linkify(node.nodeValue, forApp);
+  const linkified = linkify(node.nodeValue, forApp, webp);
   if (linkified !== node.nodeValue) {
     const replaceNode = DOMParser.parseFromString(
       `<span class="wr">${linkified}</span>`
@@ -629,9 +668,9 @@ const text = (node, forApp, webp) => {
   }
 
   if (node.nodeValue.match(imgRegex)) {
-    const attrs = forApp ? `data-href="${node.nodeValue}"` : `href="${node.nodeValue}"`;
+    const attrs = forApp ? `data-href="${node.nodeValue}" class="markdown-img-link" src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"`;
     const replaceNode = DOMParser.parseFromString(
-      `<a ${attrs} class="markdown-img-link"><img src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"></a>`
+      `<img ${attrs}/>`
     );
 
     node.parentNode.replaceChild(replaceNode, node);
@@ -663,10 +702,10 @@ const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted using [Partiko') === false)
   .filter(item => item.includes('Posted using [Dapplr') === false)
   .filter(item => item.includes('Posted Using [LeoFinance') === false)
-  .filter(item => item.includes('Posted via <a href="https://d.buzz"') === false)
-  .join('\n') : '');
+  .filter(item => item.includes('Posted via [neoxian') === false)
+  .join('\n') : '').replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '');
 
-export const linkify = (content, forApp) => {
+export const linkify = (content, forApp, webp) => {
   // Tags
   content = content.replace(/(^|\s|>)(#[-a-z\d]+)/gi, tag => {
     if (/#[\d]+$/.test(tag)) return tag; // do not allow only numbers (like #1)
@@ -690,6 +729,12 @@ export const linkify = (content, forApp) => {
       return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`;
     }
   );
+
+  // Image links
+  content = content.replace(imgRegex, imglink => {
+    const attrs = forApp ? `data-href="${imglink}" class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"`;
+    return `<img ${attrs}/>`;
+  });
 
   return content;
 };

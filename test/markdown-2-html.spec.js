@@ -21,7 +21,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png"
       };
-      const expected = '<p><a data-href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a></p>';
+      const expected = '<p><img class="markdown-img-link" src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -519,10 +519,46 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "this is link https://twitter.com/DeWaarheid_/status/1320603494836015105"
       };
-      const expected = '<p>this is link <blockquote class="twitter-tweet"><p>https://twitter.com/DeWaarheid_/status/1320603494836015105</p>- DeWaarheid_ <a href="https://twitter.com/DeWaarheid_/status/1320603494836015105"></a></blockquote></p>';
+      const expected = '<p>this is link <blockquote class="twitter-tweet"><p>https://twitter.com/DeWaarheid_/status/1320603494836015105</p>- <a href="https://twitter.com/DeWaarheid_/status/1320603494836015105">DeWaarheid_</a></blockquote></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('36- Should handle custom community links', () => {
+      const input = {
+        author: 'foo33210',
+        permlink: 'bar33210',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link https://peakd.com/c/hive-106444/trending and markdown link [Manipulation Station](https://peakd.com/c/hive-122516/trending)"
+      };
+      const expected = '<p>this is link <a class="markdown-community-link" data-community="hive-106444" data-filter="trending">trending/hive-106444</a> and markdown link <a class="markdown-community-link" data-community="hive-122516" data-filter="trending">Manipulation Station</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('37- Should handle dapplr iframe', () => {
+      const input = {
+        author: 'foo332101',
+        permlink: 'bar332101',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link <iframe src=\"https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4\" ></iframe>"
+      };
+      const expected = '<p>this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" sandbox frameborder="0" allowfullscreen="true"></iframe></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    it('38- Should handle lbry.tv iframe', () => {
+      const input = {
+        author: 'foo332102',
+        permlink: 'bar332102',
+        last_update: '2019-05-10T09:15:21',
+        body: "this is link <iframe id=\"lbry-iframe\" width=\"560\" height=\"315\" src=\"https://lbry.tv/$/embed/epic-drone-video-sunset-swiss/38f32ec6de375352512a01c37ec9ef5e7fc35958?r=4N4ga6kbnyKXLSUCHtyfF7zh57vvJwfu\" allowfullscreen></iframe> "
+      };
+      const expected = '<p>this is link <iframe src="https://lbry.tv/$/embed/epic-drone-video-sunset-swiss/38f32ec6de375352512a01c37ec9ef5e7fc35958?r=4N4ga6kbnyKXLSUCHtyfF7zh57vvJwfu" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
+    
+    
+
   });
 
   describe('Sanitization', () => {
@@ -631,7 +667,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "https://img.esteem.ws/bbq3ob1idy.png <a href=\"https://steemit.com/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">fooo</a> <a href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\">bar</a> <a href=\"http://external.com/loromoro\">baz</a> #lorem @ipsum <a href='https://steemit.com/~witnesses'>vote me</a>"
       };
-      const expected = '<p><a href="https://img.esteem.ws/bbq3ob1idy.png" class="markdown-img-link"><img src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href=\"http://external.com/loromoro\" class="markdown-external-link" target="_blank" rel="noopener">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener">vote me</a></p>';
+      const expected = '<p><img class="markdown-img-link" src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href="http://external.com/loromoro" class="markdown-external-link" target="_blank" rel="noopener">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener">vote me</a></p>';
 
       expect(markdown2Html(input, false)).to.deep.equal(expected);
     });
