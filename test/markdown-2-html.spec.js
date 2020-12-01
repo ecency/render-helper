@@ -556,9 +556,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
-    
-    
 
+    it('39- Should ignore profile page sections with copied links', () => {
+      const input = {
+        author: 'foo054',
+        permlink: 'bar054',
+        last_update: '2019-05-21T09:19:21',
+        body: "<a href='https://ecency.com/@good-karma/wallet'>click here</a>"
+      };
+      const expected = '<p><a class="markdown-external-link" data-href="https://ecency.com/@good-karma/wallet">click here</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
   });
 
   describe('Sanitization', () => {
