@@ -703,6 +703,7 @@ const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted using [Dapplr') === false)
   .filter(item => item.includes('Posted Using [LeoFinance') === false)
   .filter(item => item.includes('Posted via [neoxian') === false)
+  .filter(item => item.includes('Posted with [STEMGeeks') === false)
   .join('\n') : '').replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '');
 
 export const linkify = (content, forApp, webp) => {
