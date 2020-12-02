@@ -22,6 +22,7 @@ const dTubeRegex = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g;
 const twitchRegex = /https?:\/\/(?:www.)?twitch.tv\/(?:(videos)\/)?([a-zA-Z0-9][\w]{3,24})/i;
 const dapplrRegex = /^(https?:)?\/\/[a-z]*\.dapplr.in\/file\/dapplr-videos\/.*/i;
 const lbryRegex = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i;
+const archRegex = /^(https?:)?\/\/archive.org\/embed\/.*/i;
 // eslint-disable-next-line no-useless-escape
 const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
 const twitterRegex = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi;
@@ -631,6 +632,12 @@ const iframe = (el) => {
   if (src.match(lbryRegex)) {
     el.setAttribute('src', src);
     el.setAttribute('frameborder', '0');
+    return;
+  }
+
+  // archive.org
+  if (src.match(archRegex)) {
+    el.setAttribute('src', src);
     return;
   }
 

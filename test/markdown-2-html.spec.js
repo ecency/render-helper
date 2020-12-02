@@ -568,6 +568,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+
+    it('40- Should handle archive.org iframe', () => {
+      const input = {
+        author: 'foo040',
+        permlink: 'bar040',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link <iframe src="https://archive.org/embed/VoyagetothePlanetofPrehistoricWomen" width="640" height="480" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>'
+      };
+      const expected = '<p>this is link <iframe src="https://archive.org/embed/VoyagetothePlanetofPrehistoricWomen" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="allowfullscreen"></iframe></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
   });
 
   describe('Sanitization', () => {
