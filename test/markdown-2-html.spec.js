@@ -723,7 +723,7 @@ describe('Markdown2Html', () => {
         author: 'foo6401',
         permlink: 'bar6401',
         last_update: '2019-05-10T09:15:21',
-        body: "hello lorem ipsum \n Posted using [Partiko Android](https://partiko.app/referral/aftabkhan10) \n Posted using [Dapplr](https://app.dapplr.in/L55YHRuX4jKJ2SSk8) \n  Posted Using [LeoFinance](https://leofinance.io/@taskmaster4450/is-defi-for-real) \n Posted with [STEMGeeks](https://stemgeeks.net)"
+        body: "hello lorem ipsum \n Posted using [Partiko Android](https://partiko.app/referral/aftabkhan10) \n Posted using [Dapplr](https://app.dapplr.in/L55YHRuX4jKJ2SSk8) \n  Posted Using [LeoFinance](https://leofinance.io/@taskmaster4450/is-defi-for-real) \n Posted with [STEMGeeks](https://stemgeeks.net) \n  <center><sub>[Posted Using Aeneas.Blog](https://www.aeneas.blog/@rollie1212/sryptobrewmaster-weekend-rewards-3)</sub></center>"
       };
       const expected = "<p>hello lorem ipsum</p>";
 
