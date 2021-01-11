@@ -11,7 +11,6 @@ import {cacheGet, cacheSet} from './cache';
 const xss = require('xss');
 
 const imgRegex = /(https?:\/\/.*\.(?:tiff?|jpe?g|gif|png|svg|ico))(.*)/gim;
-const ipfsRegex = /^https?:\/\/[^/]+\/(ip[fn]s)\/([^/?#]+)/gim;
 const postRegex = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
 const mentionRegex = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i;
 const copiedPostRegex = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i;
@@ -234,27 +233,6 @@ const a = (el, forApp, webp) => {
     );
 
     el.parentNode.replaceChild(replaceNode, el);
-
-    return;
-  }
-
-  if (
-    href.match(ipfsRegex) &&
-    href.trim().replace(/&amp;/g, '&') ===
-    innerHTML(el).trim().replace(/&amp;/g, '&')
-  ) {
-    if (forApp) {
-      el.setAttribute('data-href', href);
-      el.removeAttribute('href');
-    }
-
-    el.setAttribute('class', 'markdown-img-link');
-
-    removeChildNodes(el);
-
-    const img = el.ownerDocument.createElement('img');
-    img.setAttribute('src', href);
-    el.appendChild(img);
 
     return;
   }
