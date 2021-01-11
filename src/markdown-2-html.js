@@ -46,11 +46,13 @@ const innerHTML = (node) => {
   return '';
 };
 
+/*
 const removeChildNodes = (node) => {
   [...Array(node.childNodes.length).keys()].forEach(x => {
     node.removeChild(node.childNodes[x]);
   });
 };
+ */
 
 export const sanitizeHtml = (_html) => {
   /* const allowedTags = [
