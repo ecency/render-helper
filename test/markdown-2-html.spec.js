@@ -512,6 +512,17 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
+    it('34-1- Should detect # in ipfs links', () => {
+      const input = {
+        author: 'foo34936',
+        permlink: 'bar34936',
+        last_update: '2019-05-10T09:15:24',
+        body: "this is a link https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home"
+      };
+      const expected = '<p>this is a link <a class="markdown-external-link" data-href="https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home">https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home</a></p>';
+
+      expect(markdown2Html(input)).to.deep.equal(expected);
+    });
     it('35- Should handle twitter links', () => {
       const input = {
         author: 'foo3321',

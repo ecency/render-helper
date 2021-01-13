@@ -241,7 +241,8 @@ const a = (el, forApp, webp) => {
   if (
     href.match(ipfsRegex) &&
     href.trim().replace(/&amp;/g, '&') ===
-    innerHTML(el).trim().replace(/&amp;/g, '&')
+    innerHTML(el).trim().replace(/&amp;/g, '&') &&
+    href.indexOf('#') === -1
   ) {
     if (forApp) {
       el.setAttribute('data-href', href);
