@@ -75,7 +75,7 @@ describe('Proxify image src', () => {
 
     expect(proxifyImageSrc(input)).to.deep.equal(expected);
   });
-  
+
   it('5- normal proxify for uploads', () => {
     setProxyBase('https://images.ecency.com');
     const input = 'https://images.hive.blog/DQmT7UTd6JTP3bB2fXzV6tv8u4cJ6fLijy2bUxatkLChzHD/IMG_6631.JPG';

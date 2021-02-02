@@ -10,6 +10,7 @@ import catchPostImage from '../src/catch-post-image';
 import markdown2Html from "../src/markdown-2-html";
 
 describe('catchPostImage', () => {
+
   it('1- Should extract entry image from json_metadata', () => {
     const input = {
       author: 'foo1',
@@ -135,4 +136,22 @@ describe('catchPostImage', () => {
   });
 
 
+  it('10- Image field can contain only string ', () => {
+
+    const input = {
+      author: "foo-10",
+      permlink: "bar-baz-10",
+      json_metadata: {
+        image: [
+          [
+            '![](https://cdn.steemitimages.com/DQmecSNtkk82zz62rymdK7wvXujn5P47zkARUMR13QLXmya/image.png)'
+          ]
+        ]
+      }
+    };
+
+    const expected = "";
+
+    expect(catchPostImage(input)).to.deep.equal(expected);
+  });
 });

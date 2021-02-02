@@ -23,7 +23,7 @@ export const getLatestUrl = (str) => {
 };
 
 export default (url, width = 0, height = 0, format = 'match') => {
-  if (!url) {
+  if (!url || typeof url !== 'string') {
     return '';
   }
 
