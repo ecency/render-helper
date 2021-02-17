@@ -418,7 +418,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: "[![](https://img.3speakcontent.online/xrhjxocx/post.png?v2)](https://3speak.online/watch?v=wehmoen/xrhjxocx)"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/2ufhwNgM3qHKBGVeU2TMMqPBjdB17MRuf4Q7vGrmGMtTn6yFtvW3Lt9t5v1c3so7UFhWDYh9B?format=match&amp;mode=fit" /></a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/2ufhwNgM3qHKBGVeU2TMMqPBjdB17MRuf4Q7vGrmGMtTn6yFtvW3Lt9t5v1c3so7UFhWDYh9B?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });
@@ -430,7 +430,7 @@ describe('Markdown2Html', () => {
         last_update: '2029-05-10T09:15:21',
         body: "[![](https://img.3speakcontent.co/blnmdkjt/post.png)](https://3speak.co/watch?v=theycallmedan/blnmdkjt) [Watch on 3Speak](https://3speak.co/watch?v=theycallmedan/blnmdkjt)"
       };
-      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS?format=match&amp;mode=fit" /></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>';
+      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>';
 
       expect(markdown2Html(input)).to.deep.equal(expected);
     });

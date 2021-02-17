@@ -502,7 +502,11 @@ const a = (el, forApp, webp) => {
         thumbImg.setAttribute('itemprop', 'image');
         thumbImg.setAttribute('src', thumbnail);
 
+        const play = el.ownerDocument.createElement('span');
+        play.setAttribute('class', 'markdown-video-play');
+
         el.appendChild(thumbImg);
+        el.appendChild(play);
 
         // Remove image.
         el.removeChild(imgEls[0]);
