@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "outDir": "./lib/",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "allowJs": false,
+    "declaration": true,
+    "rootDir": "src",
+    "esModuleInterop": true
+  }
+}

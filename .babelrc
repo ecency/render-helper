@@ -1,9 +1,14 @@
 {
   "env": {
     "development": {
-      "presets": ["env"],
+      "presets": [
+        "env",
+        "@babel/typescript"
+      ],
       "plugins": [
-        "add-module-exports"
+        "add-module-exports",
+        "@babel/proposal-class-properties",
+        "@babel/proposal-object-rest-spread"
       ]
     },
     "production": {
