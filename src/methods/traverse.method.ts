@@ -3,7 +3,7 @@ import { iframe } from './iframe.method'
 import { img } from './img.method'
 import { text } from './text.method'
 
-export function traverse(node: Node, forApp: string, depth = 0, webp = false): void {
+export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): void {
   if (!node || !node.childNodes) {
     return
   }

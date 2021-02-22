@@ -4,7 +4,7 @@ import { linkify } from './linkify.method'
 import xmldom from 'xmldom'
 import { noop } from './noop.method'
 
-export function text(el: HTMLElement, forApp: string, webp: boolean): void {
+export function text(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (['a', 'code'].includes(el.parentNode.nodeName)) {
     return
   }
