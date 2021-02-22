@@ -1,5 +1,5 @@
 import { IMG_REGEX, YOUTUBE_REGEX } from '../consts'
-import proxifyImageSrc from '../proxify-image-src'
+import { proxifyImageSrc } from '../proxify-image-src'
 import { linkify } from './linkify.method'
 import xmldom from 'xmldom'
 import { noop } from './noop.method'

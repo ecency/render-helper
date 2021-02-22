@@ -1,15 +1,14 @@
 import he from 'he'
-import Remarkable from 'remarkable'
+import { Remarkable } from 'remarkable'
 import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
-
-const md = new Remarkable({html: true, breaks: true, linkify: false})
 
 function postBodySummary(entryBody: string, length: number): string {
   if (!entryBody) {
     return ''
   }
 
+  const md = new Remarkable({html: true, breaks: true, linkify: false})
   // Convert markdown to html
   let text = md.render(entryBody)
 
@@ -30,7 +29,7 @@ function postBodySummary(entryBody: string, length: number): string {
   return text
 }
 
-function getPostBodySummary(obj: any, length: number): any {
+export function getPostBodySummary(obj: any, length: number): any {
   if (typeof obj === 'string') {
     return postBodySummary(obj, length)
   }
@@ -47,5 +46,3 @@ function getPostBodySummary(obj: any, length: number): any {
 
   return res
 }
-
-export default postBodySummary

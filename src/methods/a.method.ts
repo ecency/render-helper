@@ -14,7 +14,7 @@ import {
   YOUTUBE_REGEX
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
-import proxifyImageSrc from '../proxify-image-src'
+import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
 import xmldom from 'xmldom'
 import { noop } from './noop.method'

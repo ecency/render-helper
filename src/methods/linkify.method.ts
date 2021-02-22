@@ -1,7 +1,7 @@
 import { IMG_REGEX } from '../consts'
-import proxifyImageSrc from '../proxify-image-src'
+import { proxifyImageSrc } from '../proxify-image-src'
 
-export function linkify(content: string, forApp: string, webp: boolean): string {
+export function linkify(content: string, forApp: boolean, webp: boolean): string {
   // Tags
   content = content.replace(/(^|\s|>)(#[-a-z\d]+)/gi, tag => {
     if (/#[\d]+$/.test(tag)) {

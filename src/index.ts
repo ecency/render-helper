@@ -1,7 +1,7 @@
 import renderPostBody from './markdown-2-html'
 import catchPostImage from './catch-post-image'
-import postBodySummary from './post-body-summary'
-import proxifyImageSrc, { setProxyBase } from './proxify-image-src'
+import { getPostBodySummary as postBodySummary } from './post-body-summary'
+import { setProxyBase, proxifyImageSrc } from './proxify-image-src'
 import { setCacheSize } from './cache'
 
 export {

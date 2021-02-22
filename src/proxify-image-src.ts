@@ -20,7 +20,7 @@ export function getLatestUrl(str: string): string {
   return last
 }
 
-function proxifyImageSrc(url?: string, width = 0, height = 0, format = 'match') {
+export function proxifyImageSrc(url?: string, width = 0, height = 0, format = 'match') {
   if (!url || typeof url !== 'string') {
     return ''
   }
@@ -60,5 +60,3 @@ function proxifyImageSrc(url?: string, width = 0, height = 0, format = 'match') 
 
   return `${proxyBase}/p/${b58url}?${qs}`
 }
-
-export default proxifyImageSrc
