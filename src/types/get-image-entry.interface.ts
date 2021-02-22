@@ -1,5 +1,7 @@
 export interface GetImageEntry {
-  json_metadata: {
-    image: string[]
-  }
+  author?: string
+  permlink?: string
+  last_update?: string
+  body: any
+  json_metadata?: any
 }

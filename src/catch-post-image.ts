@@ -40,9 +40,9 @@ function getImage(entry: GetImageEntry, width = 0, height = 0, format = 'match')
   return null
 }
 
-export function catchPostImage(obj: GetImageEntry, width = 0, height = 0, format = 'match'): string {
+export function catchPostImage(obj: GetImageEntry | string, width = 0, height = 0, format = 'match'): string {
   if (typeof obj === 'string') {
-    return getImage(obj, width, height, format)
+    return getImage(obj as any, width, height, format)
   }
   const key = `${makeEntryCacheKey(obj)}-${width}x${height}-${format}`
 
