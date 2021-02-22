@@ -1,4 +1,4 @@
-export const whiteList = [
+export const WHITE_LIST = [
   'ecency.com',
   'hive.blog',
   'peakd.com',
