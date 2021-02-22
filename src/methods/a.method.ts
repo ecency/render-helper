@@ -26,7 +26,7 @@ function setForAppAttributes(el: HTMLElement, tag: string, author: string, perml
   el.setAttribute('data-permlink', permlink)
 }
 
-export function a(el: HTMLElement, forApp: string, webp: string): void {
+export function a(el: HTMLElement, forApp: string, webp: boolean): void {
   let href = el.getAttribute('href')
   const className = el.getAttribute('class')
 
