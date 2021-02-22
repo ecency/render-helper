@@ -1,6 +1,6 @@
 import proxifyImageSrc from '../proxify-image-src'
 
-export function img(el: HTMLElement, webp: boolean) {
+export function img(el: HTMLElement, webp: boolean): void {
   el.removeAttribute('width')
   el.removeAttribute('height')
 
