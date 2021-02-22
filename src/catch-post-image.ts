@@ -1,5 +1,5 @@
-import proxifyImageSrc from './proxify-image-src'
-import markdown2html from './markdown-2-html'
+import { proxifyImageSrc } from './proxify-image-src'
+import { markdown2Html } from './markdown-2-html'
 import { createDoc, makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
 import { GetImageEntry } from './types'
@@ -25,7 +25,7 @@ function getImage(entry: GetImageEntry, width = 0, height = 0, format = 'match')
   }
 
   // try to find first image from post body
-  const html = markdown2html(entry)
+  const html = markdown2Html(entry)
   const doc = createDoc(html)
   if (!doc) {
     return null
@@ -40,7 +40,7 @@ function getImage(entry: GetImageEntry, width = 0, height = 0, format = 'match')
   return null
 }
 
-function catchPostImage(obj: GetImageEntry, width = 0, height = 0, format = 'match'): string {
+export function catchPostImage(obj: GetImageEntry, width = 0, height = 0, format = 'match'): string {
   if (typeof obj === 'string') {
     return getImage(obj, width, height, format)
   }
@@ -56,6 +56,4 @@ function catchPostImage(obj: GetImageEntry, width = 0, height = 0, format = 'mat
 
   return res
 }
-
-export default catchPostImage
 
