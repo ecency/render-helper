@@ -1,9 +1,5 @@
-/* eslint-disable */
-import {expect} from 'chai';
-
-import postBodySummary from '../src/post-body-summary';
-import catchPostImage from "../src/catch-post-image";
-
+import { expect } from 'chai'
+import { getPostBodySummary } from './post-body-summary'
 
 describe('postBodySummary', () => {
   it('1- Should return empty string', () => {
@@ -12,10 +8,10 @@ describe('postBodySummary', () => {
       permlink: 'bar81',
       last_update: '2019-05-10T09:15:21',
       body: ''
-    };
-    const expected = '';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
+    }
+    const expected = ''
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
 
   it('2- Should remove html tags', () => {
     const input = {
@@ -23,10 +19,10 @@ describe('postBodySummary', () => {
       permlink: 'bar82',
       last_update: '2019-05-10T09:15:21',
       body: '<center>Lorem Ipsum Dolor</center>'
-    };
-    const expected = 'Lorem Ipsum Dolor';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
+    }
+    const expected = 'Lorem Ipsum Dolor'
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
 
   it('3- Should remove new lines', () => {
     const input = {
@@ -34,10 +30,10 @@ describe('postBodySummary', () => {
       permlink: 'bar83',
       last_update: '2019-05-10T09:15:21',
       body: 'Lorem \n Ipsum \n Dolor'
-    };
-    const expected = 'Lorem Ipsum Dolor';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
+    }
+    const expected = 'Lorem Ipsum Dolor'
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
 
   it('4- Should trim', () => {
     const input = {
@@ -45,10 +41,10 @@ describe('postBodySummary', () => {
       permlink: 'bar84',
       last_update: '2019-05-10T09:15:21',
       body: '   Lorem Ipsum Dolor     '
-    };
-    const expected = 'Lorem Ipsum Dolor';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
+    }
+    const expected = 'Lorem Ipsum Dolor'
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
 
   it('5- Should remove urls', () => {
     const input = {
@@ -56,10 +52,10 @@ describe('postBodySummary', () => {
       permlink: 'bar85',
       last_update: '2019-05-10T09:15:21',
       body: 'Lorem http://lorem.com Ipsum Dolor https://ipsum.com'
-    };
-    const expected = 'Lorem Ipsum Dolor';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
+    }
+    const expected = 'Lorem Ipsum Dolor'
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
 
   it('6- Should remove white spaces between words', () => {
     const input = {
@@ -67,10 +63,10 @@ describe('postBodySummary', () => {
       permlink: 'bar86',
       last_update: '2019-05-10T09:15:21',
       body: '   Lorem       Ipsum      Dolor     '
-    };
-    const expected = 'Lorem Ipsum Dolor';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
+    }
+    const expected = 'Lorem Ipsum Dolor'
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
 
   it('7- Should limit to 20', () => {
     const input = {
@@ -78,13 +74,13 @@ describe('postBodySummary', () => {
       permlink: 'bar87',
       last_update: '2019-05-10T09:15:21',
       body: 'lorem ipsum dolor sit amet'
-    };
-    const expected = 'lorem ipsum dolor si';
-    expect(postBodySummary(input, 20)).to.deep.equal(expected);
-  });
+    }
+    const expected = 'lorem ipsum dolor si'
+    expect(getPostBodySummary(input, 20)).to.deep.equal(expected)
+  })
 
   it('8- Test with long markdown', () => {
-    let input = {
+    const input = {
       author: 'foo88',
       permlink: 'bar88',
       last_update: '2019-05-10T09:15:21',
@@ -92,11 +88,11 @@ describe('postBodySummary', () => {
 In this post, we want to bring you up to speed on what is happening inside Steemit, as well as give you our perspective on the successes (and failures) of the past year, let you know what we see as our mission going forward, and provide some insight into what we have planned.
 <h1>Steemit’s Vision and Mission</h1>
 Through our vision of **empowering entrepreneurs to tokenize the internet**, our primary roles in the Steem ecosystem are providing the community with software enhancements to the Steem blockchain, modular framework applications made up of components that can be leveraged by application developers and inspiration through these platforms to entrepreneurial end-users. We believe we must build in ways that create as many opportunities — and catalyze as many amazing Steem-based entrepreneurs and communities — as possible.`
-    };
+    }
 
-    const expected = 'In this post, we want to bring you up to speed on what is happening inside Steemit, as well as give you our perspective on the successes (and failures) of the past year, let you know what we see as ou';
-    expect(postBodySummary(input, 200)).to.deep.equal(expected);
-  });
+    const expected = 'In this post, we want to bring you up to speed on what is happening inside Steemit, as well as give you our perspective on the successes (and failures) of the past year, let you know what we see as ou'
+    expect(getPostBodySummary(input, 200)).to.deep.equal(expected)
+  })
 
   it('9- Test with long markdown', () => {
     const input = {
@@ -112,14 +108,14 @@ Through our vision of **empowering entrepreneurs to tokenize the internet**, our
 <p>Without hard work and dedication as well as the great support from the community this wouldn't have been possible. Also the timing was brilliant, I joined in the earlier stages.</p>
 <p><b>I'm both grateful and proud.</b></p>
 <p>Many people supported me along the way, some tried to tear me down. I'm glad I only stayed with those who pushed me, they have a large stake in my success story.</p></html>`
-    };
+    }
 
-    const expected = 'Everybody has a dream. Most of the time it takes us a while to turn these great wishes into reality, especially because they usually come with a bigger price tag. Now thanks to Steem some of us will b';
-    expect(postBodySummary(input, 200)).to.deep.equal(expected);
-  });
+    const expected = 'Everybody has a dream. Most of the time it takes us a while to turn these great wishes into reality, especially because they usually come with a bigger price tag. Now thanks to Steem some of us will b'
+    expect(getPostBodySummary(input, 200)).to.deep.equal(expected)
+  })
 
   it('10- Test with long markdown', () => {
-    let input = {
+    const input = {
       author: 'foo90',
       permlink: 'bar90',
       last_update: '2019-05-10T09:15:21',
@@ -133,16 +129,16 @@ Through our vision of **empowering entrepreneurs to tokenize the internet**, our
 ### Boooommm!!!
 I'm giving Three DTUBE & STEEMIT BRANDED TEES to three people for free. Yes, for free. *E fit be you ooo!*
 So, how can you qualify to get one?`
-    };
+    }
 
-    const expected = 'Hey Dtube! Hey Steemian It\'s your boy marpe @marpemusic. I greet you from my stable, Ibadan Nigeria. There\'s excitement in the air! The epoch making STEEMIB (that is, STEEMIT IBADAN) meet up is around';
+    const expected = 'Hey Dtube! Hey Steemian It\'s your boy marpe @marpemusic. I greet you from my stable, Ibadan Nigeria. There\'s excitement in the air! The epoch making STEEMIB (that is, STEEMIT IBADAN) meet up is around'
 
-    expect(postBodySummary(input, 200)).to.deep.equal(expected);
-  });
+    expect(getPostBodySummary(input, 200)).to.deep.equal(expected)
+  })
 
   it('11- Test with not obj param', () => {
-    const input = '<center>Lorem Ipsum Dolor</center>';
-    const expected = 'Lorem Ipsum Dolor';
-    expect(postBodySummary(input)).to.deep.equal(expected);
-  });
-});
+    const input = '<center>Lorem Ipsum Dolor</center>'
+    const expected = 'Lorem Ipsum Dolor'
+    expect(getPostBodySummary(input)).to.deep.equal(expected)
+  })
+})
