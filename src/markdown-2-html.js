@@ -24,7 +24,7 @@ const dapplrRegex = /^(https?:)?\/\/[a-z]*\.dapplr.in\/file\/dapplr-videos\/.*/i
 const lbryRegex = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i;
 const archRegex = /^(https?:)?\/\/archive.org\/embed\/.*/i;
 // eslint-disable-next-line no-useless-escape
-const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\/]+)(&.*)?/i;
+const speakRegex = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\.\/]+)(&.*)?/i;
 const twitterRegex = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi;
 const Remarkable = require('remarkable');
 
@@ -721,6 +721,7 @@ const cleanReply = (s) => (s ? s.split('\n')
   .filter(item => item.includes('Posted with [STEMGeeks') === false)
   .filter(item => item.includes('<center><sub>[Posted Using Aeneas.Blog') === false)
   .filter(item => item.includes('<center><sub>Posted via [weedcash.network') === false)
+  .filter(item => item.includes('<center>Posted on [NaturalMedicine.io') === false)
   .join('\n') : '').replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '');
 
 export const linkify = (content, forApp, webp) => {
