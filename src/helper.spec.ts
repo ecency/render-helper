@@ -1,8 +1,4 @@
-import { expect } from 'chai'
-import { setupJest } from './setup-jest'
 import { makeEntryCacheKey } from './helper'
-
-setupJest()
 
 describe('Helper', () => {
   it('1- makeEntryCacheKey', () => {
@@ -14,6 +10,6 @@ describe('Helper', () => {
 
     const expected = 'foo1-bar1-2019-05-10T09:15:21'
 
-    expect(makeEntryCacheKey(input)).to.deep.equal(expected)
+    expect(makeEntryCacheKey(input)).toBe(expected)
   })
 })

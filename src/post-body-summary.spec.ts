@@ -1,4 +1,3 @@
-import { expect } from 'chai'
 import { getPostBodySummary } from './post-body-summary'
 
 describe('postBodySummary', () => {
@@ -10,7 +9,7 @@ describe('postBodySummary', () => {
       body: ''
     }
     const expected = ''
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 
   it('2- Should remove html tags', () => {
@@ -21,7 +20,7 @@ describe('postBodySummary', () => {
       body: '<center>Lorem Ipsum Dolor</center>'
     }
     const expected = 'Lorem Ipsum Dolor'
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 
   it('3- Should remove new lines', () => {
@@ -32,7 +31,7 @@ describe('postBodySummary', () => {
       body: 'Lorem \n Ipsum \n Dolor'
     }
     const expected = 'Lorem Ipsum Dolor'
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 
   it('4- Should trim', () => {
@@ -43,7 +42,7 @@ describe('postBodySummary', () => {
       body: '   Lorem Ipsum Dolor     '
     }
     const expected = 'Lorem Ipsum Dolor'
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 
   it('5- Should remove urls', () => {
@@ -54,7 +53,7 @@ describe('postBodySummary', () => {
       body: 'Lorem http://lorem.com Ipsum Dolor https://ipsum.com'
     }
     const expected = 'Lorem Ipsum Dolor'
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 
   it('6- Should remove white spaces between words', () => {
@@ -65,7 +64,7 @@ describe('postBodySummary', () => {
       body: '   Lorem       Ipsum      Dolor     '
     }
     const expected = 'Lorem Ipsum Dolor'
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 
   it('7- Should limit to 20', () => {
@@ -76,7 +75,7 @@ describe('postBodySummary', () => {
       body: 'lorem ipsum dolor sit amet'
     }
     const expected = 'lorem ipsum dolor si'
-    expect(getPostBodySummary(input, 20)).to.deep.equal(expected)
+    expect(getPostBodySummary(input, 20)).toBe(expected)
   })
 
   it('8- Test with long markdown', () => {
@@ -91,7 +90,7 @@ Through our vision of **empowering entrepreneurs to tokenize the internet**, our
     }
 
     const expected = 'In this post, we want to bring you up to speed on what is happening inside Steemit, as well as give you our perspective on the successes (and failures) of the past year, let you know what we see as ou'
-    expect(getPostBodySummary(input, 200)).to.deep.equal(expected)
+    expect(getPostBodySummary(input, 200)).toBe(expected)
   })
 
   it('9- Test with long markdown', () => {
@@ -111,7 +110,7 @@ Through our vision of **empowering entrepreneurs to tokenize the internet**, our
     }
 
     const expected = 'Everybody has a dream. Most of the time it takes us a while to turn these great wishes into reality, especially because they usually come with a bigger price tag. Now thanks to Steem some of us will b'
-    expect(getPostBodySummary(input, 200)).to.deep.equal(expected)
+    expect(getPostBodySummary(input, 200)).toBe(expected)
   })
 
   it('10- Test with long markdown', () => {
@@ -133,12 +132,12 @@ So, how can you qualify to get one?`
 
     const expected = 'Hey Dtube! Hey Steemian It\'s your boy marpe @marpemusic. I greet you from my stable, Ibadan Nigeria. There\'s excitement in the air! The epoch making STEEMIB (that is, STEEMIT IBADAN) meet up is around'
 
-    expect(getPostBodySummary(input, 200)).to.deep.equal(expected)
+    expect(getPostBodySummary(input, 200)).toBe(expected)
   })
 
   it('11- Test with not obj param', () => {
     const input = '<center>Lorem Ipsum Dolor</center>'
     const expected = 'Lorem Ipsum Dolor'
-    expect(getPostBodySummary(input)).to.deep.equal(expected)
+    expect(getPostBodySummary(input)).toBe(expected)
   })
 })

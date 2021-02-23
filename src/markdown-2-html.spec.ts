@@ -1,12 +1,16 @@
-import { expect } from 'chai'
-import { setupJest } from './setup-jest'
 import { getTestData } from './test/data'
 import { markdown2Html } from './markdown-2-html'
 
 const fs = require('fs')
 const path = require('path')
-
-setupJest()
+const SNAPSHOT_JSON = {
+  "markdown_2_html_test_files_1_should_catch_images_in_table": "<p><span>Congratulations <a class=\"markdown-author-link\" data-author=\"dunsky\">@dunsky</a>! You have completed the following achievement on the Steem blockchain and have been rewarded with new badge(s) :</span></p>\n<table><tr><td><span><img class=\"markdown-img-link\" src=\"https://images.ecency.com/p/9RTqgyyu8sX2kxvHt3ueNhDJEActwvqfV9wXt7pGKpjnWxBVz6r6Lv5n7t2RYBogkr5EjvnLjk?format=match&amp;mode=fit\" /></span></td><td>You made more than 6000 upvotes. Your next target is to reach 7000 upvotes.</td></tr>\n<tr><td><span><img class=\"markdown-img-link\" src=\"https://images.ecency.com/p/9RTqgyyu8sX2kxvHt3ueNhDJEActwvqfV9wXt7pGKpjnVKjKxTD5Xwi6jJqBW9PAmtMWvTCvPF?format=match&amp;mode=fit\" /></span></td><td>You published more than 250 posts. Your next target is to reach 300 posts.</td></tr>\n</table>\n<p><sub><em><a class=\"markdown-external-link\" data-href=\"https://steemitboard.com/@dunsky\">Click here to view your Board of Honor</a></em></sub><br />\n<sub><em>If you no longer want to receive notifications, reply to this comment with the word</em> <code>STOP</code></sub></p>\n<p>To support your work, I also upvoted your post!</p>\n<blockquote>\n<p>Support <a class=\"markdown-author-link\" data-author=\"steemitboard\">SteemitBoard's project</a>! <strong><a class=\"markdown-external-link\" data-href=\"https://v2.steemconnect.com/sign/account-witness-vote?witness=steemitboard&amp;approve=1\">Vote for its witness</a></strong> and <strong>get one more award</strong>!</p>\n</blockquote>",
+  "markdown_2_html_test_files_3_should_replace_busy_links_properly": "<p><img src=\"https://.esteem.app/0x0/https://ipfs.busy.org/ipfs/QmPziJCkx8w62UZCz1TNxAMsgf1uTnPZdVKAYjLBWvMzeD\" alt=\"image.png\" /></p>\n<p><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-1-2\">Part 1 - 2</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-3\">Part 3</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-4\">Part 4</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-5\">Part 5</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-6\">Part 6</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-7\">Part 7</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-8\">Part 8</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-9\">Part 9</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-10\">Part 10</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-11\">Part 11</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-12\">Part 12</a></p>\n<p><strong>Part 13</strong></p>\n<p>Members of the Yerşehir caravan have surrendered their weapons to imperial soldiers at the entrance of Istanbul by the agreement provided earlier. The imperial soldiers arrested them immediately after the surrender of the weapons, and they entered the city with their hands chained.</p>\n<p>“The Yerşehir administration will ask you the account of this disrespect,” said Tamra to the proud Commander Timor on the pony. Tamra was angry because an ordinary soldier pushed her.</p>\n<p>\"You should be thankful we didn't strip you naked and had you wandering the streets of the city,\" said Commander Timor.</p>\n<p>Doma turned to the commander and said, “That's not how we dealt with you. Still, I assume you're doing your duty. I ask you to inform your superiors as soon as possible.”</p>\n<p>”You may be executed for armed entry into the Imperial lands,\" said the commander.</p>\n<p>“You like to dramatize things,” Akman said. Although Commander Timor was angry with Akman's happy face, he chose to keep the sarcastic look on his face.</p>\n<p>When he was taken to the dungeon, Akman was watching the buildings on the road, the squares adorned with sculptures, statues, and facades reflecting the beauty of East Roman stone craftsmanship.</p>\n<p>After passing the Hippodrome, which is one of the rare works of the ancient world, they entered a narrow tunnel and went down a ladder descending by turning. The soldiers locked them in a large gallery and returned. The water was dripping from the high ceiling of the dungeon, and the air they breathed was quite damp. Akman saw two rats with the size of cats running to their holes, terrified by the sound of footsteps.</p>\n<p>”I don't think they're gonna keep us here for long,\" Akman said.</p>\n<p>Akman was wrong; they told stories to each other in the first few days while there was no authority to call and ask for them. One of the dungeon guards came once a day and left a cup of water and a disgusting wheat porridge in the cell. The amount of oatmeal brought by the guard was so small that it was even possible for them to starve if the situation went on like this.</p>\n<p>Akman was cheerful as if he was at the banquet table, not at the dungeon. His joy was so bizarre that the team members began to think he was out of his mind. As the days passed, he was weakened by malnutrition; his clothes were stained, and his face was blackened. Still, he didn't lose anything from his joy. When asked how it can be so enjoyable, he said, “peace and light are within us. Just let's call and find out.\"</p>\n<p>Days later, an officer finally appeared at the door of the dungeon. Now, even the sparkle in the eyes of Akman has been lost, and Doma was unable to get up from where he was sleeping because of his illness. “The emperor will meet with the two representatives of your choice in two days,” said Chlorus, who brought plenty of food with him. Chlorus was handling his business with care. He brought water and ash to the cell to make sure they didn't smell bad, and he arranged a basin for their clothes. After washing, a barber would cut off their hair and beard. When they talk to the emperor, they should not extend the word and that they should give satisfying answers to the questions asked.</p>\n<p>Akman and Doma were taken from prison by the guards to be brought to the emperor. They agreed to hold a reasonable discourse during the interview. They were ready to suffer the maltreatment for the well-being of their country. The Imperial Palace adjacent to the Hippodrome was quite magnificent. They couldn't retrieve their eyes from the mosaics on the floor, the tiles on the walls and the stained glass windows. They passed through the large gate of the palace and entered the inner courtyard, where they waited for a while and then came to the emperor's presence.</p>\n<p>Since Doma's disease has not passed yet, Akman was holding his arm. As a matter of fact, he hasn't been able to speak; he agreed to join the meeting to show The Emperor what a terrible treatment they had.</p>\n<p>As soon as Emperor Valens saw Doma, he noticed his discomfort and told the servants to bring him a chair to sit down.</p>\n<p>“You wanted to see me,” said the Emperor, sitting on a plain throne compared to the splendor of the palace.</p>\n<p>”In the name of my people, I share your sorrow,\" said Akman.</p>\n<p>The emperor looked at Akman with the eyes asking, \"what is it about?”</p>\n<p>“I think robots attack your stables,” Akman said. Doma, who saw the environment as blurry due to high fever, turned and looked at Akman with amazement.</p>\n<p>”Few people know that yet, \" said Emperor Valens. Akman heard the news from the two soldiers they encountered on the way to the dungeon; the soldiers thought others did not understand them because they were whispering. As the security of his country is concerned, Akman chose to transfer the incident to the emperor in a different manner.</p>\n<p>\"We came to Istanbul to warn you about this. When the imperial authorities said in the dungeon that we could finally come to your peace, I understood that the attack has occurred,” Akman said.</p>\n<p>“You speak our language very well,” said the emperor.</p>\n<p>“Master Doma is much better than me, I hoped he'd be able to talk, but I was wrong,\" Akman said.</p>\n<p>\"I give you my regards and my gratitude for showing us the grace of acceptance. Because of my illness, I beg forgiveness for the imperfections that I can handle,” Doma said.</p>\n<p>“I will ask without hesitation: what could we have done to draw the wrath of God upon us, and what should we do to be merciful to his forgiveness?”</p>\n<p>Akman did not tell the emperor that events had begun with Ordin rising to Earth. He didn't want him to think they were in charge of the activities. Moreover, there was no evidence that the attacks on the stables in Yerşehir and Istanbul were related to Ordin's action. It was more than three months ago, and it could have been a coincidence.</p>\n<p>“I do not think that what happened is related to any sin.”</p>\n<p>“Foreigners come to our city with magical weapons, and ten days later, such an attack is taking place. Is that a coincidence?”</p>\n<p>\"I suspect that your scientists have already studied our weapons and have partially solved their operational principles. I assure you, our weapons work in accordance with scientific rules. I don't know why we're being treated so hard in your country.”</p>\n<p>“Could it be because you closed your doors to our country with a unilateral decision you made two centuries ago? According to historical records, despite the insistence of our empire, we have not even been able to negotiate the matter.”</p>\n<p>“It was a great travesty that half of our people died because of the plague. But that's not a valid excuse. I think the decision we made on time was wrong. During the past, we have been deprived of the benefits that we can achieve mutually. Given that the tunnel system makes wars almost impossible, it is not reasonable for us to continue such a mistake,\" Akman said.</p>\n<p>“I haven't received a satisfactory answer to my questions yet?\" the emperor said, despite the tone of his voice, his eyes were warm to Akman.</p>\n<p>\"I have to admit I don't know the answer to your questions, even if it's embarrassing for a philosopher. We came to Istanbul to find the answer to this question together.”</p>\n<p>\"I want to learn the working principles and how to produce the weapons you bring with you. This is the only way we can initiate an equality-based relationship.”</p>\n<p>\"I am not authorized to make such a decision. But I don't think your offer will be rejected at a time when we need cooperation to defend our cities,\" Akman said.</p>\n<p>After the meeting with Emperor Valens, the Yerşehir delegation was removed from prison, their belongings were returned, and they were sent from Istanbul with a ceremony in accordance with diplomatic traditions.</p>\n<p>Image Source: pixabay.com</p>",
+  "markdown_2_html_test_files_4_should_not_convert_markdown_links": "<p>lorem <a class=\"markdown-external-link\" data-href=\"https://images.ecency.com/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png\">this error</a> ipsum</p>",
+  "markdown_2_html_traversing_20_should_not_convert_markdown_links": "<p>lorem <a class=\"markdown-external-link\" data-href=\"https://images.ecency.com/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png\">this error</a> ipsum</p>",
+  "markdown_2_html_traversing_22_should_replace_busy_links_properly": "<p><img src=\"https://images.ecency.com/p/7ohP4GDMGPrUMp8dW6yuJTR9MKNu8P8DCXDU9qmmhgT2GEFsgcwp6r41v9wnLUULgcVqE59AhpBJjFXHVP6KTGZbAszsNTZrVUY3?format=match&amp;mode=fit\" alt=\"image.png\" /></p>\n<p><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-1-2\">Part 1 - 2</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-3\">Part 3</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-4\">Part 4</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-5\">Part 5</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-6\">Part 6</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-7\">Part 7</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-8\">Part 8</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-9\">Part 9</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-10\">Part 10</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-11\">Part 11</a><br />\n<a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"muratkbesiroglu\" data-permlink=\"sci-fi-novel-underground-city-part-12\">Part 12</a></p>\n<p><strong>Part 13</strong></p>\n<p>Members of the Yerşehir caravan have surrendered their weapons to imperial soldiers at the entrance of Istanbul by the agreement provided earlier. The imperial soldiers arrested them immediately after the surrender of the weapons, and they entered the city with their hands chained.</p>\n<p>“The Yerşehir administration will ask you the account of this disrespect,” said Tamra to the proud Commander Timor on the pony. Tamra was angry because an ordinary soldier pushed her.</p>\n<p>\"You should be thankful we didn't strip you naked and had you wandering the streets of the city,\" said Commander Timor.</p>\n<p>Doma turned to the commander and said, “That's not how we dealt with you. Still, I assume you're doing your duty. I ask you to inform your superiors as soon as possible.”</p>\n<p>”You may be executed for armed entry into the Imperial lands,\" said the commander.</p>\n<p>“You like to dramatize things,” Akman said. Although Commander Timor was angry with Akman's happy face, he chose to keep the sarcastic look on his face.</p>\n<p>When he was taken to the dungeon, Akman was watching the buildings on the road, the squares adorned with sculptures, statues, and facades reflecting the beauty of East Roman stone craftsmanship.</p>\n<p>After passing the Hippodrome, which is one of the rare works of the ancient world, they entered a narrow tunnel and went down a ladder descending by turning. The soldiers locked them in a large gallery and returned. The water was dripping from the high ceiling of the dungeon, and the air they breathed was quite damp. Akman saw two rats with the size of cats running to their holes, terrified by the sound of footsteps.</p>\n<p>”I don't think they're gonna keep us here for long,\" Akman said.</p>\n<p>Akman was wrong; they told stories to each other in the first few days while there was no authority to call and ask for them. One of the dungeon guards came once a day and left a cup of water and a disgusting wheat porridge in the cell. The amount of oatmeal brought by the guard was so small that it was even possible for them to starve if the situation went on like this.</p>\n<p>Akman was cheerful as if he was at the banquet table, not at the dungeon. His joy was so bizarre that the team members began to think he was out of his mind. As the days passed, he was weakened by malnutrition; his clothes were stained, and his face was blackened. Still, he didn't lose anything from his joy. When asked how it can be so enjoyable, he said, “peace and light are within us. Just let's call and find out.\"</p>\n<p>Days later, an officer finally appeared at the door of the dungeon. Now, even the sparkle in the eyes of Akman has been lost, and Doma was unable to get up from where he was sleeping because of his illness. “The emperor will meet with the two representatives of your choice in two days,” said Chlorus, who brought plenty of food with him. Chlorus was handling his business with care. He brought water and ash to the cell to make sure they didn't smell bad, and he arranged a basin for their clothes. After washing, a barber would cut off their hair and beard. When they talk to the emperor, they should not extend the word and that they should give satisfying answers to the questions asked.</p>\n<p>Akman and Doma were taken from prison by the guards to be brought to the emperor. They agreed to hold a reasonable discourse during the interview. They were ready to suffer the maltreatment for the well-being of their country. The Imperial Palace adjacent to the Hippodrome was quite magnificent. They couldn't retrieve their eyes from the mosaics on the floor, the tiles on the walls and the stained glass windows. They passed through the large gate of the palace and entered the inner courtyard, where they waited for a while and then came to the emperor's presence.</p>\n<p>Since Doma's disease has not passed yet, Akman was holding his arm. As a matter of fact, he hasn't been able to speak; he agreed to join the meeting to show The Emperor what a terrible treatment they had.</p>\n<p>As soon as Emperor Valens saw Doma, he noticed his discomfort and told the servants to bring him a chair to sit down.</p>\n<p>“You wanted to see me,” said the Emperor, sitting on a plain throne compared to the splendor of the palace.</p>\n<p>”In the name of my people, I share your sorrow,\" said Akman.</p>\n<p>The emperor looked at Akman with the eyes asking, \"what is it about?”</p>\n<p>“I think robots attack your stables,” Akman said. Doma, who saw the environment as blurry due to high fever, turned and looked at Akman with amazement.</p>\n<p>”Few people know that yet, \" said Emperor Valens. Akman heard the news from the two soldiers they encountered on the way to the dungeon; the soldiers thought others did not understand them because they were whispering. As the security of his country is concerned, Akman chose to transfer the incident to the emperor in a different manner.</p>\n<p>\"We came to Istanbul to warn you about this. When the imperial authorities said in the dungeon that we could finally come to your peace, I understood that the attack has occurred,” Akman said.</p>\n<p>“You speak our language very well,” said the emperor.</p>\n<p>“Master Doma is much better than me, I hoped he'd be able to talk, but I was wrong,\" Akman said.</p>\n<p>\"I give you my regards and my gratitude for showing us the grace of acceptance. Because of my illness, I beg forgiveness for the imperfections that I can handle,” Doma said.</p>\n<p>“I will ask without hesitation: what could we have done to draw the wrath of God upon us, and what should we do to be merciful to his forgiveness?”</p>\n<p>Akman did not tell the emperor that events had begun with Ordin rising to Earth. He didn't want him to think they were in charge of the activities. Moreover, there was no evidence that the attacks on the stables in Yerşehir and Istanbul were related to Ordin's action. It was more than three months ago, and it could have been a coincidence.</p>\n<p>“I do not think that what happened is related to any sin.”</p>\n<p>“Foreigners come to our city with magical weapons, and ten days later, such an attack is taking place. Is that a coincidence?”</p>\n<p>\"I suspect that your scientists have already studied our weapons and have partially solved their operational principles. I assure you, our weapons work in accordance with scientific rules. I don't know why we're being treated so hard in your country.”</p>\n<p>“Could it be because you closed your doors to our country with a unilateral decision you made two centuries ago? According to historical records, despite the insistence of our empire, we have not even been able to negotiate the matter.”</p>\n<p>“It was a great travesty that half of our people died because of the plague. But that's not a valid excuse. I think the decision we made on time was wrong. During the past, we have been deprived of the benefits that we can achieve mutually. Given that the tunnel system makes wars almost impossible, it is not reasonable for us to continue such a mistake,\" Akman said.</p>\n<p>“I haven't received a satisfactory answer to my questions yet?\" the emperor said, despite the tone of his voice, his eyes were warm to Akman.</p>\n<p>\"I have to admit I don't know the answer to your questions, even if it's embarrassing for a philosopher. We came to Istanbul to find the answer to this question together.”</p>\n<p>\"I want to learn the working principles and how to produce the weapons you bring with you. This is the only way we can initiate an equality-based relationship.”</p>\n<p>\"I am not authorized to make such a decision. But I don't think your offer will be rejected at a time when we need cooperation to defend our cities,\" Akman said.</p>\n<p>After the meeting with Emperor Valens, the Yerşehir delegation was removed from prison, their belongings were returned, and they were sent from Istanbul with a ceremony in accordance with diplomatic traditions.</p>\n<p>Image Source: pixabay.com</p>",
+  "markdown_2_html_webp_support_should_render_images_in_webp_format": "<p>lorem ipsum <img class=\"markdown-img-link\" src=\"https://images.ecency.com/p/2BCfkBRHmbhyg7yeHaumxJq2oMZjKUDK5rv2tmGQzQHxPvTmaiv6Ar?format=webp&amp;mode=fit\" /> dolor sit amet</p>"
+}
 
 describe('Markdown2Html', () => {
   describe('Traversing', () => {
@@ -19,7 +23,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><img class="markdown-img-link" src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('2- Should handle steemit links', () => {
@@ -31,7 +35,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('3- Should handle copied links', () => {
@@ -43,7 +47,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('4- Should handle copied links', () => {
@@ -55,7 +59,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('5- Should handle youtube videos', () => {
@@ -67,7 +71,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/qK3d1eoH-Qs?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eMZRVYW6mkGBWKemLWWzXbRhNG7Z3h1qjGS?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('6- Should handle vimeo videos', () => {
@@ -79,7 +83,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-vimeo"><iframe frameborder="0" allowfullscreen="true" src="https://player.vimeo.com/video/311983548"></iframe></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('7- Should handle d.tube videos', () => {
@@ -91,7 +95,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/46aP2QbqUqBqwzwxM6L1P6uLNceBDDCM6xyDJFx6ANhENRd3gJWJH7TiVR91QZ1KBcdAdZruQE35PBpQ3jUvkNK4mJqZ?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('9- Should handle witnesses links', () => {
@@ -103,7 +107,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-witnesses-link" data-href="https://hivesigner.com/sign/account-witness-vote?witness=talhasch">vote @talhasch</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('10- External link', () => {
@@ -115,7 +119,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>click <a class="markdown-external-link" data-href="https://loremipsum.com/foo/bar.html">here</a> to visit</p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('11- Should remove empty iframes', () => {
@@ -127,7 +131,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<code>some content</code>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('12- Should handle youtube iframe embeds', () => {
@@ -139,7 +143,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<iframe src="https://www.youtube.com/embed/I3f9ixg59no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('13- Should handle vimeo iframe embeds', () => {
@@ -151,7 +155,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<iframe src="https://player.vimeo.com/video/311983548" frameborder="0" allowfullscreen="allowfullscreen"></iframe>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('14- Should handle twitch iframe embeds', () => {
@@ -163,7 +167,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<iframe src="https://player.twitch.tv/?channel=esl_csgo&amp;parent=ecency.com&amp;autoplay=false" frameborder="0" allowfullscreen="true"></iframe>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('15- Should handle soundcloud iframe embeds', () => {
@@ -175,7 +179,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<iframe frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/558749283&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('16- Should replace placeholder for unsopported iframe sources', () => {
@@ -187,7 +191,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<div class="unsupported-iframe">(Unsupported https://foobarbaz.com/132431212)</div>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('17- Should replace author names with link for given string', () => {
@@ -199,7 +203,7 @@ describe('Markdown2Html', () => {
       }
       let expected =
         '<p><span>lorem ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo48',
@@ -209,7 +213,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
 
       input = {
@@ -220,7 +224,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
 
       input = {
@@ -231,7 +235,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@sit</a> amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
 
       input = {
@@ -242,7 +246,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@Sit</a> amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('18- Should replace tags with link for given string', () => {
@@ -254,7 +258,7 @@ describe('Markdown2Html', () => {
       }
       let expected =
         '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo53',
@@ -264,7 +268,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo54',
@@ -274,7 +278,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo55',
@@ -284,7 +288,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#sit</a> amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo56',
@@ -294,7 +298,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#Sit</a> amet</span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo57',
@@ -303,7 +307,7 @@ describe('Markdown2Html', () => {
         body: 'you are #1'
       }
       expected = '<p>you are #1</p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo58',
@@ -313,7 +317,7 @@ describe('Markdown2Html', () => {
       }
       expected =
         '<p><span>you are #1 <a class="markdown-tag-link" data-tag="steemit-promo">#steemit-promo</a></span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('19- Should replace both mentions and tags', () => {
@@ -325,7 +329,7 @@ describe('Markdown2Html', () => {
       }
       let expected =
         '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit <a class="markdown-author-link" data-author="amet">@amet</a></span></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
 
       input = {
         author: 'foo60',
@@ -334,7 +338,7 @@ describe('Markdown2Html', () => {
         body: 'lorem ipsum @#dolor sit amet'
       }
       expected = '<p>lorem ipsum @#dolor sit amet</p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('20- Should not convert markdown links', () => {
@@ -344,7 +348,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'lorem [this error](https://images.ecency.com/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png) ipsum'
       }
-      expect(markdown2Html(input)).to.matchSnapshotJSON()
+      expect(markdown2Html(input)).toStrictEqual(SNAPSHOT_JSON)
     })
 
     it('21- Should add https prefix', () => {
@@ -354,7 +358,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '<a href="foo">foo</a>'
       }
-      expect(markdown2Html(input).trim()).to.deep.equal(
+      expect(markdown2Html(input).trim()).toBe(
         '<p><a class="markdown-external-link" data-href="https://foo">foo</a></p>'
       )
     })
@@ -367,11 +371,11 @@ describe('Markdown2Html', () => {
       data['author'] = 'foo63'
       data['permlink'] = 'foo63'
       data['last_update'] = '2019-05-10T09:15:21'
-      expect(markdown2Html(data)).to.matchSnapshotJSON()
+      expect(markdown2Html(data)).toStrictEqual(SNAPSHOT_JSON)
     })
 
     it('23- Test with not obj param', () => {
-      expect(markdown2Html('<a href="foo">foo</a> lorem ipsum **dolor** sit amet').trim()).to.deep.equal(
+      expect(markdown2Html('<a href="foo">foo</a> lorem ipsum **dolor** sit amet').trim()).toBe(
         '<p><a class="markdown-external-link" data-href="https://foo">foo</a> lorem ipsum <strong>dolor</strong> sit amet</p>'
       )
     })
@@ -384,7 +388,7 @@ describe('Markdown2Html', () => {
         body: '[Approve](https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=[39]&approve=true) [Unapprove](https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B41%5D&approve=false)'
       }
       const expected = '<p><a class="markdown-proposal-link" data-href="https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true" data-proposal="39">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B41%5D&amp;approve=false" data-proposal="41">Unapprove</a></p>'
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('25- Should handle twitch videos', () => {
@@ -396,7 +400,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-twitch"><iframe frameborder="0" allowfullscreen="true" src="https://player.twitch.tv/?channel=steemspacely&amp;parent=ecency.com&amp;autoplay=false"></iframe></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('26- Should handle speak videos', () => {
@@ -408,7 +412,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/2ufhwNgM3qHKBGVeU2TMMqPBjdB17MRuf4Q7vGrmGMtTn6yFtvW3Lt9t5v1c3so7UFhWDYh9B?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('27- Should handle speak videos with different tld', () => {
@@ -420,7 +424,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('28- Should handle peakd post links', () => {
@@ -432,7 +436,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">@demo/tests</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('29- Should handle youtu.be videos', () => {
@@ -444,7 +448,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/_-6hJ8sltdI?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eEGc5AMBA14JMjkkxrUAj3mV5QR9D6zfstr?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('30- Should handle external similar post links', () => {
@@ -456,7 +460,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-external-link" data-href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597">Voice: the criteria for success or failure</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('31- Should handle external similar post links', () => {
@@ -468,7 +472,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-external-link" data-href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597">Voice: the criteria for success or failure</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('32- Should handle whitelisted post links', () => {
@@ -480,7 +484,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">@demo/post</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('33- Should handle whitelisted user links', () => {
@@ -492,7 +496,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-author-link" data-author="demo">@demo</a> and <a class="markdown-author-link" data-author="demo123">@demo123</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('34- Should handle ipfs links', () => {
@@ -504,7 +508,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is link <a data-href="https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q" class="markdown-img-link"><img src="https://images.ecency.com/p/2923mN3pnd7PiPXAMdj9UuE6SsjvQJDHj5VpTTCNs3tkJu9JC9Pu9qXSi5Ys5PYtkaRx6ErTnFVzh1WQxWS45rvr6Q4rfUooAM242oyKeihwnx?format=match&amp;mode=fit" /></a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('34-1- Should detect # in ipfs links', () => {
@@ -516,7 +520,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is a link <a class="markdown-external-link" data-href="https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home">https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('35- Should handle twitter links', () => {
@@ -528,7 +532,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is link <blockquote class="twitter-tweet"><p>https://twitter.com/DeWaarheid_/status/1320603494836015105</p>- <a href="https://twitter.com/DeWaarheid_/status/1320603494836015105">DeWaarheid_</a></blockquote></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('36- Should handle custom community links', () => {
@@ -540,7 +544,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is link <a class="markdown-community-link" data-community="hive-106444" data-filter="trending">trending/hive-106444</a> and markdown link <a class="markdown-community-link" data-community="hive-122516" data-filter="trending">Manipulation Station</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('37- Should handle dapplr iframe', () => {
@@ -552,7 +556,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" sandbox frameborder="0" allowfullscreen="true"></iframe></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('38- Should handle lbry.tv iframe', () => {
@@ -564,7 +568,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is link <iframe src="https://lbry.tv/$/embed/epic-drone-video-sunset-swiss/38f32ec6de375352512a01c37ec9ef5e7fc35958?r=4N4ga6kbnyKXLSUCHtyfF7zh57vvJwfu" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('39- Should ignore profile page sections with copied links', () => {
@@ -576,7 +580,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a class="markdown-external-link" data-href="https://ecency.com/@good-karma/wallet">click here</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('40- Should handle archive.org iframe', () => {
@@ -588,7 +592,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>this is link <iframe src="https://archive.org/embed/VoyagetothePlanetofPrehistoricWomen" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="allowfullscreen"></iframe></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
   })
 
@@ -602,7 +606,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a>click here</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('2- Should convert script tag to span', () => {
@@ -614,7 +618,7 @@ describe('Markdown2Html', () => {
       }
       const expected = 'document.getElementById(\'body\').remove();'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('3- Should remove not allowed attributes', () => {
@@ -626,7 +630,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a title="Foo">Click</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
 
     it('4- Should remove javascript links', () => {
@@ -638,7 +642,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a title="Foo">Click</a></p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
   })
 
@@ -652,7 +656,7 @@ describe('Markdown2Html', () => {
       data['author'] = 'foo68'
       data['permlink'] = 'foo68'
       data['last_update'] = '2019-05-10T09:15:21'
-      expect(markdown2Html(data)).to.matchSnapshotJSON()
+      expect(markdown2Html(data)).toStrictEqual(SNAPSHOT_JSON)
     })
   })
 
@@ -680,7 +684,7 @@ describe('Markdown2Html', () => {
       const expected = data['result']
 
       it('ID: ' + id, function () {
-        expect(markdown2Html(input)).to.deep.equal(expected)
+        expect(markdown2Html(input)).toBe(expected)
       })
 
       x += 1
@@ -697,7 +701,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><img class="markdown-img-link" src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN?format=match&amp;mode=fit" /> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href="http://external.com/loromoro" class="markdown-external-link" target="_blank" rel="noopener">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener">vote me</a></p>'
 
-      expect(markdown2Html(input, false)).to.deep.equal(expected)
+      expect(markdown2Html(input, false)).toBe(expected)
     })
 
     it('2- Should handle external similar post links', () => {
@@ -709,7 +713,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>'
 
-      expect(markdown2Html(input, false)).to.deep.equal(expected)
+      expect(markdown2Html(input, false)).toBe(expected)
     })
 
     it('3- Should handle external similar post links', () => {
@@ -721,7 +725,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p><a href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>'
 
-      expect(markdown2Html(input, false)).to.deep.equal(expected)
+      expect(markdown2Html(input, false)).toBe(expected)
     })
   })
 
@@ -736,7 +740,7 @@ describe('Markdown2Html', () => {
       }
       const expected = '<p>hello lorem ipsum</p>'
 
-      expect(markdown2Html(input)).to.deep.equal(expected)
+      expect(markdown2Html(input)).toBe(expected)
     })
   })
 
@@ -744,7 +748,7 @@ describe('Markdown2Html', () => {
     it('Should render images in webp format', () => {
       const input = 'lorem ipsum https://images.ecency.com/foobarbaz.jpg dolor sit amet'
 
-      expect(markdown2Html(input, false, true)).to.matchSnapshotJSON()
+      expect(markdown2Html(input, false, true)).toStrictEqual(SNAPSHOT_JSON)
     })
   })
 })
