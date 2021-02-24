@@ -348,7 +348,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'lorem [this error](https://images.ecency.com/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png) ipsum'
       }
-      expect(markdown2Html(input)).toStrictEqual(SNAPSHOT_JSON)
+      expect(markdown2Html(input)).toBe(SNAPSHOT_JSON.markdown_2_html_test_files_4_should_not_convert_markdown_links)
     })
 
     it('21- Should add https prefix', () => {
@@ -371,7 +371,7 @@ describe('Markdown2Html', () => {
       data['author'] = 'foo63'
       data['permlink'] = 'foo63'
       data['last_update'] = '2019-05-10T09:15:21'
-      expect(markdown2Html(data)).toStrictEqual(SNAPSHOT_JSON)
+      expect(markdown2Html(data)).toBe(SNAPSHOT_JSON.markdown_2_html_traversing_22_should_replace_busy_links_properly)
     })
 
     it('23- Test with not obj param', () => {
@@ -656,7 +656,7 @@ describe('Markdown2Html', () => {
       data['author'] = 'foo68'
       data['permlink'] = 'foo68'
       data['last_update'] = '2019-05-10T09:15:21'
-      expect(markdown2Html(data)).toStrictEqual(SNAPSHOT_JSON)
+      expect(markdown2Html(data)).toBe(SNAPSHOT_JSON.markdown_2_html_test_files_1_should_catch_images_in_table)
     })
   })
 
@@ -748,7 +748,7 @@ describe('Markdown2Html', () => {
     it('Should render images in webp format', () => {
       const input = 'lorem ipsum https://images.ecency.com/foobarbaz.jpg dolor sit amet'
 
-      expect(markdown2Html(input, false, true)).toStrictEqual(SNAPSHOT_JSON)
+      expect(markdown2Html(input, false, true)).toBe(SNAPSHOT_JSON.markdown_2_html_webp_support_should_render_images_in_webp_format)
     })
   })
 })

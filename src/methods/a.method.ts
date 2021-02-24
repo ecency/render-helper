@@ -19,20 +19,20 @@ import { removeChildNodes } from './remove-child-nodes.method'
 import xmldom from 'xmldom'
 import { noop } from './noop.method'
 
-function setForAppAttributes(el: HTMLElement, tag: string, author: string, permlink: string): void {
-  el.removeAttribute('href')
-  el.setAttribute('data-tag', tag)
-  el.setAttribute('data-author', author)
-  el.setAttribute('data-permlink', permlink)
-}
-
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   let href = el.getAttribute('href')
-  const className = el.getAttribute('class')
 
   // Continue if href has no value
+  if (!href) {
+    return
+  }
+
+  const className = el.getAttribute('class')
+
   // Don't touch user and hashtag links
-  if (!href || ['markdown-author-link', 'markdown-tag-link'].indexOf(className) !== -1) {
+  if (
+    ['markdown-author-link', 'markdown-tag-link'].indexOf(className) !== -1
+  ) {
     return
   }
 
@@ -53,14 +53,14 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     href.trim().replace(/&amp;/g, '&') ===
     getSerializedInnerHTML(el).trim().replace(/&amp;/g, '&')
   ) {
-    const attrs = forApp ?
-      ` data-href="${href}"
-        class="markdown-img-link"
-        src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"
-      ` :
-      `class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"`
-    const replaceNode = DOMParser.parseFromString(`<img ${attrs}/>`)
+    const attrs = forApp ? `data-href="${href}" class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"`
+
+    const replaceNode = DOMParser.parseFromString(
+      `<img ${attrs}/>`
+    )
+
     el.parentNode.replaceChild(replaceNode, el)
+
     return
   }
 
@@ -98,7 +98,11 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.textContent = `@${author}/${permlink}`
     }
     if (forApp) {
-      setForAppAttributes(el, tag, author, permlink)
+      el.removeAttribute('href')
+
+      el.setAttribute('data-tag', tag)
+      el.setAttribute('data-author', author)
+      el.setAttribute('data-permlink', permlink)
     } else {
       const h = `/${tag}/@${author}/${permlink}`
       el.setAttribute('href', h)
@@ -127,12 +131,10 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   // If a copied post link
   const cpostMatch = href.match(COPIED_POST_REGEX)
-  const matchList = ['wallet', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings']
   if (
     (
-      (cpostMatch && WHITE_LIST.includes(cpostMatch[1].substring(1))) ||
-      (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)
-    ) && !matchList.includes(cpostMatch[3])
+      (cpostMatch && WHITE_LIST.includes(cpostMatch[1].substring(1))) || (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)
+    ) && !['wallet', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings'].includes(cpostMatch[3])
   ) {
     el.setAttribute('class', 'markdown-post-link')
 
@@ -147,7 +149,10 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.textContent = `@${author}/${permlink}`
     }
     if (forApp) {
-      setForAppAttributes(el, tag, author, permlink)
+      el.removeAttribute('href')
+      el.setAttribute('data-tag', tag)
+      el.setAttribute('data-author', author)
+      el.setAttribute('data-permlink', permlink)
     } else {
       const h = `/${tag}/@${author}/${permlink}`
       el.setAttribute('href', h)
@@ -183,22 +188,19 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   // If a youtube video
-  if (href.match(YOUTUBE_REGEX) && el.textContent.trim() === href) {
+  let match = href.match(YOUTUBE_REGEX)
+  if (match && el.textContent.trim() === href) {
     const e = YOUTUBE_REGEX.exec(href)
     if (e[1]) {
       el.setAttribute('class', 'markdown-video-link markdown-video-link-youtube')
       el.removeAttribute('href')
 
       const vid = e[1]
-      const thumbnail = proxifyImageSrc(
-        `https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`,
-        0,
-        0,
-        webp ? 'webp' : 'match'
-      )
+      const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`, 0, 0, webp ? 'webp' : 'match')
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`
 
       el.textContent = ''
+
       el.setAttribute('data-embed-src', embedSrc)
 
       const thumbImg = el.ownerDocument.createElement('img')
@@ -216,7 +218,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   // If vimeo video
-  if (href.match(VIMEO_REGEX) && href === el.textContent) {
+  match = href.match(VIMEO_REGEX)
+  if (match && href === el.textContent) {
     const e = VIMEO_REGEX.exec(href)
     if (e[3]) {
       el.setAttribute('class', 'markdown-video-link markdown-video-link-vimeo')
@@ -237,7 +240,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   // If twitch video
-  if (href.match(TWITCH_REGEX) && href === el.textContent) {
+  match = href.match(TWITCH_REGEX)
+  if (match && href === el.textContent) {
     const e = TWITCH_REGEX.exec(href)
     if (e[2]) {
       el.setAttribute('class', 'markdown-video-link markdown-video-link-twitch')
@@ -264,7 +268,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   // If a d.tube video
-  if (href.match(D_TUBE_REGEX)) {
+  match = href.match(D_TUBE_REGEX)
+  if (match) {
     // Only d.tube links contains an image
     const imgEls = el.getElementsByTagName('img')
 
@@ -275,12 +280,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube')
         el.removeAttribute('href')
 
-        const thumbnail = proxifyImageSrc(
-          imgEls[0].getAttribute('src').replace(/\s+/g, ''),
-          0,
-          0,
-          webp ? 'webp' : 'match'
-        )
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
         // el.setAttribute('data-video-href', videoHref);
@@ -306,7 +306,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   // Detect 3Speak
-  if (href.match(SPEAK_REGEX)) {
+  match = href.match(SPEAK_REGEX)
+  if (match) {
     const imgEls = el.getElementsByTagName('img')
 
     if (imgEls.length === 1) {
@@ -316,12 +317,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-speak')
         el.removeAttribute('href')
 
-        const thumbnail = proxifyImageSrc(
-          imgEls[0].getAttribute('src').replace(/\s+/g, ''),
-          0,
-          0,
-          webp ? 'webp' : 'match'
-        )
+        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
         const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
 
         // el.setAttribute('data-video-href', videoHref);
@@ -347,7 +343,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   // If tweets
-  if (href.match(TWITTER_REGEX) && el.textContent.trim() === href) {
+  const matchT = href.match(TWITTER_REGEX)
+  if (matchT && el.textContent.trim() === href) {
     const e = TWITTER_REGEX.exec(href)
     if (e) {
       const url = e[0].replace(/(<([^>]+)>)/gi, '')
@@ -360,21 +357,29 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
   }
 
-  if (href.indexOf('https://hivesigner.com/sign/account-witness-vote?witness=') === 0 && forApp) {
-    el.setAttribute('class', 'markdown-witnesses-link')
-    el.setAttribute('data-href', href)
-    el.removeAttribute('href')
-    return
-  }
-
-  if (href.indexOf('hivesigner.com/sign/update-proposal-votes?proposal_ids') > 0 && forApp) {
-    const m = decodeURI(href).match(/proposal_ids=\[(\d+)]/)
-    if (m) {
-      el.setAttribute('class', 'markdown-proposal-link')
+  if (
+    href.indexOf(
+      'https://hivesigner.com/sign/account-witness-vote?witness='
+    ) === 0
+  ) {
+    if (forApp) {
+      el.setAttribute('class', 'markdown-witnesses-link')
       el.setAttribute('data-href', href)
-      el.setAttribute('data-proposal', m[1])
       el.removeAttribute('href')
       return
+    }
+  }
+
+  if (href.indexOf('hivesigner.com/sign/update-proposal-votes?proposal_ids') > 0) {
+    if (forApp) {
+      const m = decodeURI(href).match(/proposal_ids=\[(\d+)]/)
+      if (m) {
+        el.setAttribute('class', 'markdown-proposal-link')
+        el.setAttribute('data-href', href)
+        el.setAttribute('data-proposal', m[1])
+        el.removeAttribute('href')
+        return
+      }
     }
   }
 

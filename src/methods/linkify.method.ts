@@ -4,10 +4,7 @@ import { proxifyImageSrc } from '../proxify-image-src'
 export function linkify(content: string, forApp: boolean, webp: boolean): string {
   // Tags
   content = content.replace(/(^|\s|>)(#[-a-z\d]+)/gi, tag => {
-    if (/#[\d]+$/.test(tag)) {
-      // do not allow only numbers (like #1)
-      return tag
-    }
+    if (/#[\d]+$/.test(tag)) return tag // do not allow only numbers (like #1)
     const preceding = /^\s|>/.test(tag) ? tag[0] : '' // space or closing tag (>)
     tag = tag.replace('>', '') // remove closing tag
     const tag2 = tag.trim().substring(1)

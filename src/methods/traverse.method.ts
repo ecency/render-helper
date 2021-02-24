@@ -8,24 +8,22 @@ export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): 
     return
   }
 
-  const childNodes: Node[] = [];
+  [...Array(node.childNodes.length).keys()]
+    .map(i => node.childNodes[i])
+    .forEach(child => {
+      if (child.nodeName.toLowerCase() === 'a') {
+        a(<HTMLElement>child, forApp, webp)
+      }
+      if (child.nodeName.toLowerCase() === 'iframe') {
+        iframe(<HTMLElement>child)
+      }
+      if (child.nodeName === '#text') {
+        text(<HTMLElement>child, forApp, webp)
+      }
+      if (child.nodeName.toLowerCase() === 'img') {
+        img(<HTMLElement>child, webp)
+      }
 
-  [...Array(node.childNodes.length).keys()].forEach(i => childNodes.push(node.childNodes[i]))
-
-  childNodes.forEach(child => {
-    if (child.nodeName.toLowerCase() === 'a') {
-      a(<HTMLElement>child, forApp, webp)
-    }
-    if (child.nodeName.toLowerCase() === 'iframe') {
-      iframe(<HTMLElement>child)
-    }
-    if (child.nodeName === '#text') {
-      text(<HTMLElement>child, forApp, webp)
-    }
-    if (child.nodeName.toLowerCase() === 'img') {
-      img(<HTMLElement>child, webp)
-    }
-
-    traverse(child, forApp, depth + 1, webp)
-  })
+      traverse(child, forApp, depth + 1, webp)
+    })
 }
