@@ -8,7 +8,7 @@ export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): 
     return
   }
 
-  [...Array(node.childNodes.length).keys()]
+  Array.from(Array(node.childNodes.length).keys())
     .map(i => node.childNodes[i])
     .forEach(child => {
       if (child.nodeName.toLowerCase() === 'a') {

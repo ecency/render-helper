@@ -6,11 +6,11 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "module": "commonjs",
-    "target": "esnext",
+    "target": "es5",
     "allowJs": false,
     "declaration": true,
     "rootDir": "src",
     "esModuleInterop": true
   },
-  "exclude": ["./**/*.spec.ts", "jest.config.js"]
+  "exclude": ["./**/*.spec.ts", "jest.config.js", "./src/test/**/*.ts"]
 }

@@ -1,7 +1,8 @@
 import he from 'he'
-import { Remarkable } from 'remarkable'
 import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
+
+const Remarkable = require('remarkable')
 
 function postBodySummary(entryBody: string, length?: number): string {
   if (!entryBody) {

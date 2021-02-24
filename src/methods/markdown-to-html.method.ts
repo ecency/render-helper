@@ -1,14 +1,12 @@
 import { traverse } from './traverse.method'
 import { sanitizeHtml } from './sanitize-html.method'
-import { Remarkable } from 'remarkable'
+import { DOMParser } from '../consts'
 import xmldom from 'xmldom'
-import { noop } from './noop.method'
+
+const Remarkable = require('remarkable')
 
 export function markdownToHTML(input: string, forApp: boolean, webp: boolean): string {
   const md = new Remarkable({ html: true, breaks: true, typographer: false, linkify: true })
-  const DOMParser = new xmldom.DOMParser({
-    errorHandler: { warning: noop, error: noop }
-  })
   const XMLSerializer = new xmldom.XMLSerializer()
 
   if (!input) {

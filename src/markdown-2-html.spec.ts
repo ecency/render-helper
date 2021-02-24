@@ -661,7 +661,7 @@ describe('Markdown2Html', () => {
   })
 
   describe('Test legacy files', () => {
-    const dataDir = `${__dirname}/data/legacy`
+    const dataDir = `${__dirname}/test/data/legacy`
 
     const files = fs.readdirSync(dataDir)
 

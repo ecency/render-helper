@@ -1,17 +1,11 @@
-import { IMG_REGEX, YOUTUBE_REGEX } from '../consts'
+import { IMG_REGEX, YOUTUBE_REGEX, DOMParser } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { linkify } from './linkify.method'
-import xmldom from 'xmldom'
-import { noop } from './noop.method'
 
 export function text(node: HTMLElement, forApp: boolean, webp: boolean): void {
   if (['a', 'code'].includes(node.parentNode.nodeName)) {
     return
   }
-
-  const DOMParser = new xmldom.DOMParser({
-    errorHandler: { warning: noop, error: noop }
-  })
 
   const linkified = linkify(node.nodeValue, forApp, webp)
   if (linkified !== node.nodeValue) {

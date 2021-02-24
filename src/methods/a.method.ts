@@ -11,13 +11,12 @@ import {
   TWITTER_REGEX,
   VIMEO_REGEX,
   WHITE_LIST,
-  YOUTUBE_REGEX
+  YOUTUBE_REGEX,
+  DOMParser
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
-import xmldom from 'xmldom'
-import { noop } from './noop.method'
 
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   let href = el.getAttribute('href')
@@ -30,9 +29,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   const className = el.getAttribute('class')
 
   // Don't touch user and hashtag links
-  if (
-    ['markdown-author-link', 'markdown-tag-link'].indexOf(className) !== -1
-  ) {
+  if (['markdown-author-link', 'markdown-tag-link'].indexOf(className) !== -1) {
     return
   }
 
@@ -41,10 +38,6 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     el.removeAttribute('href')
     return
   }
-
-  const DOMParser = new xmldom.DOMParser({
-    errorHandler: { warning: noop, error: noop }
-  })
 
   // if href is an image url and innerHTML same with href then mark it as image
   // & => &amp; can break equality
@@ -320,7 +313,6 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
         const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
 
-        // el.setAttribute('data-video-href', videoHref);
         el.setAttribute('data-embed-src', videoHref)
 
         const thumbImg = el.ownerDocument.createElement('img')
@@ -357,29 +349,21 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
   }
 
-  if (
-    href.indexOf(
-      'https://hivesigner.com/sign/account-witness-vote?witness='
-    ) === 0
-  ) {
-    if (forApp) {
-      el.setAttribute('class', 'markdown-witnesses-link')
-      el.setAttribute('data-href', href)
-      el.removeAttribute('href')
-      return
-    }
+  if (href.indexOf('https://hivesigner.com/sign/account-witness-vote?witness=') === 0 && forApp) {
+    el.setAttribute('class', 'markdown-witnesses-link')
+    el.setAttribute('data-href', href)
+    el.removeAttribute('href')
+    return
   }
 
-  if (href.indexOf('hivesigner.com/sign/update-proposal-votes?proposal_ids') > 0) {
-    if (forApp) {
-      const m = decodeURI(href).match(/proposal_ids=\[(\d+)]/)
-      if (m) {
-        el.setAttribute('class', 'markdown-proposal-link')
-        el.setAttribute('data-href', href)
-        el.setAttribute('data-proposal', m[1])
-        el.removeAttribute('href')
-        return
-      }
+  if (href.indexOf('hivesigner.com/sign/update-proposal-votes?proposal_ids') > 0 && forApp) {
+    const m = decodeURI(href).match(/proposal_ids=\[(\d+)]/)
+    if (m) {
+      el.setAttribute('class', 'markdown-proposal-link')
+      el.setAttribute('data-href', href)
+      el.setAttribute('data-proposal', m[1])
+      el.removeAttribute('href')
+      return
     }
   }
 
