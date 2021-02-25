@@ -7,6 +7,7 @@ export function cleanReply(s: string): string {
     .filter(item => item.includes('Posted with [STEMGeeks') === false)
     .filter(item => item.includes('<center><sub>[Posted Using Aeneas.Blog') === false)
     .filter(item => item.includes('<center><sub>Posted via [weedcash.network') === false)
+    .filter(item => item.includes('<center>Posted on [NaturalMedicine.io') === false)
     .join('\n') : '')
     .replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '')
 }
