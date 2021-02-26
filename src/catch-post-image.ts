@@ -2,13 +2,13 @@ import { proxifyImageSrc } from './proxify-image-src'
 import { markdown2Html } from './markdown-2-html'
 import { createDoc, makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
-import { GetImageEntry } from './types'
+import { Entry } from './types'
 
-function getImage(entry: GetImageEntry, width = 0, height = 0, format = 'match'): string | null {
+function getImage(entry: Entry, width = 0, height = 0, format = 'match'): string | null {
   /*
   * Return from json metadata if exists
   * */
-  let meta: GetImageEntry['json_metadata'] | null
+  let meta: Entry['json_metadata'] | null
 
   if (typeof entry.json_metadata === 'object') {
     meta = entry.json_metadata
@@ -40,7 +40,7 @@ function getImage(entry: GetImageEntry, width = 0, height = 0, format = 'match')
   return null
 }
 
-export function catchPostImage(obj: GetImageEntry | string, width = 0, height = 0, format = 'match'): string {
+export function catchPostImage(obj: Entry | string, width = 0, height = 0, format = 'match'): string {
   if (typeof obj === 'string') {
     return getImage(obj as any, width, height, format)
   }

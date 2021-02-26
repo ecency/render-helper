@@ -1,11 +1,12 @@
 import { makeEntryCacheKey } from './helper'
 import { cleanReply, markdownToHTML } from './methods'
 import { cacheGet, cacheSet } from './cache'
+import { Entry } from './types'
 
-export function markdown2Html(obj: any, forApp = true, webp = false): string {
+export function markdown2Html(obj: Entry | string, forApp = true, webp = false): string {
   if (typeof obj === 'string') {
     obj = cleanReply(obj)
-    return markdownToHTML(obj, forApp, webp)
+    return markdownToHTML(obj as string, forApp, webp)
   }
 
   const key = `${makeEntryCacheKey(obj)}-md${webp ? '-webp' : ''}`

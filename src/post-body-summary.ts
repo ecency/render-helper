@@ -1,6 +1,7 @@
 import he from 'he'
 import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
+import { Entry } from './types'
 
 const Remarkable = require('remarkable')
 
@@ -30,7 +31,7 @@ function postBodySummary(entryBody: string, length?: number): string {
   return text
 }
 
-export function getPostBodySummary(obj: any, length?: number): any {
+export function getPostBodySummary(obj: Entry, length?: number): any {
   if (typeof obj === 'string') {
     return postBodySummary(obj, length)
   }

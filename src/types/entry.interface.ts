@@ -1,4 +1,4 @@
-export interface GetImageEntry {
+export interface Entry {
   author?: string
   permlink?: string
   last_update?: string
