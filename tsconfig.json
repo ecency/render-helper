@@ -12,5 +12,5 @@
     "rootDir": "src",
     "esModuleInterop": true
   },
-  "exclude": ["./**/*.spec.ts", "jest.config.js", "./src/test/**/*.ts"]
+  "exclude": ["./**/*.spec.ts", "jest.config.js", "./src/test/**/*.ts", "gulpfile.js"]
 }

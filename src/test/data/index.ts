@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-export function getTestData(author: string, permlink: string): Record<string, any> {
+export function getTestData(author: string, permlink: string): any {
   const fileName = `${author}____${permlink}.json`
   const readPath = `${__dirname}/json/${fileName}`
 

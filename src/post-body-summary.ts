@@ -31,9 +31,9 @@ function postBodySummary(entryBody: string, length?: number): string {
   return text
 }
 
-export function getPostBodySummary(obj: Entry, length?: number): any {
+export function getPostBodySummary(obj: Entry | string, length?: number): any {
   if (typeof obj === 'string') {
-    return postBodySummary(obj, length)
+    return postBodySummary(obj as string, length)
   }
 
   const key = `${makeEntryCacheKey(obj)}-sum-${length}`
