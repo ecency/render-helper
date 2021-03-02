@@ -19,7 +19,7 @@ function build() {
   })
     .plugin(tsify, {target: 'es5', module: 'commonjs'})
     .bundle()
-    .pipe(source('hivesigner.js'))
+    .pipe(source('render-helper.js'))
     .pipe(gulp.dest('lib'));
 }
 
