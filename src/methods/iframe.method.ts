@@ -37,6 +37,14 @@ export function iframe(el: HTMLElement): void {
     el.setAttribute('src', s)
     return
   }
+  
+  // Spotify
+  if (src.match(/^https:\/\/open\.spotify\.com\/(embed|embed-podcast)\/(playlist|show|episode|track|album)\/(.*)/i)) {
+    el.setAttribute('src', src)
+    el.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
+    el.setAttribute('frameborder', '0')
+    return
+  }
 
   // Soundcloud
   if (src.match(/^https:\/\/w.soundcloud.com\/player\/.*/i)) {

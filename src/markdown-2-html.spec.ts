@@ -594,6 +594,31 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('41- Should handle spotify link', () => {
+      const input = {
+        author: 'foo041',
+        permlink: 'bar041',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link https://open.spotify.com/playlist/7JG1cEnaIT6CSzloyNI6tU?si=7MCcmFEZQCebLvzqehq81Q '
+      }
+      const expected = '<p>this is link <a class=\"markdown-audio-link markdown-audio-link-spotify\"><iframe frameborder=\"0\" allowfullscreen=\"true\" src=\"https://open.spotify.com/embed/playlist/7JG1cEnaIT6CSzloyNI6tU?si=7MCcmFEZQCebLvzqehq81Q\" sandbox=\"allow-scripts allow-same-origin allow-popups\"></iframe></a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('42- Should handle spotify embed', () => {
+      const input = {
+        author: 'foo042',
+        permlink: 'bar042',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is embed link <iframe src="https://open.spotify.com/embed/album/6AORtDjduMM3bupSWzbTSG" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> '
+      }
+      const expected = '<p>this is embed link <iframe src=\"https://open.spotify.com/embed/album/6AORtDjduMM3bupSWzbTSG\" frameborder=\"0\" sandbox=\"allow-scripts allow-same-origin allow-popups\"></iframe></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
   })
 
   describe('Sanitization', () => {

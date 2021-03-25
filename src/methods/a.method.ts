@@ -12,6 +12,7 @@ import {
   VIMEO_REGEX,
   WHITE_LIST,
   YOUTUBE_REGEX,
+  SPOTIFY_REGEX,
   DOMParser
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
@@ -257,6 +258,30 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.appendChild(ifr)
 
       return
+    }
+  }
+
+  // If a spotify audio
+  match = href.match(SPOTIFY_REGEX)
+  if (match && el.textContent.trim() === href) {
+    const e = SPOTIFY_REGEX.exec(href)
+    if (e[1]) {
+      
+      el.setAttribute('class', 'markdown-audio-link markdown-audio-link-spotify')
+      el.removeAttribute('href')
+
+      const embedSrc = `https://open.spotify.com/embed/playlist/${e[1]}`
+
+      el.textContent = ''
+
+      const ifr = el.ownerDocument.createElement('iframe')
+      ifr.setAttribute('frameborder', '0')
+      ifr.setAttribute('allowfullscreen', 'true')
+      ifr.setAttribute('src', embedSrc)
+      ifr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
+      el.appendChild(ifr)
+
+      return      
     }
   }
 
