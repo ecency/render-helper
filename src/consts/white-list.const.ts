@@ -17,5 +17,8 @@ export const WHITE_LIST = [
   'hede.io',
   'weedcash.network',
   'dapplr.in',
-  'leofinance.io'
+  'leofinance.io',
+  'proofofbrain.io',
+  'naturalmedicine.io',
+  'bilpcoin.com'
 ]

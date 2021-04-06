@@ -5,9 +5,13 @@ export function cleanReply(s: string): string {
     .filter(item => item.includes('Posted Using [LeoFinance') === false)
     .filter(item => item.includes('Posted via [neoxian') === false)
     .filter(item => item.includes('Posted with [STEMGeeks') === false)
+    .filter(item => item.includes('Posted using [Bilpcoin') === false)    
     .filter(item => item.includes('<center><sub>[Posted Using Aeneas.Blog') === false)
+    .filter(item => item.includes('<center><sub>Posted via [proofofbrain.io') === false)
+    .filter(item => item.includes('<center>Posted on [HypnoChain') === false)
     .filter(item => item.includes('<center><sub>Posted via [weedcash.network') === false)
     .filter(item => item.includes('<center>Posted on [NaturalMedicine.io') === false)
     .join('\n') : '')
     .replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '')
+    .replace('<div class="pull-right"><a href="/@hive.engage">![](https://i.imgur.com/XsrNmcl.png)</a></div>', '')
 }
