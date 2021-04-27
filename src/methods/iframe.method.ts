@@ -1,4 +1,5 @@
 import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX } from '../consts'
+import {youtubeEmbedSrc} from "./helper";
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
@@ -11,7 +12,7 @@ export function iframe(el: HTMLElement): void {
   if (src.match(/^(https?:)?\/\/www.youtube.com\/embed\/.*/i)) {
     // strip query string (yt: autoplay=1,controls=0,showinfo=0, etc)
     const s = src.replace(/\?.+$/, '')
-    el.setAttribute('src', s)
+    el.setAttribute('src', youtubeEmbedSrc(s))
     return
   }
 
@@ -37,7 +38,7 @@ export function iframe(el: HTMLElement): void {
     el.setAttribute('src', s)
     return
   }
-  
+
   // Spotify
   if (src.match(/^https:\/\/open\.spotify\.com\/(embed|embed-podcast)\/(playlist|show|episode|track|album)\/(.*)/i)) {
     el.setAttribute('src', src)
