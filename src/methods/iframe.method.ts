@@ -25,7 +25,7 @@ export function iframe(el: HTMLElement): void {
 
   // Twitch
   if (src.match(/^(https?:)?\/\/player.twitch.tv\/.*/i)) {
-    const parentDomain = window?.location?.hostname || 'ecency.com'
+    const parentDomain = 'ecency.com'
     const s = `${src}&parent=${parentDomain}&autoplay=false`
     el.setAttribute('src', s)
     return
