@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX } from '../consts'
-import {youtubeEmbedSrc} from "./helper";
-=======
-import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX } from '../consts'
->>>>>>> 350a7ba4ce3699a9e1ec6643bd54bfba3725b973
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
