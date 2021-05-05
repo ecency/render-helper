@@ -1,4 +1,4 @@
-import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX } from '../consts'
+import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX } from '../consts'
 import {youtubeEmbedSrc} from "./helper";
 
 export function iframe(el: HTMLElement): void {
@@ -65,9 +65,25 @@ export function iframe(el: HTMLElement): void {
     el.setAttribute('allowfullscreen', 'true')
     return
   }
+  
+  // Truvvl
+  if (src.match(TRUVVL_REGEX)) {
+    el.setAttribute('src', src)
+    el.setAttribute('sandbox', '')
+    el.setAttribute('frameborder', '0')
+    el.setAttribute('allowfullscreen', 'true')
+    return
+  }
 
   // LBRY.tv
   if (src.match(LBRY_REGEX)) {
+    el.setAttribute('src', src)
+    el.setAttribute('frameborder', '0')
+    return
+  }
+
+  // ODYSEE
+  if (src.match(ODYSEE_REGEX)) {
     el.setAttribute('src', src)
     el.setAttribute('frameborder', '0')
     return
