@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX } from '../consts'
 import {youtubeEmbedSrc} from "./helper";
+=======
+import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX } from '../consts'
+>>>>>>> 350a7ba4ce3699a9e1ec6643bd54bfba3725b973
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
@@ -12,7 +16,7 @@ export function iframe(el: HTMLElement): void {
   if (src.match(/^(https?:)?\/\/www.youtube.com\/embed\/.*/i)) {
     // strip query string (yt: autoplay=1,controls=0,showinfo=0, etc)
     const s = src.replace(/\?.+$/, '')
-    el.setAttribute('src', youtubeEmbedSrc(s))
+    el.setAttribute('src', s)
     return
   }
 
@@ -26,7 +30,7 @@ export function iframe(el: HTMLElement): void {
 
   // Twitch
   if (src.match(/^(https?:)?\/\/player.twitch.tv\/.*/i)) {
-    const parentDomain = window?.location?.hostname || 'ecency.com'
+    const parentDomain = 'ecency.com'
     const s = `${src}&parent=${parentDomain}&autoplay=false`
     el.setAttribute('src', s)
     return
