@@ -19,7 +19,7 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
   ],
   'img': ['src', 'alt', 'class'],
   'span': ['class'],
-  'iframe': ['src', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen', 'sandbox'],
+  'iframe': ['src', 'class', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen', 'sandbox'],
   'div': ['class'],
   'strong': [],
   'b': [],

@@ -12,6 +12,8 @@ export function cleanReply(s: string): string {
     .filter(item => item.includes('<center><sub>Posted via [weedcash.network') === false)
     .filter(item => item.includes('<center>Posted on [NaturalMedicine.io') === false)
     .filter(item => item.includes('<center><sub>Posted via [MusicForLife.io') === false)
+    .filter(item => item.includes('If the truvvl embed is unsupported by your current frontend, click this link to view this story') === false)
+    .filter(item => item.includes('<center><em>Posted from Truvvl') === false)
     .join('\n') : '')
     .replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '')
     .replace('<div class="pull-right"><a href="/@hive.engage">![](https://i.imgur.com/XsrNmcl.png)</a></div>', '')

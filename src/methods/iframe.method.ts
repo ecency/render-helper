@@ -68,8 +68,9 @@ export function iframe(el: HTMLElement): void {
   // Truvvl
   if (src.match(TRUVVL_REGEX)) {
     el.setAttribute('src', src)
-    el.setAttribute('sandbox', '')
+    el.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
     el.setAttribute('frameborder', '0')
+    el.setAttribute('class', 'portrait-embed')
     el.setAttribute('allowfullscreen', 'true')
     return
   }
