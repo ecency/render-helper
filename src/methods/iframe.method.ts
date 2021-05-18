@@ -56,10 +56,19 @@ export function iframe(el: HTMLElement): void {
     }
   }
 
+  // Dtube
+  if (src.match(/^https:\/\/emb.d.tube\/.*/i)) {
+    el.setAttribute('src', src)
+    el.setAttribute('sandbox', 'allow-scripts allow-same-origin')
+    el.setAttribute('frameborder', '0')
+    el.setAttribute('allowfullscreen', 'true')
+    return
+  }
+
   // Dapplr
   if (src.match(DAPPLR_REGEX)) {
     el.setAttribute('src', src)
-    el.setAttribute('sandbox', '')
+    el.setAttribute('sandbox', 'allow-scripts allow-same-origin')
     el.setAttribute('frameborder', '0')
     el.setAttribute('allowfullscreen', 'true')
     return

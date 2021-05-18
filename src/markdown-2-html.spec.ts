@@ -554,7 +554,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" ></iframe>'
       }
-      const expected = '<p>this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" sandbox frameborder="0" allowfullscreen="true"></iframe></p>'
+      const expected = '<p>this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" sandbox="allow-scripts allow-same-origin" frameborder="0" allowfullscreen="true"></iframe></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -615,6 +615,18 @@ describe('Markdown2Html', () => {
         body: 'this is embed link <iframe src="https://open.spotify.com/embed/album/6AORtDjduMM3bupSWzbTSG" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> '
       }
       const expected = '<p>this is embed link <iframe src=\"https://open.spotify.com/embed/album/6AORtDjduMM3bupSWzbTSG\" frameborder=\"0\" sandbox=\"allow-scripts allow-same-origin allow-popups\"></iframe></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('43- Should handle dtube iframe', () => {
+      const input = {
+        author: 'foo343',
+        permlink: 'bar343',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link <iframe width="560" height="315" src="https://emb.d.tube/#!/keepskating420/QmZyu5uPfm2wvEDJaSfCx9wwDBMEcDg5CoxbKKC2vjqubq" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+      }
+      const expected = '<p>this is link <iframe src="https://emb.d.tube/#!/keepskating420/QmZyu5uPfm2wvEDJaSfCx9wwDBMEcDg5CoxbKKC2vjqubq" frameborder="0" allowfullscreen="true" sandbox="allow-scripts allow-same-origin"></iframe></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
