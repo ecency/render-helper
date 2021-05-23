@@ -65,6 +65,15 @@ export function iframe(el: HTMLElement): void {
     return
   }
 
+  // VIMM
+  if (src.match(/^https:\/\/www.vimm.tv\/.*/i)) {
+    el.setAttribute('src', src)
+    el.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
+    el.setAttribute('frameborder', '0')
+    el.setAttribute('allowfullscreen', 'true')
+    return
+  }
+
   // Dapplr
   if (src.match(DAPPLR_REGEX)) {
     el.setAttribute('src', src)

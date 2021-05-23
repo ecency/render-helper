@@ -631,6 +631,19 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('44- Should handle vimm iframe', () => {
+      const input = {
+        author: 'foo344',
+        permlink: 'bar344',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link <iframe width="640px" height="360px" src="https://www.vimm.tv/vandalgame/embed?autoplay=0" frameborder=0></iframe>'
+      }
+      const expected = '<p>this is link <iframe src="https://www.vimm.tv/vandalgame/embed?autoplay=0" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups" allowfullscreen="true"></iframe></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+
   })
 
   describe('Sanitization', () => {
