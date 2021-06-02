@@ -74,7 +74,7 @@ describe('postBodySummary', () => {
       last_update: '2019-05-10T09:15:21',
       body: 'lorem ipsum dolor sit amet'
     }
-    const expected = 'lorem ipsum dolor si'
+    const expected = 'lorem ipsum dolor sit'
     expect(getPostBodySummary(input, 20)).toBe(expected)
   })
 
@@ -89,7 +89,7 @@ In this post, we want to bring you up to speed on what is happening inside Steem
 Through our vision of **empowering entrepreneurs to tokenize the internet**, our primary roles in the Steem ecosystem are providing the community with software enhancements to the Steem blockchain, modular framework applications made up of components that can be leveraged by application developers and inspiration through these platforms to entrepreneurial end-users. We believe we must build in ways that create as many opportunities — and catalyze as many amazing Steem-based entrepreneurs and communities — as possible.`
     }
 
-    const expected = 'In this post, we want to bring you up to speed on what is happening inside Steemit, as well as give you our perspective on the successes (and failures) of the past year, let you know what we see as ou'
+    const expected = 'In this post, we want to bring you up to speed on what is happening inside Steemit, as well as give you our perspective on the successes (and failures) of the past year, let you know what we see as our'
     expect(getPostBodySummary(input, 200)).toBe(expected)
   })
 
@@ -109,7 +109,7 @@ Through our vision of **empowering entrepreneurs to tokenize the internet**, our
 <p>Many people supported me along the way, some tried to tear me down. I'm glad I only stayed with those who pushed me, they have a large stake in my success story.</p></html>`
     }
 
-    const expected = 'Everybody has a dream. Most of the time it takes us a while to turn these great wishes into reality, especially because they usually come with a bigger price tag. Now thanks to Steem some of us will b'
+    const expected = 'Everybody has a dream. Most of the time it takes us a while to turn these great wishes into reality, especially because they usually come with a bigger price tag. Now thanks to Steem some of us will be'
     expect(getPostBodySummary(input, 200)).toBe(expected)
   })
 

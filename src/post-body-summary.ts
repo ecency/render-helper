@@ -5,6 +5,28 @@ import { Entry } from './types'
 
 const Remarkable = require('remarkable')
 
+const joint = (arr: string[], limit = 200) => {
+  let result = '';
+  for (let i = 0; i < arr.length; i++) {
+    // join array with space separator
+    if (result) {
+      result += " ";
+    }
+    // break with length reaches limit
+    if (result.length > limit) {
+      break;
+    } else {
+      // make sure last join doesn't break the limit too much
+      if ((result + arr[i]).length < limit + 10) {
+        result += arr[i];
+      } else {
+        break;
+      }
+    }
+  }
+  return result.trim();
+};
+
 function postBodySummary(entryBody: string, length?: number): string {
   if (!entryBody) {
     return ''
@@ -23,7 +45,7 @@ function postBodySummary(entryBody: string, length?: number): string {
 
   if (length) {
     // Truncate
-    text = text.substring(0, length)
+    text = joint(text.split(' '), length)
   }
 
   text = he.decode(text) // decode html entities
