@@ -2,6 +2,7 @@ import {
   COMMUNITY_REGEX,
   COPIED_POST_REGEX,
   D_TUBE_REGEX,
+  D_TUBE_REGEX2,
   IMG_REGEX,
   IPFS_REGEX,
   MENTION_REGEX,
@@ -320,6 +321,26 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
         return
       }
+    }
+  }
+  match = href.match(D_TUBE_REGEX2)
+  if (match) {
+    const e = D_TUBE_REGEX2.exec(href)
+    // e[2] = username, e[3] object id
+    if (e[2] && e[3]) {
+      el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube')
+      el.removeAttribute('href')
+
+      const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
+
+      // el.setAttribute('data-video-href', videoHref);
+      el.setAttribute('data-embed-src', videoHref)
+      const play = el.ownerDocument.createElement('span')
+      play.setAttribute('class', 'markdown-video-play')
+
+      el.appendChild(play)
+
+      return
     }
   }
 

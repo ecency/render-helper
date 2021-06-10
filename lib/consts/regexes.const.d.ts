@@ -7,6 +7,7 @@ export declare const COMMUNITY_REGEX: RegExp;
 export declare const YOUTUBE_REGEX: RegExp;
 export declare const VIMEO_REGEX: RegExp;
 export declare const D_TUBE_REGEX: RegExp;
+export declare const D_TUBE_REGEX2: RegExp;
 export declare const TWITCH_REGEX: RegExp;
 export declare const DAPPLR_REGEX: RegExp;
 export declare const TRUVVL_REGEX: RegExp;
