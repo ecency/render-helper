@@ -642,6 +642,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).toBe(expected)
     })
+    
+    it('45- Should handle collection linking', () => {
+      const input = {
+        author: 'foo345',
+        permlink: 'bar345',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link https://peakd.com/ccc/jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more'
+      }
+      const expected = '<p>this is link <a class=\"markdown-post-link\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
 
 
   })

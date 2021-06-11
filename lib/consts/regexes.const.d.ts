@@ -1,6 +1,7 @@
 export declare const IMG_REGEX: RegExp;
 export declare const IPFS_REGEX: RegExp;
 export declare const POST_REGEX: RegExp;
+export declare const CCC_REGEX: RegExp;
 export declare const MENTION_REGEX: RegExp;
 export declare const COPIED_POST_REGEX: RegExp;
 export declare const COMMUNITY_REGEX: RegExp;
