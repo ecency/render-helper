@@ -10,7 +10,7 @@ export function setProxyBase(p: string): void {
 export function extractPHash(url: string): string | null {
   if (url.startsWith(`${proxyBase}/p/`)) {
     const [hash] = url.split('/p/')[1].split('?')
-    return hash
+    return hash.replace(/.webp/,'').replace(/.png/,'')
   }
   return null
 }
@@ -53,10 +53,10 @@ export function proxifyImageSrc(url?: string, width = 0, height = 0, format = 'm
   const qs = querystring.stringify(options)
 
   if (pHash) {
-    return `${proxyBase}/p/${pHash}?${qs}`
+    return `${proxyBase}/p/${pHash}${format==='webp'?'.webp':'.png'}?${qs}`
   }
 
   const b58url = multihash.toB58String(Buffer.from(realUrl.toString()))
 
-  return `${proxyBase}/p/${b58url}?${qs}`
+  return `${proxyBase}/p/${b58url}${format==='webp'?'.webp':'.png'}?${qs}`
 }

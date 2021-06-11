@@ -11,7 +11,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     }
 
-    const expected = 'https://images.ecency.com/p/2N61tysBoFrHXFxZDViD89h3bB1XeSgVQ4AKkLUBP2yqmAVL2ZqehqfzwxCQq2g82mHjH9LZV4ugYdmL4TbpNqAoc5LaDDRVPYNurZeK7HpTFq6fjtFG1s9ZpXZWuCufpLhZsDw1G1wL?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/2N61tysBoFrHXFxZDViD89h3bB1XeSgVQ4AKkLUBP2yqmAVL2ZqehqfzwxCQq2g82mHjH9LZV4ugYdmL4TbpNqAoc5LaDDRVPYNurZeK7HpTFq6fjtFG1s9ZpXZWuCufpLhZsDw1G1wL.png?format=match&mode=fit'
 
     expect(catchPostImage(input)).toBe(expected)
   })
@@ -26,7 +26,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     }
 
-    const expected = 'https://images.ecency.com/p/2bP4pJr4wVimqCWjYimXJe2cnCgnAvKo1Rap9w75mXk?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/2bP4pJr4wVimqCWjYimXJe2cnCgnAvKo1Rap9w75mXk.png?format=match&mode=fit'
 
     expect(catchPostImage(input)).toBe(expected)
   })
@@ -52,7 +52,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     }
 
-    const expected = 'https://images.ecency.com/p/F7pXcna7voXwGzRSmsevszxeTZTcnhJVu7akN?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/F7pXcna7voXwGzRSmsevszxeTZTcnhJVu7akN.png?format=match&mode=fit'
 
     expect(catchPostImage(input)).toBe(expected)
   })
@@ -66,7 +66,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     }
 
-    const expected = 'https://images.ecency.com/p/46aP2QbqUqBqwzwxM6L1P6uLNceBDDCMCT7ReED4mRE2QxpU6UqBLE8rB5qCFGv3PRxu6pX61M3gUWVEEkTHbKBUQ2Kc?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/46aP2QbqUqBqwzwxM6L1P6uLNceBDDCMCT7ReED4mRE2QxpU6UqBLE8rB5qCFGv3PRxu6pX61M3gUWVEEkTHbKBUQ2Kc.png?format=match&mode=fit'
 
     expect(catchPostImage(input)).toBe(expected)
   })
@@ -81,7 +81,7 @@ describe('catchPostImage', () => {
       last_update: '2019-05-10T09:15:21'
     }
 
-    const expected = 'https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMxpZmncLuDWMUeztZaUN?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMxpZmncLuDWMUeztZaUN.png?format=match&mode=fit'
 
     expect(catchPostImage(input)).toBe(expected)
   })
@@ -100,7 +100,7 @@ describe('catchPostImage', () => {
 
   it('8- Test with not obj param', () => {
     const input = '<center>![ezrni9y9pw.jpg](https://img.esteem.ws/ezrni9y9pw.jpg)</center><hr>'
-    const expected = 'https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMxpZmncLuDWMUeztZaUN?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMxpZmncLuDWMUeztZaUN.png?format=match&mode=fit'
 
     expect(catchPostImage(input)).toBe(expected)
   })
@@ -112,7 +112,7 @@ describe('catchPostImage', () => {
       }
     }
 
-    const expected = 'https://images.ecency.com/p/hgjbks2vRxvf3xsYr6qQ7dm31DuBHGui8pKMdEVPxhLfEeEoVMPfUw4Z6QduNMpLay65R9vadbefhmDKmhM6HD8w8a?format=match&mode=fit'
+    const expected = 'https://images.ecency.com/p/hgjbks2vRxvf3xsYr6qQ7dm31DuBHGui8pKMdEVPxhLfEeEoVMPfUw4Z6QduNMpLay65R9vadbefhmDKmhM6HD8w8a.png?format=match&mode=fit'
 
     expect(catchPostImage(input as any)).toBe(expected)
   })
