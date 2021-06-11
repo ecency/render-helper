@@ -84,7 +84,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   // If a hive post
   const postMatch = href.match(POST_REGEX)
-  if (postMatch && WHITE_LIST.includes(postMatch[1])) {
+  if (postMatch && WHITE_LIST.includes(postMatch[1].replace(/www./,''))) {
     el.setAttribute('class', 'markdown-post-link')
 
     const tag = postMatch[2]
@@ -108,7 +108,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   // If a hive user with url
   const mentionMatch = href.match(MENTION_REGEX)
-  if (mentionMatch && WHITE_LIST.includes(mentionMatch[1]) && mentionMatch.length === 3) {
+  if (mentionMatch && WHITE_LIST.includes(mentionMatch[1].replace(/www./,'')) && mentionMatch.length === 3) {
     el.setAttribute('class', 'markdown-author-link')
     const author = mentionMatch[2].replace('@', '').toLowerCase()
     if (el.textContent === href) {
