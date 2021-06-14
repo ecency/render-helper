@@ -5,4 +5,4 @@ export interface Entry {
     body: any;
     json_metadata?: any;
 }
-export declare type AmpCallback = (html: string) => any;
+export declare type AmpCallback = (amp: string, html: string) => any;

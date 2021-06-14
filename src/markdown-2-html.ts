@@ -19,7 +19,9 @@ export function markdown2Html(
       const ampOptimizer = AmpOptimizer.create({
         markdown: true,
       });
-      ampOptimizer.transformHtml(html).then(ampCallback);
+      ampOptimizer
+        .transformHtml(html)
+        .then((res: string) => ampCallback(res, html));
     }
     return html;
   }
@@ -38,7 +40,7 @@ export function markdown2Html(
     const ampOptimizer = AmpOptimizer.create({
       markdown: true,
     });
-    ampOptimizer.transformHtml(res).then(ampCallback);
+    ampOptimizer.transformHtml(res).then((r: string) => ampCallback(r, res));
   }
   cacheSet(key, res);
 

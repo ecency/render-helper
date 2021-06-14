@@ -6,4 +6,4 @@ export interface Entry {
   json_metadata?: any;
 }
 
-export type AmpCallback = (html: string) => any;
+export type AmpCallback = (amp: string, html: string) => any;
