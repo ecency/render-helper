@@ -62,6 +62,7 @@
     "lru-cache": "^5.1.1",
     "multihashes": "0.4.13",
     "path": "^0.12.7",
+    "probe-image-size": "^7.2.1",
     "querystring": "^0.2.0",
     "remarkable": "^1.7.3",
     "url": "^0.11.0",
