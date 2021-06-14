@@ -34,6 +34,12 @@ export function markdown2Html(
   obj.body = cleanReply(obj.body);
 
   const res = markdownToHTML(obj.body, forApp, webp);
+  if (amp && ampCallback) {
+    const ampOptimizer = AmpOptimizer.create({
+      markdown: true,
+    });
+    ampOptimizer.transformHtml(res).then(ampCallback);
+  }
   cacheSet(key, res);
 
   return res;
