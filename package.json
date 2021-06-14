@@ -57,6 +57,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
+    "@ampproject/toolbox-optimizer": "^2.8.1",
     "he": "^1.2.0",
     "lru-cache": "^5.1.1",
     "multihashes": "0.4.13",
