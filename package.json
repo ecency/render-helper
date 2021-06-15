@@ -13,7 +13,8 @@
     "cover": "nyc --check-coverage npm run test:only",
     "lint": "eslint ./src/**/*.ts",
     "build": "npm run clean && tsc && gulp",
-    "prepublish": "npm run test && npm run build"
+    "prepublish": "npm run test && npm run build",
+    "version": "tsc -v"
   },
   "files": [
     "lib",
@@ -58,6 +59,7 @@
   },
   "dependencies": {
     "@ampproject/toolbox-optimizer": "^2.8.1",
+    "amphtml-validator": "^1.0.35",
     "he": "^1.2.0",
     "lru-cache": "^5.1.1",
     "multihashes": "0.4.13",

@@ -20,8 +20,17 @@ export function markdown2Html(
         markdown: true,
       });
       ampOptimizer
-        .transformHtml(html)
-        .then((res: string) => ampCallback(res, html));
+        .transformHtml(html, { canonical: "." })
+        .then((res: string) =>
+          ampCallback(
+            res
+              .split("<iframe")
+              .join("<noscript><iframe")
+              .split("</iframe>")
+              .join("</iframe><noscript>"),
+            html
+          )
+        );
     }
     return html;
   }
@@ -40,7 +49,18 @@ export function markdown2Html(
     const ampOptimizer = AmpOptimizer.create({
       markdown: true,
     });
-    ampOptimizer.transformHtml(res).then((r: string) => ampCallback(r, res));
+    ampOptimizer
+      .transformHtml(res, { canonical: "." })
+      .then((r: string) =>
+        ampCallback(
+          r
+            .split("<iframe")
+            .join("<noscript><iframe")
+            .split("</iframe>")
+            .join("</iframe><noscript>"),
+          res
+        )
+      );
   }
   cacheSet(key, res);
 
