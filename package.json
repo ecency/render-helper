@@ -13,7 +13,8 @@
     "cover": "nyc --check-coverage npm run test:only",
     "lint": "eslint ./src/**/*.ts",
     "build": "npm run clean && tsc && gulp",
-    "prepublish": "npm run test && npm run build"
+    "prepublish": "npm run test && npm run build",
+    "version": "tsc -v"
   },
   "files": [
     "lib",

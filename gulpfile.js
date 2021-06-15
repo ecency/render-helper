@@ -20,8 +20,8 @@ function build() {
     .plugin(tsify, { target: "es5", module: "commonjs" })
     .bundle()
     .pipe(source("render-helper.js"))
-    .pipe(buffer()) //you cannot get rid of this.
-    .pipe(uglify())
+    //.pipe(buffer()) //you cannot get rid of this.
+    //.pipe(uglify().on('error', console.error))
     .pipe(gulp.dest("lib"));
 }
 
