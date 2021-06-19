@@ -16,6 +16,7 @@ export function cleanReply(s: string): string {
     .filter(item => item.includes('<center><em>Posted from Truvvl') === false)
     .filter(item => item.includes('View this post <a href="https://travelfeed.io/') === false)
     .filter(item => item.includes('Read this post on TravelFeed.io for the best experience') === false)
+    .filter(item => item.includes('Posted via <a href="https://www.dporn.co/"') === false)
     .join('\n') : '')
     .replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '')
     .replace('<div class="pull-right"><a href="/@hive.engage">![](https://i.imgur.com/XsrNmcl.png)</a></div>', '')
