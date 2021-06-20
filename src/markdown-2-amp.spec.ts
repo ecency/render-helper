@@ -32,9 +32,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -54,9 +56,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -76,9 +80,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -98,9 +104,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -120,9 +128,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -142,9 +152,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -164,9 +176,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -186,9 +200,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -208,9 +224,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -229,9 +247,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -251,9 +271,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -273,9 +295,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -295,9 +319,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -317,9 +343,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -339,9 +367,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -677,9 +707,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -699,9 +731,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -721,9 +755,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -743,9 +779,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -765,9 +803,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -787,9 +827,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -809,9 +851,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -831,9 +875,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -853,9 +899,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -875,9 +923,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -897,9 +947,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -919,9 +971,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -941,9 +995,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -963,9 +1019,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -985,9 +1043,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1007,9 +1067,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1029,9 +1091,12 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+          if (errors?.length) console.log(errors);
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1051,9 +1116,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1073,9 +1140,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1095,9 +1164,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1117,9 +1188,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1139,9 +1212,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1161,9 +1236,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1184,9 +1261,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1205,9 +1284,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1226,9 +1307,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1247,9 +1330,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 
@@ -1300,7 +1385,11 @@ describe("Markdown2Html", () => {
         const validator = await amphtmlValidator.getInstance();
         const isValid = await new Promise((resolve) => {
           markdown2Html(input, false, false, true, (amp) => {
-            resolve(validator.validateString(amp)?.status === "PASS");
+            const errors = validator.validateString(amp)?.errors;
+
+            resolve(
+              validator.validateString(amp)?.status === "PASS" ? true : errors
+            );
           });
         });
 
@@ -1366,9 +1455,11 @@ describe("Markdown2Html", () => {
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
         markdown2Html(input, false, false, true, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
+          const errors = validator.validateString(amp)?.errors;
+
+          resolve(
+            validator.validateString(amp)?.status === "PASS" ? true : errors
+          );
         });
       });
 

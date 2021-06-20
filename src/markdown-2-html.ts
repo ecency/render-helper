@@ -2,8 +2,42 @@ import { makeEntryCacheKey } from "./helper";
 import { cleanReply, markdownToHTML } from "./methods";
 import { cacheGet, cacheSet } from "./cache";
 import { Entry, AmpCallback } from "./types";
+import cheerio from "cheerio";
 
 const AmpOptimizer = require("@ampproject/toolbox-optimizer");
+
+function htmlToAMP(
+  html: string,
+  ampCallback: (amp: string, html: string) => void
+) {
+  const ampOptimizer = AmpOptimizer.create({
+    markdown: true,
+  });
+  ampOptimizer.transformHtml(html, { canonical: "." }).then((res: string) => {
+    const $ = cheerio.load(res);
+    $("iframe")
+      .get()
+      .forEach((x) => {
+        $(x).replaceWith(
+          $("<a/>").attr("href", $(x).attr("src")).text("Open in new window")
+        );
+      });
+
+    $("img")
+      .get()
+      .forEach((x) => {
+        $(x).replaceWith(
+          $("<amp-img/>")
+            .attr("src", $(x).attr("src") || ".")
+            .attr("width", "100")
+            .attr("height", "100")
+            .attr("layout", "responsive")
+            .attr("alt", "Replaced Image")
+        );
+      });
+    ampCallback($.html(), html);
+  });
+}
 
 export function markdown2Html(
   obj: Entry | string,
@@ -16,22 +50,9 @@ export function markdown2Html(
     obj = cleanReply(obj);
     const html = markdownToHTML(obj as string, forApp, webp);
     if (amp && ampCallback) {
-      const ampOptimizer = AmpOptimizer.create({
-        markdown: true,
-      });
-      ampOptimizer
-        .transformHtml(html, { canonical: "." })
-        .then((res: string) =>
-          ampCallback(
-            res
-              .split("<iframe")
-              .join("<noscript><iframe")
-              .split("</iframe>")
-              .join("</iframe><noscript>"),
-            html
-          )
-        );
+      htmlToAMP(html, ampCallback);
     }
+
     return html;
   }
 
@@ -46,21 +67,7 @@ export function markdown2Html(
 
   const res = markdownToHTML(obj.body, forApp, webp);
   if (amp && ampCallback) {
-    const ampOptimizer = AmpOptimizer.create({
-      markdown: true,
-    });
-    ampOptimizer
-      .transformHtml(res, { canonical: "." })
-      .then((r: string) =>
-        ampCallback(
-          r
-            .split("<iframe")
-            .join("<noscript><iframe")
-            .split("</iframe>")
-            .join("</iframe><noscript>"),
-          res
-        )
-      );
+    htmlToAMP(res, ampCallback);
   }
   cacheSet(key, res);
 
