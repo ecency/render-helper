@@ -5,7 +5,7 @@ export const POST_REGEX = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i
 export const CCC_REGEX = /^https?:\/\/(.*)\/ccc\/([\w.\d-]+)\/(.*)/i
 export const MENTION_REGEX = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i
 export const COPIED_POST_REGEX = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i
-export const COMMUNITY_REGEX = /^https?:\/\/(.*)\/c\/(hive-\d+)\/(.*)/i
+export const COMMUNITY_REGEX = /^https?:\/\/(.*)\/c\/(hive-\d+)(.*)/i
 export const YOUTUBE_REGEX = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g
 export const VIMEO_REGEX = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i
 export const D_TUBE_REGEX = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g
