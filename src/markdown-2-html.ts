@@ -8,7 +8,8 @@ const AmpOptimizer = require("@ampproject/toolbox-optimizer");
 
 function htmlToAMP(
   html: string,
-  ampCallback: (amp: string, html: string) => void
+  ampCallback: (amp: string, html: string) => void,
+  onlyBody: boolean
 ) {
   const ampOptimizer = AmpOptimizer.create({
     markdown: true,
@@ -35,7 +36,7 @@ function htmlToAMP(
             .attr("alt", "Replaced Image")
         );
       });
-    ampCallback($.html(), html);
+    ampCallback(onlyBody ? $("body").html() : $.html(), html);
   });
 }
 
@@ -44,13 +45,14 @@ export function markdown2Html(
   forApp = true,
   webp = false,
   amp = false,
-  ampCallback: AmpCallback = null
+  ampCallback: AmpCallback = null,
+  onlyBody = false
 ): string {
   if (typeof obj === "string") {
     obj = cleanReply(obj);
     const html = markdownToHTML(obj as string, forApp, webp);
     if (amp && ampCallback) {
-      htmlToAMP(html, ampCallback);
+      htmlToAMP(html, ampCallback, onlyBody);
     }
 
     return html;
@@ -67,7 +69,7 @@ export function markdown2Html(
 
   const res = markdownToHTML(obj.body, forApp, webp);
   if (amp && ampCallback) {
-    htmlToAMP(res, ampCallback);
+    htmlToAMP(res, ampCallback, onlyBody);
   }
   cacheSet(key, res);
 
