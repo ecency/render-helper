@@ -31,7 +31,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -55,7 +55,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -79,7 +79,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -103,7 +103,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -127,7 +127,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -151,7 +151,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -175,7 +175,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -199,7 +199,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -223,7 +223,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -246,7 +246,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -270,7 +270,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -294,7 +294,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -318,7 +318,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -342,7 +342,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -366,7 +366,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -389,7 +389,7 @@ describe("Markdown2Html", () => {
         '<p><span>lorem ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       let validator = await amphtmlValidator.getInstance();
       let isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -408,7 +408,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -427,7 +427,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -446,7 +446,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -465,7 +465,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@Sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -486,7 +486,7 @@ describe("Markdown2Html", () => {
         '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       let validator = await amphtmlValidator.getInstance();
       let isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -505,7 +505,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -524,7 +524,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -543,7 +543,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -562,7 +562,7 @@ describe("Markdown2Html", () => {
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#Sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -580,7 +580,7 @@ describe("Markdown2Html", () => {
       expected = "<p>you are #1</p>";
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -599,7 +599,7 @@ describe("Markdown2Html", () => {
         '<p><span>you are #1 <a class="markdown-tag-link" data-tag="steemit-promo">#steemit-promo</a></span></p>';
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -620,7 +620,7 @@ describe("Markdown2Html", () => {
         '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit <a class="markdown-author-link" data-author="amet">@amet</a></span></p>';
       let validator = await amphtmlValidator.getInstance();
       let isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -638,7 +638,7 @@ describe("Markdown2Html", () => {
       expected = "<p>lorem ipsum @#dolor sit amet</p>";
       validator = await amphtmlValidator.getInstance();
       isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           if (validator.validateString(amp)?.status !== "PASS")
             console.log(amp, validator.validateString(amp)?.status);
           resolve(validator.validateString(amp)?.status === "PASS");
@@ -706,7 +706,7 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-proposal-link" data-href="https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true" data-proposal="39">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B41%5D&amp;approve=false" data-proposal="41">Unapprove</a></p>';
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -730,7 +730,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -754,7 +754,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -778,7 +778,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -802,7 +802,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -826,7 +826,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -850,7 +850,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -874,7 +874,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -898,7 +898,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -922,7 +922,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -946,7 +946,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -970,7 +970,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -994,7 +994,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1018,7 +1018,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1042,7 +1042,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1066,7 +1066,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1090,7 +1090,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
           if (errors?.length) console.log(errors);
 
@@ -1115,7 +1115,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1139,7 +1139,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1163,7 +1163,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1187,7 +1187,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1211,7 +1211,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1235,7 +1235,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1260,7 +1260,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1283,7 +1283,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1306,7 +1306,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1329,7 +1329,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(
@@ -1384,7 +1384,7 @@ describe("Markdown2Html", () => {
       it("ID: " + id, async function () {
         const validator = await amphtmlValidator.getInstance();
         const isValid = await new Promise((resolve) => {
-          markdown2Html(input, false, false, true, (amp) => {
+          markdown2Html(input, false, false, true, false, (amp) => {
             const errors = validator.validateString(amp)?.errors;
 
             resolve(
@@ -1454,7 +1454,7 @@ describe("Markdown2Html", () => {
 
       const validator = await amphtmlValidator.getInstance();
       const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, (amp) => {
+        markdown2Html(input, false, false, true, false, (amp) => {
           const errors = validator.validateString(amp)?.errors;
 
           resolve(

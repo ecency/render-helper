@@ -45,8 +45,8 @@ export function markdown2Html(
   forApp = true,
   webp = false,
   amp = false,
-  ampCallback: AmpCallback = null,
-  onlyBody = false
+  onlyBody = true,
+  ampCallback: AmpCallback = null
 ): string {
   if (typeof obj === "string") {
     obj = cleanReply(obj);
