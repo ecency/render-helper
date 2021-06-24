@@ -4,7 +4,7 @@ var source = require("vinyl-source-stream");
 var tsify = require("tsify");
 var sourcemaps = require("gulp-sourcemaps");
 var buffer = require("vinyl-buffer");
-var uglify = require("gulp-terser");
+var uglify = require('gulp-uglify'); 
 const pkg = require("./package.json");
 
 const libraryName = pkg.name;
