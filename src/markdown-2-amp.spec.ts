@@ -1,6 +1,6 @@
 import amphtmlValidator from "amphtml-validator";
 import { getTestData } from "./test/data";
-import { markdown2Html } from "./markdown-2-html";
+import { markdown2AMP } from "./markdown-2-amp";
 
 const fs = require("fs");
 const path = require("path");
@@ -30,15 +30,11 @@ describe("Markdown2Html", () => {
       };
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
 
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -54,15 +50,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -78,15 +69,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -102,15 +88,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -126,15 +107,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/qK3d1eoH-Qs?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eMZRVYW6mkGBWKemLWWzXbRhNG7Z3h1qjGS.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -150,15 +126,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-video-link markdown-video-link-vimeo"><iframe frameborder="0" allowfullscreen="true" src="https://player.vimeo.com/video/311983548"></iframe></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -174,15 +145,10 @@ describe("Markdown2Html", () => {
         '<p><a title="This link will take you away from steemit.com" class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/scottcbusiness/g04n2bbp"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/46aP2QbqUqBqwzwxM6L1P6uLNceBDDCM6xyDJFx6ANhENRd3gJWJH7TiVR91QZ1KBcdAdZruQE35PBpQ3jUvkNK4mJqZ.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -198,15 +164,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-witnesses-link" data-href="https://hivesigner.com/sign/account-witness-vote?witness=talhasch">vote @talhasch</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -222,15 +183,10 @@ describe("Markdown2Html", () => {
         '<p>click <a class="markdown-external-link" data-href="https://loremipsum.com/foo/bar.html">here</a> to visit</p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -245,15 +201,10 @@ describe("Markdown2Html", () => {
       const expected = "<code>some content</code>";
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -269,15 +220,10 @@ describe("Markdown2Html", () => {
         '<iframe src="https://www.youtube.com/embed/I3f9ixg59no" frameborder="0" allowfullscreen="allowfullscreen"></iframe>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -293,15 +239,10 @@ describe("Markdown2Html", () => {
         '<iframe src="https://player.vimeo.com/video/311983548" frameborder="0" allowfullscreen="allowfullscreen"></iframe>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -317,15 +258,10 @@ describe("Markdown2Html", () => {
         '<iframe src="https://player.twitch.tv/?channel=esl_csgo&amp;parent=ecency.com&amp;autoplay=false" frameborder="0" allowfullscreen="true"></iframe>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -341,15 +277,10 @@ describe("Markdown2Html", () => {
         '<iframe frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/558749283&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true"></iframe>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -365,15 +296,10 @@ describe("Markdown2Html", () => {
         '<div class="unsupported-iframe">(Unsupported https://foobarbaz.com/132431212)</div>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -388,13 +314,10 @@ describe("Markdown2Html", () => {
       let expected =
         '<p><span>lorem ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       let validator = await amphtmlValidator.getInstance();
-      let isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      let amp = await markdown2AMP(input, false, false, false);
+      let errors = validator.validateString(amp)?.errors;
+      let isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -407,13 +330,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> ipsum <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -426,13 +346,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -445,13 +362,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -464,13 +378,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@Sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -485,13 +396,10 @@ describe("Markdown2Html", () => {
       let expected =
         '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       let validator = await amphtmlValidator.getInstance();
-      let isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      let amp = await markdown2AMP(input, false, false, false);
+      let errors = validator.validateString(amp)?.errors;
+      let isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -504,13 +412,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -523,14 +428,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
-
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
       expect(isValid).toBe(true);
 
       input = {
@@ -542,13 +443,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -561,13 +459,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span><a class="markdown-tag-link" data-tag="lorem">#lorem</a> <a class="markdown-tag-link" data-tag="ipsum">#ipsum</a> <a class="markdown-tag-link" data-tag="dolor">#dolor</a></span><br /><span>\n<a class="markdown-tag-link" data-tag="sit">#Sit</a> amet</span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -579,13 +474,10 @@ describe("Markdown2Html", () => {
       };
       expected = "<p>you are #1</p>";
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -598,13 +490,10 @@ describe("Markdown2Html", () => {
       expected =
         '<p><span>you are #1 <a class="markdown-tag-link" data-tag="steemit-promo">#steemit-promo</a></span></p>';
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -619,13 +508,10 @@ describe("Markdown2Html", () => {
       let expected =
         '<p><span>lorem ipsum <a class="markdown-tag-link" data-tag="dolor">#dolor</a> sit <a class="markdown-author-link" data-author="amet">@amet</a></span></p>';
       let validator = await amphtmlValidator.getInstance();
-      let isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      let amp = await markdown2AMP(input, false, false, false);
+      let errors = validator.validateString(amp)?.errors;
+      let isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
 
@@ -637,42 +523,46 @@ describe("Markdown2Html", () => {
       };
       expected = "<p>lorem ipsum @#dolor sit amet</p>";
       validator = await amphtmlValidator.getInstance();
-      isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          if (validator.validateString(amp)?.status !== "PASS")
-            console.log(amp, validator.validateString(amp)?.status);
-          resolve(validator.validateString(amp)?.status === "PASS");
-        });
-      });
+      amp = await markdown2AMP(input, false, false, false);
+      errors = validator.validateString(amp)?.errors;
+      isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
 
-    it("20- Should not convert markdown links", () => {
+    it("20- Should not convert markdown links", async () => {
       const input = {
         author: "foo61",
         permlink: "bar61",
         last_update: "2019-05-10T09:15:21",
         body: "lorem [this error](https://images.ecency.com/0x0/https://d1vof77qrk4l5q.cloudfront.net/img/5752638e6965247789bc20cef34727263aaa41e1.png) ipsum",
       };
-      expect(markdown2Html(input)).toBe(
-        SNAPSHOT_JSON.markdown_2_html_test_files_4_should_not_convert_markdown_links
-      );
+
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
 
-    it("21- Should add https prefix", () => {
+    it("21- Should add https prefix", async () => {
       const input = {
         author: "foo62",
         permlink: "bar62",
         last_update: "2019-05-10T09:15:21",
         body: '<a href="foo">foo</a>',
       };
-      expect(markdown2Html(input).trim()).toBe(
-        '<p><a class="markdown-external-link" data-href="https://foo">foo</a></p>'
-      );
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
 
-    it("22- Should replace busy links properly", () => {
+    it("22- Should replace busy links properly", async () => {
       const data = getTestData(
         "muratkbesiroglu",
         "sci-fi-novel-underground-city-part-13"
@@ -680,19 +570,27 @@ describe("Markdown2Html", () => {
       data["author"] = "foo63";
       data["permlink"] = "foo63";
       data["last_update"] = "2019-05-10T09:15:21";
-      expect(markdown2Html(data)).toBe(
-        SNAPSHOT_JSON.markdown_2_html_traversing_22_should_replace_busy_links_properly
-      );
+
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(data, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
 
-    it("23- Test with not obj param", () => {
-      expect(
-        markdown2Html(
-          '<a href="foo">foo</a> lorem ipsum **dolor** sit amet'
-        ).trim()
-      ).toBe(
-        '<p><a class="markdown-external-link" data-href="https://foo">foo</a> lorem ipsum <strong>dolor</strong> sit amet</p>'
+    it("23- Test with not obj param", async () => {
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(
+        '<a href="foo">foo</a> lorem ipsum **dolor** sit amet',
+        false,
+        false,
+        false
       );
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
 
     it("24- Should handle proposal vote links", async () => {
@@ -705,15 +603,10 @@ describe("Markdown2Html", () => {
       const expected =
         '<p><a class="markdown-proposal-link" data-href="https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=[39]&amp;approve=true" data-proposal="39">Approve</a> <a class="markdown-proposal-link" data-href="https://beta.hivesigner.com/sign/update-proposal-votes?proposal_ids=%5B41%5D&amp;approve=false" data-proposal="41">Unapprove</a></p>';
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -729,15 +622,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-video-link markdown-video-link-twitch"><iframe frameborder="0" allowfullscreen="true" src="https://player.twitch.tv/?channel=steemspacely&amp;parent=ecency.com&amp;autoplay=false"></iframe></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -753,15 +641,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.online/embed?v=wehmoen/xrhjxocx"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/2ufhwNgM3qHKBGVeU2TMMqPBjdB17MRuf4Q7vGrmGMtTn6yFtvW3Lt9t5v1c3so7UFhWDYh9B.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -777,15 +660,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -801,15 +679,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">@demo/tests</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -825,15 +698,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/_-6hJ8sltdI?autoplay=1"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eEGc5AMBA14JMjkkxrUAj3mV5QR9D6zfstr.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -849,15 +717,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-external-link" data-href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597">Voice: the criteria for success or failure</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -873,15 +736,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-external-link" data-href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597">Voice: the criteria for success or failure</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -897,15 +755,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">@demo/post</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -921,15 +774,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-author-link" data-author="demo">@demo</a> and <a class="markdown-author-link" data-author="demo123">@demo123</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -945,15 +793,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <a data-href="https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q" class="markdown-img-link"><img src="https://images.ecency.com/p/2923mN3pnd7PiPXAMdj9UuE6SsjvQJDHj5VpTTCNs3tkJu9JC9Pu9qXSi5Ys5PYtkaRx6ErTnFVzh1WQxWS45rvr6Q4rfUooAM242oyKeihwnx.png?format=match&amp;mode=fit" /></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -969,15 +812,10 @@ describe("Markdown2Html", () => {
         '<p>this is a link <a class="markdown-external-link" data-href="https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home">https://ipfs.io/ipfs/bafybeihbqfrcrbr6jkf77rdve3nbxjzkfgmeneaw2x5s43qdgpe26cha6q/#home</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -993,15 +831,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <blockquote class="twitter-tweet"><p>https://twitter.com/DeWaarheid_/status/1320603494836015105</p>- <a href="https://twitter.com/DeWaarheid_/status/1320603494836015105">DeWaarheid_</a></blockquote></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1017,15 +850,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <a class="markdown-community-link" data-community="hive-106444" data-filter="trending">trending/hive-106444</a> and markdown link <a class="markdown-community-link" data-community="hive-122516" data-filter="trending">Manipulation Station</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1041,15 +869,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <iframe src="https://cdn.dapplr.in/file/dapplr-videos/sandymeyer/pEm9SdqNYJ6vntQCAalWU6dNC9zegQVl.mp4" sandbox="allow-scripts allow-same-origin" frameborder="0" allowfullscreen="true"></iframe></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1065,15 +888,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <iframe src="https://lbry.tv/$/embed/epic-drone-video-sunset-swiss/38f32ec6de375352512a01c37ec9ef5e7fc35958?r=4N4ga6kbnyKXLSUCHtyfF7zh57vvJwfu" allowfullscreen="allowfullscreen" frameborder="0"></iframe></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1089,17 +907,10 @@ describe("Markdown2Html", () => {
         '<p><a class="markdown-external-link" data-href="https://ecency.com/@good-karma/wallet">click here</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-          if (errors?.length) console.log(errors);
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
-
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
       expect(isValid).toBe(true);
     });
 
@@ -1114,15 +925,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <iframe src="https://archive.org/embed/VoyagetothePlanetofPrehistoricWomen" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="allowfullscreen"></iframe></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1138,15 +944,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <a class="markdown-audio-link markdown-audio-link-spotify"><iframe frameborder="0" allowfullscreen="true" src="https://open.spotify.com/embed/playlist/7JG1cEnaIT6CSzloyNI6tU?si=7MCcmFEZQCebLvzqehq81Q" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1162,15 +963,10 @@ describe("Markdown2Html", () => {
         '<p>this is embed link <iframe src="https://open.spotify.com/embed/album/6AORtDjduMM3bupSWzbTSG" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups"></iframe></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1186,15 +982,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <iframe src="https://emb.d.tube/#!/keepskating420/QmZyu5uPfm2wvEDJaSfCx9wwDBMEcDg5CoxbKKC2vjqubq" frameborder="0" allowfullscreen="true" sandbox="allow-scripts allow-same-origin"></iframe></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1210,15 +1001,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <iframe src="https://www.vimm.tv/vandalgame/embed?autoplay=0" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups" allowfullscreen="true"></iframe></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1234,15 +1020,10 @@ describe("Markdown2Html", () => {
         '<p>this is link <a class="markdown-post-link" data-tag="ccc" data-author="jarvie" data-permlink="one-week-roadtrip-to-all-5-utah-national-parks-and-more">@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1259,15 +1040,10 @@ describe("Markdown2Html", () => {
       const expected = "<p><a>click here</a></p>";
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1282,15 +1058,10 @@ describe("Markdown2Html", () => {
       const expected = "document.getElementById('body').remove();";
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1305,15 +1076,10 @@ describe("Markdown2Html", () => {
       const expected = '<p><a title="Foo">Click</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
@@ -1328,22 +1094,17 @@ describe("Markdown2Html", () => {
       const expected = '<p><a title="Foo">Click</a></p>';
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
   });
 
   describe("Test files", () => {
-    it("1- Should catch images in table", () => {
+    it("1- Should catch images in table", async () => {
       const data = getTestData(
         "steemitboard",
         "steemitboard-notify-dunsky-20181210t153450000z"
@@ -1352,9 +1113,13 @@ describe("Markdown2Html", () => {
       data["author"] = "foo68";
       data["permlink"] = "foo68";
       data["last_update"] = "2019-05-10T09:15:21";
-      expect(markdown2Html(data)).toBe(
-        SNAPSHOT_JSON.markdown_2_html_test_files_1_should_catch_images_in_table
-      );
+
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(data, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
   });
 
@@ -1383,16 +1148,10 @@ describe("Markdown2Html", () => {
 
       it("ID: " + id, async function () {
         const validator = await amphtmlValidator.getInstance();
-        const isValid = await new Promise((resolve) => {
-          markdown2Html(input, false, false, true, false, (amp) => {
-            const errors = validator.validateString(amp)?.errors;
-
-            resolve(
-              validator.validateString(amp)?.status === "PASS" ? true : errors
-            );
-          });
-        });
-
+        const amp = await markdown2AMP(input, false, false, false);
+        const errors = validator.validateString(amp)?.errors;
+        const isValid =
+          validator.validateString(amp)?.status === "PASS" ? true : errors;
         expect(isValid).toBe(true);
       });
 
@@ -1401,7 +1160,7 @@ describe("Markdown2Html", () => {
   });
 
   describe("forApp = false", () => {
-    it("1", () => {
+    it("1", async () => {
       const input = {
         author: "foo1123",
         permlink: "bar1123",
@@ -1411,10 +1170,15 @@ describe("Markdown2Html", () => {
       const expected =
         '<p><img class="markdown-img-link" src="https://images.ecency.com/p/o1AJ9qDyyJNSpZWhUgGYc3MngFqoAMwgbeMkkd8SVxyfRVjiN.png?format=match&amp;mode=fit" /> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">fooo</a> <a href="/esteem/@esteemapp/esteem-monthly-guest-curation-program-4" class="markdown-post-link">bar</a> <a href="http://external.com/loromoro" class="markdown-external-link" target="_blank" rel="noopener">baz</a><span> <a class="markdown-tag-link" href="/trending/lorem">#lorem</a> <a class="markdown-author-link" href="/@ipsum">@ipsum</a> </span><a href="https://steemit.com/~witnesses" class="markdown-external-link" target="_blank" rel="noopener">vote me</a></p>';
 
-      expect(markdown2Html(input, false)).toBe(expected);
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
 
-    it("2- Should handle external similar post links", () => {
+    it("2- Should handle external similar post links", async () => {
       const input = {
         author: "foo35342",
         permlink: "bar35232",
@@ -1424,10 +1188,15 @@ describe("Markdown2Html", () => {
       const expected =
         '<p><a href="https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>';
 
-      expect(markdown2Html(input, false)).toBe(expected);
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
 
-    it("3- Should handle external similar post links", () => {
+    it("3- Should handle external similar post links", async () => {
       const input = {
         author: "foo35343",
         permlink: "bar35233",
@@ -1437,7 +1206,12 @@ describe("Markdown2Html", () => {
       const expected =
         '<p><a href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>';
 
-      expect(markdown2Html(input, false)).toBe(expected);
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
   });
 
@@ -1453,28 +1227,26 @@ describe("Markdown2Html", () => {
       const expected = "<p>hello lorem ipsum</p>";
 
       const validator = await amphtmlValidator.getInstance();
-      const isValid = await new Promise((resolve) => {
-        markdown2Html(input, false, false, true, false, (amp) => {
-          const errors = validator.validateString(amp)?.errors;
-
-          resolve(
-            validator.validateString(amp)?.status === "PASS" ? true : errors
-          );
-        });
-      });
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
 
       expect(isValid).toBe(true);
     });
   });
 
   describe("Webp support", () => {
-    it("Should render images in webp format", () => {
+    it("Should render images in webp format", async () => {
       const input =
         "lorem ipsum https://images.ecency.com/foobarbaz.jpg dolor sit amet";
 
-      expect(markdown2Html(input, false, true)).toBe(
-        SNAPSHOT_JSON.markdown_2_html_webp_support_should_render_images_in_webp_format
-      );
+      const validator = await amphtmlValidator.getInstance();
+      const amp = await markdown2AMP(input, false, false, false);
+      const errors = validator.validateString(amp)?.errors;
+      const isValid =
+        validator.validateString(amp)?.status === "PASS" ? true : errors;
+      expect(isValid).toBe(true);
     });
   });
 });
