@@ -814,30 +814,4 @@ describe('Markdown2Html', () => {
     })
   })
 
-  describe('AMP files', () => {
-    it('1- Should handle AMP base', () => {
-      const input = {
-        parent_author: 'bar33310',
-        author: 'foo640110',
-        permlink: 'bar640110',
-        last_update: '2019-05-10T09:15:21',
-        body: '<!DOCTYPE html><html lang="en"><head><title>HEADER</title></head><body>BODY</body></html>'
-      }
-      const expected = '<!DOCTYPE html><html amp lang="en"><head><title>HEADER</title></head><body>BODY</body></html>'
-      
-      expect(markdown2Html(input, false, false, true)).toBe(expected)
-    })
-    it('2- Should handle AMP images', () => {
-      const input = {
-        parent_author: 'bar3332',
-        author: 'foo64012',
-        permlink: 'bar64012',
-        last_update: '2019-05-10T09:15:21',
-        body: 'hello lorem ipsum ![image-alt-text](https://images.ecency.com/foobarbaz.jpg)'
-      }
-      const expected = 'hello lorem ipsum <amp-img src="https://images.ecency.com/p/2BCfkBRHmbhyg7yeHaumxJq2oMZjKUDK5rv2tmGQzQHxPvTmaiv6Ar.png?format=match&amp;mode=fit" alt="image-alt-text"></amp-img>'
-
-      expect(markdown2Html(input, false, false, true)).toBe(expected)
-    })
-  })
 })

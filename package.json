@@ -1,7 +1,7 @@
 {
-  "name": "@ecency/render-helper",
-  "version": "2.1.12",
-  "description": "Markdown+Html Render helper",
+  "name": "@ecency/render-helper-amp",
+  "version": "1.0.0",
+  "description": "Markdown+AMP Render helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -45,7 +45,7 @@
     "eslint-plugin-react": "^7.4.0",
     "gulp": "^4.0.2",
     "gulp-sourcemaps": "^3.0.0",
-    "gulp-uglify": "^3.0.2",
+    "gulp-terser": "^2.0.1",
     "jest": "^26.6.3",
     "nyc": "^13.3.0",
     "rimraf": "^2.7.1",
