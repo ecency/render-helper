@@ -1,6 +1,6 @@
 {
   "name": "@ecency/render-helper-amp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Markdown+AMP Render helper",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

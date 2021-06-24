@@ -46,7 +46,7 @@ function htmlToAMP(
 
 export function markdown2AMP(
   obj: Entry | string,
-  forApp = true,
+  forApp = false,
   webp = false,
   onlyBody = true
 ): Promise<string> {
