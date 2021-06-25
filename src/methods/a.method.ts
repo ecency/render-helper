@@ -163,7 +163,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     el.setAttribute('class', 'markdown-community-link')
 
     const community = comMatch[2]
-    let filter = comMatch[3]
+    let filter = comMatch[3].substring(1)
+    if (!filter) filter = 'created'
     if (filter === 'about' || filter === 'discord') {
       filter = 'created'
     }
