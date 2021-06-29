@@ -571,14 +571,14 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('39- Should ignore profile page sections with copied links', () => {
+    it('39- Should form profile page sections with copied links', () => {
       const input = {
         author: 'foo054',
         permlink: 'bar054',
         last_update: '2019-05-21T09:19:21',
         body: '<a href=\'https://ecency.com/@good-karma/wallet\'>click here</a>'
       }
-      const expected = '<p><a class="markdown-external-link" data-href="https://ecency.com/@good-karma/wallet">click here</a></p>'
+      const expected = '<p><a href="https://ecency.com/@good-karma/wallet" class="markdown-profile-link">click here</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -655,6 +655,17 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('46- Should handle copied md links', () => {
+      const input = {
+        author: 'foo346',
+        permlink: 'bar346',
+        last_update: '2019-05-10T09:15:21',
+        body: '[click here](https://peakd.com/@praetoria-cartel/wallet) direct link https://peakd.com/@praetoria-cartel/posts'
+      }
+      const expected = '<p><a href="https://ecency.com/@praetoria-cartel/wallet" class="markdown-profile-link">click here</a> direct link <a href="https://ecency.com/@praetoria-cartel/posts" class="markdown-profile-link">@praetoria-cartel/posts</a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })    
 
   })
 
