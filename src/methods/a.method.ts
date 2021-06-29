@@ -125,36 +125,52 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
-  // If a copied post link
+  // If a copied post and profile section links
   const cpostMatch = href.match(COPIED_POST_REGEX)
   if (
-    (
-      (cpostMatch && WHITE_LIST.includes(cpostMatch[1].substring(1))) || (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)
-    ) && !['wallet', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings'].includes(cpostMatch[3])
+    (cpostMatch && WHITE_LIST.includes(cpostMatch[1].substring(1))) || (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)
   ) {
-    el.setAttribute('class', 'markdown-post-link')
+    if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings'].includes(cpostMatch[3])) {
+      el.setAttribute('class', 'markdown-profile-link')
+      const author = cpostMatch[2].replace('@', '').toLowerCase()
+      const section = cpostMatch[3]
 
-    let tag = 'post'
-    if (!WHITE_LIST.includes(cpostMatch[1].substring(1))) {
-      [, tag] = cpostMatch
-    }
-
-    const author = cpostMatch[2].replace('@', '')
-    const permlink = cpostMatch[3]
-    if (el.textContent === href) {
-      el.textContent = `@${author}/${permlink}`
-    }
-    if (forApp) {
-      el.removeAttribute('href')
-      el.setAttribute('data-tag', tag)
-      el.setAttribute('data-author', author)
-      el.setAttribute('data-permlink', permlink)
+      if (el.textContent === href) {
+        el.textContent = `@${author}/${section}`
+      }
+      if (forApp) {
+        const ha = `https://ecency.com/@${author}/${section}`
+        el.setAttribute('href', ha)
+      } else {
+        const h = `/@${author}/${section}`
+        el.setAttribute('href', h)
+      }
+      return
     } else {
-      const h = `/${tag}/@${author}/${permlink}`
-      el.setAttribute('href', h)
-    }
+      el.setAttribute('class', 'markdown-post-link')
 
-    return
+      let tag = 'post'
+      if (!WHITE_LIST.includes(cpostMatch[1].substring(1))) {
+        [, tag] = cpostMatch
+      }
+
+      const author = cpostMatch[2].replace('@', '')
+      const permlink = cpostMatch[3]
+      if (el.textContent === href) {
+        el.textContent = `@${author}/${permlink}`
+      }
+      if (forApp) {
+        el.removeAttribute('href')
+        el.setAttribute('data-tag', tag)
+        el.setAttribute('data-author', author)
+        el.setAttribute('data-permlink', permlink)
+      } else {
+        const h = `/${tag}/@${author}/${permlink}`
+        el.setAttribute('href', h)
+      }
+
+      return
+    }
   }
 
   // If a custom hive community link
