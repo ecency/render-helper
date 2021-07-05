@@ -242,6 +242,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
       const thumbImg = el.ownerDocument.createElement('img')
       thumbImg.setAttribute('class', 'no-replace video-thumbnail')
+      thumbImg.setAttribute('itemprop', 'thumbnailUrl')
       thumbImg.setAttribute('src', thumbnail)
 
       const play = el.ownerDocument.createElement('span')
@@ -349,7 +350,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
         const thumbImg = el.ownerDocument.createElement('img')
         thumbImg.setAttribute('class', 'no-replace video-thumbnail')
-        thumbImg.setAttribute('itemprop', 'image')
+        thumbImg.setAttribute('itemprop', 'thumbnailUrl')
+        
         thumbImg.setAttribute('src', thumbnail)
 
         const play = el.ownerDocument.createElement('span')
@@ -405,7 +407,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
         const thumbImg = el.ownerDocument.createElement('img')
         thumbImg.setAttribute('class', 'no-replace video-thumbnail')
-        thumbImg.setAttribute('itemprop', 'image')
+        thumbImg.setAttribute('itemprop', 'thumbnailUrl')
         thumbImg.setAttribute('src', thumbnail)
 
         const play = el.ownerDocument.createElement('span')
