@@ -393,34 +393,30 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (match) {
     const imgEls = el.getElementsByTagName('img')
 
-    if (imgEls.length === 1) {
-      const e = SPEAK_REGEX.exec(href)
-      // e[1] = tld , e[3] = embed address
-      if (e[1] && e[3]) {
-        el.setAttribute('class', 'markdown-video-link markdown-video-link-speak')
-        el.removeAttribute('href')
+    const e = SPEAK_REGEX.exec(href)
+    // e[1] = tld , e[3] = embed address
+    if (e[1] && e[3]) {
+      const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
+      el.setAttribute('class', 'markdown-video-link markdown-video-link-speak')
+      el.removeAttribute('href')
+      el.setAttribute('data-embed-src', videoHref)
 
+      if (imgEls.length === 1) {
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
-        const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
-
-        el.setAttribute('data-embed-src', videoHref)
-
         const thumbImg = el.ownerDocument.createElement('img')
         thumbImg.setAttribute('class', 'no-replace video-thumbnail')
         thumbImg.setAttribute('itemprop', 'thumbnailUrl')
         thumbImg.setAttribute('src', thumbnail)
-
-        const play = el.ownerDocument.createElement('span')
-        play.setAttribute('class', 'markdown-video-play')
-
         el.appendChild(thumbImg)
-        el.appendChild(play)
-
         // Remove image.
         el.removeChild(imgEls[0])
-
-        return
       }
+
+      const play = el.ownerDocument.createElement('span')
+      play.setAttribute('class', 'markdown-video-play')
+      el.appendChild(play)
+
+      return
     }
   }
 
