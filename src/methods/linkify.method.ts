@@ -26,6 +26,15 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
     }
   )
 
+  // internal links
+  content = content.replace(
+    /(\s\/@[\w.\d-]+)\/(\S+)/gi, (match, u, p) => {
+      const uu = u.trim().toLowerCase().replace('/@','');
+      const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${p.trim()}"` : `href="/post/@${uu}/${p.trim()}"`
+      return ` <a class="markdown-post-link" ${attrs}>/@${uu}/${p.trim()}</a>`  
+    }
+  )
+
   // Image links
   content = content.replace(IMG_REGEX, imglink => {
     const attrs = forApp ? `data-href="${imglink}" class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"`
