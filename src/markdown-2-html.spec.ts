@@ -434,7 +434,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'https://peakd.com/@demo/tests'
       }
-      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">@demo/tests</a></p>'
+      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">/@demo/tests</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -482,7 +482,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'https://peakd.com/tag/@demo/tests and https://steemit.com/test/@demo/post'
       }
-      const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">@demo/post</a></p>'
+      const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">/@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">/@demo/post</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -650,7 +650,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'this is link https://peakd.com/ccc/jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more'
       }
-      const expected = '<p>this is link <a class=\"markdown-post-link\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
+      const expected = '<p>this is link <a class=\"markdown-post-link\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">/@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -662,7 +662,19 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '[click here](https://peakd.com/@praetoria-cartel/wallet) direct link https://peakd.com/@praetoria-cartel/posts'
       }
-      const expected = '<p><a href="https://ecency.com/@praetoria-cartel/wallet" class="markdown-profile-link">click here</a> direct link <a href="https://ecency.com/@praetoria-cartel/posts" class="markdown-profile-link">@praetoria-cartel/posts</a></p>'
+      const expected = '<p><a href="https://ecency.com/@praetoria-cartel/wallet" class="markdown-profile-link">click here</a> direct link <a href="https://ecency.com/@praetoria-cartel/posts" class="markdown-profile-link">/@praetoria-cartel/posts</a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('47- Should handle internal links', () => {
+      const input = {
+        author: 'foo347',
+        permlink: 'bar347',
+        last_update: '2019-05-10T09:15:21',
+        body: 'for history refer to this fine post /@offgridlife/proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you and while you are in the community'
+      }
+      const expected = '<p><span>for history refer to this fine post <a class=\"markdown-post-link\" data-author=\"offgridlife\" data-tag=\"post\" data-permlink=\"proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you\">/@offgridlife/proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you</a> and while you are in the community</span></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })    
