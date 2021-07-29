@@ -1,4 +1,4 @@
-import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX } from '../consts'
+import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX } from '../consts'
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
@@ -15,6 +15,10 @@ export function iframe(el: HTMLElement): void {
     return
   }
 
+  if (src.match(BITCHUTE_REGEX)) {
+    return
+  }
+  
   // Vimeo
   const m = src.match(/https:\/\/player\.vimeo\.com\/video\/([0-9]+)/)
   if (m && m.length === 2) {
