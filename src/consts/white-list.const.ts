@@ -20,5 +20,6 @@ export const WHITE_LIST = [
   'leofinance.io',
   'proofofbrain.io',
   'naturalmedicine.io',
-  'bilpcoin.com'
+  'bilpcoin.com',
+  'stemgeeks.net'
 ]

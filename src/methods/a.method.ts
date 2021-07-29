@@ -92,7 +92,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const author = postMatch[3].replace('@', '')
     const permlink = postMatch[4]
     if (el.textContent === href) {
-      el.textContent = `@${author}/${permlink}`
+      el.textContent = `/@${author}/${permlink}`
     }
     if (forApp) {
       el.removeAttribute('href')
@@ -137,7 +137,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const section = cpostMatch[3]
 
       if (el.textContent === href) {
-        el.textContent = `@${author}/${section}`
+        el.textContent = `/@${author}/${section}`
       }
       if (forApp) {
         const ha = `https://ecency.com/@${author}/${section}`
@@ -158,7 +158,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const author = cpostMatch[2].replace('@', '')
       const permlink = cpostMatch[3]
       if (el.textContent === href) {
-        el.textContent = `@${author}/${permlink}`
+        el.textContent = `/@${author}/${permlink}`
       }
       if (forApp) {
         el.removeAttribute('href')
@@ -210,7 +210,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const author = cccMatch[2].replace('@', '')
     const permlink = cccMatch[3]
     if (el.textContent === href) {
-      el.textContent = `@${author}/${permlink}`
+      el.textContent = `/@${author}/${permlink}`
     }
     if (forApp) {
       el.removeAttribute('href')
@@ -264,6 +264,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
       const thumbImg = el.ownerDocument.createElement('img')
       thumbImg.setAttribute('class', 'no-replace video-thumbnail')
+      thumbImg.setAttribute('itemprop', 'thumbnailUrl')
       thumbImg.setAttribute('src', thumbnail)
 
       const play = el.ownerDocument.createElement('span')
@@ -371,7 +372,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
         const thumbImg = el.ownerDocument.createElement('img')
         thumbImg.setAttribute('class', 'no-replace video-thumbnail')
-        thumbImg.setAttribute('itemprop', 'image')
+        thumbImg.setAttribute('itemprop', 'thumbnailUrl')
+        
         thumbImg.setAttribute('src', thumbnail)
 
         const play = el.ownerDocument.createElement('span')
@@ -412,31 +414,33 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   match = href.match(SPEAK_REGEX)
   if (match) {
     const imgEls = el.getElementsByTagName('img')
+    if (imgEls.length === 1 || el.textContent.trim() === href) {
+      const e = SPEAK_REGEX.exec(href)
+      // e[1] = tld , e[3] = embed address
+      if (e[1] && e[3]) {
+        const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
+        el.setAttribute('class', 'markdown-video-link markdown-video-link-speak')
+        el.removeAttribute('href')
+        el.setAttribute('data-embed-src', videoHref)
+        if (el.textContent.trim() === href) {
+          el.textContent = ''
+        }
+        if (imgEls.length === 1) {
+          const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
+          const thumbImg = el.ownerDocument.createElement('img')
+          thumbImg.setAttribute('class', 'no-replace video-thumbnail')
+          thumbImg.setAttribute('itemprop', 'thumbnailUrl')
+          thumbImg.setAttribute('src', thumbnail)
+          el.appendChild(thumbImg)
+          // Remove image.
+          el.removeChild(imgEls[0])
+        }
 
-    const e = SPEAK_REGEX.exec(href)
-    // e[1] = tld , e[3] = embed address
-    if (e[1] && e[3]) {
-      const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
-      el.setAttribute('class', 'markdown-video-link markdown-video-link-speak')
-      el.removeAttribute('href')
-      el.setAttribute('data-embed-src', videoHref)
-
-      if (imgEls.length === 1) {
-        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
-        const thumbImg = el.ownerDocument.createElement('img')
-        thumbImg.setAttribute('class', 'no-replace video-thumbnail')
-        thumbImg.setAttribute('itemprop', 'image')
-        thumbImg.setAttribute('src', thumbnail)
-        el.appendChild(thumbImg)
-        // Remove image.
-        el.removeChild(imgEls[0])
+        const play = el.ownerDocument.createElement('span')
+        play.setAttribute('class', 'markdown-video-play')
+        el.appendChild(play)
+        return
       }
-
-      const play = el.ownerDocument.createElement('span')
-      play.setAttribute('class', 'markdown-video-play')
-      el.appendChild(play)
-
-      return
     }
   }
 
