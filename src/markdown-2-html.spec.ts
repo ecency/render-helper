@@ -422,7 +422,7 @@ describe('Markdown2Html', () => {
         last_update: '2029-05-10T09:15:21',
         body: '[![](https://img.3speakcontent.co/blnmdkjt/post.png)](https://3speak.co/watch?v=theycallmedan/blnmdkjt) [Watch on 3Speak](https://3speak.co/watch?v=theycallmedan/blnmdkjt)'
       }
-      const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>'
+      const expected = '<p><a class=\"markdown-video-link markdown-video-link-speak\" data-embed-src=\"https://3speak.co/embed?v=theycallmedan/blnmdkjt\"><img class=\"no-replace video-thumbnail\" src=\"https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS.png?format=match&amp;mode=fit\" /><span class=\"markdown-video-play\"></span></a> <a class=\"markdown-video-link markdown-video-link-speak\" data-embed-src=\"https://3speak.co/embed?v=theycallmedan/blnmdkjt\">Watch on 3Speak<span class=\"markdown-video-play\"></span></a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -675,7 +675,7 @@ describe('Markdown2Html', () => {
         body: 'https://www.bitchute.com/video/DJJvTZQxMaNK/'
       }
       const expected = '<p><a class=\"markdown-video-link\" data-embed-src=\"https://www.bitchute.com/embed/DJJvTZQxMaNK/\"><span class=\"markdown-video-play\"></span></a></p>'
-      expect(markdown2Html(input)).toBe(expected);  
+      expect(markdown2Html(input)).toBe(expected);
     })
     
   })
