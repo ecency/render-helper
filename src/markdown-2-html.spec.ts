@@ -667,6 +667,17 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })    
 
+    it('47 - Should handle Bitchute links', () => {
+      const input = {
+        author: 'foo347',
+        permlink: 'bar347',
+        last_update: '2021-05-10T09:15:21',
+        body: 'https://www.bitchute.com/video/DJJvTZQxMaNK/'
+      }
+      const expected = '<p><a class=\"markdown-video-link\" data-embed-src=\"https://www.bitchute.com/embed/DJJvTZQxMaNK/\"><span class=\"markdown-video-play\"></span></a></p>'
+      expect(markdown2Html(input)).toBe(expected);  
+    })
+    
   })
 
   describe('Sanitization', () => {
