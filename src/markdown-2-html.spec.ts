@@ -678,6 +678,17 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected);
     })
     
+    it('49 - Should handle Bitchute iframes', () => {
+      const input = {
+        author: 'foo349',
+        permlink: 'bar349',
+        last_update: '2021-05-10T09:15:49',
+        body: '<iframe width="640" height="360" scrolling="no" frameborder="0" style="border: none;" src="https://www.bitchute.com/embed/DJJvTZQxMaNK/"></iframe>'
+      }
+      const expected = '<iframe frameborder=\"0\" src=\"https://www.bitchute.com/embed/DJJvTZQxMaNK/\"></iframe>'
+      expect(markdown2Html(input)).toBe(expected);
+    })
+          
   })
 
   describe('Sanitization', () => {
