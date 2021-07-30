@@ -1,4 +1,5 @@
 import {
+  BITCHUTE_REGEX,
   COMMUNITY_REGEX,
   COPIED_POST_REGEX,
   D_TUBE_REGEX,
@@ -224,6 +225,27 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
+
+  const BCmatch = href.match(BITCHUTE_REGEX)
+  if (BCmatch && el.textContent.trim() === href) {
+    const e = BITCHUTE_REGEX.exec(href)
+    const vid = e[1]
+    el.setAttribute('class', 'markdown-video-link')
+    el.removeAttribute('href')
+
+    const embedSrc = `https://www.bitchute.com/embed/${vid}/`
+
+    el.textContent = ''
+
+    el.setAttribute('data-embed-src', embedSrc)
+    const play = el.ownerDocument.createElement('span')
+    play.setAttribute('class', 'markdown-video-play')
+    el.appendChild(play)
+    return;
+  }
+
+
+  
   // If a youtube video
   let match = href.match(YOUTUBE_REGEX)
   if (match && el.textContent.trim() === href) {
