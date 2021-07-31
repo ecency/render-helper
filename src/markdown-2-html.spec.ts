@@ -677,7 +677,7 @@ describe('Markdown2Html', () => {
       const expected = '<p><span>for history refer to this fine post <a class=\"markdown-post-link\" data-author=\"offgridlife\" data-tag=\"post\" data-permlink=\"proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you\">/@offgridlife/proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you</a> and while you are in the community</span></p>'
 
       expect(markdown2Html(input)).toBe(expected)
-    })    
+    })
 
     it('47 - Should handle Bitchute links', () => {
       const input = {
@@ -687,9 +687,9 @@ describe('Markdown2Html', () => {
         body: 'https://www.bitchute.com/video/DJJvTZQxMaNK/'
       }
       const expected = '<p><a class=\"markdown-video-link\" data-embed-src=\"https://www.bitchute.com/embed/DJJvTZQxMaNK/\"><span class=\"markdown-video-play\"></span></a></p>'
-      expect(markdown2Html(input)).toBe(expected);  
+      expect(markdown2Html(input)).toBe(expected)
     })
-    
+
     it('49 - Should handle Bitchute iframes', () => {
       const input = {
         author: 'foo349',
@@ -698,9 +698,10 @@ describe('Markdown2Html', () => {
         body: '<iframe width="640" height="360" scrolling="no" frameborder="0" style="border: none;" src="https://www.bitchute.com/embed/DJJvTZQxMaNK/"></iframe>'
       }
       const expected = '<iframe frameborder=\"0\" src=\"https://www.bitchute.com/embed/DJJvTZQxMaNK/\"></iframe>'
-      expect(markdown2Html(input)).toBe(expected);
+      expect(markdown2Html(input)).toBe(expected)
     })
-          
+
+
   })
 
   describe('Sanitization', () => {
@@ -857,5 +858,37 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input, false, true)).toBe(SNAPSHOT_JSON.markdown_2_html_webp_support_should_render_images_in_webp_format)
     })
+  })
+
+  describe("Rumble support", () => {
+
+    it('Rumble iframes', () => {
+      let expected = '<iframe frameborder="0" src="https://rumble.com/embed/vhwsp4/?pub=4"></iframe>'
+      let input = {
+        author: 'foo350x',
+        permlink: 'bar350x',
+        last_update: '2021-05-10T09:15:50',
+        body: '<iframe width="640" height="360" scrolling="no" frameborder="0" style="border: none;" src="https://rumble.com/embed/vhwsp4/?pub=4"></iframe>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+
+    it('Rumble embed URL', () => {
+      const expected = "<p><a class=\"markdown-video-link\" data-embed-src=\"https://www.rumble.com/embed/vhwsp4/?pub=4\"><span class=\"markdown-video-play\"></span></a></p>"
+      let input = {
+        author: 'foo350y',
+        permlink: 'bar350y',
+        last_update: '2021-05-10T09:16:50',
+        body: '<a href="https://rumble.com/embed/vhwsp4/?pub=4">https://rumble.com/embed/vhwsp4/?pub=4</a>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    // The following canot be done: Convert URLs to the video page like this one
+    // (https://rumble.com/vkhkzl-helping-my-girls-to-cool-down-in-the-heat.html)
+    // to its corresponding embedded URL (https://rumble.com/embed/vhveub/?pub=4).
+    // The relationship seems to be governed by a table.
+
   })
 })

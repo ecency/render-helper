@@ -1,9 +1,15 @@
-import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX } from '../consts'
+import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX, RUMBLE_REGEX } from '../consts'
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
   if (!src) {
     el.parentNode.removeChild(el)
+    return
+  }
+
+  try {
+
+  if (src.match(BITCHUTE_REGEX)) {
     return
   }
 
@@ -15,10 +21,6 @@ export function iframe(el: HTMLElement): void {
     return
   }
 
-  if (src.match(BITCHUTE_REGEX)) {
-    return
-  }
-  
   // Vimeo
   const m = src.match(/https:\/\/player\.vimeo\.com\/video\/([0-9]+)/)
   if (m && m.length === 2) {
@@ -86,7 +88,7 @@ export function iframe(el: HTMLElement): void {
     el.setAttribute('allowfullscreen', 'true')
     return
   }
-  
+
   // Truvvl
   if (src.match(TRUVVL_REGEX)) {
     el.setAttribute('src', src)
@@ -104,6 +106,11 @@ export function iframe(el: HTMLElement): void {
     return
   }
 
+  if (src.match(RUMBLE_REGEX)) {
+    el.setAttribute('frameborder', '0')
+    return
+  }
+
   // ODYSEE
   if (src.match(ODYSEE_REGEX)) {
     el.setAttribute('src', src)
@@ -115,6 +122,9 @@ export function iframe(el: HTMLElement): void {
   if (src.match(ARCH_REGEX)) {
     el.setAttribute('src', src)
     return
+  }
+  } catch (e) {
+    console.log(e)
   }
 
   const replaceNode = el.ownerDocument.createElement('div')

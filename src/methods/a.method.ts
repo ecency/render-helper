@@ -14,6 +14,7 @@ import {
   TWITTER_REGEX,
   VIMEO_REGEX,
   WHITE_LIST,
+  RUMBLE_REGEX,
   YOUTUBE_REGEX,
   SPOTIFY_REGEX,
   DOMParser
@@ -225,6 +226,21 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
+  const RBmatch = href.match(RUMBLE_REGEX)
+  if (RBmatch && el.textContent.trim() === href) {
+    const vid = RBmatch.groups.id
+    const embedSrc = `https://www.rumble.com/embed/${vid}/?pub=4`
+    el.setAttribute('class', 'markdown-video-link')
+    el.removeAttribute('href')
+
+    el.textContent = ''
+    el.setAttribute('data-embed-src', embedSrc)
+    const play = el.ownerDocument.createElement('span')
+    play.setAttribute('class', 'markdown-video-play')
+    el.appendChild(play)
+    return
+  }
+
 
   const BCmatch = href.match(BITCHUTE_REGEX)
   if (BCmatch && el.textContent.trim() === href) {
@@ -241,11 +257,11 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const play = el.ownerDocument.createElement('span')
     play.setAttribute('class', 'markdown-video-play')
     el.appendChild(play)
-    return;
+    return
   }
 
 
-  
+
   // If a youtube video
   let match = href.match(YOUTUBE_REGEX)
   if (match && el.textContent.trim() === href) {
@@ -332,7 +348,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (match && el.textContent.trim() === href) {
     const e = SPOTIFY_REGEX.exec(href)
     if (e[1]) {
-      
+
       el.setAttribute('class', 'markdown-audio-link markdown-audio-link-spotify')
       el.removeAttribute('href')
 
@@ -347,7 +363,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       ifr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
       el.appendChild(ifr)
 
-      return      
+      return
     }
   }
 
@@ -367,13 +383,13 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
-        // el.setAttribute('data-video-href', videoHref);
+        // el.setAttribute('data-video-href', videoHref)
         el.setAttribute('data-embed-src', videoHref)
 
         const thumbImg = el.ownerDocument.createElement('img')
         thumbImg.setAttribute('class', 'no-replace video-thumbnail')
         thumbImg.setAttribute('itemprop', 'thumbnailUrl')
-        
+
         thumbImg.setAttribute('src', thumbnail)
 
         const play = el.ownerDocument.createElement('span')
@@ -399,7 +415,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
       const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
-      // el.setAttribute('data-video-href', videoHref);
+      // el.setAttribute('data-video-href', videoHref)
       el.setAttribute('data-embed-src', videoHref)
       const play = el.ownerDocument.createElement('span')
       play.setAttribute('class', 'markdown-video-play')
