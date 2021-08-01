@@ -20,4 +20,5 @@ export const ARCH_REGEX = /^(https?:)?\/\/archive.org\/embed\/.*/i
 export const SPEAK_REGEX = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\.\/]+)(&.*)?/i
 export const TWITTER_REGEX = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi
 export const SPOTIFY_REGEX = /^https:\/\/open\.spotify\.com\/playlist\/(.*)?$/gi
-export const RUMBLE_REGEX  = /^https:\/\/rumble.com\/embed\/(?<id>[a-zA-Z0-9-]+)\/\?pub=4/
+export const RUMBLE_REGEX  = /^https:\/\/rumble\.com\/embed\/(?<id>[a-zA-Z0-9-]+)\/\?pub=4/
+export const BRIGHTEON_REGEX = /^https?:\/\/(www\.)?brighteon\.com\/(?:embed\/)?(?<id>[0-9a-f-]+)/i

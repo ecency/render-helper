@@ -15,6 +15,7 @@ import {
   VIMEO_REGEX,
   WHITE_LIST,
   RUMBLE_REGEX,
+  BRIGHTEON_REGEX,
   YOUTUBE_REGEX,
   SPOTIFY_REGEX,
   DOMParser
@@ -226,6 +227,27 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
+  const BNmatch = href.match(BRIGHTEON_REGEX)
+  if (BNmatch && el.textContent.trim() === href) {
+    try {
+      const vid = BNmatch.groups.id
+      const embedSrc = `https://www.brighteon.com/embed/${vid}`
+      el.setAttribute('class', 'markdown-video-link')
+      el.removeAttribute('href')
+      
+      el.textContent = ''
+      el.setAttribute('data-embed-src', embedSrc)
+      const play = el.ownerDocument.createElement('span')
+      play.setAttribute('class', 'markdown-video-play')
+      el.appendChild(play)
+      return
+    } catch (e) {
+      console.log(e)
+      console.log({BNmatch})
+    }
+  }
+  
+  
   const RBmatch = href.match(RUMBLE_REGEX)
   if (RBmatch && el.textContent.trim() === href) {
     const vid = RBmatch.groups.id
