@@ -248,8 +248,10 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       //    '" frameBorder="0" allowfullscreen></iframe>' +
       //    '</div> </div>'
       const a = el.ownerDocument.createElement('a')
-      a.setAttribute('data-href', IWmatch[0])
+      a.setAttribute('href', IWmatch[0])
       a.setAttribute('class', "markdown-external-link")
+      a.setAttribute('target', '_blank')
+      a.setAttribute('rel', 'noopener')      
       a.textContent  = 'View at ' + domain
       el.parentNode.insertBefore(iframe, el)
       el.parentNode.insertBefore(a, el)

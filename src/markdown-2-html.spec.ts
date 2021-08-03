@@ -947,7 +947,7 @@ describe('Markdown2Html', () => {
      
      it('Infowars hyperlink URL', () => {
       const expected = "<p><iframe src=\"https://api.banned.video/embed/61034110c23c721c1814cde2\" allowfullscreen=\"true\" frameborder=\"0\"></iframe>"
-      +"<a data-href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\" class=\"markdown-external-link\">View at freeworldnews.tv</a></p>"
+      +"<a href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\" class=\"markdown-external-link\" target=\"_blank\" rel=\"noopener\">View at freeworldnews.tv</a></p>"
       let input = {
         author: 'alexjones1z',
         permlink: 'paypalsendingYourDataToADL-' + counter++,
@@ -959,7 +959,7 @@ describe('Markdown2Html', () => {
      
      it('Infowars Embedding code', () => {
       const expected =  "<iframe src=\"https://api.banned.video/embed/61034110c23c721c1814cde2\" allowfullscreen=\"true\" frameborder=\"0\"></iframe>"
-      +"<a data-href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\" class=\"markdown-external-link\">View at freeworldnews.tv</a>"
+      +"<a href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\" class=\"markdown-external-link\" target=\"_blank\" rel=\"noopener\">View at freeworldnews.tv</a>"
       let input = {
         author: 'alexjones1z',
         permlink: 'paypalsendingYourDataToADL-' + counter++,
