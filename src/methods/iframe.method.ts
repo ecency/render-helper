@@ -1,4 +1,5 @@
-import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX, RUMBLE_REGEX, BRIGHTEON_REGEX } from '../consts'
+import { ARCH_REGEX, DAPPLR_REGEX, INFOWARS_REGEX, INFOWARS_EMBED_REGEX, LBRY_REGEX, TRUVVL_REGEX, 
+ODYSEE_REGEX, BITCHUTE_REGEX, RUMBLE_REGEX, BRIGHTEON_REGEX } from '../consts'
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
@@ -9,6 +10,15 @@ export function iframe(el: HTMLElement): void {
 
   try {
 
+  const IWmatch = src.match(INFOWARS_EMBED_REGEX)
+  if (IWmatch) {
+    //el.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
+    el.setAttribute('allowfullscreen', 'true')
+    el.setAttribute('frameborder', '0')
+    return
+  }
+
+    
   if (src.match(BITCHUTE_REGEX)) {
     return
   }

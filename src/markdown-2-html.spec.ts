@@ -930,4 +930,45 @@ describe('Markdown2Html', () => {
 
 
   })
+  
+  describe("Infowars support", () => {
+      let counter = 1      
+     it('Infowars embedded URL in an IFrame', () => {
+      const expected = "<iframe src=\"https://api.banned.video/embed/61034110c23c721c1814cde2\" allowfullscreen=\"true\" frameborder=\"0\"></iframe>"
+      +"<a class=\"markdown-external-link\" data-href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\">View at freeworldnews.tv</a>"
+      let input = {
+        author: 'alexjones1z',
+        permlink: 'paypalsendingYourDataToADL-' + counter++,
+        last_update: '2021-05-10T09:16:50',
+        body: '<iframe src=\"https://api.banned.video/embed/61034110c23c721c1814cde2\" allowfullscreen=\"true\" frameborder=\"0\"></iframe><a class=\"markdown-external-link\" data-href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\">View at freeworldnews.tv</a>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+     
+     it('Infowars hyperlink URL', () => {
+      const expected = "<p><iframe src=\"https://api.banned.video/embed/61034110c23c721c1814cde2\" allowfullscreen=\"true\" frameborder=\"0\"></iframe>"
+      +"<a data-href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\" class=\"markdown-external-link\">View at freeworldnews.tv</a></p>"
+      let input = {
+        author: 'alexjones1z',
+        permlink: 'paypalsendingYourDataToADL-' + counter++,
+        last_update: '2021-05-10T09:16:50',
+        body: '<a href="https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2">https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2</a>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+     
+     it('Infowars Embedding code', () => {
+      const expected =  "<iframe src=\"https://api.banned.video/embed/61034110c23c721c1814cde2\" allowfullscreen=\"true\" frameborder=\"0\"></iframe>"
+      +"<a data-href=\"https://freeworldnews.tv/watch?id=61034110c23c721c1814cde2\" class=\"markdown-external-link\">View at freeworldnews.tv</a>"
+      let input = {
+        author: 'alexjones1z',
+        permlink: 'paypalsendingYourDataToADL-' + counter++,
+        last_update: '2021-05-10T09:16:50',
+        body: '<div class="ifw-player" data-video-id="61034110c23c721c1814cde2"></div><script src="https://infowarsmedia.com/js/player.js" async></script>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+     
+     
+ }) // Info Wars Support
 })

@@ -5,6 +5,7 @@ import {
   D_TUBE_REGEX,
   D_TUBE_REGEX2,
   IMG_REGEX,
+  INFOWARS_REGEX,
   IPFS_REGEX,
   MENTION_REGEX,
   POST_REGEX,
@@ -227,6 +228,40 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
+  const IWmatch = href.match(INFOWARS_REGEX)
+  if (IWmatch && el.textContent.trim() === href) {
+    try {
+      
+      const video = IWmatch.groups.video
+      const domain = IWmatch.groups.domain
+      const div =  el.ownerDocument.createElement('div')
+      
+      //div.setAttribute('style', "margin-bottom: 10px; position: relative; padding-bottom: 56%; padding-top: 35px; height: 0; overflow: hidden;")
+      const iframe = el.ownerDocument.createElement('iframe')
+      iframe.setAttribute('src', "https://api.banned.video/embed/" + video)
+      iframe.setAttribute('allowfullscreen', 'true')
+      iframe.setAttribute('frameborder', '0')
+      div.appendChild(iframe)
+      //
+      //    '<iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://api.banned.video/embed/' +
+      //    video +
+      //    '" frameBorder="0" allowfullscreen></iframe>' +
+      //    '</div> </div>'
+      const a = el.ownerDocument.createElement('a')
+      a.setAttribute('data-href', IWmatch[0])
+      a.setAttribute('class', "markdown-external-link")
+      a.textContent  = 'View at ' + domain
+      el.parentNode.insertBefore(iframe, el)
+      el.parentNode.insertBefore(a, el)
+      el.parentNode.removeChild(el)
+      return
+    } catch (e) {
+      console.log(e)
+    }
+    return;
+  }
+    
+  
   const BNmatch = href.match(BRIGHTEON_REGEX)
   if (BNmatch && el.textContent.trim() === href) {
     try {
