@@ -425,6 +425,16 @@ describe('Markdown2Html', () => {
       const expected = '<p><a class="markdown-video-link markdown-video-link-speak" data-embed-src="https://3speak.co/embed?v=theycallmedan/blnmdkjt"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/CQdwDW6BZfWWtctopKyTJuDRdBH4KXwm9ijE6sZXe5MveWF3nUu4zXXBFUau8NS.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a> <a class="markdown-external-link" data-href="https://3speak.co/watch?v=theycallmedan/blnmdkjt">Watch on 3Speak</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
+      
+      const input2 = {
+        author: 'foo33399',
+        permlink: 'bar32300a',
+        last_update: '2029-05-10T09:15:21',
+        body: '<iframe width="560" height="315" src="https://3speak.co/embed?v=theycallmedan/blnmdkjt" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
+      }
+      const expected2 = '<iframe src="https://3speak.co/embed?v=theycallmedan/blnmdkjt&amp;autoplay=true\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe>'
+
+      expect(markdown2Html(input2)).toBe(expected2)
     })
 
     it('28- Should handle peakd post links', () => {

@@ -23,7 +23,7 @@ export const LBRY_REGEX = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i
 export const ODYSEE_REGEX = /^(https?:)?\/\/odysee.com\/\$\/embed\/.*/i
 export const ARCH_REGEX = /^(https?:)?\/\/archive.org\/embed\/.*/i
 export const SPEAK_REGEX = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\.\/]+)(&.*)?/i
-export const SPEAK_EMBED_REGEX = /^(https?:)?\/\/3speak.online\/embed\?.*/i
+export const SPEAK_EMBED_REGEX = /^(https?:)?\/\/3speak.(?:tv|co|online)\/embed\?.*/i
 export const TWITTER_REGEX = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi
 export const SPOTIFY_REGEX = /^https:\/\/open\.spotify\.com\/playlist\/(.*)?$/gi
 export const RUMBLE_REGEX  = /^https:\/\/rumble\.com\/embed\/(?<id>[a-zA-Z0-9-]+)\/\?pub=4/
