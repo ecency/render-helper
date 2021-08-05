@@ -32,3 +32,4 @@ export const VIMM_EMBED_REGEX = /^https:\/\/www.vimm.tv\/.*/i
 export const SPOTIFY_EMBED_REGEX = /^https:\/\/open\.spotify\.com\/(embed|embed-podcast)\/(playlist|show|episode|track|album)\/(.*)/i
 export const SOUNDCLOUD_EMBED_REGEX = /^https:\/\/w.soundcloud.com\/player\/.*/i
 export const TWITCH_EMBED_REGEX = /^(https?:)?\/\/player.twitch.tv\/.*/i
+export const BRAND_NEW_TUBE_REGEX = /^https:\/\/brandnewtube\.com\/embed\/[a-z0-9]+$/i
