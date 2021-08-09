@@ -21,5 +21,6 @@ export const WHITE_LIST = [
   'proofofbrain.io',
   'naturalmedicine.io',
   'bilpcoin.com',
-  'stemgeeks.net'
+  'stemgeeks.net',
+  'hiveblockexplorer.com'
 ]

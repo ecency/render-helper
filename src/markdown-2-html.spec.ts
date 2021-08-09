@@ -405,8 +405,8 @@ describe('Markdown2Html', () => {
 
     it('26- Should handle speak videos', () => {
       const input = {
-        author: 'foo333',
-        permlink: 'bar323',
+        author: 'foo326',
+        permlink: 'bar326',
         last_update: '2019-05-10T09:15:21',
         body: '[![](https://img.3speakcontent.online/xrhjxocx/post.png?v2)](https://3speak.online/watch?v=wehmoen/xrhjxocx)'
       }
@@ -441,8 +441,8 @@ describe('Markdown2Html', () => {
 
     it('29- Should handle youtu.be videos', () => {
       const input = {
-        author: 'foo353',
-        permlink: 'bar352',
+        author: 'foo329',
+        permlink: 'bar329',
         last_update: '2019-05-10T09:15:21',
         body: 'https://youtu.be/_-6hJ8sltdI'
       }
@@ -453,8 +453,8 @@ describe('Markdown2Html', () => {
 
     it('30- Should handle external similar post links', () => {
       const input = {
-        author: 'foo3534',
-        permlink: 'bar3523',
+        author: 'foo300',
+        permlink: 'bar300',
         last_update: '2019-05-10T09:15:21',
         body: '[Voice: the criteria for success or failure](https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)'
       }
@@ -465,8 +465,8 @@ describe('Markdown2Html', () => {
 
     it('31- Should handle external similar post links', () => {
       const input = {
-        author: 'foo35341',
-        permlink: 'bar35231',
+        author: 'foo331',
+        permlink: 'bar331',
         last_update: '2019-05-10T09:15:21',
         body: '[Voice: the criteria for success or failure](https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)'
       }
@@ -722,6 +722,28 @@ describe('Markdown2Html', () => {
       const expected = '<p><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"test\">test post</a></p>'
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('52 - Should handle filtered tag link', () => {
+      const input = {
+        author: 'foo352',
+        permlink: 'bar352',
+        last_update: '2021-05-10T09:15:49',
+        body: 'https://hive.blog/trending/books'
+      }
+      const expected = '<p><a class=\"markdown-topic-link\" data-filter=\"trending\" data-tag=\"books\">/trending/books</a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('53 - Should handle filtered tag internal link', () => {
+      const input = {
+        author: 'foo353',
+        permlink: 'bar353',
+        last_update: '2021-05-10T09:15:49',
+        body: '<a href="/trending/books">trending books</a>'
+      }
+      const expected = '<p><a class=\"markdown-topic-link\" data-filter=\"trending\" data-tag=\"books\">trending books</a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
     
   })
 
@@ -918,8 +940,8 @@ describe('Markdown2Html', () => {
 
     it('2- Should handle external similar post links', () => {
       const input = {
-        author: 'foo35342',
-        permlink: 'bar35232',
+        author: 'foo32',
+        permlink: 'bar32',
         last_update: '2019-05-10T09:15:21',
         body: '[Voice: the criteria for success or failure](https://app.voice.com/post/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)'
       }
@@ -930,13 +952,24 @@ describe('Markdown2Html', () => {
 
     it('3- Should handle external similar post links', () => {
       const input = {
-        author: 'foo35343',
-        permlink: 'bar35233',
+        author: 'foo33',
+        permlink: 'bar33',
         last_update: '2019-05-10T09:15:21',
         body: '[Voice: the criteria for success or failure](https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597)'
       }
       const expected = '<p><a href="https://app.voice.com/@lukestokes/voice-the-criteria-for-success-or-failure-1597453134-597" class="markdown-external-link" target="_blank" rel="noopener">Voice: the criteria for success or failure</a></p>'
 
+      expect(markdown2Html(input, false)).toBe(expected)
+    })
+
+    it('4 - Should handle filtered tag internal link', () => {
+      const input = {
+        author: 'foo34',
+        permlink: 'bar34',
+        last_update: '2021-05-10T09:15:49',
+        body: '<a href="/trending/books">trending books</a>'
+      }
+      const expected = '<p><a href=\"/trending/books\" class=\"markdown-topic-link\">trending books</a></p>'
       expect(markdown2Html(input, false)).toBe(expected)
     })
   })

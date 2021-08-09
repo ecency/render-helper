@@ -1,6 +1,6 @@
 import {
   BITCHUTE_REGEX,
-  COMMUNITY_REGEX,
+  CUSTOM_COMMUNITY_REGEX,
   INTERNAL_POST_REGEX,
   INTERNAL_POST_TAG_REGEX,
   D_TUBE_REGEX,
@@ -9,6 +9,8 @@ import {
   IPFS_REGEX,
   MENTION_REGEX,
   INTERNAL_MENTION_REGEX,
+  TOPIC_REGEX,
+  INTERNAL_TOPIC_REGEX,
   POST_REGEX,
   CCC_REGEX,
   SPEAK_REGEX,
@@ -242,8 +244,52 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
   }
 
+  // If topic with filters url
+  const topicMatch = href.match(TOPIC_REGEX)
+  if (topicMatch && WHITE_LIST.includes(topicMatch[1].replace(/www./,'')) && topicMatch.length === 4) {
+    el.setAttribute('class', 'markdown-topic-link')
+    const filter = topicMatch[2]
+    const tag = topicMatch[3]
+
+    if (el.textContent === href) {
+      el.textContent = `/${filter}/${tag}`
+    }
+    if (forApp) {
+      el.removeAttribute('href')
+
+      el.setAttribute('data-filter', filter)
+      el.setAttribute('data-tag', tag)
+    } else {
+      const h = `/${filter}/${tag}`
+      el.setAttribute('href', h)
+    }
+    return
+  }
+
+  // If topic with filters internal url
+  const itopicMatch = href.match(INTERNAL_TOPIC_REGEX)
+  if (itopicMatch && itopicMatch.length === 3) {
+    el.setAttribute('class', 'markdown-topic-link')
+    const filter = itopicMatch[1]
+    const tag = itopicMatch[2]
+
+    if (el.textContent === href) {
+      el.textContent = `/${filter}/${tag}`
+    }
+    if (forApp) {
+      el.removeAttribute('href')
+
+      el.setAttribute('data-filter', filter)
+      el.setAttribute('data-tag', tag)
+    } else {
+      const h = `/${filter}/${tag}`
+      el.setAttribute('href', h)
+    }
+    return
+  }
+
   // If a custom hive community link
-  const comMatch = href.match(COMMUNITY_REGEX)
+  const comMatch = href.match(CUSTOM_COMMUNITY_REGEX)
   if (comMatch && WHITE_LIST.includes(comMatch[1])) {
     el.setAttribute('class', 'markdown-community-link')
 
