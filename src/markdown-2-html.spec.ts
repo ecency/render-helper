@@ -735,6 +735,42 @@ describe('Markdown2Html', () => {
 
   })
 
+  describe("Brightreon support", () => {
+
+    it('Brightreon iframes', () => {
+      let expected = '<iframe src="https://www.brighteon.com/embed/5821540656001" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe>'
+      let input = {
+        author: 'foo351x',
+        permlink: 'bar351x',
+        last_update: '2021-05-10T09:15:50',
+        body: "<iframe src='https://www.brighteon.com/embed/5821540656001' width='560' height='315' frameborder='0' allowfullscreen></iframe>"
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('Brightreon embed URL', () => {
+      const expected = "<p><a class=\"markdown-video-link\" data-embed-src=\"https://www.brighteon.com/embed/5821540656001\"><span class=\"markdown-video-play\"></span></a></p>"
+      let input = {
+        author: 'foo351y',
+        permlink: 'bar351y',
+        last_update: '2021-05-10T09:16:50',
+        body: '<a href="https://www.brighteon.com/embed/5821540656001">https://www.brighteon.com/embed/5821540656001</a>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('Brightreon page URL', () => {
+      const expected = "<p><a class=\"markdown-video-link\" data-embed-src=\"https://www.brighteon.com/embed/5821540656001\"><span class=\"markdown-video-play\"></span></a></p>"
+      let input = {
+        author: 'foo351z',
+        permlink: 'bar351z',
+        last_update: '2021-05-10T09:16:50',
+        body: '<a href="https://www.brighteon.com/5821540656001">https://www.brighteon.com/5821540656001</a>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+  })
+
   describe('Sanitization', () => {
     it('1- Should remove javascript links', () => {
       const input = {

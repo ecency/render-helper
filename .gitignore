@@ -39,3 +39,5 @@ yarn.lock
 
 others
 .DS_Store
+*.marks
+*~
