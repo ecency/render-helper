@@ -701,6 +701,28 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('50 - Should handle user slash link', () => {
+      const input = {
+        author: 'foo350',
+        permlink: 'bar350',
+        last_update: '2021-05-10T09:15:49',
+        body: '<a href="/@hivesql"><img src="https://i.imgur.com/EPN8RW6.png"></a>'
+      }
+      const expected = '<p><a class=\"markdown-author-link\" data-author=\"hivesql\"><img src=\"https://images.ecency.com/p/2bP4pJr4wVimqCWjYimXJe2cnCgn8gbL3c5wQPJF23G.png?format=match&amp;mode=fit\" /></a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('51 - Should handle posts without tags internal link', () => {
+      const input = {
+        author: 'foo351',
+        permlink: 'bar351',
+        last_update: '2021-05-10T09:15:49',
+        body: '<a href="/@demo/test">test post</a>'
+      }
+      const expected = '<p><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"test\">test post</a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
+    
   })
 
   describe("Rumble support", () => {

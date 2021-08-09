@@ -1,12 +1,14 @@
 import {
   BITCHUTE_REGEX,
   COMMUNITY_REGEX,
-  COPIED_POST_REGEX,
+  INTERNAL_POST_REGEX,
+  INTERNAL_POST_TAG_REGEX,
   D_TUBE_REGEX,
   D_TUBE_REGEX2,
   IMG_REGEX,
   IPFS_REGEX,
   MENTION_REGEX,
+  INTERNAL_MENTION_REGEX,
   POST_REGEX,
   CCC_REGEX,
   SPEAK_REGEX,
@@ -128,15 +130,15 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
-  // If a copied post and profile section links
-  const cpostMatch = href.match(COPIED_POST_REGEX)
+  // If a tagged post and profile section links
+  const tpostMatch = href.match(INTERNAL_POST_TAG_REGEX)
   if (
-    (cpostMatch && WHITE_LIST.includes(cpostMatch[1].substring(1))) || (cpostMatch && cpostMatch.length === 4 && cpostMatch[1].indexOf('/') !== 0)
+    (tpostMatch && WHITE_LIST.includes(tpostMatch[1].substring(1))) || (tpostMatch && tpostMatch.length === 4 && tpostMatch[1].indexOf('/') !== 0)
   ) {
-    if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings'].includes(cpostMatch[3])) {
+    if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings'].includes(tpostMatch[3])) {
       el.setAttribute('class', 'markdown-profile-link')
-      const author = cpostMatch[2].replace('@', '').toLowerCase()
-      const section = cpostMatch[3]
+      const author = tpostMatch[2].replace('@', '').toLowerCase()
+      const section = tpostMatch[3]
 
       if (el.textContent === href) {
         el.textContent = `/@${author}/${section}`
@@ -153,12 +155,76 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.setAttribute('class', 'markdown-post-link')
 
       let tag = 'post'
-      if (!WHITE_LIST.includes(cpostMatch[1].substring(1))) {
-        [, tag] = cpostMatch
+      if (!WHITE_LIST.includes(tpostMatch[1].substring(1))) {
+        [, tag] = tpostMatch
       }
 
-      const author = cpostMatch[2].replace('@', '')
-      const permlink = cpostMatch[3]
+      const author = tpostMatch[2].replace('@', '')
+      const permlink = tpostMatch[3]
+      if (el.textContent === href) {
+        el.textContent = `/@${author}/${permlink}`
+      }
+      if (forApp) {
+        el.removeAttribute('href')
+        el.setAttribute('data-tag', tag)
+        el.setAttribute('data-author', author)
+        el.setAttribute('data-permlink', permlink)
+      } else {
+        const h = `/${tag}/@${author}/${permlink}`
+        el.setAttribute('href', h)
+      }
+
+      return
+    }
+  }
+
+  // If a hive user with internal url
+  const imentionMatch = href.match(INTERNAL_MENTION_REGEX)
+  if (imentionMatch) {
+    el.setAttribute('class', 'markdown-author-link')
+    const author = imentionMatch[0].replace('/@', '').toLowerCase()
+    if (el.textContent === href) {
+      el.textContent = `@${author}`
+    }
+    if (forApp) {
+      el.removeAttribute('href')
+
+      el.setAttribute('data-author', author)
+    } else {
+      const h = `/@${author}`
+      el.setAttribute('href', h)
+    }
+    return
+  }
+
+  // If a copied post and profile section links
+  const cpostMatch = href.match(INTERNAL_POST_REGEX)
+  if (
+    (cpostMatch && cpostMatch.length === 3 && cpostMatch[1].indexOf('@') === 0)
+  ) {
+    if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings'].includes(cpostMatch[2])) {
+      el.setAttribute('class', 'markdown-profile-link')
+      const author = cpostMatch[1].replace('@', '').toLowerCase()
+      const section = cpostMatch[2]
+
+      if (el.textContent === href) {
+        el.textContent = `/@${author}/${section}`
+      }
+      if (forApp) {
+        const ha = `https://ecency.com/@${author}/${section}`
+        el.setAttribute('href', ha)
+      } else {
+        const h = `/@${author}/${section}`
+        el.setAttribute('href', h)
+      }
+      return
+    } else {
+      el.setAttribute('class', 'markdown-post-link')
+
+      const tag = 'post'
+
+      const author = cpostMatch[1].replace('@', '')
+      const permlink = cpostMatch[2]
       if (el.textContent === href) {
         el.textContent = `/@${author}/${permlink}`
       }

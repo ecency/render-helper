@@ -4,7 +4,9 @@ export const IPFS_REGEX = /^https?:\/\/[^/]+\/(ip[fn]s)\/([^/?#]+)/gim
 export const POST_REGEX = /^https?:\/\/(.*)\/(.*)\/(@[\w.\d-]+)\/(.*)/i
 export const CCC_REGEX = /^https?:\/\/(.*)\/ccc\/([\w.\d-]+)\/(.*)/i
 export const MENTION_REGEX = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i
-export const COPIED_POST_REGEX = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i
+export const INTERNAL_MENTION_REGEX = /^\/@[\w.\d-]+$/i
+export const INTERNAL_POST_TAG_REGEX = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i
+export const INTERNAL_POST_REGEX = /^\/(@[\w.\d-]+)\/(.*)$/i
 export const COMMUNITY_REGEX = /^https?:\/\/(.*)\/c\/(hive-\d+)(.*)/i
 export const YOUTUBE_REGEX = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^& \n<]+)(?:[^ \n<]+)?/g
 export const YOUTUBE_EMBED_REGEX = /^(https?:)?\/\/www.youtube.com\/embed\/.*/i
