@@ -15,10 +15,10 @@ import {
   TWITTER_REGEX,
   VIMEO_REGEX,
   WHITE_LIST,
-  RUMBLE_REGEX,
-  BRIGHTEON_REGEX,
   YOUTUBE_REGEX,
   SPOTIFY_REGEX,
+  RUMBLE_REGEX,
+  BRIGHTEON_REGEX,
   DOMParser
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
@@ -232,8 +232,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (IWmatch && el.textContent.trim() === href) {
     try {
       
-      const video = IWmatch.groups.video
-      const domain = IWmatch.groups.domain
+      const video = IWmatch[2]
+      const domain = IWmatch[1]
       const div =  el.ownerDocument.createElement('div')
       
       //div.setAttribute('style', "margin-bottom: 10px; position: relative; padding-bottom: 56%; padding-top: 35px; height: 0; overflow: hidden;")
@@ -267,7 +267,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   const BNmatch = href.match(BRIGHTEON_REGEX)
   if (BNmatch && el.textContent.trim() === href) {
     try {
-      const vid = BNmatch.groups.id
+      const vid = BNmatch[3]
       const embedSrc = `https://www.brighteon.com/embed/${vid}`
       el.setAttribute('class', 'markdown-video-link')
       el.removeAttribute('href')
@@ -284,23 +284,6 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
   }
   
-  
-  const RBmatch = href.match(RUMBLE_REGEX)
-  if (RBmatch && el.textContent.trim() === href) {
-    const vid = RBmatch.groups.id
-    const embedSrc = `https://www.rumble.com/embed/${vid}/?pub=4`
-    el.setAttribute('class', 'markdown-video-link')
-    el.removeAttribute('href')
-
-    el.textContent = ''
-    el.setAttribute('data-embed-src', embedSrc)
-    const play = el.ownerDocument.createElement('span')
-    play.setAttribute('class', 'markdown-video-play')
-    el.appendChild(play)
-    return
-  }
-
-
   const BCmatch = href.match(BITCHUTE_REGEX)
   if (BCmatch && el.textContent.trim() === href) {
     const e = BITCHUTE_REGEX.exec(href)
@@ -319,7 +302,23 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     return
   }
 
+  const RBmatch = href.match(RUMBLE_REGEX)
+  if (RBmatch && el.textContent.trim() === href) {
+    const e = RUMBLE_REGEX.exec(href)
+    if (e[1]) {
+      const vid = e[1]
+      const embedSrc = `https://www.rumble.com/embed/${vid}/?pub=4`
+      el.setAttribute('class', 'markdown-video-link')
+      el.removeAttribute('href')
 
+      el.textContent = ''
+      el.setAttribute('data-embed-src', embedSrc)
+      const play = el.ownerDocument.createElement('span')
+      play.setAttribute('class', 'markdown-video-play')
+      el.appendChild(play)
+      return
+    }
+  }
 
   // If a youtube video
   let match = href.match(YOUTUBE_REGEX)

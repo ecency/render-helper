@@ -11,7 +11,7 @@ export const YOUTUBE_EMBED_REGEX = /^(https?:)?\/\/www.youtube.com\/embed\/.*/i
 export const VIMEO_REGEX = /(https?:\/\/)?(www\.)?(?:vimeo)\.com.*(?:videos|video|channels|)\/([\d]+)/i
 export const VIMEO_EMBED_REGEX = /https:\/\/player\.vimeo\.com\/video\/([0-9]+)/
 export const BITCHUTE_REGEX = /^(?:https?:\/\/)?(?:www\.)?bitchute.com\/(?:video|embed)\/([a-z0-9]+)/i
-export const INFOWARS_REGEX = /https:\/\/(?<domain>banned.video|infowars\.com|freeworldnews\.tv|2020electioncenter\.com)\/watch\?id=(?<video>[0-9a-f]+)/
+export const INFOWARS_REGEX = /https:\/\/(banned.video|infowars\.com|freeworldnews\.tv|2020electioncenter\.com)\/watch\?id=([0-9a-f]+)/
 export const INFOWARS_EMBED_REGEX = /https:\/\/api\.banned\.video\/embed\/(?<video>[0-9a-f]+)/
 export const D_TUBE_REGEX = /(https?:\/\/d.tube.#!\/v\/)(\w+)\/(\w+)/g
 export const D_TUBE_REGEX2 = /(https?:\/\/d.tube\/v\/)(\w+)\/(\w+)/g
@@ -23,11 +23,11 @@ export const LBRY_REGEX = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i
 export const ODYSEE_REGEX = /^(https?:)?\/\/odysee.com\/\$\/embed\/.*/i
 export const ARCH_REGEX = /^(https?:)?\/\/archive.org\/embed\/.*/i
 export const SPEAK_REGEX = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\.\/]+)(&.*)?/i
-export const SPEAK_EMBED_REGEX = /^(https?:)?\/\/3speak.(?:tv|co|online)\/embed\?.*/i
+export const SPEAK_EMBED_REGEX = /^(https?:)?\/\/3speak.([a-z]+)\/embed\?.*/i
 export const TWITTER_REGEX = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi
 export const SPOTIFY_REGEX = /^https:\/\/open\.spotify\.com\/playlist\/(.*)?$/gi
-export const RUMBLE_REGEX  = /^https:\/\/rumble\.com\/embed\/(?<id>[a-zA-Z0-9-]+)\/\?pub=4/
-export const BRIGHTEON_REGEX = /^https?:\/\/(www\.)?brighteon\.com\/(?:embed\/)?(?<id>[0-9a-f-]+)/i
+export const RUMBLE_REGEX  = /^https:\/\/rumble.com\/embed\/([a-zA-Z0-9-]+)\/\?pub=4/
+export const BRIGHTEON_REGEX = /^https?:\/\/(www\.)?brighteon\.com\/(embed\/)?(.*[0-9].*)/i
 export const VIMM_EMBED_REGEX = /^https:\/\/www.vimm.tv\/.*/i
 export const SPOTIFY_EMBED_REGEX = /^https:\/\/open\.spotify\.com\/(embed|embed-podcast)\/(playlist|show|episode|track|album)\/(.*)/i
 export const SOUNDCLOUD_EMBED_REGEX = /^https:\/\/w.soundcloud.com\/player\/.*/i

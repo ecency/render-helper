@@ -1,7 +1,4 @@
-import { ARCH_REGEX, DAPPLR_REGEX, INFOWARS_REGEX, INFOWARS_EMBED_REGEX, LBRY_REGEX, TRUVVL_REGEX, 
-ODYSEE_REGEX, BITCHUTE_REGEX, RUMBLE_REGEX, BRIGHTEON_REGEX, VIMEO_EMBED_REGEX, SPEAK_EMBED_REGEX,
-VIMM_EMBED_REGEX, D_TUBE_EMBED_REGEX, SPOTIFY_EMBED_REGEX, SOUNDCLOUD_EMBED_REGEX, 
-TWITCH_EMBED_REGEX, YOUTUBE_EMBED_REGEX, BRAND_NEW_TUBE_REGEX} from '../consts'
+import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX, INFOWARS_EMBED_REGEX, RUMBLE_REGEX, BRIGHTEON_REGEX, VIMEO_EMBED_REGEX, SPEAK_EMBED_REGEX, VIMM_EMBED_REGEX, D_TUBE_EMBED_REGEX, SPOTIFY_EMBED_REGEX, SOUNDCLOUD_EMBED_REGEX, TWITCH_EMBED_REGEX, YOUTUBE_EMBED_REGEX, BRAND_NEW_TUBE_REGEX } from '../consts'
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
@@ -147,6 +144,27 @@ export function iframe(el: HTMLElement): void {
   }
   } catch (e) {
     console.log(e)
+  }
+
+  // Rumble
+  if (src.match(RUMBLE_REGEX)) {
+    el.setAttribute('src', src)
+    el.setAttribute('frameborder', '0')
+    return
+  }
+
+  // Brigtheon
+  if (src.match(BRIGHTEON_REGEX)) {
+    el.setAttribute('src', src)
+    el.setAttribute('frameborder', '0')
+    return
+  }
+
+  // Brandnew Tube
+  if (src.match(BRAND_NEW_TUBE_REGEX)) {
+    el.setAttribute('src', src)
+    el.setAttribute('frameborder', '0')
+    return;
   }
 
   const replaceNode = el.ownerDocument.createElement('div')

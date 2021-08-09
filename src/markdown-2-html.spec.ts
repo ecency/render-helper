@@ -711,7 +711,6 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-
   })
 
   describe('Sanitization', () => {
