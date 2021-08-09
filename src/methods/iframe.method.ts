@@ -1,4 +1,4 @@
-import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX } from '../consts'
+import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, BITCHUTE_REGEX, RUMBLE_REGEX } from '../consts'
 
 export function iframe(el: HTMLElement): void {
   const src = el.getAttribute('src')
@@ -114,6 +114,12 @@ export function iframe(el: HTMLElement): void {
   // archive.org
   if (src.match(ARCH_REGEX)) {
     el.setAttribute('src', src)
+    return
+  }
+
+  if (src.match(RUMBLE_REGEX)) {
+    el.setAttribute('src', src)
+    el.setAttribute('frameborder', '0')
     return
   }
 

@@ -16,6 +16,7 @@ import {
   WHITE_LIST,
   YOUTUBE_REGEX,
   SPOTIFY_REGEX,
+  RUMBLE_REGEX,
   DOMParser
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
@@ -241,11 +242,24 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const play = el.ownerDocument.createElement('span')
     play.setAttribute('class', 'markdown-video-play')
     el.appendChild(play)
-    return;
+    return
   }
 
+  const RBmatch = href.match(RUMBLE_REGEX)
+  if (RBmatch && el.textContent.trim() === href) {
+    const vid = RBmatch.groups.id
+    const embedSrc = `https://www.rumble.com/embed/${vid}/?pub=4`
+    el.setAttribute('class', 'markdown-video-link')
+    el.removeAttribute('href')
 
-  
+    el.textContent = ''
+    el.setAttribute('data-embed-src', embedSrc)
+    const play = el.ownerDocument.createElement('span')
+    play.setAttribute('class', 'markdown-video-play')
+    el.appendChild(play)
+    return
+  }
+
   // If a youtube video
   let match = href.match(YOUTUBE_REGEX)
   if (match && el.textContent.trim() === href) {
@@ -367,7 +381,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
-        // el.setAttribute('data-video-href', videoHref);
+        // el.setAttribute('data-video-href', videoHref)
         el.setAttribute('data-embed-src', videoHref)
 
         const thumbImg = el.ownerDocument.createElement('img')

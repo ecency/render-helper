@@ -19,3 +19,4 @@ export declare const ARCH_REGEX: RegExp;
 export declare const SPEAK_REGEX: RegExp;
 export declare const TWITTER_REGEX: RegExp;
 export declare const SPOTIFY_REGEX: RegExp;
+export declare const RUMBLE_REGEX: RegExp;
