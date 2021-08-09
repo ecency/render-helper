@@ -29,3 +29,4 @@ export declare const VIMM_EMBED_REGEX: RegExp;
 export declare const SPOTIFY_EMBED_REGEX: RegExp;
 export declare const SOUNDCLOUD_EMBED_REGEX: RegExp;
 export declare const TWITCH_EMBED_REGEX: RegExp;
+export declare const BRAND_NEW_TUBE_REGEX: RegExp;

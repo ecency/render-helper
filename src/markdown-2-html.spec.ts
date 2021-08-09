@@ -771,6 +771,21 @@ describe('Markdown2Html', () => {
     })
   })
 
+  describe("Brand new tube support", () => {
+
+    it('Brand new tube iframes', () => {
+      let expected = '<iframe src=\"https://brandnewtube.com/embed/BSqeH7nhg8I41rM\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe>'
+      let input = {
+        author: 'foo352x',
+        permlink: 'bar352x',
+        last_update: '2021-05-10T09:15:50',
+        body: "<iframe src='https://brandnewtube.com/embed/BSqeH7nhg8I41rM' frameborder='0' width='700' height='400' allowfullscreen></iframe>"
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+  })
+
   describe('Sanitization', () => {
     it('1- Should remove javascript links', () => {
       const input = {
