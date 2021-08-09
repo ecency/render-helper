@@ -247,7 +247,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   // If topic with filters url
   const topicMatch = href.match(TOPIC_REGEX)
   if (topicMatch && WHITE_LIST.includes(topicMatch[1].replace(/www./,'')) && topicMatch.length === 4) {
-    el.setAttribute('class', 'markdown-topic-link')
+    el.setAttribute('class', 'markdown-tag-link')
     const filter = topicMatch[2]
     const tag = topicMatch[3]
 
@@ -269,7 +269,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   // If topic with filters internal url
   const itopicMatch = href.match(INTERNAL_TOPIC_REGEX)
   if (itopicMatch && itopicMatch.length === 3) {
-    el.setAttribute('class', 'markdown-topic-link')
+    el.setAttribute('class', 'markdown-tag-link')
     const filter = itopicMatch[1]
     const tag = itopicMatch[2]
 

@@ -730,7 +730,7 @@ describe('Markdown2Html', () => {
         last_update: '2021-05-10T09:15:49',
         body: 'https://hive.blog/trending/books'
       }
-      const expected = '<p><a class=\"markdown-topic-link\" data-filter=\"trending\" data-tag=\"books\">/trending/books</a></p>'
+      const expected = '<p><a class=\"markdown-tag-link\" data-filter=\"trending\" data-tag=\"books\">/trending/books</a></p>'
       expect(markdown2Html(input)).toBe(expected)
     })
 
@@ -741,7 +741,7 @@ describe('Markdown2Html', () => {
         last_update: '2021-05-10T09:15:49',
         body: '<a href="/trending/books">trending books</a>'
       }
-      const expected = '<p><a class=\"markdown-topic-link\" data-filter=\"trending\" data-tag=\"books\">trending books</a></p>'
+      const expected = '<p><a class=\"markdown-tag-link\" data-filter=\"trending\" data-tag=\"books\">trending books</a></p>'
       expect(markdown2Html(input)).toBe(expected)
     })
     
@@ -969,7 +969,7 @@ describe('Markdown2Html', () => {
         last_update: '2021-05-10T09:15:49',
         body: '<a href="/trending/books">trending books</a>'
       }
-      const expected = '<p><a href=\"/trending/books\" class=\"markdown-topic-link\">trending books</a></p>'
+      const expected = '<p><a href=\"/trending/books\" class=\"markdown-tag-link\">trending books</a></p>'
       expect(markdown2Html(input, false)).toBe(expected)
     })
   })
