@@ -248,23 +248,27 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   const RBmatch = href.match(RUMBLE_REGEX)
   if (RBmatch && el.textContent.trim() === href) {
-    const vid = RBmatch.groups.id
-    const embedSrc = `https://www.rumble.com/embed/${vid}/?pub=4`
-    el.setAttribute('class', 'markdown-video-link')
-    el.removeAttribute('href')
+    const e = RUMBLE_REGEX.exec(href)
+    if (e[1]) {
+      const vid = e[1]
+      const embedSrc = `https://www.rumble.com/embed/${vid}/?pub=4`
+      el.setAttribute('class', 'markdown-video-link')
+      el.removeAttribute('href')
 
-    el.textContent = ''
-    el.setAttribute('data-embed-src', embedSrc)
-    const play = el.ownerDocument.createElement('span')
-    play.setAttribute('class', 'markdown-video-play')
-    el.appendChild(play)
-    return
+      el.textContent = ''
+      el.setAttribute('data-embed-src', embedSrc)
+      const play = el.ownerDocument.createElement('span')
+      play.setAttribute('class', 'markdown-video-play')
+      el.appendChild(play)
+      return
+    }
   }
 
   const BNmatch = href.match(BRIGHTEON_REGEX)
   if (BNmatch && el.textContent.trim() === href) {
-    try {
-      const vid = BNmatch.groups.id
+    const e = BRIGHTEON_REGEX.exec(href)
+    if (e[2]) {
+      const vid = e[2]
       const embedSrc = `https://www.brighteon.com/embed/${vid}`
       el.setAttribute('class', 'markdown-video-link')
       el.removeAttribute('href')
@@ -275,9 +279,6 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       play.setAttribute('class', 'markdown-video-play')
       el.appendChild(play)
       return
-    } catch (e) {
-      console.log(e)
-      console.log({BNmatch})
     }
   }
 

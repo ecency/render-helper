@@ -24,8 +24,8 @@ export const SPEAK_REGEX = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3spe
 export const SPEAK_EMBED_REGEX = /^(https?:)?\/\/3speak.([a-z]+)\/embed\?.*/i
 export const TWITTER_REGEX = /(?:https?:\/\/(?:(?:twitter\.com\/(.*?)\/status\/(.*))))/gi
 export const SPOTIFY_REGEX = /^https:\/\/open\.spotify\.com\/playlist\/(.*)?$/gi
-export const RUMBLE_REGEX  = /^https:\/\/rumble.com\/embed\/(?<id>[a-zA-Z0-9-]+)\/\?pub=4/
-export const BRIGHTEON_REGEX = /^https?:\/\/(www\.)?brighteon\.com\/(?:embed\/)?(?<id>[0-9a-f-]+)/i
+export const RUMBLE_REGEX  = /^https:\/\/rumble.com\/embed\/([a-zA-Z0-9-]+)\/\?pub=4/
+export const BRIGHTEON_REGEX = /^https?:\/\/(www\.)?brighteon\.com\/(?:embed\/)?(.*[0-9].*)/i
 export const VIMM_EMBED_REGEX = /^https:\/\/www.vimm.tv\/.*/i
 export const SPOTIFY_EMBED_REGEX = /^https:\/\/open\.spotify\.com\/(embed|embed-podcast)\/(playlist|show|episode|track|album)\/(.*)/i
 export const SOUNDCLOUD_EMBED_REGEX = /^https:\/\/w.soundcloud.com\/player\/.*/i
