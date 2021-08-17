@@ -2,6 +2,7 @@ import he from 'he'
 import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
 import { Entry } from './types'
+import hljs from 'highlight.js'
 
 const Remarkable = require('remarkable')
 
@@ -32,7 +33,24 @@ function postBodySummary(entryBody: string, length?: number): string {
     return ''
   }
 
-  const md = new Remarkable({html: true, breaks: true, linkify: false})
+  const md = new Remarkable({
+    html: true,
+    breaks: true,
+    linkify: false,
+    highlight: function (str: string, lang: string) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value
+        } catch (err) {}
+      }
+
+      try {
+        return hljs.highlightAuto(str).value;
+      } catch (err) {}
+
+      return ''
+    }
+  })
   // Convert markdown to html
   let text = md.render(entryBody)
 

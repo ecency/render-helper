@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "he": "^1.2.0",
+    "highlight.js": "^11.2.0",
     "lru-cache": "^5.1.1",
     "multihashes": "0.4.13",
     "path": "^0.12.7",

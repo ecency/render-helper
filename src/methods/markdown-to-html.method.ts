@@ -1,12 +1,31 @@
 import { traverse } from './traverse.method'
 import { sanitizeHtml } from './sanitize-html.method'
 import { DOMParser } from '../consts'
+import hljs from 'highlight.js'
 import xmldom from 'xmldom'
 
 const Remarkable = require('remarkable')
 
 export function markdownToHTML(input: string, forApp: boolean, webp: boolean): string {
-  const md = new Remarkable({ html: true, breaks: true, typographer: false, linkify: true })
+  const md = new Remarkable({
+    html: true,
+    breaks: true,
+    typographer: false,
+    linkify: true,
+    highlight: function (str: string, lang: string) {
+      if (lang && hljs.getLanguage(lang)) {
+        try {
+          return hljs.highlight(lang, str).value
+        } catch (err) {}
+      }
+
+      try {
+        return hljs.highlightAuto(str).value;
+      } catch (err) {}
+
+      return ''
+    }
+  })
   const XMLSerializer = new xmldom.XMLSerializer()
 
   if (!input) {
