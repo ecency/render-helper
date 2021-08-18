@@ -1,9 +1,9 @@
 import { traverse } from './traverse.method'
 import { sanitizeHtml } from './sanitize-html.method'
 import { DOMParser } from '../consts'
-import hljs from 'highlight.js'
 import xmldom from 'xmldom'
 
+const lolight = require('lolight')
 const Remarkable = require('remarkable')
 
 export function markdownToHTML(input: string, forApp: boolean, webp: boolean): string {
@@ -13,17 +13,14 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
     typographer: false,
     linkify: true,
     highlight: function (str: string, lang: string) {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(lang, str).value
-        } catch (err) {}
-      }
-
       try {
-        return hljs.highlightAuto(str).value;
-      } catch (err) {}
+        const tokens = lolight.tok(str);
+        return tokens.map(
+          (token: string[]) => `<span class="ll-${token[0]}">${token[1]}</span>`
+        ).join('')
+      } catch (err) { console.error(err) }
 
-      return ''
+      return str
     }
   })
   const XMLSerializer = new xmldom.XMLSerializer()

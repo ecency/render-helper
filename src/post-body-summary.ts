@@ -2,8 +2,8 @@ import he from 'he'
 import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
 import { Entry } from './types'
-import hljs from 'highlight.js'
 
+const lolight = require('lolight')
 const Remarkable = require('remarkable')
 
 const joint = (arr: string[], limit = 200) => {
@@ -38,17 +38,14 @@ function postBodySummary(entryBody: string, length?: number): string {
     breaks: true,
     linkify: false,
     highlight: function (str: string, lang: string) {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(lang, str).value
-        } catch (err) {}
-      }
-
       try {
-        return hljs.highlightAuto(str).value;
-      } catch (err) {}
+        const tokens = lolight.tok(str);
+        return tokens.map(
+          (token: string[]) => `<span class="ll-${token[0]}">${token[1]}</span>`
+        ).join('')
+      } catch (err) { console.error(err) }
 
-      return ''
+      return str
     }
   })
   // Convert markdown to html
