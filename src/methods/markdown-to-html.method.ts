@@ -12,7 +12,7 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
     breaks: true,
     typographer: false,
     linkify: true,
-    highlight: function (str: string, lang: string) {
+    highlight: function (str: string) {
       try {
         const tokens = lolight.tok(str);
         return tokens.map(

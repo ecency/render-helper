@@ -37,7 +37,7 @@ function postBodySummary(entryBody: string, length?: number): string {
     html: true,
     breaks: true,
     linkify: false,
-    highlight: function (str: string, lang: string) {
+    highlight: function (str: string) {
       try {
         const tokens = lolight.tok(str);
         return tokens.map(
