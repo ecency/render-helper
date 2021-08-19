@@ -3,6 +3,7 @@ import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
 import { Entry } from './types'
 
+const lolight = require('lolight')
 const Remarkable = require('remarkable')
 
 const joint = (arr: string[], limit = 200) => {
@@ -32,7 +33,21 @@ function postBodySummary(entryBody: string, length?: number): string {
     return ''
   }
 
-  const md = new Remarkable({html: true, breaks: true, linkify: false})
+  const md = new Remarkable({
+    html: true,
+    breaks: true,
+    linkify: false,
+    highlight: function (str: string) {
+      try {
+        const tokens = lolight.tok(str);
+        return tokens.map(
+          (token: string[]) => `<span class="ll-${token[0]}">${token[1]}</span>`
+        ).join('')
+      } catch (err) { console.error(err) }
+
+      return str
+    }
+  })
   // Convert markdown to html
   let text = md.render(entryBody)
 
