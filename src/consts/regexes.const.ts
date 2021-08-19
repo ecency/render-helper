@@ -35,3 +35,5 @@ export const SPOTIFY_EMBED_REGEX = /^https:\/\/open\.spotify\.com\/(embed|embed-
 export const SOUNDCLOUD_EMBED_REGEX = /^https:\/\/w.soundcloud.com\/player\/.*/i
 export const TWITCH_EMBED_REGEX = /^(https?:)?\/\/player.twitch.tv\/.*/i
 export const BRAND_NEW_TUBE_REGEX = /^https:\/\/brandnewtube\.com\/embed\/[a-z0-9]+$/i
+export const LOOM_REGEX = /^(https?:)?\/\/www.loom.com\/share\/(.*)/i
+export const LOOM_EMBED_REGEX = /^(https?:)?\/\/www.loom.com\/embed\/(.*)/i

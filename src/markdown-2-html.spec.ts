@@ -760,6 +760,28 @@ describe('Markdown2Html', () => {
       }
       expect(markdown2Html(input)).toBe(SNAPSHOT_JSON.markdown_2_html_traversing_54_should_highlight_code)
     })
+
+    it('55 - Should detect loom share', () => {
+      const input = {
+        author: 'foo355',
+        permlink: 'bar355',
+        last_update: '2021-08-18T09:15:49',
+        body: 'https://www.loom.com/share/5bbdeb480ba84e65b1b3de8c190e2003'
+      }
+      const expected = '<p><a class=\"markdown-video-link markdown-video-link-loom\"><iframe frameborder=\"0\" allowfullscreen=\"true\" src=\"https://www.loom.com/embed/5bbdeb480ba84e65b1b3de8c190e2003\" sandbox=\"allow-scripts allow-same-origin allow-popups\"></iframe></a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('56 - Should detect loom embed', () => {
+      const input = {
+        author: 'foo356',
+        permlink: 'bar356',
+        last_update: '2021-08-18T09:15:49',
+        body: '<iframe width="640" height="327" src="https://www.loom.com/embed/5bbdeb480ba84e65b1b3de8c190e2003" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>'
+      }
+      const expected = '<iframe src=\"https://www.loom.com/embed/5bbdeb480ba84e65b1b3de8c190e2003\" frameborder=\"0\" webkitallowfullscreen=\"webkitallowfullscreen\" mozallowfullscreen=\"mozallowfullscreen\" allowfullscreen=\"allowfullscreen\"></iframe>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {

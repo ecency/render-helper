@@ -22,7 +22,8 @@ import {
   SPOTIFY_REGEX,
   RUMBLE_REGEX,
   BRIGHTEON_REGEX,
-  DOMParser
+  DOMParser,
+  LOOM_REGEX
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
@@ -485,6 +486,30 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.removeAttribute('href')
 
       const embedSrc = `https://open.spotify.com/embed/playlist/${e[1]}`
+
+      el.textContent = ''
+
+      const ifr = el.ownerDocument.createElement('iframe')
+      ifr.setAttribute('frameborder', '0')
+      ifr.setAttribute('allowfullscreen', 'true')
+      ifr.setAttribute('src', embedSrc)
+      ifr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
+      el.appendChild(ifr)
+
+      return      
+    }
+  }
+
+  // If a spotify audio
+  match = href.match(LOOM_REGEX)
+  if (match && el.textContent.trim() === href) {
+    const e = LOOM_REGEX.exec(href)
+    if (e[2]) {
+      
+      el.setAttribute('class', 'markdown-video-link markdown-video-link-loom')
+      el.removeAttribute('href')
+
+      const embedSrc = `https://www.loom.com/embed/${e[2]}`
 
       el.textContent = ''
 
