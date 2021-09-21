@@ -4,7 +4,7 @@ import { cacheGet, cacheSet } from './cache'
 import { Entry } from './types'
 
 const lolight = require('lolight')
-const Remarkable = require('remarkable')
+const { Remarkable } = require('remarkable')
 
 const joint = (arr: string[], limit = 200) => {
   let result = '';
@@ -36,7 +36,6 @@ function postBodySummary(entryBody: string, length?: number): string {
   const md = new Remarkable({
     html: true,
     breaks: true,
-    linkify: false,
     highlight: function (str: string) {
       try {
         const tokens = lolight.tok(str);

@@ -782,6 +782,29 @@ describe('Markdown2Html', () => {
       const expected = '<iframe src=\"https://www.loom.com/embed/5bbdeb480ba84e65b1b3de8c190e2003\" frameborder=\"0\" webkitallowfullscreen=\"webkitallowfullscreen\" mozallowfullscreen=\"mozallowfullscreen\" allowfullscreen=\"allowfullscreen\"></iframe>'
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('57 - Should post linkify failed links', () => {
+      const input = {
+        author: 'foo357',
+        permlink: 'bar357',
+        last_update: '2021-08-18T09:15:49',
+        body: '<p><strong>THINGS WE CAN DO TO PREPARE FOR INDEFINITE LOCKDOWNS<br></strong>https://peakd.com/hive-123046/@ecotrain/ecotrain-question-of-the-week-5-2tie-up-post-things-we-can-do-to-prepare-for-indefinite-lockdowns </p>'
+      }
+      const expected = '<p><strong>THINGS WE CAN DO TO PREPARE FOR INDEFINITE LOCKDOWNS<br /></strong><a data-tag=\"hive-123046\" data-author=\"ecotrain\" data-permlink=\"ecotrain-question-of-the-week-5-2tie-up-post-things-we-can-do-to-prepare-for-indefinite-lockdowns\" class=\"markdown-post-link\">/@ecotrain/ecotrain-question-of-the-week-5-2tie-up-post-things-we-can-do-to-prepare-for-indefinite-lockdowns</a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('58 - Should post linkify failed, spaced links', () => {
+      const input = {
+        author: 'foo358',
+        permlink: 'bar358',
+        last_update: '2021-08-18T09:15:49',
+        body: `<p><strong>It's a Secret, But is it good to have secrets?</strong><br> 
+        https://peakd.com/hive-123046/@ecotrain/ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets </p> `
+      }
+      const expected = '<p><strong>It\'s a Secret, But is it good to have secrets?</strong><br /><a data-tag=\"hive-123046\" data-author=\"ecotrain\" data-permlink=\"ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets\" class=\"markdown-post-link\">/@ecotrain/ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets</a></p>'
+      expect(markdown2Html(input)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {

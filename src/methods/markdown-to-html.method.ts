@@ -4,14 +4,15 @@ import { DOMParser } from '../consts'
 import xmldom from 'xmldom'
 
 const lolight = require('lolight')
-const Remarkable = require('remarkable')
+const { Remarkable } = require('remarkable')
+const { linkify } = require('remarkable/linkify')
+
 
 export function markdownToHTML(input: string, forApp: boolean, webp: boolean): string {
   const md = new Remarkable({
     html: true,
     breaks: true,
     typographer: false,
-    linkify: true,
     highlight: function (str: string) {
       try {
         const tokens = lolight.tok(str);
@@ -22,7 +23,7 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
 
       return str
     }
-  })
+  }).use(linkify)
   const XMLSerializer = new xmldom.XMLSerializer()
 
   if (!input) {

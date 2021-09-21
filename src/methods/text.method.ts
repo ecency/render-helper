@@ -1,4 +1,4 @@
-import { IMG_REGEX, YOUTUBE_REGEX, DOMParser } from '../consts'
+import { IMG_REGEX, YOUTUBE_REGEX, WHITE_LIST, DOMParser, POST_REGEX,  } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { linkify } from './linkify.method'
 
@@ -44,6 +44,20 @@ export function text(node: HTMLElement, forApp: boolean, webp: boolean): void {
       play.setAttribute('class', 'markdown-video-play')
 
       const replaceNode = DOMParser.parseFromString(`<p><a ${attrs}>${thumbImg}${play}</a></p>`)
+      node.parentNode.replaceChild(replaceNode, node)
+    }
+  }
+  if (node.nodeValue && typeof node.nodeValue === 'string') {
+    const postMatch = node.nodeValue.trim().match(POST_REGEX)
+    if (postMatch && WHITE_LIST.includes(postMatch[1].replace(/www./,''))) {
+      const tag = postMatch[2]
+      const author = postMatch[3].replace('@', '')
+      const permlink = postMatch[4]
+
+      const attrs = forApp ? `data-tag="${tag}" data-author="${author}" data-permlink="${permlink}" class="markdown-post-link"` : `class="markdown-post-link" href="/${tag}/@${author}/${permlink}"`
+      const replaceNode = DOMParser.parseFromString(
+        `<a ${attrs}>/@${author}/${permlink}</a>`
+      )
       node.parentNode.replaceChild(replaceNode, node)
     }
   }

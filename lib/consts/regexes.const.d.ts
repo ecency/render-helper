@@ -1,3 +1,4 @@
+export declare const URL_REGEX: RegExp;
 export declare const IMG_REGEX: RegExp;
 export declare const IPFS_REGEX: RegExp;
 export declare const POST_REGEX: RegExp;
