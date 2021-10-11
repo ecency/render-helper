@@ -24,6 +24,20 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
       return str
     }
   }).use(linkify)
+  md.core.ruler.enable([
+    'abbr'
+  ]);
+  md.block.ruler.enable([
+    'footnote',
+    'deflist'
+  ]);
+  md.inline.ruler.enable([
+    'footnote_inline',
+    'ins',
+    'mark',
+    'sub',
+    'sup'
+  ]);
   const XMLSerializer = new xmldom.XMLSerializer()
 
   if (!input) {
