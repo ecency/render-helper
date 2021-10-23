@@ -38,3 +38,4 @@ export const TWITCH_EMBED_REGEX = /^(https?:)?\/\/player.twitch.tv\/.*/i
 export const BRAND_NEW_TUBE_REGEX = /^https:\/\/brandnewtube\.com\/embed\/[a-z0-9]+$/i
 export const LOOM_REGEX = /^(https?:)?\/\/www.loom.com\/share\/(.*)/i
 export const LOOM_EMBED_REGEX = /^(https?:)?\/\/www.loom.com\/embed\/(.*)/i
+export const AUREAL_EMBED_REGEX = /^(https?:\/\/)?(www\.)?(?:aureal-embed)\.web\.app\/([0-9]+)/i
