@@ -805,6 +805,18 @@ describe('Markdown2Html', () => {
       const expected = '<p><strong>It\'s a Secret, But is it good to have secrets?</strong><br /><a data-tag=\"hive-123046\" data-author=\"ecotrain\" data-permlink=\"ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets\" class=\"markdown-post-link\">/@ecotrain/ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets</a></p>'
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('59 - Should handle Aureal iframe', () => {
+      const input = {
+        author: 'foo359',
+        permlink: 'bar359',
+        last_update: '2021-10-23T09:15:21',
+        body: 'this is link <iframe loading="lazy" src="https://aureal-embed.web.app/535939" width="100%" height="200" frameborder="0" data-rocket-lazyload="fitvidscompatible" class="lazyloaded" data-ll-status="loaded"></iframe>'
+      }
+      const expected = '<p>this is link <iframe loading="lazy" src="https://aureal-embed.web.app/535939" width="100%" height="200" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups" data-rocket-lazyload="fitvidscompatible" class="lazyloaded" data-ll-status="loaded"></iframe></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {
