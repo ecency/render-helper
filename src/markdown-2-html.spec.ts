@@ -813,7 +813,7 @@ describe('Markdown2Html', () => {
         last_update: '2021-10-23T09:15:21',
         body: 'this is link <iframe loading="lazy" src="https://aureal-embed.web.app/535939" width="100%" height="200" frameborder="0" data-rocket-lazyload="fitvidscompatible" class="lazyloaded" data-ll-status="loaded"></iframe>'
       }
-      const expected = '<p>this is link <iframe loading="lazy" src="https://aureal-embed.web.app/535939" width="100%" height="200" frameborder="0" sandbox="allow-scripts allow-same-origin allow-popups" data-rocket-lazyload="fitvidscompatible" class="lazyloaded" data-ll-status="loaded"></iframe></p>'
+      const expected = '<p>this is link <iframe src=\"https://aureal-embed.web.app/535939\" frameborder=\"0\" class=\"lazyloaded\"></iframe></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -844,7 +844,7 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    // The following canot be done: Convert URLs to the video page like this one
+    // The following cannot be done: Convert URLs to the video page like this one
     // (https://rumble.com/vkhkzl-helping-my-girls-to-cool-down-in-the-heat.html)
     // to its corresponding embedded URL (https://rumble.com/embed/vhveub/?pub=4).
     // The relationship seems to be governed by a table.
