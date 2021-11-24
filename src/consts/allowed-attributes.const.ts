@@ -16,7 +16,7 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
     'data-proposal',
     'class',
     'title',
-    'id'
+    'data-id'
   ],
   'img': ['src', 'alt', 'class'],
   'span': ['class'],
