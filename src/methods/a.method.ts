@@ -662,7 +662,10 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     el.setAttribute('data-href', href)
     el.removeAttribute('href')
   } else {
-    el.setAttribute('target', '_blank')
-    el.setAttribute('rel', 'noopener')
+    const externalRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    if(externalRegex.test(href)) {
+        el.setAttribute('target', '_blank');
+        el.setAttribute('rel', 'noopener');
+    }
   }
 }

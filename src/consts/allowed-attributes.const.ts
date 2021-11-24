@@ -15,7 +15,8 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
     'data-video-href',
     'data-proposal',
     'class',
-    'title'
+    'title',
+    'id'
   ],
   'img': ['src', 'alt', 'class'],
   'span': ['class'],
