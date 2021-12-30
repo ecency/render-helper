@@ -34,8 +34,13 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
     /((^|\s)(\/|)@[\w.\d-]+)\/(\S+)/gi, (match, u, p1, p2, p3) => {
       const uu = u.trim().toLowerCase().replace('/@','').replace('@','');
       const perm = p3;
-      const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${perm}"` : `href="/post/@${uu}/${perm}"`
-      return ` <a class="markdown-post-link" ${attrs}>@${uu}/${perm}</a>`  
+      if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings', 'engine'].includes(p3)) {
+        const attrs = forApp ? `https://ecency.com/@${uu}/${perm}` : `href="/@${uu}/${perm}"`
+        return ` <a class="markdown-profile-link" ${attrs}>@${uu}/${perm}</a>`
+      } else {
+        const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${perm}"` : `href="/post/@${uu}/${perm}"`
+        return ` <a class="markdown-post-link" ${attrs}>@${uu}/${perm}</a>`  
+      }
     }
   )
 

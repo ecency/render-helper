@@ -865,6 +865,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('64 - Should username with section link', () => {
+      const input = {
+        author: 'foo364',
+        permlink: 'bar364',
+        last_update: '2021-10-23T09:15:21',
+        body: '@demo/wallet for internal'
+      }
+      const expected = '<p><span> <a class=\"markdown-profile-link\" href=\"/@demo/wallet\">@demo/wallet</a> for internal</span></p>'
+
+      expect(markdown2Html(input, false)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {
