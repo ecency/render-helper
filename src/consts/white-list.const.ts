@@ -22,5 +22,7 @@ export const WHITE_LIST = [
   'naturalmedicine.io',
   'bilpcoin.com',
   'stemgeeks.net',
-  'hiveblockexplorer.com'
+  'hiveblockexplorer.com',
+  'proofofbrain.blog',
+  'liketu.com',
 ]

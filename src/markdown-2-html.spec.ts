@@ -428,14 +428,14 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('28- Should handle peakd post links', () => {
+    it('28 - Should handle peakd post links', () => {
       const input = {
         author: 'foo3343',
         permlink: 'bar3243',
         last_update: '2019-05-10T09:15:21',
         body: 'https://peakd.com/@demo/tests'
       }
-      const expected = '<p><a class="markdown-post-link" data-tag="post" data-author="demo" data-permlink="tests">/@demo/tests</a></p>'
+      const expected = '<p><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"tests\">@demo/tests</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -663,7 +663,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '[click here](https://peakd.com/@praetoria-cartel/wallet) direct link https://peakd.com/@praetoria-cartel/posts'
       }
-      const expected = '<p><a href="https://ecency.com/@praetoria-cartel/wallet" class="markdown-profile-link">click here</a> direct link <a href="https://ecency.com/@praetoria-cartel/posts" class="markdown-profile-link">/@praetoria-cartel/posts</a></p>'
+      const expected = '<p><a href=\"https://ecency.com/@praetoria-cartel/wallet\" class=\"markdown-profile-link\">click here</a> direct link <a href=\"https://ecency.com/@praetoria-cartel/posts\" class=\"markdown-profile-link\">@praetoria-cartel/posts</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -675,12 +675,12 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'for history refer to this fine post /@offgridlife/proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you and while you are in the community'
       }
-      const expected = '<p><span>for history refer to this fine post <a class=\"markdown-post-link\" data-author=\"offgridlife\" data-tag=\"post\" data-permlink=\"proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you\">/@offgridlife/proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you</a> and while you are in the community</span></p>'
+      const expected = '<p><span>for history refer to this fine post <a class=\"markdown-post-link\" data-author=\"offgridlife\" data-tag=\"post\" data-permlink=\"proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you\">@offgridlife/proofofbrain-golden-rule-do-to-others-what-you-want-them-to-do-to-you</a> and while you are in the community</span></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('47 - Should handle Bitchute links', () => {
+    it('48 - Should handle Bitchute links', () => {
       const input = {
         author: 'foo347',
         permlink: 'bar347',
@@ -814,6 +814,54 @@ describe('Markdown2Html', () => {
         body: 'this is link <iframe loading="lazy" src="https://aureal-embed.web.app/535939" width="100%" height="200" frameborder="0" data-rocket-lazyload="fitvidscompatible" class="lazyloaded" data-ll-status="loaded"></iframe>'
       }
       const expected = '<p>this is link <iframe src=\"https://aureal-embed.web.app/535939\" frameborder=\"0\" class=\"lazyloaded\"></iframe></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('60 - Should username with permlink', () => {
+      const input = {
+        author: 'foo360',
+        permlink: 'bar360',
+        last_update: '2021-10-23T09:15:21',
+        body: 'this is link @demo/test for internal'
+      }
+      const expected = '<p><span>this is link <a class=\"markdown-post-link\" data-author=\"demo\" data-tag=\"post\" data-permlink=\"test\">@demo/test</a> for internal</span></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('61 - Should username with permlink with slash', () => {
+      const input = {
+        author: 'foo361',
+        permlink: 'bar361',
+        last_update: '2021-10-23T09:15:21',
+        body: 'this is link /@demo/test for internal'
+      }
+      const expected = '<p><span>this is link <a class=\"markdown-post-link\" data-author=\"demo\" data-tag=\"post\" data-permlink=\"test\">@demo/test</a> for internal</span></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('62 - Should username with permlink new line', () => {
+      const input = {
+        author: 'foo362',
+        permlink: 'bar362',
+        last_update: '2021-10-23T09:15:21',
+        body: '@demo/test for internal'
+      }
+      const expected = '<p><span> <a class=\"markdown-post-link\" data-author=\"demo\" data-tag=\"post\" data-permlink=\"test\">@demo/test</a> for internal</span></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('63 - Should username with permlink with slash new line', () => {
+      const input = {
+        author: 'foo363',
+        permlink: 'bar363',
+        last_update: '2021-10-23T09:15:21',
+        body: '/@demo/test for internal'
+      }
+      const expected = '<p><span> <a class=\"markdown-post-link\" data-author=\"demo\" data-tag=\"post\" data-permlink=\"test\">@demo/test</a> for internal</span></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })

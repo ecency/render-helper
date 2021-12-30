@@ -119,16 +119,18 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (mentionMatch && WHITE_LIST.includes(mentionMatch[1].replace(/www./,'')) && mentionMatch.length === 3) {
     el.setAttribute('class', 'markdown-author-link')
     const author = mentionMatch[2].replace('@', '').toLowerCase()
-    if (el.textContent === href) {
-      el.textContent = `@${author}`
-    }
-    if (forApp) {
-      el.removeAttribute('href')
-
-      el.setAttribute('data-author', author)
-    } else {
-      const h = `/@${author}`
-      el.setAttribute('href', h)
+    if (author.indexOf('/')===-1) {
+      if (el.textContent === href) {
+        el.textContent = `@${author}`
+      }
+      if (forApp) {
+        el.removeAttribute('href')
+  
+        el.setAttribute('data-author', author)
+      } else {
+        const h = `/@${author}`
+        el.setAttribute('href', h)
+      }
     }
     return
   }
@@ -144,13 +146,13 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const section = tpostMatch[3]
 
       if (el.textContent === href) {
-        el.textContent = `/@${author}/${section}`
+        el.textContent = `@${author}/${section}`
       }
       if (forApp) {
         const ha = `https://ecency.com/@${author}/${section}`
         el.setAttribute('href', ha)
       } else {
-        const h = `/@${author}/${section}`
+        const h = `@${author}/${section}`
         el.setAttribute('href', h)
       }
       return
@@ -165,7 +167,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const author = tpostMatch[2].replace('@', '')
       const permlink = tpostMatch[3]
       if (el.textContent === href) {
-        el.textContent = `/@${author}/${permlink}`
+        el.textContent = `@${author}/${permlink}`
       }
       if (forApp) {
         el.removeAttribute('href')
@@ -186,16 +188,18 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (imentionMatch) {
     el.setAttribute('class', 'markdown-author-link')
     const author = imentionMatch[0].replace('/@', '').toLowerCase()
-    if (el.textContent === href) {
-      el.textContent = `@${author}`
-    }
-    if (forApp) {
-      el.removeAttribute('href')
+    if (author.indexOf('/')===-1) {
+      if (el.textContent === href) {
+        el.textContent = `@${author}`
+      }
+      if (forApp) {
+        el.removeAttribute('href')
 
-      el.setAttribute('data-author', author)
-    } else {
-      const h = `/@${author}`
-      el.setAttribute('href', h)
+        el.setAttribute('data-author', author)
+      } else {
+        const h = `/@${author}`
+        el.setAttribute('href', h)
+      }
     }
     return
   }

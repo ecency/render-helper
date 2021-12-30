@@ -18,6 +18,8 @@ export function cleanReply(s: string): string {
     .filter(item => item.toLowerCase().includes('read this post on travelfeed.io for the best experience') === false)
     .filter(item => item.toLowerCase().includes('posted via <a href="https://www.dporn.co/"') === false)
     .filter(item => item.toLowerCase().includes('▶️ [watch on 3speak](https://3speak') === false)
+    .filter(item => item.toLowerCase().includes('<sup><sub>Posted via [inji.com]') === false)
+    .filter(item => item.toLowerCase().includes('view this post on [Liketu]') === false)
     .join('\n') : '')
     .replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '')
     .replace('<div class="pull-right"><a href="/@hive.engage">![](https://i.imgur.com/XsrNmcl.png)</a></div>', '')

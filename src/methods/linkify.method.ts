@@ -16,22 +16,26 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
 
   // User mentions
   content = content.replace(
-    /(^|[^a-zA-Z0-9_!#$%&*@＠/]|(^|[^a-zA-Z0-9_+~.-/]))[@＠]([a-z][-.a-z\d]+[a-z\d])/gi,
+    /(^|[^a-zA-Z0-9_!#$%&*@＠/]|(^|[^a-zA-Z0-9_+~.-/]))[@＠]([a-z][-.a-z\d^/]+[a-z\d])/gi,
     (match, preceeding1, preceeding2, user) => {
       const userLower = user.toLowerCase()
       const preceedings = (preceeding1 || '') + (preceeding2 || '')
-
-      const attrs = forApp ? `data-author="${userLower}"` : `href="/@${userLower}"`
-      return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`
+      if (userLower.indexOf('/')===-1) {
+        const attrs = forApp ? `data-author="${userLower}"` : `href="/@${userLower}"`
+        return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`  
+      } else {
+        return match
+      }
     }
   )
 
   // internal links
   content = content.replace(
-    /(\s\/@[\w.\d-]+)\/(\S+)/gi, (match, u, p) => {
-      const uu = u.trim().toLowerCase().replace('/@','');
-      const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${p.trim()}"` : `href="/post/@${uu}/${p.trim()}"`
-      return ` <a class="markdown-post-link" ${attrs}>/@${uu}/${p.trim()}</a>`  
+    /((^|\s)(\/|)@[\w.\d-]+)\/(\S+)/gi, (match, u, p1, p2, p3) => {
+      const uu = u.trim().toLowerCase().replace('/@','').replace('@','');
+      const perm = p3;
+      const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${perm}"` : `href="/post/@${uu}/${perm}"`
+      return ` <a class="markdown-post-link" ${attrs}>@${uu}/${perm}</a>`  
     }
   )
 
