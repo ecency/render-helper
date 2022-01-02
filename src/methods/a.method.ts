@@ -99,7 +99,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const author = postMatch[3].replace('@', '')
     const permlink = postMatch[4]
     if (el.textContent === href) {
-      el.textContent = `/@${author}/${permlink}`
+      el.textContent = `@${author}/${permlink}`
     }
     if (forApp) {
       el.removeAttribute('href')
@@ -152,7 +152,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         const ha = `https://ecency.com/@${author}/${section}`
         el.setAttribute('href', ha)
       } else {
-        const h = `@${author}/${section}`
+        const h = `/@${author}/${section}`
         el.setAttribute('href', h)
       }
       return
@@ -215,7 +215,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const section = cpostMatch[2]
 
       if (el.textContent === href) {
-        el.textContent = `/@${author}/${section}`
+        el.textContent = `@${author}/${section}`
       }
       if (forApp) {
         const ha = `https://ecency.com/@${author}/${section}`
@@ -233,7 +233,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const author = cpostMatch[1].replace('@', '')
       const permlink = cpostMatch[2]
       if (el.textContent === href) {
-        el.textContent = `/@${author}/${permlink}`
+        el.textContent = `@${author}/${permlink}`
       }
       if (forApp) {
         el.removeAttribute('href')
@@ -329,7 +329,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const author = cccMatch[2].replace('@', '')
     const permlink = cccMatch[3]
     if (el.textContent === href) {
-      el.textContent = `/@${author}/${permlink}`
+      el.textContent = `@${author}/${permlink}`
     }
     if (forApp) {
       el.removeAttribute('href')

@@ -476,14 +476,14 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('32- Should handle whitelisted post links', () => {
+    it('32 - Should handle whitelisted post links', () => {
       const input = {
         author: 'foo33435',
         permlink: 'bar32435',
         last_update: '2019-05-10T09:15:21',
         body: 'https://peakd.com/tag/@demo/tests and https://steemit.com/test/@demo/post'
       }
-      const expected = '<p><a class="markdown-post-link" data-tag="tag" data-author="demo" data-permlink="tests">/@demo/tests</a> and <a class="markdown-post-link" data-tag="test" data-author="demo" data-permlink="post">/@demo/post</a></p>'
+      const expected = '<p><a class=\"markdown-post-link\" data-tag=\"tag\" data-author=\"demo\" data-permlink=\"tests\">@demo/tests</a> and <a class=\"markdown-post-link\" data-tag=\"test\" data-author=\"demo\" data-permlink=\"post\">@demo/post</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -644,14 +644,14 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('45- Should handle collection linking', () => {
+    it('45 - Should handle collection linking', () => {
       const input = {
         author: 'foo345',
         permlink: 'bar345',
         last_update: '2019-05-10T09:15:21',
         body: 'this is link https://peakd.com/ccc/jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more'
       }
-      const expected = '<p>this is link <a class=\"markdown-post-link\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">/@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
+      const expected = '<p>this is link <a class=\"markdown-post-link\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
