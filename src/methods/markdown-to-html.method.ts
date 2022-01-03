@@ -51,9 +51,9 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   const encEntities:string[] = [];
   if(entities && forApp){
     entities.forEach((entity)=>{
-      var CryptoJS = require("react-native-crypto-js");
+      const CryptoJS = require("react-native-crypto-js");
       const encData = CryptoJS.AES.encrypt(entity, 'key').toString();
-      let encyptedEntity = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encData));
+      const encyptedEntity = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encData));
       encEntities.push(encyptedEntity);
       input = input.replace(entity, encyptedEntity);
     })
@@ -73,9 +73,9 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   //decrypt and put back entiteis
   if(forApp && output){
     encEntities.forEach((encEntity)=>{
-      var CryptoJS = require("react-native-crypto-js");
-      let decData = CryptoJS.enc.Base64.parse(encEntity).toString(CryptoJS.enc.Utf8);
-      let entity = CryptoJS.AES.decrypt(decData, 'key').toString(CryptoJS.enc.Utf8);
+      const CryptoJS = require("react-native-crypto-js");
+      const decData = CryptoJS.enc.Base64.parse(encEntity).toString(CryptoJS.enc.Utf8);
+      const entity = CryptoJS.AES.decrypt(decData, 'key').toString(CryptoJS.enc.Utf8);
       output = output.replace(encEntity, entity);
     })
   }
