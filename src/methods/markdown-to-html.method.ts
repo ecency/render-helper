@@ -44,7 +44,20 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
     return ''
   }
 
-  let output
+  let output = '';
+
+  //encrypt entities
+  const entities = input.match(/&(.*?);/g);
+  const encEntities:string[] = [];
+  if(entities && forApp){
+    entities.forEach((entity)=>{
+      var CryptoJS = require("react-native-crypto-js");
+      const encData = CryptoJS.AES.encrypt(entity, 'key').toString();
+      let encyptedEntity = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encData));
+      encEntities.push(encyptedEntity);
+      input = input.replace(entity, encyptedEntity);
+    })
+  }
 
   try {
     output = md.render(input)
@@ -55,6 +68,16 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
     output = XMLSerializer.serializeToString(doc)
   } catch (error) {
     output = ''
+  }
+
+  //decrypt and put back entiteis
+  if(forApp && output){
+    encEntities.forEach((encEntity)=>{
+      var CryptoJS = require("react-native-crypto-js");
+      let decData = CryptoJS.enc.Base64.parse(encEntity).toString(CryptoJS.enc.Utf8);
+      let entity = CryptoJS.AES.decrypt(decData, 'key').toString(CryptoJS.enc.Utf8);
+      output = output.replace(encEntity, entity);
+    })
   }
 
   output = output.replace(/ xmlns="http:\/\/www.w3.org\/1999\/xhtml"/g, '')
