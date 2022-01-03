@@ -140,4 +140,11 @@ So, how can you qualify to get one?`
     const expected = 'Lorem Ipsum Dolor'
     expect(getPostBodySummary(input)).toBe(expected)
   })
+
+
+  it('12- Test entity parsing', () => {
+    const input = 'http://lorem.com Lorem &lt; Ipsum &amp; Dolor &euro;	'
+    const expected = 'Lorem < Ipsum & Dolor €'
+    expect(getPostBodySummary(input)).toBe(expected)
+  })
 })

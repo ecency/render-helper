@@ -31,7 +31,7 @@ const joint = (arr: string[], limit = 200) => {
   return result.trim();
 };
 
-function postBodySummary(entryBody: string, length?: number): string {
+function postBodySummary(entryBody: string, length?: number, platform:'ios'|'android'|'web' = 'web'): string {
   if (!entryBody) {
     return ''
   }
@@ -57,6 +57,19 @@ function postBodySummary(entryBody: string, length?: number): string {
     'sup'
   ]);
 
+  //encrypt entities
+  const entities = entryBody.match(/&(.*?);/g);
+  const encEntities:string[] = [];
+  if(entities && platform !== 'web'){
+    entities.forEach((entity)=>{
+      var CryptoJS = require("react-native-crypto-js");
+      const encData = CryptoJS.AES.encrypt(entity, 'key').toString();
+      let encyptedEntity = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encData));
+      encEntities.push(encyptedEntity);
+      entryBody = entryBody.replace(entity, encyptedEntity);
+    })
+  }
+
   // Convert markdown to html
   let text = '';
   try {
@@ -64,6 +77,18 @@ function postBodySummary(entryBody: string, length?: number): string {
   } catch (err) {
     console.log(err)
   }
+
+
+  //decrypt and put back entiteis
+  if(platform !== 'web'){
+    encEntities.forEach((encEntity)=>{
+      var CryptoJS = require("react-native-crypto-js");
+      let decData = CryptoJS.enc.Base64.parse(encEntity).toString(CryptoJS.enc.Utf8);
+      let entity = CryptoJS.AES.decrypt(decData, 'key').toString(CryptoJS.enc.Utf8);
+      text = text.replace(encEntity, entity);
+    })
+  }
+
 
   text = text
     .replace(/(<([^>]+)>)/gi, '') // Remove html tags
@@ -84,9 +109,9 @@ function postBodySummary(entryBody: string, length?: number): string {
   return text
 }
 
-export function getPostBodySummary(obj: Entry | string, length?: number): any {
+export function getPostBodySummary(obj: Entry | string, length?: number, platform?:'ios'|'android'|'web'): any {
   if (typeof obj === 'string') {
-    return postBodySummary(obj as string, length)
+    return postBodySummary(obj as string, length, platform)
   }
 
   const key = `${makeEntryCacheKey(obj)}-sum-${length}`
@@ -96,7 +121,7 @@ export function getPostBodySummary(obj: Entry | string, length?: number): any {
     return item
   }
 
-  const res = postBodySummary(obj.body, length)
+  const res = postBodySummary(obj.body, length, platform)
   cacheSet(key, res)
 
   return res
