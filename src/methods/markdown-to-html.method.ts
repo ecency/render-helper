@@ -49,15 +49,21 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   //encrypt entities
   const entities = input.match(/&(.*?);/g);
   const encEntities:string[] = [];
-  if(entities && forApp){
-    entities.forEach((entity)=>{
-      const CryptoJS = require("react-native-crypto-js");
-      const encData = CryptoJS.AES.encrypt(entity, 'key').toString();
-      const encyptedEntity = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encData));
-      encEntities.push(encyptedEntity);
-      input = input.replace(entity, encyptedEntity);
-    })
+
+  try{
+    if(entities && forApp){
+      entities.forEach((entity)=>{
+        const CryptoJS = require("react-native-crypto-js");
+        const encData = CryptoJS.AES.encrypt(entity, 'key').toString();
+        const encyptedEntity = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(encData));
+        encEntities.push(encyptedEntity);
+        input = input.replace(entity, encyptedEntity);
+      })
+    }
+  } catch (err){
+    console.log("failed to encrypt entities, ignore if not using mobile");
   }
+
 
   try {
     output = md.render(input)
