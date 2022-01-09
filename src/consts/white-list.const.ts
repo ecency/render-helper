@@ -25,4 +25,5 @@ export const WHITE_LIST = [
   'hiveblockexplorer.com',
   'proofofbrain.blog',
   'liketu.com',
+  'inji.com'
 ]
