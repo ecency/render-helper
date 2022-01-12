@@ -664,6 +664,14 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   if (forApp) {
     el.setAttribute('data-href', href)
+    let match = href.match(YOUTUBE_REGEX)
+    if (match) {
+      const e = YOUTUBE_REGEX.exec(href)
+      if (e[1]) {
+        const vid = e[1]
+        el.setAttribute('data-youtube', vid);
+      }
+    }
     el.removeAttribute('href')
   } else {
     const externalRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
