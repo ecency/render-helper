@@ -665,7 +665,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   if (forApp) {
     el.setAttribute('data-href', href)
-    let match = href.match(YOUTUBE_REGEX)
+    const match = href.match(YOUTUBE_REGEX)
     if (match) {
       const e = YOUTUBE_REGEX.exec(href)
       if (e[1]) {
