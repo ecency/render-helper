@@ -34,7 +34,7 @@ export function text(node: HTMLElement, forApp: boolean, webp: boolean): void {
       const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`, 0, 0, webp ? 'webp' : 'match')
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`
 
-      const attrs = `class="markdown-video-link markdown-video-link-youtube" data-embed-src="${embedSrc}"`
+      const attrs = `class="markdown-video-link markdown-video-link-youtube" data-embed-src="${embedSrc}" data-youtube="${vid}"`
 
       const thumbImg = node.ownerDocument.createElement('img')
       thumbImg.setAttribute('class', 'no-replace video-thumbnail')
