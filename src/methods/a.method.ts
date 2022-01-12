@@ -412,8 +412,9 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`
 
       el.textContent = ''
-
-      el.setAttribute('data-embed-src', embedSrc)
+     
+      el.setAttribute('data-embed-src', embedSrc);
+      el.setAttribute('data-youtube', vid);
 
       const thumbImg = el.ownerDocument.createElement('img')
       thumbImg.setAttribute('class', 'no-replace video-thumbnail')
