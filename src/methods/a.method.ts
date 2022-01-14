@@ -28,6 +28,7 @@ import {
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
+import { extractYtStartTime } from '../helper'
 
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   let href = el.getAttribute('href')
@@ -416,6 +417,12 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.setAttribute('data-embed-src', embedSrc);
       el.setAttribute('data-youtube', vid);
 
+      //extract start time if available
+      const startTime = extractYtStartTime(href);
+      if(startTime){
+        el.setAttribute('data-start-time', startTime);
+      }
+
       const thumbImg = el.ownerDocument.createElement('img')
       thumbImg.setAttribute('class', 'no-replace video-thumbnail')
       thumbImg.setAttribute('itemprop', 'thumbnailUrl')
@@ -671,6 +678,12 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       if (e[1]) {
         const vid = e[1]
         el.setAttribute('data-youtube', vid);
+
+        //extract start time if available
+        const startTime = extractYtStartTime(href);
+        if(startTime){
+          el.setAttribute('data-start-time', startTime);
+        }
       }
     }
     el.removeAttribute('href')
@@ -684,3 +697,6 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
   }
 }
+
+
+

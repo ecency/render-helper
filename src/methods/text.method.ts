@@ -1,4 +1,5 @@
 import { IMG_REGEX, YOUTUBE_REGEX, WHITE_LIST, DOMParser, POST_REGEX,  } from '../consts'
+import { extractYtStartTime } from '../helper'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { linkify } from './linkify.method'
 
@@ -34,7 +35,12 @@ export function text(node: HTMLElement, forApp: boolean, webp: boolean): void {
       const thumbnail = proxifyImageSrc(`https://img.youtube.com/vi/${vid.split('?')[0]}/hqdefault.jpg`, 0, 0, webp ? 'webp' : 'match')
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`
 
-      const attrs = `class="markdown-video-link markdown-video-link-youtube" data-embed-src="${embedSrc}" data-youtube="${vid}"`
+      let attrs = `class="markdown-video-link markdown-video-link-youtube" data-embed-src="${embedSrc}" data-youtube="${vid}"`
+      //extract start time if available
+      const startTime = extractYtStartTime(node.nodeValue);
+      if(startTime){
+        attrs = attrs.concat(` data-start-time="${startTime}"`);
+      }
 
       const thumbImg = node.ownerDocument.createElement('img')
       thumbImg.setAttribute('class', 'no-replace video-thumbnail')

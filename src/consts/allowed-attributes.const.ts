@@ -13,6 +13,7 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
     'data-filter',
     'data-embed-src',
     'data-youtube',
+    'data-start-time',
     'data-video-href',
     'data-proposal',
     'class',
