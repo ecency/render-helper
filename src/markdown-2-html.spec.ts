@@ -445,9 +445,9 @@ describe('Markdown2Html', () => {
         author: 'foo329',
         permlink: 'bar329',
         last_update: '2019-05-10T09:15:21',
-        body: 'https://youtu.be/UuyS7YAkECA?t=295'
+        body: 'https://youtu.be/UuyS7YAkECA?t=295s'
       }
-      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/UuyS7YAkECA?autoplay=1" data-youtube="UuyS7YAkECA"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eAMp88bZ44hfAQDm6BtJw2H53aq1Tpn1cu4.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
+      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/UuyS7YAkECA?autoplay=1" data-youtube="UuyS7YAkECA" data-start-time="295"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eAMp88bZ44hfAQDm6BtJw2H53aq1Tpn1cu4.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -876,6 +876,18 @@ describe('Markdown2Html', () => {
       const expected = '<p><span> <a class=\"markdown-profile-link\" href=\"/@demo/wallet\">@demo/wallet</a> for internal</span></p>'
 
       expect(markdown2Html(input, false)).toBe(expected)
+    })
+
+    it('65- Should handle youtube.com/embed videos', () => {
+      const input = {
+        author: 'foo329',
+        permlink: 'bar329',
+        last_update: '2019-05-10T09:15:21',
+        body: 'https://www.youtube.com/embed/UuyS7YAkECA?start=295&autoplay=1'
+      }
+      const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/UuyS7YAkECA?autoplay=1" data-youtube="UuyS7YAkECA" data-start-time="295"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eAMp88bZ44hfAQDm6BtJw2H53aq1Tpn1cu4.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
     })
   })
 
