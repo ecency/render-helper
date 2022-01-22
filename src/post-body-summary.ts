@@ -58,7 +58,7 @@ function postBodySummary(entryBody: string, length?: number, platform:'ios'|'and
   ]);
 
   //encrypt entities
-  const entities = entryBody.match(/&(.*?);/g);
+  const entities = entryBody.match(/&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/ig);
   const encEntities:string[] = [];
   if(entities && platform !== 'web'){
     entities.forEach((entity)=>{
