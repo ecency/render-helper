@@ -47,7 +47,7 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   let output = '';
 
   //encrypt entities
-  const entities = input.match(/&(.*?);/g);
+  const entities = input.match(/&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/ig);
   const encEntities:string[] = [];
 
   try{
