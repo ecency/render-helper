@@ -1,6 +1,6 @@
 import { traverse } from './traverse.method'
 import { sanitizeHtml } from './sanitize-html.method'
-import { DOMParser } from '../consts'
+import { DOMParser, ENTITY_REGEX } from '../consts'
 import xmldom from 'xmldom'
 
 const lolight = require('lolight')
@@ -47,7 +47,7 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   let output = '';
 
   //encrypt entities
-  const entities = input.match(/&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/ig);
+  const entities = input.match(ENTITY_REGEX);
   const encEntities:string[] = [];
 
   try{

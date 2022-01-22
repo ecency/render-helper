@@ -39,3 +39,4 @@ export const BRAND_NEW_TUBE_REGEX = /^https:\/\/brandnewtube\.com\/embed\/[a-z0-
 export const LOOM_REGEX = /^(https?:)?\/\/www.loom.com\/share\/(.*)/i
 export const LOOM_EMBED_REGEX = /^(https?:)?\/\/www.loom.com\/embed\/(.*)/i
 export const AUREAL_EMBED_REGEX = /^(https?:\/\/)?(www\.)?(?:aureal-embed)\.web\.app\/([0-9]+)/i
+export const ENTITY_REGEX = /&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/ig;

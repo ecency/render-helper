@@ -3,6 +3,8 @@ import { makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
 import { Entry } from './types'
 import { cleanReply } from './methods'
+import { ENTITY_REGEX } from './consts'
+
 
 const { Remarkable } = require('remarkable')
 const { linkify } = require('remarkable/linkify')
@@ -58,7 +60,7 @@ function postBodySummary(entryBody: string, length?: number, platform:'ios'|'and
   ]);
 
   //encrypt entities
-  const entities = entryBody.match(/&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-fA-F]{1,6});/ig);
+  const entities = entryBody.match(ENTITY_REGEX);
   const encEntities:string[] = [];
   if(entities && platform !== 'web'){
     entities.forEach((entity)=>{
