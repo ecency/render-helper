@@ -142,7 +142,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '<iframe width="560" height="315" src="https://www.youtube.com/embed/I3f9ixg59no?foo=bar&baz=000" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>'
       }
-      const expected = '<iframe src=\"https://www.youtube.com/embed/I3f9ixg59no\" allowfullscreen=\"allowfullscreen\"></iframe>'
+      const expected = '<iframe src=\"https://www.youtube.com/embed/I3f9ixg59no\" frameborder=\"0\" allowfullscreen=\"allowfullscreen\"></iframe>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
