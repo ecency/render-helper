@@ -539,36 +539,45 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   // If a d.tube video
   match = href.match(D_TUBE_REGEX)
   if (match) {
-    // Only d.tube links contains an image
-    const imgEls = el.getElementsByTagName('img')
 
-    if (imgEls.length === 1) {
+     // Only d.tube links contains an image
+     const imgEls = el.getElementsByTagName('img')
+
+     if (imgEls.length === 1 || el.textContent.trim() === href) {
       const e = D_TUBE_REGEX.exec(href)
       // e[2] = username, e[3] object id
       if (e[2] && e[3]) {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube')
         el.removeAttribute('href')
+   
 
-        const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
         // el.setAttribute('data-video-href', videoHref)
         el.setAttribute('data-embed-src', videoHref)
 
-        const thumbImg = el.ownerDocument.createElement('img')
-        thumbImg.setAttribute('class', 'no-replace video-thumbnail')
-        thumbImg.setAttribute('itemprop', 'thumbnailUrl')
-        
-        thumbImg.setAttribute('src', thumbnail)
+        //process thumb img element 
+        if (imgEls.length === 1) {
+          const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match') 
+          const thumbImg = el.ownerDocument.createElement('img')
+
+          thumbImg.setAttribute('class', 'no-replace video-thumbnail')
+          thumbImg.setAttribute('itemprop', 'thumbnailUrl')
+            
+          thumbImg.setAttribute('src', thumbnail)
+          el.appendChild(thumbImg)
+
+          // Remove image.
+          el.removeChild(imgEls[0])
+        } else {
+            el.textContent = '';
+        }
 
         const play = el.ownerDocument.createElement('span')
         play.setAttribute('class', 'markdown-video-play')
 
-        el.appendChild(thumbImg)
+  
         el.appendChild(play)
-
-        // Remove image.
-        el.removeChild(imgEls[0])
 
         return
       }
@@ -581,6 +590,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     if (e[2] && e[3]) {
       el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube')
       el.removeAttribute('href')
+      el.textContent = '';
 
       const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
@@ -590,6 +600,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       play.setAttribute('class', 'markdown-video-play')
 
       el.appendChild(play)
+ 
 
       return
     }

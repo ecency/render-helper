@@ -99,6 +99,30 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('7.1- Should handle raw d.tube videos without thumbnail', () => {
+      const input = {
+        author: 'foo37.1',
+        permlink: 'bar37.1',
+        last_update: '2020-05-10T09:15:21',
+        body: 'https://d.tube/#!/v/techcoderx/QmVdEYicJwiTxSk2U9ER1Yc8Rumb1Nek4KynqAYGyQs7ga'
+      }
+      const expected = '<p><a class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/techcoderx/QmVdEYicJwiTxSk2U9ER1Yc8Rumb1Nek4KynqAYGyQs7ga"><span class="markdown-video-play"></span></a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('7.2- Should handle raw d.tube videos different format', () => {
+      const input = {
+        author: 'foo37.2',
+        permlink: 'bar37.2',
+        last_update: '2020-05-10T09:15:21',
+        body: 'https://d.tube/v/techcoderx/QmVdEYicJwiTxSk2U9ER1Yc8Rumb1Nek4KynqAYGyQs7ga'
+      }
+      const expected = '<p><a class="markdown-video-link markdown-video-link-dtube" data-embed-src="https://emb.d.tube/#!/techcoderx/QmVdEYicJwiTxSk2U9ER1Yc8Rumb1Nek4KynqAYGyQs7ga"><span class="markdown-video-play"></span></a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
     it('9- Should handle witnesses links', () => {
       const input = {
         author: 'foo39',
