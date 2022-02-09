@@ -1,4 +1,4 @@
-import { IMG_REGEX } from '../consts'
+import { IMG_REGEX, SECTION_LIST } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
 
 export function linkify(content: string, forApp: boolean, webp: boolean): string {
@@ -34,7 +34,7 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
     /((^|\s)(\/|)@[\w.\d-]+)\/(\S+)/gi, (match, u, p1, p2, p3) => {
       const uu = u.trim().toLowerCase().replace('/@','').replace('@','');
       const perm = p3;
-      if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings', 'engine'].includes(p3)) {
+      if (SECTION_LIST.some(v => p3.includes(v))) {
         const attrs = forApp ? `https://ecency.com/@${uu}/${perm}` : `href="/@${uu}/${perm}"`
         return ` <a class="markdown-profile-link" ${attrs}>@${uu}/${perm}</a>`
       } else {
