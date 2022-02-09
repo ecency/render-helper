@@ -12,3 +12,10 @@ Ecency markdown+html render helper
 - internalized links
 - cached responses
 - xss protection
+
+
+## Pull request guide
+
+- If you want to fix a bug or add new feature, please add relevant tests
+- Make sure all tests pass without breaking existing structure
+- Make sure to increase version number in package.json, so CI can auto publish new version
