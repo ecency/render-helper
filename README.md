@@ -17,5 +17,6 @@ Ecency markdown+html render helper
 ## Pull request guide
 
 - If you want to fix a bug or add new feature, please add relevant tests
+- Do not load external js or libraries when adding embed supports, it compromises the security
 - Make sure all tests pass without breaking existing structure
 - Make sure to increase version number in package.json, so CI can auto publish new version
