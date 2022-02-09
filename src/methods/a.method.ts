@@ -142,6 +142,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (
     (tpostMatch && tpostMatch.length === 4 && WHITE_LIST.some(v => tpostMatch[1].includes(v))) || (tpostMatch && tpostMatch.length === 4 && tpostMatch[1].indexOf('/') == 0)
   ) {
+    // check if permlink is section or section with params ?q=xyz
     if (SECTION_LIST.some(v => tpostMatch[3].includes(v))) {
       el.setAttribute('class', 'markdown-profile-link')
       const author = tpostMatch[2].replace('@', '').toLowerCase()
@@ -159,11 +160,13 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       }
       return
     } else {
+      // check if domain is not whitelist and does contain dot (not tag e.g. `/ecency`)
       if (tpostMatch[1] && tpostMatch[1].includes('.') && !WHITE_LIST.some(v => tpostMatch[1].includes(v))) {
         return
       }
       let tag = 'post'
-      if (!WHITE_LIST.some(v => tpostMatch[1].includes(v)) && tpostMatch[1] && !tpostMatch[1].includes('.')) {
+      // check if tag does exist and doesn't include dot likely word/tag
+      if (tpostMatch[1] && !tpostMatch[1].includes('.')) {
         [, tag] = tpostMatch
         tag = tag.replace('/', '')
       }
