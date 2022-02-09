@@ -23,7 +23,8 @@ import {
   RUMBLE_REGEX,
   BRIGHTEON_REGEX,
   DOMParser,
-  LOOM_REGEX
+  LOOM_REGEX,
+  SECTION_LIST
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
@@ -139,9 +140,9 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   // If a tagged post and profile section links
   const tpostMatch = href.match(INTERNAL_POST_TAG_REGEX)
   if (
-    (tpostMatch && WHITE_LIST.includes(tpostMatch[1].substring(1))) || (tpostMatch && tpostMatch.length === 4 && tpostMatch[1].indexOf('/') !== 0)
+    (tpostMatch && tpostMatch.length === 4 && WHITE_LIST.some(v => tpostMatch[1].includes(v))) || (tpostMatch && tpostMatch.length === 4 && tpostMatch[1].indexOf('/') == 0)
   ) {
-    if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings', 'engine'].includes(tpostMatch[3])) {
+    if (SECTION_LIST.some(v => tpostMatch[3].includes(v))) {
       el.setAttribute('class', 'markdown-profile-link')
       const author = tpostMatch[2].replace('@', '').toLowerCase()
       const section = tpostMatch[3]
@@ -158,13 +159,16 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       }
       return
     } else {
-      el.setAttribute('class', 'markdown-post-link')
-
+      if (tpostMatch[1] && tpostMatch[1].includes('.') && !WHITE_LIST.some(v => tpostMatch[1].includes(v))) {
+        return
+      }
       let tag = 'post'
-      if (!WHITE_LIST.includes(tpostMatch[1].substring(1))) {
+      if (!WHITE_LIST.some(v => tpostMatch[1].includes(v)) && tpostMatch[1] && !tpostMatch[1].includes('.')) {
         [, tag] = tpostMatch
+        tag = tag.replace('/', '')
       }
 
+      el.setAttribute('class', 'markdown-post-link')
       const author = tpostMatch[2].replace('@', '')
       const permlink = tpostMatch[3]
       if (el.textContent === href) {
@@ -210,7 +214,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (
     (cpostMatch && cpostMatch.length === 3 && cpostMatch[1].indexOf('@') === 0)
   ) {
-    if (['wallet', 'feed', 'followers', 'following', 'points', 'communities', 'posts', 'blog', 'comments', 'replies', 'settings', 'engine'].includes(cpostMatch[2])) {
+    if (SECTION_LIST.some(v => cpostMatch[2].includes(v))) {
       el.setAttribute('class', 'markdown-profile-link')
       const author = cpostMatch[1].replace('@', '').toLowerCase()
       const section = cpostMatch[2]

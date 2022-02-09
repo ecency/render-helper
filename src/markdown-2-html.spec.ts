@@ -644,7 +644,7 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('43- Should handle dtube iframe', () => {
+    it('43 - Should handle dtube iframe', () => {
       const input = {
         author: 'foo343',
         permlink: 'bar343',
@@ -656,7 +656,7 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('44- Should handle vimm iframe', () => {
+    it('44 - Should handle vimm iframe', () => {
       const input = {
         author: 'foo344',
         permlink: 'bar344',
@@ -680,7 +680,7 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('46- Should handle copied md links', () => {
+    it('46 - Should handle copied md links', () => {
       const input = {
         author: 'foo346',
         permlink: 'bar346',
@@ -692,7 +692,7 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
-    it('47- Should handle internal links', () => {
+    it('47 - Should handle internal links', () => {
       const input = {
         author: 'foo347',
         permlink: 'bar347',
@@ -902,14 +902,38 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input, false)).toBe(expected)
     })
 
-    it('65- Should handle youtube.com/embed videos', () => {
+    it('65 - Should handle youtube.com/embed videos', () => {
       const input = {
-        author: 'foo329',
-        permlink: 'bar329',
+        author: 'foo365',
+        permlink: 'bar365',
         last_update: '2019-05-10T09:15:21',
         body: 'https://www.youtube.com/embed/UuyS7YAkECA?start=295&autoplay=1'
       }
       const expected = '<p><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/UuyS7YAkECA?autoplay=1" data-youtube="UuyS7YAkECA" data-start-time="295"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45eAMp88bZ44hfAQDm6BtJw2H53aq1Tpn1cu4.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('66 - Should handle internal links with params', () => {
+      const input = {
+        author: 'foo366',
+        permlink: 'bar366',
+        last_update: '2019-05-10T09:15:21',
+        body: 'direct link https://ecency.com/@ecency/faq?history'
+      }
+      const expected = '<p>direct link <a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"ecency\" data-permlink=\"faq?history\">@ecency/faq?history</a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
+    it('67 - Should handle section links with params', () => {
+      const input = {
+        author: 'foo367',
+        permlink: 'bar367',
+        last_update: '2019-05-10T09:15:21',
+        body: 'direct link https://ecency.com/@ecency/posts?q=games'
+      }
+      const expected = '<p>direct link <a href=\"https://ecency.com/@ecency/posts?q=games\" class=\"markdown-profile-link\">@ecency/posts?q=games</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })

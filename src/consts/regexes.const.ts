@@ -8,7 +8,7 @@ export const MENTION_REGEX = /^https?:\/\/(.*)\/(@[\w.\d-]+)$/i
 export const TOPIC_REGEX = /^https?:\/\/(.*)\/(trending|hot|created|promoted|muted|payout)\/(.*)$/i
 export const INTERNAL_MENTION_REGEX = /^\/@[\w.\d-]+$/i
 export const INTERNAL_TOPIC_REGEX = /^\/(trending|hot|created|promoted|muted|payout)\/(.*)$/i
-export const INTERNAL_POST_TAG_REGEX = /\/(.*)\/(@[\w.\d-]+)\/(.*)/i
+export const INTERNAL_POST_TAG_REGEX = /(.*)\/(@[\w.\d-]+)\/(.*)/i
 export const INTERNAL_POST_REGEX = /^\/(@[\w.\d-]+)\/(.*)$/i
 export const CUSTOM_COMMUNITY_REGEX = /^https?:\/\/(.*)\/c\/(hive-\d+)(.*)/i
 export const YOUTUBE_REGEX = /(?:youtube.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu.be\/)([^"&?\/\s]{11})/g
