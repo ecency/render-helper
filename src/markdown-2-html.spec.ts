@@ -937,6 +937,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('68 - Should handle section links', () => {
+      const input = {
+        author: 'foo368',
+        permlink: 'bar368',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link [What is HIVE](#WhatHive) and locatino ## 1 <a data-id="WhatHive"></a>What is HIVE?'
+      }
+      const expected = '<p>this is link <a href=\"#WhatHive\" class=\"markdown-internal-link\">What is HIVE</a> and locatino ## 1 <a data-id=\"WhatHive\"></a>What is HIVE?</p>'
+
+      expect(markdown2Html(input, false)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {
