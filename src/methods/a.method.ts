@@ -24,6 +24,7 @@ import {
   BRIGHTEON_REGEX,
   DOMParser,
   LOOM_REGEX,
+  SECTION_REGEX,
   SECTION_LIST
 } from '../consts'
 import { getSerializedInnerHTML } from './get-inner-html.method'
@@ -706,12 +707,12 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
     el.removeAttribute('href')
   } else {
-    const externalRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    if(externalRegex.test(href)) {
+    const matchS = href.match(SECTION_REGEX)
+    if(matchS) {
+      el.setAttribute('class', 'markdown-internal-link');
+    } else {
       el.setAttribute('target', '_blank');
       el.setAttribute('rel', 'noopener');
-    } else {
-      el.setAttribute('class', 'markdown-internal-link')
     }
   }
 }
