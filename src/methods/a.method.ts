@@ -686,7 +686,6 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
   // Prepend https if no scheme provided
   if (!(/^((#)|(mailto:)|(\/(?!\/))|(((steem|hive|esteem|ecency|https?):)?\/\/))/.test(href))) {
-    console.log('href',href)
     href = `https://${href}`
   }
 
@@ -708,9 +707,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     }
     el.removeAttribute('href')
   } else {
-    const externalRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     const matchS = href.match(SECTION_REGEX)
-    console.log('matchS',matchS, href);
     if(matchS) {
       el.setAttribute('class', 'markdown-internal-link');
     } else {
