@@ -58,7 +58,7 @@
     "vinyl-source-stream": "^2.0.0"
   },
   "dependencies": {
-    "@ampproject/toolbox-optimizer": "^2.8.1",
+    "@ampproject/toolbox-optimizer": "^2.8.10",
     "amphtml-validator": "^1.0.35",
     "cheerio": "^1.0.0-rc.10",
     "he": "^1.2.0",

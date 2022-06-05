@@ -6,9 +6,10 @@ import cheerio from "cheerio";
 
 const AmpOptimizer = require("@ampproject/toolbox-optimizer");
 
-async function htmlToAMP(
+export async function htmlToAMP(
   html: string,
-  onlyBody: boolean
+  onlyBody: boolean,
+  saveImageClass = false
 ): Promise<string> {
   const ampOptimizer = AmpOptimizer.create({
     markdown: true,
@@ -33,9 +34,10 @@ async function htmlToAMP(
           .attr("height", "100")
           .attr("layout", "responsive")
           .attr("alt", "Replaced Image")
+          .attr("class", saveImageClass ? $(x).attr("class") : "")
       );
     });
-    
+
   return onlyBody ? $("body").html() : $.html();
 }
 
