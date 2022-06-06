@@ -9,7 +9,8 @@ const AmpOptimizer = require("@ampproject/toolbox-optimizer");
 export async function htmlToAMP(
   html: string,
   onlyBody: boolean,
-  saveImageClass = false
+  saveImageClass = false,
+  processImage = true
 ): Promise<string> {
   const ampOptimizer = AmpOptimizer.create({
     markdown: true,
@@ -24,19 +25,21 @@ export async function htmlToAMP(
       );
     });
 
-  $("img")
-    .get()
-    .forEach((x) => {
-      $(x).replaceWith(
-        $("<amp-img/>")
-          .attr("src", $(x).attr("src") || ".")
-          .attr("width", "100")
-          .attr("height", "100")
-          .attr("layout", "responsive")
-          .attr("alt", "Replaced Image")
-          .attr("class", saveImageClass ? $(x).attr("class") : "")
-      );
-    });
+  if (processImage) {
+    $("img")
+      .get()
+      .forEach((x) => {
+        $(x).replaceWith(
+          $("<amp-img/>")
+            .attr("src", $(x).attr("src") || ".")
+            .attr("width", "100")
+            .attr("height", "100")
+            .attr("layout", "responsive")
+            .attr("alt", "Replaced Image")
+            .attr("class", saveImageClass ? $(x).attr("class") : "")
+        );
+      });
+  }
 
   return onlyBody ? $("body").html() : $.html();
 }
