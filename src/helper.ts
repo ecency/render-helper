@@ -15,13 +15,15 @@ export function makeEntryCacheKey(entry: any): string {
 }
 
 export function extractYtStartTime(url:string):string {
-  const urlObj = new URL(url);
-  const params = new URLSearchParams(urlObj.search);
-  if(params.has('t')){
-    return '' + parseInt(params.get('t')); //parsing is important as sometimes t is famated '123s';
-  }else if (params.has('start')){
-    return params.get('start');
+  try {
+    const urlObj = new URL(url);
+    const params = new URLSearchParams(urlObj.search);
+    if(params.has('t')){
+      return '' + parseInt(params.get('t')); //parsing is important as sometimes t is famated '123s';
+    }else if (params.has('start')){
+      return params.get('start');
+    } 
+  } catch (error) {
+    return '';
   }
-
-  return '';
 }
