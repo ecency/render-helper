@@ -11,7 +11,7 @@ export function createDoc(html: string): Document | null {
 }
 
 export function makeEntryCacheKey(entry: any): string {
-  return `${entry.author}-${entry.permlink}-${entry.last_update}`
+  return `${entry.author}-${entry.permlink}-${entry.last_update}-${entry.updated}`
 }
 
 export function extractYtStartTime(url:string):string {
