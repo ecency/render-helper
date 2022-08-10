@@ -11,5 +11,8 @@ export const SECTION_LIST = [
   'replies',
   'settings',
   'engine',
-  'permissions'
+  'permissions',
+  'referrals',
+  'payout',
+  'activities'
 ]
