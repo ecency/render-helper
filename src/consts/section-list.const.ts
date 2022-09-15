@@ -14,5 +14,6 @@ export const SECTION_LIST = [
   'permissions',
   'referrals',
   'payout',
-  'activities'
+  'activities',
+  'spk'
 ]
