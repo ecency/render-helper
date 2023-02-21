@@ -4,6 +4,12 @@ import { createDoc, makeEntryCacheKey } from './helper'
 import { cacheGet, cacheSet } from './cache'
 import { Entry } from './types'
 
+const gifLinkRegex = /\.(gif)$/i;
+
+function isGifLink(link: string) {
+  return gifLinkRegex.test(link);
+}
+
 function getImage(entry: Entry, width = 0, height = 0, format = 'match'): string | null {
   /*
   * Return from json metadata if exists
@@ -21,6 +27,9 @@ function getImage(entry: Entry, width = 0, height = 0, format = 'match'): string
   }
 
   if (meta && meta.image && !!meta.image.length && meta.image[0]) {
+    if (isGifLink(meta.image[0])) {
+      return proxifyImageSrc(meta.image[0], 0, 0, format)
+    }
     return proxifyImageSrc(meta.image[0], width, height, format)
   }
 
@@ -34,6 +43,9 @@ function getImage(entry: Entry, width = 0, height = 0, format = 'match'): string
   const imgEls = doc.getElementsByTagName('img')
   if (imgEls.length >= 1) {
     const src = imgEls[0].getAttribute('src')
+    if (isGifLink(src)) {
+      return proxifyImageSrc(src, 0, 0, format)
+    }
     return proxifyImageSrc(src, width, height, format)
   }
 
