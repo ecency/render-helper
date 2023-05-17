@@ -20,9 +20,9 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
     (match, preceeding1, preceeding2, user) => {
       const userLower = user.toLowerCase()
       const preceedings = (preceeding1 || '') + (preceeding2 || '')
-      if (userLower.indexOf('/')===-1) {
+      if (userLower.indexOf('/') === -1) {
         const attrs = forApp ? `data-author="${userLower}"` : `href="/@${userLower}"`
-        return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`  
+        return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`
       } else {
         return match
       }
@@ -32,14 +32,14 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
   // internal links
   content = content.replace(
     /((^|\s)(\/|)@[\w.\d-]+)\/(\S+)/gi, (match, u, p1, p2, p3) => {
-      const uu = u.trim().toLowerCase().replace('/@','').replace('@','');
+      const uu = u.trim().toLowerCase().replace('/@', '').replace('@', '');
       const perm = p3;
       if (SECTION_LIST.some(v => p3.includes(v))) {
         const attrs = forApp ? `https://ecency.com/@${uu}/${perm}` : `href="/@${uu}/${perm}"`
         return ` <a class="markdown-profile-link" ${attrs}>@${uu}/${perm}</a>`
       } else {
         const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${perm}"` : `href="/post/@${uu}/${perm}"`
-        return ` <a class="markdown-post-link" ${attrs}>@${uu}/${perm}</a>`  
+        return ` <a class="markdown-post-link" ${attrs}>@${uu}/${perm}</a>`
       }
     }
   )
