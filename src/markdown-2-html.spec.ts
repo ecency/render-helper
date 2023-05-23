@@ -976,6 +976,17 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('Rumble iframes 2', () => {
+      let expected = '<iframe class="rumble" src="https://rumble.com/embed/v2mb4d6/?pub=1aoesn" frameborder="0" allowfullscreen="allowfullscreen"></iframe>'
+      let input = {
+        author: 'foo350xx',
+        permlink: 'bar350xx',
+        last_update: '2021-05-10T09:15:50',
+        body: '<iframe class="rumble" width="640" height="360" src="https://rumble.com/embed/v2mb4d6/?pub=1aoesn" frameborder="0" allowfullscreen></iframe>'
+      }
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
     // The following cannot be done: Convert URLs to the video page like this one
     // (https://rumble.com/vkhkzl-helping-my-girls-to-cool-down-in-the-heat.html)
     // to its corresponding embedded URL (https://rumble.com/embed/vhveub/?pub=4).
