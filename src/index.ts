@@ -3,6 +3,7 @@ import { catchPostImage } from './catch-post-image'
 import { getPostBodySummary as postBodySummary } from './post-body-summary'
 import { setProxyBase, proxifyImageSrc } from './proxify-image-src'
 import { setCacheSize } from './cache'
+import { SECTION_LIST } from './consts'
 
 export {
   renderPostBody,
@@ -10,5 +11,6 @@ export {
   postBodySummary,
   proxifyImageSrc,
   setProxyBase,
-  setCacheSize
+  setCacheSize,
+  SECTION_LIST
 }

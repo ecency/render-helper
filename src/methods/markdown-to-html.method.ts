@@ -12,6 +12,7 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   // Internalize leofinance.io links
   input = input.replace("https://leofinance.io/threads/view/", "/@");
   input = input.replace("https://leofinance.io/posts/", "/@");
+  input = input.replace("https://leofinance.io/threads/", "/@");
 
 
   const md = new Remarkable({
