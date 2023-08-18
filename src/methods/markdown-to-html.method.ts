@@ -10,9 +10,9 @@ const { linkify } = require('remarkable/linkify')
 
 export function markdownToHTML(input: string, forApp: boolean, webp: boolean): string {
   // Internalize leofinance.io links
-  input = input.replace("https://leofinance.io/threads/view/", "/@");
-  input = input.replace("https://leofinance.io/posts/", "/@");
-  input = input.replace("https://leofinance.io/threads/", "/@");
+  input = input.replace(new RegExp("https://leofinance.io/threads/view/","g"), "/@");
+  input = input.replace(new RegExp("https://leofinance.io/posts/","g"), "/@");
+  input = input.replace(new RegExp("https://leofinance.io/threads/","g"), "/@");
 
 
   const md = new Remarkable({

@@ -2,6 +2,20 @@ export const WHITE_LIST = [
   'ecency.com',
   'hive.blog',
   'peakd.com',
+  'travelfeed.io',
+  'dapplr.in',
+  'leofinance.io',
+  'proofofbrain.io',
+  'stemgeeks.net',
+  'hiveblockexplorer.com',
+  'proofofbrain.blog',
+  'weedcash.network',
+  'dapplr.in',
+  'liketu.com',
+  'bilpcoin.com',
+  'inji.com'
+]
+export const OLD_LIST = [
   'busy.org',
   'steemit.com',
   'esteem.app',
@@ -12,18 +26,7 @@ export const WHITE_LIST = [
   'steemkr.com',
   'strimi.pl',
   'steemhunt.com',
-  'travelfeed.io',
   'ulogs.org',
   'hede.io',
-  'weedcash.network',
-  'dapplr.in',
-  'leofinance.io',
-  'proofofbrain.io',
-  'naturalmedicine.io',
-  'bilpcoin.com',
-  'stemgeeks.net',
-  'hiveblockexplorer.com',
-  'proofofbrain.blog',
-  'liketu.com',
-  'inji.com'
+  'naturalmedicine.io'
 ]
