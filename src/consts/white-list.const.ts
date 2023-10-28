@@ -5,6 +5,7 @@ export const WHITE_LIST = [
   'travelfeed.io',
   'dapplr.in',
   'leofinance.io',
+  'inleo.io',
   'proofofbrain.io',
   'stemgeeks.net',
   'hiveblockexplorer.com',
