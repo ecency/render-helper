@@ -14,7 +14,9 @@ export const WHITE_LIST = [
   'dapplr.in',
   'liketu.com',
   'bilpcoin.com',
-  'inji.com'
+  'inji.com',
+  'skatehive.app',
+  'ipfs.skatehive.app'
 ]
 export const OLD_LIST = [
   'busy.org',
