@@ -7,6 +7,7 @@ export function cleanReply(s: string): string {
     .filter(item => item.toLowerCase().includes('posted with [stemgeeks') === false)
     .filter(item => item.toLowerCase().includes('posted using [bilpcoin') === false)
     .filter(item => item.toLowerCase().includes('posted using [inleo') === false)
+    .filter(item => item.toLowerCase().includes('posted using [sportstalksocial]') === false)
     .filter(item => item.toLowerCase().includes('<center><sub>[posted using aeneas.blog') === false)
     .filter(item => item.toLowerCase().includes('<center><sub>posted via [proofofbrain.io') === false)
     .filter(item => item.toLowerCase().includes('<center>posted on [hypnochain') === false)
@@ -24,4 +25,5 @@ export function cleanReply(s: string): string {
     .join('\n') : '')
     .replace('Posted via <a href="https://d.buzz" data-link="promote-link">D.Buzz</a>', '')
     .replace('<div class="pull-right"><a href="/@hive.engage">![](https://i.imgur.com/XsrNmcl.png)</a></div>', '')
+    .replace('<div><a href="https://engage.hivechain.app">![](https://i.imgur.com/XsrNmcl.png)</a></div>', '')
 }

@@ -812,7 +812,7 @@ describe('Markdown2Html', () => {
         author: 'foo358',
         permlink: 'bar358',
         last_update: '2021-08-18T09:15:49',
-        body: `<p><strong>It's a Secret, But is it good to have secrets?</strong><br> 
+        body: `<p><strong>It's a Secret, But is it good to have secrets?</strong><br>
         https://peakd.com/hive-123046/@ecotrain/ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets </p> `
       }
       const expected = '<p><strong>It\'s a Secret, But is it good to have secrets?</strong><br /><a data-tag=\"hive-123046\" data-author=\"ecotrain\" data-permlink=\"ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets\" class=\"markdown-post-link\">/@ecotrain/ecotrain-question-of-the-week-season-5-1tie-up-post-it-s-a-secret-but-is-it-good-to-have-secrets</a></p>'
@@ -935,6 +935,18 @@ describe('Markdown2Html', () => {
         body: 'this is link [What is HIVE](#WhatHive) and locatino ## 1 <a data-id="WhatHive"></a>What is HIVE?'
       }
       const expected = '<p>this is link <a href=\"#WhatHive\" class=\"markdown-internal-link\">What is HIVE</a> and locatino ## 1 <a data-id=\"WhatHive\"></a>What is HIVE?</p>'
+
+      expect(markdown2Html(input, false)).toBe(expected)
+    })
+
+    it('69 - Should handle section links', () => {
+      const input = {
+        author: 'foo369',
+        permlink: 'bar369',
+        last_update: '2019-05-10T09:15:21',
+        body: 'this is link https://inleo.io/@godfish/close-range-reflections'
+      }
+      const expected = '<p>this is link <a href="/post/@godfish/close-range-reflections" class="markdown-post-link">@godfish/close-range-reflections</a></p>'
 
       expect(markdown2Html(input, false)).toBe(expected)
     })

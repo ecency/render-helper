@@ -13,6 +13,9 @@ export function markdownToHTML(input: string, forApp: boolean, webp: boolean): s
   input = input.replace(new RegExp("https://leofinance.io/threads/view/","g"), "/@");
   input = input.replace(new RegExp("https://leofinance.io/posts/","g"), "/@");
   input = input.replace(new RegExp("https://leofinance.io/threads/","g"), "/@");
+  input = input.replace(new RegExp("https://inleo.io/threads/view/","g"), "/@");
+  input = input.replace(new RegExp("https://inleo.io/posts/","g"), "/@");
+  input = input.replace(new RegExp("https://inleo.io/threads/","g"), "/@");
 
 
   const md = new Remarkable({
