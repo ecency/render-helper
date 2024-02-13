@@ -4,6 +4,7 @@ export function cleanReply(s: string): string {
     .filter(item => item.toLowerCase().includes('posted using [dapplr') === false)
     .filter(item => item.toLowerCase().includes('posted using [leofinance') === false)
     .filter(item => item.toLowerCase().includes('posted via [neoxian') === false)
+    .filter(item => item.toLowerCase().includes('posted using [neoxian') === false)
     .filter(item => item.toLowerCase().includes('posted with [stemgeeks') === false)
     .filter(item => item.toLowerCase().includes('posted using [bilpcoin') === false)
     .filter(item => item.toLowerCase().includes('posted using [inleo') === false)
