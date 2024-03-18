@@ -1,6 +1,7 @@
 import { a } from './a.method'
 import { iframe } from './iframe.method'
 import { img } from './img.method'
+import { p } from './p.method'
 import { text } from './text.method'
 
 export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): void {
@@ -22,6 +23,9 @@ export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): 
       }
       if (child.nodeName.toLowerCase() === 'img') {
         img(<HTMLElement>child, webp)
+      }
+      if (child.nodeName.toLowerCase() === 'p') {
+        p(<HTMLElement>child)
       }
 
       traverse(child, forApp, depth + 1, webp)
