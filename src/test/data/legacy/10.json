@@ -1,5 +1,5 @@
 {
   "id": 10,
   "input": "Lorem ipsum dolor <img src=x onerror=alert(x)> sit amet.\n\n<a href=\"javascript:void(0)\">etiam ut sollicitudin neque</a>\n\n<a onclick=\"console.log('ss')\">Vivamus pulvinar semper porttitor</a>",
-  "result": "<p>Lorem ipsum dolor <img src=\"https://images.ecency.com/p/35.png?format=match&amp;mode=fit\" /> sit amet.</p>\n<p><a>etiam ut sollicitudin neque</a></p>\n<p><a>Vivamus pulvinar semper porttitor</a></p>"
+  "result": "<p dir=\"auto\">Lorem ipsum dolor <img src=\"https://images.ecency.com/p/35.png?format=match&amp;mode=fit\" /> sit amet.</p>\n<p dir=\"auto\"><a>etiam ut sollicitudin neque</a></p>\n<p dir=\"auto\"><a>Vivamus pulvinar semper porttitor</a></p>"
 }
