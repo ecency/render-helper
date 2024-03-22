@@ -23,6 +23,7 @@ export declare const DAPPLR_REGEX: RegExp;
 export declare const TRUVVL_REGEX: RegExp;
 export declare const LBRY_REGEX: RegExp;
 export declare const ODYSEE_REGEX: RegExp;
+export declare const SKATEHIVE_IPFS_REGEX: RegExp;
 export declare const ARCH_REGEX: RegExp;
 export declare const SPEAK_REGEX: RegExp;
 export declare const SPEAK_EMBED_REGEX: RegExp;
