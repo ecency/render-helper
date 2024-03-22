@@ -40,7 +40,7 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
   'h4': [],
   'h5': [],
   'h6': [],
-  'p': [],
+  'p': ['dir'],
   'center': [],
   'ul': [],
   'ol': [],
