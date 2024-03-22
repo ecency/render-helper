@@ -24,6 +24,7 @@ export const DAPPLR_REGEX = /^(https?:)?\/\/[a-z]*\.dapplr.in\/file\/dapplr-vide
 export const TRUVVL_REGEX = /^https?:\/\/embed.truvvl.com\/(@[\w.\d-]+)\/(.*)/i
 export const LBRY_REGEX = /^(https?:)?\/\/lbry.tv\/\$\/embed\/.*/i
 export const ODYSEE_REGEX = /^(https?:)?\/\/odysee.com\/\$\/embed\/.*/i
+export const SKATEHIVE_IPFS_REGEX = /^https?:\/\/ipfs\.skatehive\.app\/ipfs\/([^/?#]+)/i
 export const ARCH_REGEX = /^(https?:)?\/\/archive.org\/embed\/.*/i
 export const SPEAK_REGEX = /(?:https?:\/\/(?:3speak.([a-z]+)\/watch\?v=)|(?:3speak.([a-z]+)\/embed\?v=))([A-Za-z0-9\_\-\.\/]+)(&.*)?/i
 export const SPEAK_EMBED_REGEX = /^(https?:)?\/\/3speak.([a-z]+)\/embed\?.*/i
