@@ -131,4 +131,14 @@ describe('catchPostImage', () => {
     }
     expect(catchPostImage(input as any)).toBe('')
   })
+
+  it('11- Image field is string', () => {
+    const input = {
+      'json_metadata': {
+        'image': 'https://files.peakd.com/file/peakd-hive/aggroed/agtirkG8-image.png'
+      }
+    }
+    const expected = 'https://images.ecency.com/p/hgjbks2vRxvf3xsYr6qQ7dm31DuBHGui8pKMdEVPxhLfEeEoVMPfUw4Z6QduNMpLay65R9vadbefhmDKmhM6HD8w8a.png?format=match&mode=fit'
+    expect(catchPostImage(input as any)).toBe(expected)
+  })
 })

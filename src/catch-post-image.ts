@@ -26,6 +26,13 @@ function getImage(entry: Entry, width = 0, height = 0, format = 'match'): string
     }
   }
 
+  if (meta && typeof meta.image === 'string' && meta.image.length > 0) {
+    if (isGifLink(meta.image)) {
+      return proxifyImageSrc(meta.image, 0, 0, format)
+    }
+    return proxifyImageSrc(meta.image, width, height, format)
+  }
+
   if (meta && meta.image && !!meta.image.length && meta.image[0]) {
     if (isGifLink(meta.image[0])) {
       return proxifyImageSrc(meta.image[0], 0, 0, format)
