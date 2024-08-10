@@ -950,6 +950,18 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input, false)).toBe(expected)
     })
+
+    it('70- Should handle youtube shorts/videos', () => {
+      const input = {
+        author: 'foo370',
+        permlink: 'bar370',
+        last_update: '2019-05-10T09:15:21',
+        body: 'https://www.youtube.com/shorts/IaehbZnsi4w'
+      }
+      const expected = '<p dir=\"auto\"><a class="markdown-video-link markdown-video-link-youtube" data-embed-src="https://www.youtube.com/embed/IaehbZnsi4w?autoplay=1" data-youtube="IaehbZnsi4w"><img class="no-replace video-thumbnail" src="https://images.ecency.com/p/S5Eokt4BcQdk7EHeT1aYjzebg2hC7hkthT45e5VviwaTq13pYBZesC7Hh3idYK26Q1RMUHU.png?format=match&amp;mode=fit" /><span class="markdown-video-play"></span></a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {
