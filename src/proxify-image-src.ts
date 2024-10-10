@@ -15,13 +15,22 @@ export function extractPHash(url: string): string | null {
   return null
 }
 
+export function isValidUrl(url: string): boolean {
+  try {
+    return Boolean(new URL(url));
+  }
+  catch(e){
+    return false;
+  }
+}
+
 export function getLatestUrl(str: string): string {
   const [last] = [...str.replace(/https?:\/\//g, '\n$&').trim().split('\n')].reverse()
   return last
 }
 
 export function proxifyImageSrc(url?: string, width = 0, height = 0, format = 'match') {
-  if (!url || typeof url !== 'string') {
+  if (!url || typeof url !== 'string' || !isValidUrl(url)) {
     return ''
   }
 
