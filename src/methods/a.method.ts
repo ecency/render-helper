@@ -109,6 +109,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     if (forApp) {
       el.removeAttribute('href')
 
+      el.setAttribute('data-href', href)
       el.setAttribute('data-is-inline', '' + isInline)
       el.setAttribute('data-tag', tag)
       el.setAttribute('data-author', author)
@@ -186,6 +187,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       }
       if (forApp) {
         el.removeAttribute('href')
+
+        el.setAttribute('data-href', href)
         el.setAttribute('data-is-inline', '' + isInline)
         el.setAttribute('data-tag', tag)
         el.setAttribute('data-author', author)
@@ -256,6 +259,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       }
       if (forApp) {
         el.removeAttribute('href')
+
+        el.setAttribute('data-href', href)
         el.setAttribute('data-is-inline', '' + isInline)
         el.setAttribute('data-tag', tag)
         el.setAttribute('data-author', author)
@@ -356,6 +361,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     if (forApp) {
       el.removeAttribute('href')
 
+      el.setAttribute('data-href', href)
       el.setAttribute('data-is-inline', '' + isInline)
       el.setAttribute('data-tag', tag)
       el.setAttribute('data-author', author)
