@@ -46,7 +46,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '<a href=\'/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\'>click here</a>'
       }
-      const expected = '<p dir=\"auto\"><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>'
+      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\" data-is-inline=\"true\" data-tag=\"esteem\" data-author=\"esteemapp\" data-permlink=\"esteem-monthly-guest-curation-program-4\">click here</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -58,7 +58,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: '[click here](/esteem/@esteemapp/esteem-monthly-guest-curation-program-4)'
       }
-      const expected = '<p dir=\"auto\"><a class="markdown-post-link" data-tag="esteem" data-author="esteemapp" data-permlink="esteem-monthly-guest-curation-program-4">click here</a></p>'
+      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-href=\"/esteem/@esteemapp/esteem-monthly-guest-curation-program-4\" data-is-inline=\"true\" data-tag=\"esteem\" data-author=\"esteemapp\" data-permlink=\"esteem-monthly-guest-curation-program-4\">click here</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -448,7 +448,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'https://peakd.com/@demo/tests'
       }
-      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"tests\">@demo/tests</a></p>'
+      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-href=\"https://peakd.com/@demo/tests\" data-is-inline=\"false\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"tests\">@demo/tests</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -496,7 +496,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'https://peakd.com/tag/@demo/tests and https://steemit.com/test/@demo/post'
       }
-      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-tag=\"tag\" data-author=\"demo\" data-permlink=\"tests\">@demo/tests</a> and <a class=\"markdown-external-link\" data-href=\"https://steemit.com/test/@demo/post\">https://steemit.com/test/@demo/post</a></p>'
+      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-href=\"https://peakd.com/tag/@demo/tests\" data-is-inline=\"false\" data-tag=\"tag\" data-author=\"demo\" data-permlink=\"tests\">@demo/tests</a> and <a class=\"markdown-external-link\" data-href=\"https://steemit.com/test/@demo/post\">https://steemit.com/test/@demo/post</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -664,7 +664,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'this is link https://peakd.com/ccc/jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more'
       }
-      const expected = '<p dir=\"auto\">this is link <a class=\"markdown-post-link\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
+      const expected = '<p dir=\"auto\">this is link <a class=\"markdown-post-link\" data-href=\"https://peakd.com/ccc/jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more\" data-is-inline=\"false\" data-tag=\"ccc\" data-author=\"jarvie\" data-permlink=\"one-week-roadtrip-to-all-5-utah-national-parks-and-more\">@jarvie/one-week-roadtrip-to-all-5-utah-national-parks-and-more</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -733,7 +733,7 @@ describe('Markdown2Html', () => {
         last_update: '2021-05-10T09:15:49',
         body: '<a href="/@demo/test">test post</a>'
       }
-      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"test\">test post</a></p>'
+      const expected = '<p dir=\"auto\"><a class=\"markdown-post-link\" data-href=\"/@demo/test\" data-is-inline=\"true\" data-tag=\"post\" data-author=\"demo\" data-permlink=\"test\">test post</a></p>'
       expect(markdown2Html(input)).toBe(expected)
     })
 
@@ -910,7 +910,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'direct link https://ecency.com/@ecency/faq?history'
       }
-      const expected = '<p dir=\"auto\">direct link <a class=\"markdown-post-link\" data-tag=\"post\" data-author=\"ecency\" data-permlink=\"faq?history\">@ecency/faq?history</a></p>'
+      const expected = '<p dir=\"auto\">direct link <a class=\"markdown-post-link\" data-href=\"https://ecency.com/@ecency/faq?history\" data-is-inline=\"false\" data-tag=\"post\" data-author=\"ecency\" data-permlink=\"faq?history\">@ecency/faq?history</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })

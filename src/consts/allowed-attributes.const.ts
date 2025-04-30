@@ -16,6 +16,7 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
     'data-start-time',
     'data-video-href',
     'data-proposal',
+    'data-is-inline',
     'class',
     'title',
     'data-id'
