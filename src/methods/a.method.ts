@@ -101,7 +101,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const tag = postMatch[2]
     const author = postMatch[3].replace('@', '')
     const permlink = postMatch[4]
-    var isInline = true;
+    let isInline = true;
     if (el.textContent === href) {
       el.textContent = `@${author}/${permlink}`
       isInline = false;
@@ -180,7 +180,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.setAttribute('class', 'markdown-post-link')
       const author = tpostMatch[2].replace('@', '')
       const permlink = tpostMatch[3]
-      var isInline = true;
+      let isInline = true;
       if (el.textContent === href) {
         el.textContent = `@${author}/${permlink}`
         isInline = false;
@@ -252,7 +252,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
       const author = cpostMatch[1].replace('@', '')
       const permlink = cpostMatch[2]
-      var isInline = true;
+      let isInline = true;
       if (el.textContent === href) {
         el.textContent = `@${author}/${permlink}`
         isInline = false;
@@ -353,7 +353,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const tag = 'ccc'
     const author = cccMatch[2].replace('@', '')
     const permlink = cccMatch[3]
-    var isInline = true;
+    let isInline = true;
     if (el.textContent === href) {
       el.textContent = `@${author}/${permlink}`
       isInline = false;
