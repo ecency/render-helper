@@ -10,7 +10,13 @@
     "allowJs": false,
     "declaration": true,
     "rootDir": "src",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "exclude": ["./**/*.spec.ts", "jest.config.js", "./src/test/**/*.ts", "gulpfile.js"]
+  "exclude": [
+    "./**/*.spec.ts",
+    "jest.config.js",
+    "./src/test/**/*.ts",
+    "gulpfile.js"
+  ]
 }
