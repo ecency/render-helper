@@ -4,21 +4,31 @@ export function img(el: HTMLElement, webp: boolean): void {
   el.removeAttribute("width");
   el.removeAttribute("height");
 
-  let src = el.getAttribute("src") || "";
+  const src = el.getAttribute("src") || "";
 
-  // ❌ Remove JS-based or empty srcs
-  if (src.toLowerCase().startsWith("javascript") || !src.trim()) {
+  // Normalize encoded characters
+  const decodedSrc = decodeURIComponent(
+    src.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
+      .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
+  ).trim().toLowerCase();
+
+  // ❌ Remove if javascript or empty/invalid
+  const isInvalid = !src || decodedSrc.startsWith("javascript") || decodedSrc.startsWith("vbscript") || decodedSrc === "x";
+  if (isInvalid) {
     el.remove();
     return;
   }
 
-  // ⚠️ Skip or remove relative image links (likely filenames like photo.jpg)
+  // ❌ Skip relative paths (e.g., `photo.jpg`)
   const isRelative = !/^https?:\/\//i.test(src) && !src.startsWith("/");
   if (isRelative) {
     console.warn("Skipped relative image:", src);
     el.remove();
     return;
   }
+
+  // Sanitize any dynamic or low-res src-like attributes
+  ["onerror", "dynsrc", "lowsrc"].forEach(attr => el.removeAttribute(attr));
 
   el.setAttribute("itemprop", "image");
 
