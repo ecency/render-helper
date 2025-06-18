@@ -32,6 +32,11 @@ import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
 import { extractYtStartTime } from '../helper'
 
+function isValidPermlink(permlink: string): boolean {
+  // Reject anything that looks like a file (ends with .jpg/.png/.webp/.jpeg etc)
+  return !/\.(jpg|jpeg|png|webp|gif|svg)$/i.test(permlink);
+}
+
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   let href = el.getAttribute('href')
 
@@ -101,6 +106,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const tag = postMatch[2]
     const author = postMatch[3].replace('@', '')
     const permlink = postMatch[4]
+    if (!isValidPermlink(permlink)) return;
     if (el.textContent === href) {
       el.textContent = `@${author}/${permlink}`
     }
@@ -128,7 +134,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       }
       if (forApp) {
         el.removeAttribute('href')
-  
+
         el.setAttribute('data-author', author)
       } else {
         const h = `/@${author}`
@@ -175,6 +181,9 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       el.setAttribute('class', 'markdown-post-link')
       const author = tpostMatch[2].replace('@', '')
       const permlink = tpostMatch[3]
+
+      if (!isValidPermlink(permlink)) return
+
       if (el.textContent === href) {
         el.textContent = `@${author}/${permlink}`
       }
@@ -241,6 +250,8 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
 
       const author = cpostMatch[1].replace('@', '')
       const permlink = cpostMatch[2]
+      if (!isValidPermlink(permlink)) return
+
       if (el.textContent === href) {
         el.textContent = `@${author}/${permlink}`
       }
@@ -337,6 +348,9 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     const tag = 'ccc'
     const author = cccMatch[2].replace('@', '')
     const permlink = cccMatch[3]
+
+    if (!isValidPermlink(permlink)) return;
+
     if (el.textContent === href) {
       el.textContent = `@${author}/${permlink}`
     }
@@ -421,7 +435,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const embedSrc = `https://www.youtube.com/embed/${vid}?autoplay=1`
 
       el.textContent = ''
-     
+
       el.setAttribute('data-embed-src', embedSrc);
       el.setAttribute('data-youtube', vid);
 
@@ -501,7 +515,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (match && el.textContent.trim() === href) {
     const e = SPOTIFY_REGEX.exec(href)
     if (e[1]) {
-      
+
       el.setAttribute('class', 'markdown-audio-link markdown-audio-link-spotify')
       el.removeAttribute('href')
 
@@ -516,7 +530,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       ifr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
       el.appendChild(ifr)
 
-      return      
+      return
     }
   }
 
@@ -525,7 +539,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   if (match && el.textContent.trim() === href) {
     const e = LOOM_REGEX.exec(href)
     if (e[2]) {
-      
+
       el.setAttribute('class', 'markdown-video-link markdown-video-link-loom')
       el.removeAttribute('href')
 
@@ -540,7 +554,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       ifr.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups')
       el.appendChild(ifr)
 
-      return      
+      return
     }
   }
 
@@ -557,21 +571,21 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       if (e[2] && e[3]) {
         el.setAttribute('class', 'markdown-video-link markdown-video-link-dtube')
         el.removeAttribute('href')
-   
+
 
         const videoHref = `https://emb.d.tube/#!/${e[2]}/${e[3]}`
 
         // el.setAttribute('data-video-href', videoHref)
         el.setAttribute('data-embed-src', videoHref)
 
-        //process thumb img element 
+        //process thumb img element
         if (imgEls.length === 1) {
-          const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match') 
+          const thumbnail = proxifyImageSrc(imgEls[0].getAttribute('src').replace(/\s+/g, ''), 0, 0, webp ? 'webp' : 'match')
           const thumbImg = el.ownerDocument.createElement('img')
 
           thumbImg.setAttribute('class', 'no-replace video-thumbnail')
           thumbImg.setAttribute('itemprop', 'thumbnailUrl')
-            
+
           thumbImg.setAttribute('src', thumbnail)
           el.appendChild(thumbImg)
 
@@ -584,7 +598,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
         const play = el.ownerDocument.createElement('span')
         play.setAttribute('class', 'markdown-video-play')
 
-  
+
         el.appendChild(play)
 
         return
@@ -608,7 +622,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       play.setAttribute('class', 'markdown-video-play')
 
       el.appendChild(play)
- 
+
 
       return
     }
