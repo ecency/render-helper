@@ -4,7 +4,7 @@ export function img(el: HTMLElement, webp: boolean): void {
   el.removeAttribute("width");
   el.removeAttribute("height");
 
-  const src = el.getAttribute("src") || "";
+  let src = el.getAttribute("src") || "";
 
   // Normalize encoded characters
   const decodedSrc = decodeURIComponent(
@@ -15,16 +15,14 @@ export function img(el: HTMLElement, webp: boolean): void {
   // ❌ Remove if javascript or empty/invalid
   const isInvalid = !src || decodedSrc.startsWith("javascript") || decodedSrc.startsWith("vbscript") || decodedSrc === "x";
   if (isInvalid) {
-    el.remove();
-    return;
+    src = ""
   }
 
   // ❌ Skip relative paths (e.g., `photo.jpg`)
   const isRelative = !/^https?:\/\//i.test(src) && !src.startsWith("/");
   if (isRelative) {
     console.warn("Skipped relative image:", src);
-    el.remove();
-    return;
+    src = ""
   }
 
   // Sanitize any dynamic or low-res src-like attributes
