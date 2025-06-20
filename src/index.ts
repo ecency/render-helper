@@ -4,6 +4,7 @@ import { getPostBodySummary as postBodySummary } from './post-body-summary'
 import { setProxyBase, proxifyImageSrc } from './proxify-image-src'
 import { setCacheSize } from './cache'
 import { SECTION_LIST } from './consts'
+import { isValidPermlink } from "./helper";
 
 export {
   renderPostBody,
@@ -12,5 +13,6 @@ export {
   proxifyImageSrc,
   setProxyBase,
   setCacheSize,
-  SECTION_LIST
+  SECTION_LIST,
+  isValidPermlink
 }
