@@ -1,5 +1,6 @@
 import { IMG_REGEX, SECTION_LIST } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
+import {isValidPermlink} from "../helper";
 
 export function linkify(content: string, forApp: boolean, webp: boolean): string {
   // Tags
@@ -33,13 +34,15 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
   content = content.replace(
     /((^|\s)(\/|)@[\w.\d-]+)\/(\S+)/gi, (match, u, p1, p2, p3) => {
       const uu = u.trim().toLowerCase().replace('/@', '').replace('@', '');
-      const perm = p3;
+      const permlink = p3;
+      if (!isValidPermlink(permlink)) return match;
+
       if (SECTION_LIST.some(v => p3.includes(v))) {
-        const attrs = forApp ? `https://ecency.com/@${uu}/${perm}` : `href="/@${uu}/${perm}"`
-        return ` <a class="markdown-profile-link" ${attrs}>@${uu}/${perm}</a>`
+        const attrs = forApp ? `https://ecency.com/@${uu}/${permlink}` : `href="/@${uu}/${permlink}"`
+        return ` <a class="markdown-profile-link" ${attrs}>@${uu}/${permlink}</a>`
       } else {
-        const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${perm}"` : `href="/post/@${uu}/${perm}"`
-        return ` <a class="markdown-post-link" ${attrs}>@${uu}/${perm}</a>`
+        const attrs = forApp ? `data-author="${uu}" data-tag="post" data-permlink="${permlink}"` : `href="/post/@${uu}/${permlink}"`
+        return ` <a class="markdown-post-link" ${attrs}>@${uu}/${permlink}</a>`
       }
     }
   )

@@ -18,10 +18,10 @@ export function img(el: HTMLElement, webp: boolean): void {
     src = ""
   }
 
-  // ❌ Skip relative paths (e.g., `photo.jpg`)
+  // ❌ Skip relative paths (e.g., `photo.jpg`, `./photo.png`, `assets/pic.jpeg`)
   const isRelative = !/^https?:\/\//i.test(src) && !src.startsWith("/");
   if (isRelative) {
-    console.warn("Skipped relative image:", src);
+    //console.warn("Skipped relative image:", src);
     src = ""
   }
 

@@ -30,12 +30,8 @@ import {
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
-import { extractYtStartTime } from '../helper'
+import { extractYtStartTime, isValidPermlink } from '../helper'
 
-function isValidPermlink(permlink: string): boolean {
-  // Reject anything that looks like a file (ends with .jpg/.png/.webp/.jpeg etc)
-  return !/\.(jpg|jpeg|png|webp|gif|svg)$/i.test(permlink);
-}
 
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   let href = el.getAttribute('href')
@@ -162,6 +158,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       const author = tpostMatch[2].replace('@', '').toLowerCase()
       const section = tpostMatch[3]
 
+      if (!isValidPermlink(section)) return;
       if (el.textContent === href) {
         el.textContent = `@${author}/${section}`
       }

@@ -910,7 +910,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'direct link https://ecency.com/@ecency/faq?history'
       }
-      const expected = '<p dir=\"auto\">direct link <a class=\"markdown-post-link\" data-href=\"https://ecency.com/@ecency/faq?history\" data-is-inline=\"false\" data-tag=\"post\" data-author=\"ecency\" data-permlink=\"faq?history\">@ecency/faq?history</a></p>'
+      const expected = '<p dir=\"auto\">direct link <a href=\"https://ecency.com/@ecency/faq?history\" class=\"markdown-post-link\">https://ecency.com/@ecency/faq?history</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -922,7 +922,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'direct link https://ecency.com/@ecency/posts?q=games'
       }
-      const expected = '<p dir=\"auto\">direct link <a href=\"https://ecency.com/@ecency/posts?q=games\" class=\"markdown-profile-link\">@ecency/posts?q=games</a></p>'
+      const expected = '<p dir=\"auto\">direct link <a href=\"https://ecency.com/@ecency/posts?q=games\" class=\"markdown-profile-link\">https://ecency.com/@ecency/posts?q=games</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
