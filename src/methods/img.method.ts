@@ -1,9 +1,6 @@
 import { proxifyImageSrc } from "../proxify-image-src";
 
-export function img(el: HTMLElement, webp: boolean): void {
-  el.removeAttribute("width");
-  el.removeAttribute("height");
-
+export function img(el: HTMLElement, webp: boolean, state?: { firstImageFound: boolean }): void {
   let src = el.getAttribute("src") || "";
 
   // Normalize encoded characters
@@ -26,9 +23,20 @@ export function img(el: HTMLElement, webp: boolean): void {
   }
 
   // Sanitize any dynamic or low-res src-like attributes
-  ["onerror", "dynsrc", "lowsrc"].forEach(attr => el.removeAttribute(attr));
+  ["onerror", "dynsrc", "lowsrc", "width", "height"].forEach(attr => el.removeAttribute(attr));
 
   el.setAttribute("itemprop", "image");
+  const isLCP = state && !state.firstImageFound;
+
+  if (isLCP) {
+    el.setAttribute("loading", "eager");
+    el.setAttribute("fetchpriority", "high");
+    state.firstImageFound = true;
+  } else {
+    el.setAttribute("loading", "lazy");
+    el.setAttribute("decoding", "async");
+  }
+
 
   const cls = el.getAttribute("class") || "";
   const shouldReplace = !cls.includes("no-replace");
@@ -38,4 +46,17 @@ export function img(el: HTMLElement, webp: boolean): void {
     const proxified = proxifyImageSrc(src, 0, 0, webp ? "webp" : "match");
     el.setAttribute("src", proxified);
   }
+}
+
+export function createImageHTML(src: string, isLCP: boolean, webp: boolean): string {
+  const loading = isLCP ? 'eager' : 'lazy';
+  const fetch = isLCP ? 'fetchpriority="high"' : 'decoding="async"';
+  const proxified = proxifyImageSrc(src, 0, 0, webp ? 'webp' : 'match');
+  return `<img
+    class="markdown-img-link"
+    src="${proxified}"
+    loading="${loading}"
+    ${fetch}
+    itemprop="image"
+  />`;
 }

@@ -2,6 +2,7 @@ import { IMG_REGEX, YOUTUBE_REGEX, WHITE_LIST, DOMParser, POST_REGEX,  } from '.
 import { extractYtStartTime, isValidPermlink } from '../helper'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { linkify } from './linkify.method'
+import {createImageHTML} from "./img.method";
 
 export function text(node: HTMLElement, forApp: boolean, webp: boolean): void {
   if (['a', 'code'].includes(node.parentNode.nodeName)) {
@@ -20,12 +21,10 @@ export function text(node: HTMLElement, forApp: boolean, webp: boolean): void {
   }
 
   if (node.nodeValue.match(IMG_REGEX)) {
-    const attrs = forApp ? `data-href="${node.nodeValue}" class="markdown-img-link" src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(node.nodeValue, 0, 0, webp ? 'webp' : 'match')}"`
-    const replaceNode = DOMParser.parseFromString(
-      `<img ${attrs}/>`
-    )
-
-    node.parentNode.replaceChild(replaceNode, node)
+    const isLCP = false; // Traverse handles LCP; no need to double-count
+    const imageHTML = createImageHTML(node.nodeValue, isLCP, webp);
+    const replaceNode = DOMParser.parseFromString(imageHTML);
+    node.parentNode.replaceChild(replaceNode, node);
   }
   // If a youtube video
   if (node.nodeValue.match(YOUTUBE_REGEX)) {

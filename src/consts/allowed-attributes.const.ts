@@ -21,7 +21,15 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
     'title',
     'data-id'
   ],
-  'img': ['src', 'alt', 'class'],
+  'img': [
+    'src',
+    'alt',
+    'class',
+    'loading',
+    'fetchpriority',
+    'decoding',
+    'itemprop'
+  ],
   'span': ['class'],
   'iframe': ['src', 'class', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen', 'sandbox'],
   'div': ['class'],

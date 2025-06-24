@@ -4,7 +4,7 @@ import { img } from './img.method'
 import { p } from './p.method'
 import { text } from './text.method'
 
-export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): void {
+export function traverse(node: Node, forApp: boolean, depth = 0, webp = false, state = { firstImageFound: false }): void {
   if (!node || !node.childNodes) {
     return
   }
@@ -22,12 +22,12 @@ export function traverse(node: Node, forApp: boolean, depth = 0, webp = false): 
         text(<HTMLElement>child, forApp, webp)
       }
       if (child.nodeName.toLowerCase() === 'img') {
-        img(<HTMLElement>child, webp)
+        img(<HTMLElement>child, webp, state)
       }
       if (child.nodeName.toLowerCase() === 'p') {
         p(<HTMLElement>child)
       }
 
-      traverse(child, forApp, depth + 1, webp)
+      traverse(child, forApp, depth + 1, webp, state)
     })
 }

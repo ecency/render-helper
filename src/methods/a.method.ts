@@ -31,6 +31,7 @@ import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
 import { extractYtStartTime, isValidPermlink } from '../helper'
+import {createImageHTML} from "./img.method";
 
 
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
@@ -61,11 +62,9 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     href.trim().replace(/&amp;/g, '&') ===
     getSerializedInnerHTML(el).trim().replace(/&amp;/g, '&')
   ) {
-    const attrs = forApp ? `data-href="${href}" class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(href, 0, 0, webp ? 'webp' : 'match')}"`
-
-    const replaceNode = DOMParser.parseFromString(
-      `<img ${attrs}/>`
-    )
+    const isLCP = false; // LCP handled elsewhere
+    const imgHTML = createImageHTML(href, isLCP, webp);
+    const replaceNode = DOMParser.parseFromString(imgHTML);
 
     el.parentNode.replaceChild(replaceNode, el)
 

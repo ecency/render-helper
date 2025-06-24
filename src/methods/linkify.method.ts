@@ -1,6 +1,7 @@
 import { IMG_REGEX, SECTION_LIST } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
 import {isValidPermlink} from "../helper";
+import {createImageHTML} from "./img.method";
 
 export function linkify(content: string, forApp: boolean, webp: boolean): string {
   // Tags
@@ -48,10 +49,13 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
   )
 
   // Image links
-  content = content.replace(IMG_REGEX, imglink => {
-    const attrs = forApp ? `data-href="${imglink}" class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"` : `class="markdown-img-link" src="${proxifyImageSrc(imglink, 0, 0, webp ? 'webp' : 'match')}"`
-    return `<img ${attrs}/>`
-  })
+  let firstImageUsed = false;
+
+  content = content.replace(IMG_REGEX, (imglink) => {
+    const isLCP = !firstImageUsed;
+    firstImageUsed = true;
+    return createImageHTML(imglink, isLCP, webp);
+  });
 
   return content
 }
