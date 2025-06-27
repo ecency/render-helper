@@ -36,4 +36,26 @@ export function isValidPermlink(permlink: string): boolean {
   return isCleanFormat && !isImage && !hasSpecialChars;
 }
 
+// Reference: https://en.wikipedia.org/wiki/Domain_Name_System#Domain_name_syntax
+// Hive account names must follow similar rules to DNS (RFC 1035)
+const LABEL_REGEX = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?$/;
+
+export function isValidUsername(username: string): boolean {
+  if (!username || typeof username !== 'string') return false;
+  if (username.length > 16) return false;
+
+  const labels = username.split('.');
+
+  return labels.every(label => {
+    return (
+      label.length >= 3 &&
+      label.length <= 16 &&
+      /^[a-z]/.test(label) &&                    // must start with a letter
+      LABEL_REGEX.test(label) &&                 // a-z0-9, hyphens, no start/end hyphen
+      !label.includes('..')                      // double dots are impossible after split, but just in case
+    );
+  });
+}
+
+
 

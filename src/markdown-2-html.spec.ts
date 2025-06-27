@@ -270,7 +270,7 @@ describe('Markdown2Html', () => {
         body: '@lorem @ipsum @dolor \n @Sit amet'
       }
       expected =
-        '<p dir=\"auto\"><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br /><span>\n<a class="markdown-author-link" data-author="sit">@Sit</a> amet</span></p>'
+        '<p dir=\"auto\"><span><a class="markdown-author-link" data-author="lorem">@lorem</a> <a class="markdown-author-link" data-author="ipsum">@ipsum</a> <a class="markdown-author-link" data-author="dolor">@dolor</a></span><br />\n@Sit amet</p>'
       expect(markdown2Html(input)).toBe(expected)
     })
 

@@ -1,7 +1,7 @@
 import { IMG_REGEX, SECTION_LIST } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
-import {isValidPermlink} from "../helper";
-import {createImageHTML} from "./img.method";
+import { isValidPermlink, isValidUsername } from "../helper";
+import { createImageHTML } from "./img.method";
 
 export function linkify(content: string, forApp: boolean, webp: boolean): string {
   // Tags
@@ -22,7 +22,7 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
     (match, preceeding1, preceeding2, user) => {
       const userLower = user.toLowerCase()
       const preceedings = (preceeding1 || '') + (preceeding2 || '')
-      if (userLower.indexOf('/') === -1) {
+      if (userLower.indexOf('/') === -1 && isValidUsername(user)) {
         const attrs = forApp ? `data-author="${userLower}"` : `href="/@${userLower}"`
         return `${preceedings}<a class="markdown-author-link" ${attrs}>@${user}</a>`
       } else {

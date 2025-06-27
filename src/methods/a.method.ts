@@ -30,8 +30,8 @@ import {
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
-import { extractYtStartTime, isValidPermlink } from '../helper'
-import {createImageHTML} from "./img.method";
+import { extractYtStartTime, isValidPermlink, isValidUsername } from '../helper'
+import { createImageHTML } from "./img.method";
 
 
 export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
@@ -128,8 +128,12 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   // If a hive user with url
   const mentionMatch = href.match(MENTION_REGEX)
   if (mentionMatch && WHITE_LIST.includes(mentionMatch[1].replace(/www./,'')) && mentionMatch.length === 3) {
+    const _author = mentionMatch[2].replace('@', '')
+    if (!isValidUsername(_author)) return
+    const author = _author.toLowerCase()
+
     el.setAttribute('class', 'markdown-author-link')
-    const author = mentionMatch[2].replace('@', '').toLowerCase()
+
     if (author.indexOf('/')===-1) {
       if (el.textContent === href) {
         el.textContent = `@${author}`
@@ -213,8 +217,11 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
   // If a hive user with internal url
   const imentionMatch = href.match(INTERNAL_MENTION_REGEX)
   if (imentionMatch) {
+    const _author = imentionMatch[0].replace('/@', '')
+    if (!isValidUsername(_author)) return
+    const author = _author.toLowerCase()
+
     el.setAttribute('class', 'markdown-author-link')
-    const author = imentionMatch[0].replace('/@', '').toLowerCase()
     if (author.indexOf('/')===-1) {
       if (el.textContent === href) {
         el.textContent = `@${author}`
