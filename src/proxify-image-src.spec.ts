@@ -50,10 +50,10 @@ describe('Proxify image src', () => {
   })
 
   it('3- set proxy base', () => {
-    setProxyBase('https://img.esteem.app')
+    setProxyBase('https://images.hive.blog')
 
     const input = 'https://i.imgur.com/muESb0B.png'
-    const expected = 'https://img.esteem.app/p/2bP4pJr4wVimqCWjYimXJe2cnCgnJdyHYxb4dfF6gmC.png?format=match&mode=fit'
+    const expected = 'https://images.hive.blog/p/2bP4pJr4wVimqCWjYimXJe2cnCgnJdyHYxb4dfF6gmC?format=match&mode=fit'
 
     expect(proxifyImageSrc(input)).toBe(expected)
   })
