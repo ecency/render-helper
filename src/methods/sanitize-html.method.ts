@@ -1,5 +1,5 @@
 import xss from 'xss'
-import { ALLOWED_ATTRIBUTES } from '../consts'
+import {ALLOWED_ATTRIBUTES, ID_WHITELIST} from '../consts'
 
 const decodeEntities = (input: string): string =>
   input
@@ -19,7 +19,9 @@ export function sanitizeHtml(html: string): string {
       if (tag === 'img' && name === 'src' && (!/^https?:\/\//.test(decoded) || decoded.startsWith('javascript:'))) return '';
       if (tag === 'img' && ['dynsrc', 'lowsrc'].includes(name)) return '';
       if (tag === 'span' && name === 'class' && value === 'wr') return '';
-
+      if (name === 'id') {
+        if (!ID_WHITELIST.test(decoded)) return '';
+      }
       return undefined;
     }
   });

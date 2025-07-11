@@ -41,3 +41,4 @@ export declare const LOOM_EMBED_REGEX: RegExp;
 export declare const AUREAL_EMBED_REGEX: RegExp;
 export declare const ENTITY_REGEX: RegExp;
 export declare const SECTION_REGEX: RegExp;
+export declare const ID_WHITELIST: RegExp;
