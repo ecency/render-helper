@@ -121,6 +121,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     } else {
       const h = `/${tag}/@${author}/${permlink}`
       el.setAttribute('href', h)
+      el.setAttribute('data-is-inline', '' + isInline)
     }
     return
   }
@@ -208,6 +209,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       } else {
         const h = `/${tag}/@${author}/${permlink}`
         el.setAttribute('href', h)
+        el.setAttribute('data-is-inline', '' + isInline)
       }
 
       return
@@ -286,6 +288,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
       } else {
         const h = `/${tag}/@${author}/${permlink}`
         el.setAttribute('href', h)
+        el.setAttribute('data-is-inline', '' + isInline)
       }
 
       return
@@ -391,6 +394,7 @@ export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
     } else {
       const h = `/${tag}/@${author}/${permlink}`
       el.setAttribute('href', h)
+      el.setAttribute('data-is-inline', '' + isInline)
     }
     return
   }
