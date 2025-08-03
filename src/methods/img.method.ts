@@ -7,7 +7,7 @@ export function img(el: HTMLElement, webp: boolean, state?: { firstImageFound: b
   const decodedSrc = decodeURIComponent(
     src.replace(/&#(\d+);/g, (_, dec) => String.fromCharCode(dec))
       .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCharCode(parseInt(hex, 16)))
-  ).trim().toLowerCase();
+  ).trim();
 
   // ❌ Remove if javascript or empty/invalid
   const isInvalid = !src || decodedSrc.startsWith("javascript") || decodedSrc.startsWith("vbscript") || decodedSrc === "x";
