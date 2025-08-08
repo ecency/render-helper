@@ -962,6 +962,55 @@ describe('Markdown2Html', () => {
 
       expect(markdown2Html(input)).toBe(expected)
     })
+
+    it('68 - Should handle table', () => {
+      const input = {
+        author: 'foo368',
+        permlink: 'bar368',
+        last_update: '2019-05-10T09:15:21',
+        body: `<table>
+        <thead>
+        <tr><th>Table 1 Header 1</th><th>Table 1 Header 2</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>Table 1 Body 1</td>
+        <td>Table 1 Body 2</td>
+        </tbody>
+        </table>
+        <table>
+        <thead>
+        <tr><th>Table 2 Header 1</th><th>Table 2 Header 2</th></tr>
+        </thead>
+        <tbody>
+        <tr><td>Table 2 Body 1</td>
+        <td>Table 2 Body 2</td> 
+        </tbody>
+        </table>
+      `
+      }
+      const expected = `<table>
+      <thead>
+      <tr><th>Table 1 Header 1</th><th>Table 1 Header 2</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Table 1 Body 1</td>
+      <td>Table 1 Body 2</td>
+      </tr>
+      </tbody>
+      </table>
+      <table>
+      <thead>
+      <tr><th>Table 2 Header 1</th><th>Table 2 Header 2</th></tr>
+      </thead>
+      <tbody>
+      <tr><td>Table 2 Body 1</td>
+      <td>Table 2 Body 2</td> 
+      </tr>
+      </tbody>
+      </table>`
+
+      expect(markdown2Html(input, false)).toBe(expected)
+    })
   })
 
   describe("Rumble support", () => {
