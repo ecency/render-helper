@@ -1,1 +1,1 @@
-export declare function iframe(el: HTMLElement): void;
+export declare function iframe(el: HTMLElement | null): void;

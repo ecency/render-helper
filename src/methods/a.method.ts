@@ -34,7 +34,10 @@ import { extractYtStartTime, isValidPermlink, isValidUsername } from '../helper'
 import { createImageHTML } from "./img.method";
 
 
-export function a(el: HTMLElement, forApp: boolean, webp: boolean): void {
+export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void {
+  if (!el || !el.parentNode) {
+    return
+  }
   let href = el.getAttribute('href')
 
   // Continue if href has no value

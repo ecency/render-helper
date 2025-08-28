@@ -1,6 +1,9 @@
 import { ARCH_REGEX, DAPPLR_REGEX, LBRY_REGEX, TRUVVL_REGEX, ODYSEE_REGEX, SKATEHIVE_IPFS_REGEX, BITCHUTE_REGEX, RUMBLE_REGEX, BRIGHTEON_REGEX, VIMEO_EMBED_REGEX, SPEAK_EMBED_REGEX, VIMM_EMBED_REGEX, D_TUBE_EMBED_REGEX, SPOTIFY_EMBED_REGEX, SOUNDCLOUD_EMBED_REGEX, TWITCH_EMBED_REGEX, YOUTUBE_EMBED_REGEX, BRAND_NEW_TUBE_REGEX, LOOM_EMBED_REGEX, AUREAL_EMBED_REGEX } from '../consts'
 
-export function iframe(el: HTMLElement): void {
+export function iframe(el: HTMLElement | null): void {
+  if (!el || !el.parentNode) {
+    return;
+  }
   const src = el.getAttribute('src');
   if (!src) {
     el.parentNode.removeChild(el);
@@ -18,7 +21,7 @@ export function iframe(el: HTMLElement): void {
   if (src.match(BITCHUTE_REGEX)) {
     return;
   }
-  
+
   // Vimeo
   const m = src.match(VIMEO_EMBED_REGEX);
   if (m && m.length === 2) {
@@ -86,7 +89,7 @@ export function iframe(el: HTMLElement): void {
     el.setAttribute('allowfullscreen', 'true');
     return;
   }
-  
+
   // Truvvl
   if (src.match(TRUVVL_REGEX)) {
     el.setAttribute('src', src);
@@ -162,6 +165,8 @@ export function iframe(el: HTMLElement): void {
   const replaceNode = el.ownerDocument.createElement('div');
   replaceNode.setAttribute('class', 'unsupported-iframe');
   replaceNode.textContent = `(Unsupported ${src})`;
-  el.parentNode.insertBefore(replaceNode, el);
-  el.parentNode.removeChild(el);
+  if (el.parentNode) {
+    el.parentNode.insertBefore(replaceNode, el);
+    el.parentNode.removeChild(el);
+  }
 }
