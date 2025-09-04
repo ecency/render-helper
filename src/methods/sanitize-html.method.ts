@@ -17,6 +17,10 @@ export function sanitizeHtml(html: string): string {
 
       if (name.startsWith('on')) return ''; // 🛡 event handlers
       if (tag === 'img' && name === 'src' && (!/^https?:\/\//.test(decoded) || decoded.startsWith('javascript:'))) return '';
+      if (
+        tag === 'video' && ['src', 'poster'].includes(name) &&
+        (!/^https?:\/\//.test(decoded) || decoded.startsWith('javascript:'))
+      ) return '';
       if (tag === 'img' && ['dynsrc', 'lowsrc'].includes(name)) return '';
       if (tag === 'span' && name === 'class' && value === 'wr') return '';
       if (name === 'id') {

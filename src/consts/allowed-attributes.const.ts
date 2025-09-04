@@ -33,6 +33,7 @@ export const ALLOWED_ATTRIBUTES: XSSWhiteList = {
   ],
   'span': ['class', 'id'],
   'iframe': ['src', 'class', 'frameborder', 'allowfullscreen', 'webkitallowfullscreen', 'mozallowfullscreen', 'sandbox'],
+  'video': ['src', 'controls', 'poster'],
   'div': ['class', 'id'],
   'strong': [],
   'b': [],
