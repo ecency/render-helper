@@ -33,6 +33,27 @@ import { removeChildNodes } from './remove-child-nodes.method'
 import { extractYtStartTime, isValidPermlink, isValidUsername } from '../helper'
 import { createImageHTML } from "./img.method";
 
+const normalizeValue = (value?: string | null): string => (value ? value.trim() : '')
+
+const matchesHref = (href: string, value?: string | null): boolean => {
+  const normalizedHref = normalizeValue(href)
+  if (!normalizedHref) {
+    return false
+  }
+
+  return normalizeValue(value) === normalizedHref
+}
+
+const getInlineMeta = (el: HTMLElement, href: string) => {
+  const textMatches = matchesHref(href, el.textContent)
+  const titleMatches = matchesHref(href, el.getAttribute('title'))
+
+  return {
+    textMatches,
+    nonInline: textMatches || titleMatches
+  }
+}
+
 
 export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void {
   if (!el || !el.parentNode) {
@@ -107,11 +128,11 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
     if (!isValidPermlink(permlink)) return;
 
-    let isInline = true;
-    if (el.textContent === href) {
+    const inlineMeta = getInlineMeta(el, href)
+    if (inlineMeta.textMatches) {
       el.textContent = `@${author}/${permlink}`
-      isInline = false;
     }
+    const isInline = !inlineMeta.nonInline
     if (forApp) {
       el.removeAttribute('href')
 
@@ -195,11 +216,11 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
       if (!isValidPermlink(permlink)) return;
 
-      let isInline = true;
-      if (el.textContent === href) {
+      const inlineMeta = getInlineMeta(el, href)
+      if (inlineMeta.textMatches) {
         el.textContent = `@${author}/${permlink}`
-        isInline = false;
       }
+      const isInline = !inlineMeta.nonInline
       if (forApp) {
         el.removeAttribute('href')
 
@@ -274,12 +295,12 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
       if (!isValidPermlink(permlink)) return;
 
-      let isInline = true;
+      const inlineMeta = getInlineMeta(el, href)
 
-      if (el.textContent === href) {
+      if (inlineMeta.textMatches) {
         el.textContent = `@${author}/${permlink}`
-        isInline = false;
       }
+      const isInline = !inlineMeta.nonInline
       if (forApp) {
         el.removeAttribute('href')
 
@@ -380,12 +401,12 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
     if (!isValidPermlink(permlink)) return;
 
-    let isInline = true;
+    const inlineMeta = getInlineMeta(el, href)
 
-    if (el.textContent === href) {
+    if (inlineMeta.textMatches) {
       el.textContent = `@${author}/${permlink}`
-      isInline = false;
     }
+    const isInline = !inlineMeta.nonInline
     if (forApp) {
       el.removeAttribute('href')
 
