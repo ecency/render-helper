@@ -501,6 +501,18 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('32b - Should treat titled Hive links as non-inline', () => {
+      const input = {
+        author: 'foo33436',
+        permlink: 'bar32436',
+        last_update: '2019-05-10T09:15:21',
+        body: '[Waves mobile app](https://ecency.com/hive-125125/@ecency/waves-mobile-app-update-explore "https://ecency.com/hive-125125/@ecency/waves-mobile-app-update-explore")'
+      }
+      const expected = '<p dir=\"auto\"><a title=\"https://ecency.com/hive-125125/@ecency/waves-mobile-app-update-explore\" class=\"markdown-post-link\" data-href=\"https://ecency.com/hive-125125/@ecency/waves-mobile-app-update-explore\" data-is-inline=\"false\" data-tag=\"hive-125125\" data-author=\"ecency\" data-permlink=\"waves-mobile-app-update-explore\">Waves mobile app</a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
     it('33- Should handle whitelisted user links', () => {
       const input = {
         author: 'foo334352',
