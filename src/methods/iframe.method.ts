@@ -40,7 +40,11 @@ export function iframe(el: HTMLElement | null): void {
 
   // 3Speak
   if (src.match(SPEAK_EMBED_REGEX)) {
-    const s = `${src}&autoplay=true`;
+    const normalizedSrc = src.replace(/3speak\.[a-z]+/i, '3speak.tv');
+    const hasAutoplay = /[?&]autoplay=/.test(normalizedSrc);
+    const s = hasAutoplay
+      ? normalizedSrc
+      : `${normalizedSrc}${normalizedSrc.includes('?') ? '&' : '?'}autoplay=true`;
     el.setAttribute('src', s);
     return;
   }

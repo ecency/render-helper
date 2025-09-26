@@ -690,9 +690,9 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
     const imgEls = el.getElementsByTagName('img')
     if (imgEls.length === 1 || el.textContent.trim() === href) {
       const e = SPEAK_REGEX.exec(href)
-      // e[1] = tld , e[3] = embed address
-      if (e[1] && e[3]) {
-        const videoHref = `https://3speak.${e[1]}/embed?v=${e[3]}`
+      // e[1] / e[2] = tld , e[3] = embed address
+      if ((e[1] || e[2]) && e[3]) {
+        const videoHref = `https://3speak.tv/embed?v=${e[3]}`
         el.setAttribute('class', 'markdown-video-link markdown-video-link-speak')
         el.removeAttribute('href')
         el.setAttribute('data-embed-src', videoHref)
