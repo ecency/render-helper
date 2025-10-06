@@ -1,5 +1,5 @@
 import { IMG_REGEX, YOUTUBE_REGEX, WHITE_LIST, DOMParser, POST_REGEX  } from '../consts'
-import { extractYtStartTime, isValidPermlink, isValidUsername } from '../helper'
+import { extractYtStartTime, isValidPermlink, isValidUsername, sanitizePermlink } from '../helper'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { linkify } from './linkify.method'
 import {createImageHTML} from "./img.method";
@@ -62,7 +62,7 @@ export function text(node: HTMLElement | null, forApp: boolean, webp: boolean): 
     if (postMatch && WHITE_LIST.includes(postMatch[1].replace(/www./,''))) {
       const tag = postMatch[2]
       const author = postMatch[3].replace('@', '')
-      const permlink = postMatch[4]
+      const permlink = sanitizePermlink(postMatch[4])
 
       if (!isValidUsername(author)) return
       if (!isValidPermlink(permlink)) return

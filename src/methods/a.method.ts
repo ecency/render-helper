@@ -30,7 +30,7 @@ import {
 import { getSerializedInnerHTML } from './get-inner-html.method'
 import { proxifyImageSrc } from '../proxify-image-src'
 import { removeChildNodes } from './remove-child-nodes.method'
-import { extractYtStartTime, isValidPermlink, isValidUsername } from '../helper'
+import { extractYtStartTime, isValidPermlink, isValidUsername, sanitizePermlink } from '../helper'
 import { createImageHTML } from "./img.method";
 
 const normalizeValue = (value?: string | null): string => (value ? value.trim() : '')
@@ -124,7 +124,7 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
     const tag = postMatch[2]
     const author = postMatch[3].replace('@', '')
-    const permlink = postMatch[4]
+    const permlink = sanitizePermlink(postMatch[4])
 
     if (!isValidPermlink(permlink)) return;
 
@@ -212,7 +212,7 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
       el.setAttribute('class', 'markdown-post-link')
       const author = tpostMatch[2].replace('@', '')
-      const permlink = tpostMatch[3]
+      const permlink = sanitizePermlink(tpostMatch[3])
 
       if (!isValidPermlink(permlink)) return;
 
@@ -291,7 +291,7 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
       const tag = 'post'
 
       const author = cpostMatch[1].replace('@', '')
-      const permlink = cpostMatch[2]
+      const permlink = sanitizePermlink(cpostMatch[2])
 
       if (!isValidPermlink(permlink)) return;
 
@@ -397,7 +397,7 @@ export function a(el: HTMLElement | null, forApp: boolean, webp: boolean): void 
 
     const tag = 'ccc'
     const author = cccMatch[2].replace('@', '')
-    const permlink = cccMatch[3]
+    const permlink = sanitizePermlink(cccMatch[3])
 
     if (!isValidPermlink(permlink)) return;
 

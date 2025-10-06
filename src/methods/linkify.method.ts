@@ -1,6 +1,6 @@
 import { IMG_REGEX, SECTION_LIST } from '../consts'
 import { proxifyImageSrc } from '../proxify-image-src'
-import { isValidPermlink, isValidUsername } from "../helper";
+import { isValidPermlink, isValidUsername, sanitizePermlink } from "../helper";
 import { createImageHTML } from "./img.method";
 
 export function linkify(content: string, forApp: boolean, webp: boolean): string {
@@ -35,7 +35,7 @@ export function linkify(content: string, forApp: boolean, webp: boolean): string
   content = content.replace(
     /((^|\s)(\/|)@[\w.\d-]+)\/(\S+)/gi, (match, u, p1, p2, p3) => {
       const uu = u.trim().toLowerCase().replace('/@', '').replace('@', '');
-      const permlink = p3;
+      const permlink = sanitizePermlink(p3);
       if (!isValidPermlink(permlink)) return match;
 
       if (SECTION_LIST.some(v => p3.includes(v))) {

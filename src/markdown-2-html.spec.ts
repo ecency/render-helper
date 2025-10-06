@@ -501,6 +501,18 @@ describe('Markdown2Html', () => {
       expect(markdown2Html(input)).toBe(expected)
     })
 
+    it('32c - Should handle whitelisted post links with referral parameters', () => {
+      const input = {
+        author: 'foo33437',
+        permlink: 'bar32437',
+        last_update: '2019-05-10T09:15:21',
+        body: 'Read related post: [Weekly Sacrament of Confession? | 3 Misconducts to Avoid!](https://ecency.com/hive-148441/@artgirl/weekly-sacrament-of-confession-or?referral=artgirl)'
+      }
+      const expected = '<p dir=\"auto\">Read related post: <a class=\"markdown-post-link\" data-href=\"https://ecency.com/hive-148441/@artgirl/weekly-sacrament-of-confession-or?referral=artgirl\" data-is-inline=\"true\" data-tag=\"hive-148441\" data-author=\"artgirl\" data-permlink=\"weekly-sacrament-of-confession-or\">Weekly Sacrament of Confession? | 3 Misconducts to Avoid!</a></p>'
+
+      expect(markdown2Html(input)).toBe(expected)
+    })
+
     it('32b - Should treat titled Hive links as non-inline', () => {
       const input = {
         author: 'foo33436',
@@ -922,7 +934,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'direct link https://ecency.com/@ecency/faq?history'
       }
-      const expected = '<p dir=\"auto\">direct link <a href=\"https://ecency.com/@ecency/faq?history\" class=\"markdown-post-link\">https://ecency.com/@ecency/faq?history</a></p>'
+      const expected = '<p dir=\"auto\">direct link <a class=\"markdown-post-link\" data-href=\"https://ecency.com/@ecency/faq?history\" data-is-inline=\"false\" data-tag=\"post\" data-author=\"ecency\" data-permlink=\"faq\">@ecency/faq</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })
@@ -934,7 +946,7 @@ describe('Markdown2Html', () => {
         last_update: '2019-05-10T09:15:21',
         body: 'direct link https://ecency.com/@ecency/posts?q=games'
       }
-      const expected = '<p dir=\"auto\">direct link <a href=\"https://ecency.com/@ecency/posts?q=games\" class=\"markdown-profile-link\">https://ecency.com/@ecency/posts?q=games</a></p>'
+      const expected = '<p dir=\"auto\">direct link <a href=\"https://ecency.com/@ecency/posts?q=games\" class=\"markdown-profile-link\">@ecency/posts?q=games</a></p>'
 
       expect(markdown2Html(input)).toBe(expected)
     })

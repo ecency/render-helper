@@ -27,13 +27,29 @@ export function extractYtStartTime(url:string):string {
     return '';
   }
 }
-export function isValidPermlink(permlink: string): boolean {
-  // Should not contain image extensions, query params, or fragments
-  const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(permlink);
-  const hasSpecialChars = /[?#]/.test(permlink);
-  const isCleanFormat = /^[a-z0-9-]+$/.test(permlink); // Hive standard
+export function sanitizePermlink(permlink: string): string {
+  if (!permlink || typeof permlink !== 'string') {
+    return ''
+  }
 
-  return isCleanFormat && !isImage && !hasSpecialChars;
+  const [withoutQuery] = permlink.split('?')
+  const [cleaned] = withoutQuery.split('#')
+
+  return cleaned
+}
+
+export function isValidPermlink(permlink: string): boolean {
+  const sanitized = sanitizePermlink(permlink)
+
+  if (!sanitized) {
+    return false
+  }
+
+  // Should not contain image extensions, query params, or fragments
+  const isImage = /\.(jpg|jpeg|png|webp|gif|svg)$/i.test(sanitized)
+  const isCleanFormat = /^[a-z0-9-]+$/.test(sanitized) // Hive standard
+
+  return isCleanFormat && !isImage
 }
 
 // Reference: https://en.wikipedia.org/wiki/Domain_Name_System#Domain_name_syntax
